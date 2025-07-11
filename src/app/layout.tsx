@@ -5,8 +5,14 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Gaëlle B - Développeuse front-end',
-  description: 'Portfolio de Gaëlle B, développeuse passionnée par le web, NYC et la créativité',
+  title: 'Gaëlle Boucher - Front-End Developer | NYC Inspired Portfolio',
+  description: 'Portfolio de Gaëlle Boucher, développeuse front-end passionnée, inspirée par l\'énergie de New York City',
+  keywords: 'développeur front-end, React, Next.js, TypeScript, portfolio, NYC',
+  openGraph: {
+    title: 'Gaëlle Boucher - Front-End Developer',
+    description: 'Building digital experiences from the city that never sleeps',
+    type: 'website',
+  }
 }
 
 export default function RootLayout({
