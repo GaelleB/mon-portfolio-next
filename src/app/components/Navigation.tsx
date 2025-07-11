@@ -1,65 +1,57 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Navigation() {
-    const [isScrolled, setIsScrolled] = useState(false)
-    
-    // Effet pour détecter le scroll
+    const [scrolled, setScrolled] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => {
-        // On considère qu'on a scrollé après 50px
-        setIsScrolled(window.scrollY > 50)
-        }
-        
-        // Ajouter l'écouteur d'événements
-        window.addEventListener('scroll', handleScroll)
-        
-        // Nettoyer l'écouteur quand le composant est démonté
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-    
-    const navItems = ['Accueil', 'À propos', 'Compétences', 'Projets', 'Contact']
-    
+        setScrolled(window.scrollY > 10);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 100 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            isScrolled 
-            ? 'bg-gray-900/95 backdrop-blur-md shadow-lg' 
-            : 'bg-transparent'
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+        className={`fixed top-0 left-0 w-full px-6 py-4 z-50 backdrop-blur-sm transition-all duration-300 ${
+            scrolled ? 'bg-[rgba(30,30,30,0.7)] border-b border-[var(--color-taxi)]' : 'bg-transparent'
         }`}
         >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <motion.div 
-                className="text-3xl font-bold"
-                whileHover={{ scale: 1.05 }}
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+            <Link
+            href="/"
+            className="text-xl font-bold tracking-tight text-[var(--color-taxi)] hover:opacity-80 transition"
             >
-                <span className="text-yellow-400">G</span>
-                <span className="text-pink-500">B</span>
-            </motion.div>
-            
-            {/* Menu de navigation */}
-            <div className="flex space-x-8">
-                {navItems.map((item) => (
-                <motion.a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-yellow-400 transition-colors"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    {item}
-                </motion.a>
-                ))}
-            </div>
+            Gaëlle Boucher
+            </Link>
+            <div className="flex gap-6 text-sm uppercase tracking-wider font-semibold">
+            <Link
+                href="#projects"
+                className="btn btn-outline btn-warning text-[var(--color-text-light)] hover:scale-105 transition-transform duration-200"
+            >
+                Projets
+            </Link>
+            <Link
+                href="#about"
+                className="btn btn-outline btn-warning text-[var(--color-text-light)] hover:scale-105 transition-transform duration-200"
+            >
+                À propos
+            </Link>
+            <Link
+                href="#contact"
+                className="btn btn-outline btn-warning text-[var(--color-text-light)] hover:scale-105 transition-transform duration-200"
+            >
+                Contact
+            </Link>
             </div>
         </div>
         </motion.nav>
-    )
+    );
 }

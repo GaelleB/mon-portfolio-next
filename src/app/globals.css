@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --color-ny-dark: #1e1e1e;
+  --color-taxi: #facc15;
+  --color-taxi-hover: #fcd34d;
+  --color-text-light: #f9fafb;
+  --color-text-dark: #111827;
+}
