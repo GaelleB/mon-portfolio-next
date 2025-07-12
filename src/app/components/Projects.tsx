@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Projects() {
     const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -236,7 +237,7 @@ export default function Projects() {
                                             
                                             {/* Modal Header with Image */}
                                             <div className="relative h-80 overflow-hidden">
-                                                <img
+                                                <Image
                                                     src={project.image}
                                                     alt={project.title}
                                                     className="w-full h-full object-cover"
