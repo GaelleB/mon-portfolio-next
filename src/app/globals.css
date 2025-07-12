@@ -1,10 +1,303 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @theme {
   --color-ny-dark: #1e1e1e;
   --color-taxi: #facc15;
   --color-taxi-hover: #fcd34d;
   --color-text-light: #f9fafb;
   --color-text-dark: #111827;
+  --color-scrap-pink: #f472b6;
+  --color-scrap-blue: #3b82f6;
+  --color-scrap-green: #10b981;
+  --color-scrap-purple: #8b5cf6;
+  --color-scrap-orange: #f97316;
+  --color-paper: #fffef7;
+  --color-paper-shadow: #f1f5f9;
+}
+
+/* Polices personnalisées */
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Effets de papier et scrapbooking */
+.paper-texture {
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  background-color: var(--color-paper);
+}
+
+.paper-card {
+  background: linear-gradient(135deg, #fffef7 0%, #fefcf3 100%);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.paper-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f1f5f9' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Polaroid effect */
+.polaroid {
+  background: white;
+  padding: 15px 15px 50px 15px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.polaroid:nth-child(even):hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+/* Stickers et badges */
+.sticker {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--color-taxi);
+  color: var(--color-text-dark);
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transform: rotate(-2deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.sticker:hover {
+  transform: rotate(0deg) scale(1.1);
+}
+
+.sticker:nth-child(even) {
+  background: var(--color-scrap-pink);
+  color: white;
+  transform: rotate(2deg);
+}
+
+.sticker:nth-child(3n) {
+  background: var(--color-scrap-blue);
+  color: white;
+  transform: rotate(-1deg);
+}
+
+.sticker:nth-child(4n) {
+  background: var(--color-scrap-green);
+  color: white;
+  transform: rotate(1deg);
+}
+
+/* Doodles et decorations */
+.doodle {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.doodle-star {
+  width: 20px;
+  height: 20px;
+  background: var(--color-taxi);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.doodle-heart {
+  width: 16px;
+  height: 16px;
+  background: var(--color-scrap-pink);
+  clip-path: path('M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5 C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3 C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z');
+}
+
+/* Animations personnalisées */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+/* Buttons style scrapbooking */
+.btn-scrap {
+  position: relative;
+  padding: 12px 24px;
+  background: var(--color-taxi);
+  color: var(--color-text-dark);
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(255, 255, 255, 0.2);
+  transform: rotate(-1deg);
+}
+
+.btn-scrap:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.btn-scrap::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-scrap-pink), var(--color-scrap-blue), var(--color-scrap-green));
+  border-radius: 27px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-scrap:hover::before {
+  opacity: 0.7;
+}
+
+/* Grilles et layouts scrapbooking */
+.scrap-grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  position: relative;
+}
+
+.scrap-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Sections avec style scrapbooking */
+.section-scrap {
+  position: relative;
+  padding: 60px 20px;
+  overflow: hidden;
+}
+
+.section-scrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .polaroid {
+    padding: 10px 10px 30px 10px;
+  }
+  
+  .sticker {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-taxi);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-taxi-hover);
+}
+
+/* Sélection de texte */
+::selection {
+  background: var(--color-taxi);
+  color: var(--color-text-dark);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
