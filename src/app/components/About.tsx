@@ -52,6 +52,12 @@ export default function About() {
                         <h2 className="text-6xl md:text-8xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-400 mb-4">
                             À propos de moi
                         </h2>
+
+                        {/* Notebook style lines */}
+                        <div className="absolute -bottom-4 left-0 right-0 space-y-1">
+                            <div className="h-0.5 bg-gradient-to-r from-transparent via-pink-300 to-transparent rounded"></div>
+                            <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-300 to-transparent rounded"></div>
+                        </div>
                         
                         {/* Doodles autour du titre */}
                         <motion.div
