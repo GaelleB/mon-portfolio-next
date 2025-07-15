@@ -85,19 +85,9 @@ export default function About() {
                         className="relative"
                     >
                         <div className="paper-card p-8 rounded-3xl relative overflow-hidden">
-                            {/* Polaroid style */}
-                            <div className="polaroid max-w-sm mx-auto mb-6">
-                                <div className="w-full h-64 bg-gradient-to-br from-yellow-100 to-pink-100 rounded-lg flex items-center justify-center relative overflow-hidden">
-                                    <div className="text-8xl">👩‍💻</div>
-                                </div>
-                                <p className="font-handwriting text-center text-gray-600 mt-3">
-                                    Moi dans mon élément ! 📸
-                                </p>
-                            </div>
-
                             <div className="text-center space-y-4">
                                 <h3 className="text-3xl font-handwriting text-gray-800 mb-4">
-                                    Salut, moi c&apos;est Gaëlle ! 👋
+                                    Salut, moi c&apos;est Gaëlle !
                                 </h3>
                                 
                                 <p className="text-gray-700 leading-relaxed font-body">
