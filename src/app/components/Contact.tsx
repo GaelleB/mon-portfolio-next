@@ -4,63 +4,58 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 export default function Contact() {
-    const [hoveredCard, setHoveredCard] = useState<string | null>(null)
-    const [isFormVisible, setIsFormVisible] = useState(false)
+    const [, setHoveredCard] = useState<string | null>(null)
 
     const contactCards = [
         {
             id: 'email',
-            icon: '📧',
             title: 'Email',
             subtitle: 'Pour les projets sérieux',
             content: 'contact@gaelleb.dev',
             href: 'mailto:contact@gaelleb.dev',
             color: 'from-yellow-400 to-orange-400',
-            description: 'Écrivez-moi pour discuter de vos projets !'
+            description: 'Écrivez-moi pour discuter de vos projets'
         },
         {
             id: 'linkedin',
-            icon: '👩‍💼',
             title: 'LinkedIn',
             subtitle: 'Networking professionnel',
             content: 'Gaëlle Boucher',
             href: 'https://www.linkedin.com/in/gaelle-boucher/',
             color: 'from-blue-400 to-cyan-400',
-            description: 'Connectons-nous professionnellement !'
+            description: 'Connectons-nous professionnellement'
         },
         {
             id: 'github',
-            icon: '💻',
             title: 'GitHub',
-            subtitle: 'Mes codes secrets',
+            subtitle: 'Mes codes sources',
             content: '@GaelleB',
             href: 'https://github.com/GaelleB',
             color: 'from-purple-400 to-pink-400',
-            description: 'Explorez mes projets et contributions !'
+            description: 'Explorez mes projets et contributions'
         },
         {
-            id: 'coffee',
-            icon: '☕',
-            title: 'Café Virtuel',
-            subtitle: 'Pour discuter autour d\'un café',
-            content: 'Prenons un café !',
-            href: 'mailto:contact@gaelleb.dev?subject=Prenons un café virtuel !',
+            id: 'call',
+            title: 'Appel découverte',
+            subtitle: 'Pour échanger directement',
+            content: 'Planifier un call',
+            href: 'mailto:contact@gaelleb.dev?subject=Demande d\'appel découverte',
             color: 'from-green-400 to-emerald-400',
-            description: 'Parlons de code et de créativité !'
+            description: 'Discutons de votre projet ensemble'
         }
     ]
 
     const reasons = [
-        { emoji: '🚀', text: 'Un projet à développer' },
-        { emoji: '💡', text: 'Une idée à concrétiser' },
-        { emoji: '🤝', text: 'Une collaboration' },
-        { emoji: '📚', text: 'Une question technique' },
-        { emoji: '🎭', text: 'Juste pour dire bonjour' },
-        { emoji: '📺', text: 'Une série à recommander' }
+        { text: 'Un projet à développer' },
+        { text: 'Une idée à concrétiser' },
+        { text: 'Une collaboration' },
+        { text: 'Une question technique' },
+        { text: 'Juste pour dire bonjour' },
+        { text: 'Un conseil ou avis' }
     ]
 
     return (
-        <section id="contact" className="section-scrap bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <section id="contact" className="section-scrap bg-gradient-to-br from-gray-100 to-white relative overflow-hidden">
             {/* Washi tape décoratifs */}
             <div className="absolute top-0 right-12 w-40 h-8 bg-gradient-to-r from-pink-400 to-purple-400 opacity-70 transform rotate-3 shadow-lg"></div>
             <div className="absolute bottom-0 left-20 w-56 h-6 bg-gradient-to-l from-yellow-400 to-orange-400 opacity-80 transform -rotate-2 shadow-lg"></div>
@@ -76,7 +71,7 @@ export default function Contact() {
                 >
                     <div className="relative inline-block">
                         <h2 className="text-6xl md:text-8xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 mb-4">
-                            Contactez-moi !
+                            Contactez-moi
                         </h2>
 
                         {/* Notebook style lines */}
@@ -87,10 +82,10 @@ export default function Contact() {
                     </div>
                     
                     <p className="text-xl font-handwriting text-gray-600 max-w-3xl mx-auto mt-8">
-                        Une idée ? Un projet ? Une série à me recommander ? 
+                        Une idée ? Un projet ? Une question ? 
                         <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-                            Écrivez-moi, j&apos;adore rencontrer de nouvelles personnes ! 🤗
+                            Écrivez-moi, j&apos;adore rencontrer de nouvelles personnes
                         </span>
                     </p>
                 </motion.div>
@@ -120,27 +115,15 @@ export default function Contact() {
                             initial={{ rotate: index % 2 === 0 ? -2 : 2 }}
                         >
                             <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 h-48 flex flex-col justify-between relative overflow-hidden">
-                                {/* Icône animée */}
-                                <motion.div
-                                    className="text-5xl text-center mb-4"
-                                    animate={hoveredCard === card.id ? {
-                                        scale: [1, 1.3, 1],
-                                        rotate: [0, 10, -10, 0]
-                                    } : {}}
-                                    transition={{ duration: 0.6 }}
-                                >
-                                    {card.icon}
-                                </motion.div>
-
                                 {/* Contenu */}
-                                <div className="text-center space-y-1">
-                                    <h3 className={`font-bold text-lg bg-gradient-to-r ${card.color} bg-clip-text text-transparent font-body`}>
+                                <div className="text-center space-y-2">
+                                    <h3 className={`font-bold text-xl bg-gradient-to-r ${card.color} bg-clip-text text-transparent font-body`}>
                                         {card.title}
                                     </h3>
-                                    <p className="text-xs text-gray-500 font-handwriting">
+                                    <p className="text-sm text-gray-500 font-handwriting">
                                         {card.subtitle}
                                     </p>
-                                    <p className="text-sm text-gray-700 font-mono">
+                                    <p className="text-sm text-gray-700 font-mono mt-4">
                                         {card.content}
                                     </p>
                                 </div>
@@ -161,7 +144,7 @@ export default function Contact() {
                                         whileHover={{ rotate: 360 }}
                                         transition={{ duration: 0.5 }}
                                     >
-                                        Click !
+                                        Click
                                     </motion.div>
                                 </div>
                             </div>
@@ -184,7 +167,7 @@ export default function Contact() {
                 >
                     <div className="paper-card p-8 rounded-3xl relative">
                         <h3 className="text-4xl font-handwriting text-center text-gray-800 mb-8">
-                            Pourquoi me contacter ? 🤔
+                            Pourquoi me contacter ?
                         </h3>
                         
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -202,16 +185,7 @@ export default function Contact() {
                                         transition: { type: "spring", stiffness: 400 }
                                     }}
                                 >
-                                    <motion.span
-                                        className="text-2xl"
-                                        whileHover={{ 
-                                            scale: 1.3,
-                                            rotate: [0, -10, 10, 0]
-                                        }}
-                                        transition={{ duration: 0.5 }}
-                                    >
-                                        {reason.emoji}
-                                    </motion.span>
+                                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
                                     <span className="text-gray-700 font-body">
                                         {reason.text}
                                     </span>
@@ -233,13 +207,6 @@ export default function Contact() {
                     className="text-center"
                 >
                     <div className="paper-card p-8 rounded-3xl max-w-4xl mx-auto relative overflow-hidden">
-                        {/* Background pattern */}
-                        <div className="absolute inset-0 opacity-5">
-                            <div className="absolute top-4 left-4 text-6xl">💌</div>
-                            <div className="absolute bottom-4 right-4 text-6xl">✨</div>
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl">📱</div>
-                        </div>
-
                         <motion.div
                             className="relative z-10"
                             initial={{ y: 20 }}
@@ -248,7 +215,7 @@ export default function Contact() {
                             viewport={{ once: true }}
                         >
                             <h3 className="text-4xl font-handwriting text-gray-800 mb-6">
-                                N&apos;hésitez pas ! 🌟
+                                N&apos;hésitez pas
                             </h3>
                             
                             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto font-body">
@@ -256,86 +223,44 @@ export default function Contact() {
                                 ou simplement pour échanger sur nos passions communes 
                                 (développement, séries, musique, NYC...), 
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 font-semibold">
-                                    {" "}je serais ravie de vous lire !
+                                    {" "}je serais ravie de vous lire
                                 </span>
                             </p>
 
-                            {/* CTA principal avec animation spéciale */}
+                            {/* CTA principal */}
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
-                                className="inline-block relative overflow-hidden"
-                                whileHover="hover"
+                                className="btn-scrap text-xl px-8 py-4 inline-block"
+                                style={{
+                                    background: 'linear-gradient(45deg, #f472b6, #8b5cf6, #3b82f6)',
+                                    color: 'white',
+                                    fontSize: '1.2rem'
+                                }}
+                                whileHover={{ 
+                                    scale: 1.05,
+                                    rotate: [0, -1, 1, 0],
+                                    transition: { duration: 0.5 }
+                                }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <motion.div
-                                    className="btn-scrap text-xl px-8 py-4 relative z-10"
-                                    style={{
-                                        background: 'linear-gradient(45deg, #f472b6, #8b5cf6, #3b82f6)',
-                                        color: 'white',
-                                        fontSize: '1.2rem'
-                                    }}
-                                    variants={{
-                                        hover: {
-                                            scale: 1.05,
-                                            rotate: [0, -1, 1, 0],
-                                            transition: { duration: 0.5 }
-                                        }
-                                    }}
-                                >
-                                    Écrivez-moi maintenant ! 💌✨
-                                </motion.div>
-                                
-                                {/* Effet de particules au hover */}
-                                <motion.div
-                                    className="absolute inset-0 pointer-events-none"
-                                    variants={{
-                                        hover: {
-                                            opacity: 1
-                                        }
-                                    }}
-                                    initial={{ opacity: 0 }}
-                                >
-                                    {[...Array(6)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="absolute w-2 h-2 bg-yellow-300 rounded-full"
-                                            style={{
-                                                left: `${20 + Math.random() * 60}%`,
-                                                top: `${20 + Math.random() * 60}%`,
-                                            }}
-                                            variants={{
-                                                hover: {
-                                                    scale: [0, 1, 0],
-                                                    y: [-20, -40],
-                                                    x: [0, Math.random() * 40 - 20],
-                                                    opacity: [0, 1, 0]
-                                                }
-                                            }}
-                                            transition={{
-                                                duration: 1,
-                                                delay: i * 0.1,
-                                                ease: "easeOut"
-                                            }}
-                                        />
-                                    ))}
-                                </motion.div>
+                                Écrivez-moi maintenant
                             </motion.a>
 
-                            {/* Sous-texte amusant */}
+                            {/* Sous-texte */}
                             <p className="text-sm text-gray-500 mt-4 font-handwriting">
-                                PS : Si vous avez des recommandations de séries, c&apos;est encore mieux ! 📺😉
+                                Je réponds généralement sous 24h
                             </p>
                         </motion.div>
 
                         {/* Stickers décoratifs */}
                         <div className="absolute -top-3 -left-3 sticker animate-wiggle">
-                            🚀 Rapide
+                            Rapide
                         </div>
                         <div className="absolute -bottom-3 -right-3 sticker animate-wiggle" style={{ animationDelay: '1s' }}>
-                            💯 Sympa
+                            Sympa
                         </div>
                         <div className="absolute top-1/2 -left-4 sticker animate-pulse-soft" style={{ animationDelay: '0.5s' }}>
-                            ✨ Pro
+                            Pro
                         </div>
                     </div>
                 </motion.div>
@@ -350,102 +275,21 @@ export default function Contact() {
                 >
                     <div className="paper-card p-6 rounded-2xl max-w-md mx-auto">
                         <div className="flex items-center justify-center space-x-3 mb-3">
-                            <motion.div
-                                className="text-2xl"
-                                animate={{ 
-                                    rotate: [0, 360],
-                                    scale: [1, 1.1, 1]
-                                }}
-                                transition={{ 
-                                    duration: 3,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                            >
-                                ⏰
-                            </motion.div>
+                            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                             <h4 className="font-handwriting text-xl text-gray-700">
-                                Temps de réponse
+                                Disponible pour nouveaux projets
                             </h4>
                         </div>
                         <p className="text-gray-600 font-body">
-                            Je réponds généralement sous{" "}
+                            Je suis actuellement{" "}
                             <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                                24h
+                                disponible
                             </span>
-                            {" "}(sauf si je binge-watch une série 😅)
+                            {" "}pour de nouveaux projets et collaborations
                         </p>
                     </div>
                 </motion.div>
             </div>
-
-            {/* Éléments décoratifs flottants */}
-            <motion.div
-                className="absolute top-1/4 left-4 text-3xl opacity-50"
-                animate={{ 
-                    y: [0, -25, 0],
-                    rotate: [0, 360],
-                    scale: [1, 1.2, 1]
-                }}
-                transition={{ 
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-            >
-                💌
-            </motion.div>
-            
-            <motion.div
-                className="absolute bottom-1/4 right-8 text-2xl opacity-40"
-                animate={{ 
-                    y: [-20, 20, -20],
-                    rotate: [0, -180, 0],
-                    scale: [1, 1.4, 1]
-                }}
-                transition={{ 
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 2
-                }}
-            >
-                📱
-            </motion.div>
-
-            <motion.div
-                className="absolute top-1/2 right-16 text-xl opacity-30"
-                animate={{ 
-                    x: [0, 20, 0],
-                    y: [0, -15, 0],
-                    rotate: [0, 45, 0]
-                }}
-                transition={{ 
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                }}
-            >
-                ✉️
-            </motion.div>
-
-            <motion.div
-                className="absolute top-3/4 left-12 text-lg opacity-60"
-                animate={{ 
-                    scale: [1, 1.5, 1],
-                    rotate: [0, -360, 0],
-                    opacity: [0.6, 1, 0.6]
-                }}
-                transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 3
-                }}
-            >
-                🌟
-            </motion.div>
         </section>
     )
 }
