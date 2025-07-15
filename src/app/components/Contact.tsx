@@ -78,38 +78,12 @@ export default function Contact() {
                         <h2 className="text-6xl md:text-8xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 mb-4">
                             Contactez-moi !
                         </h2>
-                        
-                        {/* Doodles autour du titre */}
-                        <motion.div
-                            className="absolute -top-12 -left-16 text-4xl"
-                            animate={{ 
-                                rotate: [0, 360],
-                                scale: [1, 1.2, 1]
-                            }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        >
-                            💌
-                        </motion.div>
-                        <motion.div
-                            className="absolute -top-8 -right-12 text-3xl"
-                            animate={{ 
-                                y: [0, -15, 0],
-                                rotate: [0, 20, 0]
-                            }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                        >
-                            📱
-                        </motion.div>
-                        <motion.div
-                            className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-2xl"
-                            animate={{ 
-                                scale: [1, 1.3, 1],
-                                rotate: [0, -10, 10, 0]
-                            }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                        >
-                            ✨
-                        </motion.div>
+
+                        {/* Notebook style lines */}
+                        <div className="absolute -bottom-4 left-0 right-0 space-y-1">
+                            <div className="h-0.5 bg-gradient-to-r from-transparent via-pink-300 to-transparent rounded"></div>
+                            <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-300 to-transparent rounded"></div>
+                        </div>
                     </div>
                     
                     <p className="text-xl font-handwriting text-gray-600 max-w-3xl mx-auto mt-8">
