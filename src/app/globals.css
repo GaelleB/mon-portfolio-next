@@ -14,8 +14,9 @@
   --color-scrap-green: #10b981;
   --color-scrap-purple: #8b5cf6;
   --color-scrap-orange: #f97316;
-  --color-paper: #fffef7;
-  --color-paper-shadow: #f1f5f9;
+  --color-paper: #f8f9fa;
+  --color-paper-shadow: #e9ecef;
+  --color-bg-main: #f1f3f4;
 }
 
 /* Polices personnalisées */
@@ -30,14 +31,14 @@
 /* Effets de papier et scrapbooking */
 .paper-texture {
   background-image: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.05) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-  background-color: var(--color-paper);
+  background-color: var(--color-bg-main);
 }
 
 .paper-card {
-  background: linear-gradient(135deg, #fffef7 0%, #fefcf3 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
@@ -56,6 +57,42 @@
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f1f5f9' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
   pointer-events: none;
   opacity: 0.5;
+}
+
+/* Washi tape effects */
+.washi-tape {
+  position: relative;
+  overflow: hidden;
+}
+
+.washi-tape::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -10px;
+  width: 120%;
+  height: 30px;
+  background: linear-gradient(45deg, var(--color-taxi), var(--color-taxi-hover));
+  transform: rotate(-2deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.washi-tape-vertical {
+  position: relative;
+}
+
+.washi-tape-vertical::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  width: 20px;
+  height: 120%;
+  background: linear-gradient(to bottom, var(--color-scrap-pink), var(--color-scrap-blue));
+  transform: rotate(3deg);
+  opacity: 0.7;
+  z-index: 1;
 }
 
 /* Polaroid effect */
@@ -265,6 +302,10 @@
 @media (max-width: 768px) {
   .polaroid {
     padding: 10px 10px 30px 10px;
+  }
+  
+  .washi-tape::before {
+    height: 20px;
   }
   
   .sticker {
