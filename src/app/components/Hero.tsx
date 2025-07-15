@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 export default function Hero() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -35,17 +36,18 @@ export default function Hero() {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring" as const,
+                type: "spring",
                 stiffness: 100
             }
         }
-    }
+    } as const
 
     return (
         <section
             id="home"
             className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 paper-texture overflow-hidden"
         >
+
             {/* Contenu principal */}
             <motion.div
                 variants={containerVariants}
@@ -64,15 +66,20 @@ export default function Hero() {
                     }}
                 >
                     <div className="w-full h-48 bg-gradient-to-br from-yellow-200 to-pink-200 rounded-lg flex items-center justify-center relative overflow-hidden">
-                        {/* Avatar stylisé */}
-                        <div className="w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400 to-pink-400 flex items-center justify-center text-6xl shadow-lg">
-                            👩‍💻
+                        {/* Photo de profil réelle */}
+                        <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+                            <Image
+                                src="/assets/gaelle.jpg"
+                                alt="Gaëlle Boucher"
+                                className="w-full h-full object-cover"
+                                width={128}
+                                height={128}
+                            />
                         </div>
                         {/* Sparkles */}
                         <div className="absolute top-2 right-2 w-3 h-3 bg-white rounded-full animate-sparkle"></div>
                         <div className="absolute bottom-3 left-3 w-2 h-2 bg-yellow-300 rounded-full animate-sparkle" style={{ animationDelay: '0.5s' }}></div>
                     </div>
-                    <p className="font-handwriting text-gray-700 text-center mt-2">Hello, c&apos;est moi ! ✨</p>
                 </motion.div>
 
                 {/* Nom avec style scrapbooking */}
@@ -100,7 +107,6 @@ export default function Hero() {
                             Boucher
                         </motion.span>
                     </h1>
-                    
                 </motion.div>
 
                 {/* Titre avec stickers */}
@@ -142,7 +148,7 @@ export default function Hero() {
                     </motion.a>
                     
                     <motion.a
-                        href="#projects"
+                        href="#contact"
                         className="btn-scrap group relative overflow-hidden"
                         whileHover={{ 
                             y: -2,
@@ -169,10 +175,10 @@ export default function Hero() {
                         animate={{ y: [0, 10, 0] }}
                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                     >
-                        👇
+                        ↓
                     </motion.div>
                 </div>
-                <p className="font-handwriting text-gray-500 mt-2 text-sm">Découvrez mon univers !</p>
+                <p className="font-handwriting text-gray-500 mt-2 text-sm">Découvrez mon univers</p>
             </motion.div>
 
             {/* Curseur personnalisé (optionnel) */}
