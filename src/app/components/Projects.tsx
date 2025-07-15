@@ -10,7 +10,7 @@ const projects = [
         description: 'API sécurisée pour une app gastronomique avec gestion des utilisateurs et des sauces piquantes',
         longDescription: 'Développement d\'une API complète avec authentification JWT, upload d\'images optimisées et système de notation. Un projet qui m\'a fait découvrir les joies du backend.',
         tech: ['Node.js', 'MongoDB', 'Express', 'JWT', 'Multer'],
-        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&q=80',
+        image: '/assets/piiquante.jpg',
         color: 'from-red-400 to-orange-400',
         category: 'Backend',
         status: 'Terminé',
@@ -25,7 +25,7 @@ const projects = [
         description: 'Application de location immobilière moderne et responsive',
         longDescription: 'Refonte complète d\'une plateforme de location avec React Router, animations fluides et design responsive. Mon premier grand projet React.',
         tech: ['React', 'Sass', 'Router', 'CSS3', 'Responsive'],
-        image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&q=80',
+        image: '/assets/kanap.jpg',
         color: 'from-blue-400 to-cyan-400',
         category: 'Frontend',
         status: 'Terminé',
@@ -40,7 +40,7 @@ const projects = [
         description: 'Réseau social d\'entreprise avec fonctionnalités complètes',
         longDescription: 'Création d\'un réseau social d\'entreprise avec posts, commentaires, likes et modération. Un projet fullstack qui combine frontend moderne et backend robuste.',
         tech: ['Vue.js', 'MySQL', 'Node.js', 'Socket.io', 'JWT'],
-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&q=80',
+        image: '/assets/groupomania.jpg',
         color: 'from-green-400 to-emerald-400',
         category: 'Fullstack',
         status: 'Terminé',
@@ -85,7 +85,7 @@ const projects = [
         description: 'Mon portfolio actuel avec style scrapbooking et animations',
         longDescription: 'Conception et développement de ce portfolio avec un style scrapbooking unique, des animations Framer Motion fluides et une expérience utilisateur immersive.',
         tech: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind', 'Vercel'],
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&q=80',
+        image: '/assets/gaelle.jpg',
         color: 'from-yellow-400 to-orange-400',
         category: 'Frontend',
         status: 'En cours',
@@ -112,41 +112,19 @@ export default function Projects() {
 
     return (
         <section id="projects" className="section-scrap bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
-            {/* Washi tape décoratifs */}
-            <div className="absolute top-0 left-16 w-48 h-8 bg-gradient-to-r from-yellow-400 to-pink-400 opacity-70 transform rotate-2 shadow-lg"></div>
-            <div className="absolute bottom-12 right-20 w-32 h-6 bg-gradient-to-l from-blue-400 to-purple-400 opacity-80 transform -rotate-3 shadow-lg"></div>
-
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {/* Titre principal */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
+                {/* Titre */}
+                <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-5xl font-handwriting text-center mb-16"
                 >
-                    <div className="relative inline-block">
-                        <h2 className="text-6xl md:text-8xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 mb-4">
-                            Mes Créations
-                        </h2>
-                        
-                        {/* Soulignement créatif */}
-                        <motion.div
-                            className="absolute -bottom-6 left-1/2 transform -translate-x-1/2"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: '100%' }}
-                            transition={{ duration: 1.5, delay: 0.5 }}
-                            viewport={{ once: true }}
-                        >
-                            <div className="h-1 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 rounded-full"></div>
-                            <div className="h-0.5 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 rounded-full mt-1"></div>
-                        </motion.div>
-                    </div>
-                    
-                    <p className="text-xl font-handwriting text-gray-600 max-w-3xl mx-auto mt-8">
-                        Chaque projet raconte une histoire, chaque ligne de code cache une passion
-                    </p>
-                </motion.div>
+                <span className="bg-gradient-to-r from-yellow-400 via-pink-400 to-pink-500 bg-clip-text text-transparent">
+                    Mes créations
+                </span>
+                {/* Soulignement fin multicolore */}
+                <div className="mt-2 w-48 h-1 mx-auto bg-gradient-to-r from-yellow-400 via-pink-400 to-pink-500 rounded-full" />
+                </motion.h2>
 
                 {/* Filtres créatifs */}
                 <motion.div
