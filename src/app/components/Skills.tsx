@@ -3,46 +3,71 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-const skillsData = {
+type Skill = { name: string; level: string; icon: string; color: string };
+type CategoryKey = 'frontend' | 'backend' | 'outils';
+type SkillsData = {
+    [key in CategoryKey]: {
+        title: string;
+        color: string;
+        skills: Skill[];
+    }
+};
+
+const skillsData: SkillsData = {
     frontend: {
         title: 'Front-end',
         color: 'from-pink-400 to-purple-400',
         skills: [
-            { name: 'React', level: 90, icon: '⚛️', color: '#61dafb' },
-            { name: 'Next.js', level: 85, icon: '🔺', color: '#000000' },
-            { name: 'TypeScript', level: 80, icon: '📘', color: '#3178c6' },
-            { name: 'Tailwind CSS', level: 95, icon: '🎨', color: '#06b6d4' },
-            { name: 'Framer Motion', level: 75, icon: '🌊', color: '#0055ff' },
-            { name: 'GSAP', level: 70, icon: '⚡', color: '#88ce02' }
+            { name: 'React', level: 'Expert', icon: '⚛️', color: '#61dafb' },
+            { name: 'Next.js', level: 'Avancé', icon: '🔺', color: '#000000' },
+            { name: 'TypeScript', level: 'Avancé', icon: '📘', color: '#3178c6' },
+            { name: 'Tailwind CSS', level: 'Expert', icon: '🎨', color: '#06b6d4' },
+            { name: 'Framer Motion', level: 'Intermédiaire', icon: '🌊', color: '#0055ff' },
+            { name: 'GSAP', level: 'Intermédiaire', icon: '⚡', color: '#88ce02' }
         ]
     },
     backend: {
         title: 'Back-end',
         color: 'from-blue-400 to-cyan-400',
         skills: [
-            { name: 'Node.js', level: 80, icon: '🟢', color: '#68cc00' },
-            { name: 'Express', level: 75, icon: '🚂', color: '#000000' },
-            { name: 'MongoDB', level: 70, icon: '🍃', color: '#4db33d' },
-            { name: 'MySQL', level: 65, icon: '🗄️', color: '#f29111' }
+            { name: 'Node.js', level: 'Avancé', icon: '🟢', color: '#68cc00' },
+            { name: 'Express', level: 'Avancé', icon: '🚂', color: '#000000' },
+            { name: 'MongoDB', level: 'Intermédiaire', icon: '🍃', color: '#4db33d' },
+            { name: 'MySQL', level: 'Intermédiaire', icon: '🗄️', color: '#f29111' }
         ]
     },
     outils: {
-        title: 'Mes Outils Favoris',
-        color: 'from-green-400 to-emerald-400',
+        title: 'Outils',
+        color: 'from-yellow-400 to-orange-400',
         skills: [
-            { name: 'Git', level: 85, icon: '🌿', color: '#f1502f' },
-            { name: 'GitHub', level: 90, icon: '🐙', color: '#171515' },
-            { name: 'Figma', level: 80, icon: '🎭', color: '#f24e1e' },
-            { name: 'Vercel', level: 85, icon: '▲', color: '#000000' }
+            { name: 'Vercel', level: 'Avancé', icon: '▲', color: '#000000' }
         ]
     }
 };
 
 export default function Skills() {
-    const [activeCategory, setActiveCategory] = useState<string>('frontend');
+    const [activeCategory, setActiveCategory] = useState<CategoryKey>('frontend');
     const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
-    const categories = Object.keys(skillsData) as (keyof typeof skillsData)[];
+    const categories = Object.keys(skillsData) as CategoryKey[];
+
+    const getLevelColor = (level: string) => {
+        switch(level) {
+            case 'Expert': return 'bg-green-500';
+            case 'Avancé': return 'bg-blue-500';
+            case 'Intermédiaire': return 'bg-yellow-500';
+            default: return 'bg-gray-500';
+        }
+    };
+
+    const getLevelWidth = (level: string) => {
+        switch(level) {
+            case 'Expert': return 'w-full';
+            case 'Avancé': return 'w-4/5';
+            case 'Intermédiaire': return 'w-3/5';
+            default: return 'w-2/5';
+        }
+    };
 
     return (
         <section id="skills" className="section-scrap paper-texture relative overflow-hidden">
@@ -68,7 +93,7 @@ export default function Skills() {
                     </div>
                     
                     <p className="text-xl font-handwriting text-gray-600 max-w-3xl mx-auto mt-6">
-                        Mes armes secrètes pour créer des expériences digitales inoubliables !
+                        Mes armes secrètes pour créer des expériences digitales inoubliables
                     </p>
                 </motion.div>
 
@@ -81,7 +106,7 @@ export default function Skills() {
                     className="flex justify-center mb-12"
                 >
                     <div className="paper-card p-2 rounded-full flex space-x-2">
-                        {categories.map((category, index) => (
+                        {categories.map((category) => (
                             <motion.button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
@@ -132,78 +157,57 @@ export default function Skills() {
                                 transition: { type: "spring", stiffness: 300 }
                             }}
                         >
-                            <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 h-40 flex flex-col justify-between relative overflow-hidden">
-                                {/* Icône et nom */}
-                                <div className="flex items-center space-x-3 mb-4">
-                                    <motion.div
-                                        className="text-3xl"
-                                        animate={hoveredSkill === skill.name ? {
-                                            scale: [1, 1.2, 1],
-                                            rotate: [0, 360]
-                                        } : {}}
-                                        transition={{ duration: 0.6 }}
-                                    >
-                                        {skill.icon}
-                                    </motion.div>
-                                    <h3 className="font-bold text-gray-800 text-lg font-body">
-                                        {skill.name}
-                                    </h3>
-                                </div>
-
-                                {/* Barre de progression circulaire */}
-                                <div className="relative flex justify-center">
-                                    <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
-                                        {/* Cercle de fond */}
-                                        <circle
-                                            cx="40"
-                                            cy="40"
-                                            r="30"
-                                            fill="none"
-                                            stroke="#e5e7eb"
-                                            strokeWidth="6"
-                                        />
-                                        {/* Cercle de progression */}
-                                        <motion.circle
-                                            cx="40"
-                                            cy="40"
-                                            r="30"
-                                            fill="none"
-                                            stroke={skill.color}
-                                            strokeWidth="6"
-                                            strokeLinecap="round"
-                                            initial={{ strokeDasharray: "0 188.5" }}
-                                            animate={{ 
-                                                strokeDasharray: `${(skill.level / 100) * 188.5} 188.5`
-                                            }}
-                                            transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
-                                        />
-                                    </svg>
-                                    {/* Pourcentage au centre */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <motion.span
-                                            className="font-bold text-gray-700 text-sm"
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+                            <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 h-48 flex flex-col justify-between relative overflow-hidden">
+                                {/* Header avec icône et nom */}
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center space-x-3">
+                                        <motion.div
+                                            className="text-2xl p-2 rounded-full"
+                                            style={{ backgroundColor: `${skill.color}20` }}
+                                            animate={hoveredSkill === skill.name ? {
+                                                rotate: [0, 360],
+                                                scale: [1, 1.1, 1]
+                                            } : {}}
+                                            transition={{ duration: 0.8 }}
                                         >
-                                            {skill.level}%
-                                        </motion.span>
+                                            {skill.icon}
+                                        </motion.div>
+                                        <div>
+                                            <h3 className="font-bold text-gray-800 text-lg font-body">
+                                                {skill.name}
+                                            </h3>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Sticker avec niveau */}
-                                <div className="absolute -top-2 -right-2">
-                                    <motion.div
-                                        className="sticker text-xs animate-pulse-soft"
-                                        style={{ 
-                                            backgroundColor: skill.color,
-                                            color: 'white'
-                                        }}
-                                        whileHover={{ rotate: 360 }}
-                                        transition={{ duration: 0.5 }}
-                                    >
-                                        {skill.level >= 80 ? 'Expert' : skill.level >= 60 ? 'Avancé' : 'En cours'}
-                                    </motion.div>
+                                {/* Barre de progression moderne */}
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-500">Niveau</span>
+                                        <span className={`text-sm font-semibold px-2 py-1 rounded-full text-white ${getLevelColor(skill.level)}`}>
+                                            {skill.level}
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <motion.div
+                                            className={`h-2 rounded-full ${getLevelColor(skill.level)} ${getLevelWidth(skill.level)}`}
+                                            initial={{ width: 0 }}
+                                            animate={{ width: getLevelWidth(skill.level) === 'w-full' ? '100%' : 
+                                                     getLevelWidth(skill.level) === 'w-4/5' ? '80%' : 
+                                                     getLevelWidth(skill.level) === 'w-3/5' ? '60%' : '40%' }}
+                                            transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Description du niveau */}
+                                <div className="mt-4">
+                                    <p className="text-xs text-gray-500 font-body">
+                                        {skill.level === 'Expert' ? 'Maîtrise complète et expérience approfondie' :
+                                         skill.level === 'Avancé' ? 'Solide expérience et bonnes pratiques' :
+                                         skill.level === 'Intermédiaire' ? 'Bases solides et en progression' :
+                                         'Apprentissage en cours'}
+                                    </p>
                                 </div>
 
                                 {/* Effet de brillance */}
@@ -218,13 +222,16 @@ export default function Skills() {
 
                             {/* Légende polaroid */}
                             <p className="font-handwriting text-center text-gray-600 mt-2 text-sm">
-                                {skill.level >= 80 ? '🔥 Maîtrisé !' : skill.level >= 60 ? '📈 En progression' : '🌱 En apprentissage'}
+                                {skill.level === 'Expert' ? 'Expertise confirmée' : 
+                                 skill.level === 'Avancé' ? 'Niveau avancé' : 
+                                 skill.level === 'Intermédiaire' ? 'En progression' : 
+                                 'En apprentissage'}
                             </p>
                         </motion.div>
                     ))}
                 </motion.div>
 
-                {/* Section statistiques amusantes */}
+                {/* Section sur l'apprentissage continu */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -232,6 +239,63 @@ export default function Skills() {
                     viewport={{ once: true }}
                     className="mt-20"
                 >
+                    <div className="paper-card p-8 rounded-3xl relative">
+                        <h3 className="text-4xl font-handwriting text-center text-gray-800 mb-6">
+                            Toujours en apprentissage
+                        </h3>
+                        
+                        <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto font-body">
+                            Le monde du développement évolue constamment, et j&apos;aime rester à jour avec les dernières technologies et tendances.
+                        </p>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="text-center">
+                                <h4 className="font-bold text-gray-800 mb-3 font-body">Actuellement j&apos;explore</h4>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {['Three.js', 'React Native', 'GraphQL', 'Docker'].map((tech, index) => (
+                                        <motion.span
+                                            key={tech}
+                                            className="sticker text-xs bg-purple-100 text-purple-800"
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                                            viewport={{ once: true }}
+                                            whileHover={{ 
+                                                rotate: 0,
+                                                scale: 1.1,
+                                                transition: { type: "spring", stiffness: 400 }
+                                            }}
+                                        >
+                                            {tech}
+                                        </motion.span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="text-center">
+                                <h4 className="font-bold text-gray-800 mb-3 font-body">Prochainement</h4>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {['Vue 3', 'Nuxt.js', 'Prisma', 'Supabase'].map((tech, index) => (
+                                        <motion.span
+                                            key={tech}
+                                            className="sticker text-xs bg-blue-100 text-blue-800"
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                                            viewport={{ once: true }}
+                                            whileHover={{ 
+                                                rotate: 0,
+                                                scale: 1.1,
+                                                transition: { type: "spring", stiffness: 400 }
+                                            }}
+                                        >
+                                            {tech}
+                                        </motion.span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </section>
