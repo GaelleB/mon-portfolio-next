@@ -338,6 +338,32 @@
   color: var(--color-text-dark);
 }
 
+/* Navigation hover effect */
+.nav-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-taxi), var(--color-scrap-pink));
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+.nav-item.active::after {
+  width: 100% !important;
+  background: var(--color-taxi) !important;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
