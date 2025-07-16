@@ -1,23 +1,11 @@
 import React from 'react'
 import './globals.css'
 import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Navigation activeSection="home" />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
+      <Navigation />
     </main>
   )
 }
