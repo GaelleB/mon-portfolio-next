@@ -218,23 +218,34 @@ export default function Hero() {
 
                 {/* Photo de profil avec effet flip 3D */}
                 <motion.div 
-                    className={`mb-6 relative w-64 h-64 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                    className={`mb-6 relative w-75 h-75 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     style={{ transitionDelay: '400ms' }}
                 >
                     <motion.div
                         className="relative w-full h-full transition-transform duration-700 flip-card"
                         style={{ 
                             transformStyle: 'preserve-3d',
-                            transform: 'perspective(1000px) rotateX(10deg) rotateY(15deg)'
+                            transform: 'perspective(1000px) rotateX(10deg) rotateY(15deg) rotateZ(0deg)'
                         }}
                     >
                         {/* FACE AVANT */}
-                        <div className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1" style={{ backfaceVisibility: 'hidden' }}>
-                            <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white">
+                        <div className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl" style={{ 
+                            backfaceVisibility: 'hidden',
+                            background: '#6366f1'
+                        }}>
+                            <div className="relative w-full h-full rounded-3xl overflow-hidden">
                                 <Image 
-                                    src="/assets/gaelle.jpg" 
+                                    src="/assets/gaelle.png" 
                                     alt="Gaëlle Boucher" 
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full rounded-3xl"
+                                    style={{ 
+                                        display: 'block',
+                                        width: '100%',
+                                        height: '100%',
+                                        borderRadius: 'inherit',
+                                        objectPosition: '47.9% 24.1%',
+                                        objectFit: 'cover'
+                                    }}
                                     width={500}
                                     height={500}
                                 />
