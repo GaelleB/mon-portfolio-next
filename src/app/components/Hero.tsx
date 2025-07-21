@@ -26,7 +26,7 @@ export default function Hero() {
     return (
         <section ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
         
-            {/* Texte en arrière-plan avec défilement et parallax */}
+            {/* Texte énorme en arrière-plan avec défilement et parallax */}
             <motion.div 
                 className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
                 style={{ y: backgroundY }}
@@ -70,7 +70,7 @@ export default function Hero() {
                     }}
                 >
                     <Image 
-                        src="/assets/pyramid.webp"
+                        src="/assets/3d/pyramid.webp"
                         alt=""
                         width={96}
                         height={96}
@@ -94,7 +94,7 @@ export default function Hero() {
                     }}
                 >
                     <Image 
-                        src="/assets/sphere.webp"
+                        src="/assets/3d/sphere.webp"
                         alt=""
                         width={80}
                         height={80}
@@ -118,7 +118,7 @@ export default function Hero() {
                     }}
                 >
                     <Image 
-                        src="/assets/star.webp"
+                        src="/assets/3d/star.webp"
                         alt=""
                         width={96}
                         height={96}
@@ -142,7 +142,7 @@ export default function Hero() {
                     }}
                 >
                     <Image 
-                        src="/assets/cylinder.webp"
+                        src="/assets/3d/cylinder.webp"
                         alt=""
                         width={80}
                         height={128}
@@ -150,31 +150,7 @@ export default function Hero() {
                     />
                 </motion.div>
 
-                {/* Cube vert/jaune (bottom-right) */}
-                <motion.div 
-                    className="absolute bottom-48 right-72 w-20 h-20 z-20"
-                    animate={{
-                        y: [0, -28, -12, -35, -15, 0],
-                        rotate: [12, 30, 45, 25, 50, 12],
-                        scale: [1, 1.12, 0.88, 1.15, 0.92, 1]
-                    }}
-                    transition={{
-                        duration: 6.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -1.5
-                    }}
-                >
-                    <Image 
-                        src="/assets/cube-yellow.webp"
-                        alt=""
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-contain drop-shadow-2xl"
-                    />
-                </motion.div>
-
-                {/* Cube jaune (right) */}
+                {/* Cube vert/jaune (right) */}
                 <motion.div 
                     className="absolute right-96 top-80 w-18 h-18 z-20"
                     animate={{
@@ -190,10 +166,34 @@ export default function Hero() {
                     }}
                 >
                     <Image 
-                        src="/assets/cube-green.webp"
+                        src="/assets/3d/cube-green.webp"
                         alt=""
                         width={72}
                         height={72}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Cube jaune (bottom-right) */}
+                <motion.div 
+                    className="absolute bottom-48 right-72 w-20 h-20 z-20"
+                    animate={{
+                        y: [0, -28, -12, -35, -15, 0],
+                        rotate: [12, 30, 45, 25, 50, 12],
+                        scale: [1, 1.12, 0.88, 1.15, 0.92, 1]
+                    }}
+                    transition={{
+                        duration: 6.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -1.5
+                    }}
+                >
+                    <Image 
+                        src="/assets/3d/cube-yellow.webp"
+                        alt=""
+                        width={80}
+                        height={80}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
@@ -218,14 +218,18 @@ export default function Hero() {
 
                 {/* Photo de profil avec effet flip 3D */}
                 <motion.div 
-                    className={`mb-6 relative w-48 h-48 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                    className={`mb-6 relative w-64 h-64 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     style={{ transitionDelay: '400ms' }}
                 >
                     <motion.div
-                        className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
+                        className="relative w-full h-full transition-transform duration-700 flip-card"
+                        style={{ 
+                            transformStyle: 'preserve-3d',
+                            transform: 'perspective(1000px) rotateX(10deg) rotateY(15deg)'
+                        }}
                     >
                         {/* FACE AVANT */}
-                        <div className="absolute w-full h-full rounded-3xl overflow-hidden [backface-visibility:hidden] shadow-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                        <div className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1" style={{ backfaceVisibility: 'hidden' }}>
                             <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white">
                                 <Image 
                                     src="/assets/gaelle.jpg" 
@@ -238,10 +242,10 @@ export default function Hero() {
                         </div>
 
                         {/* FACE ARRIÈRE */}
-                        <div className="absolute w-full h-full rounded-3xl bg-white flex items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-2xl">
+                        <div className="absolute w-full h-full rounded-3xl bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
                             
-                            {/* Conteneur pour le texte rotatif */}
-                            <div className="relative w-48 h-48">
+                            {/* Cercle extérieur avec bordure */}
+                            <div className="relative w-44 h-44 rounded-full bg-white flex items-center justify-center border-2 border-black">
                                 
                                 {/* Texte rotatif */}
                                 <motion.div
@@ -251,16 +255,16 @@ export default function Hero() {
                                         repeat: Infinity,
                                         ease: "linear"
                                     }}
-                                    className="absolute inset-0 w-48 h-48"
+                                    className="absolute inset-0 w-full h-full"
                                 >
-                                    <svg className="w-full h-full" viewBox="0 0 200 200">
+                                    <svg className="w-full h-full" viewBox="0 0 176 176">
                                         <defs>
                                             <path
                                                 id="textPath"
-                                                d="M 100,100 m -85,0 a 85,85 0 1,1 170,0 a 85,85 0 1,1 -170,0"
+                                                d="M 88,88 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
                                             />
                                         </defs>
-                                        <text className="text-xs font-medium fill-gray-500 uppercase tracking-[0.3em]">
+                                        <text className="text-lg font-medium black justify-center uppercase tracking-widest">
                                             <textPath href="#textPath" startOffset="0%">
                                                 • SCROLL DOWN • AND KNOW ME BETTER 
                                             </textPath>
@@ -268,10 +272,10 @@ export default function Hero() {
                                     </svg>
                                 </motion.div>
                                 
-                                {/* Flèche vers le bas au centre */}
-                                <div className="absolute inset-0 flex items-center justify-center">
+                                {/* Cercle intérieur avec bordure */}
+                                <div className="w-25 h-25 rounded-full bg-white flex items-center justify-center border-2 border-black" >
                                     <motion.div
-                                        animate={{ y: [0, 8, 0] }}
+                                        animate={{ y: [0, 6, 0] }}
                                         transition={{
                                             duration: 2,
                                             repeat: Infinity,
@@ -279,7 +283,7 @@ export default function Hero() {
                                         }}
                                     >
                                         <svg 
-                                            className="w-6 h-6 text-gray-600" 
+                                            className="w-5 h-5 text-gray-600" 
                                             fill="none" 
                                             stroke="currentColor" 
                                             viewBox="0 0 24 24"

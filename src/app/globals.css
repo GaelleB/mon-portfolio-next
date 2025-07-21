@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
-
 @theme {
   --color-ny-dark: #1e1e1e;
   --color-taxi: #facc15;
@@ -19,11 +17,6 @@
   --color-bg-main: #f1f3f4;
 }
 
-/* Polices personnalisées */
-.font-handwriting {
-  font-family: 'Caveat', cursive;
-}
-
-.font-body {
-  font-family: 'Poppins', sans-serif;
+.flip-card:hover {
+  transform: perspective(1000px) rotateX(-10deg) rotateY(165deg) !important;
 }
