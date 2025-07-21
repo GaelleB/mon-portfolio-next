@@ -137,10 +137,6 @@ export default function Contact() {
                                 <div className="absolute -top-2 -right-2">
                                     <motion.div
                                         className="sticker text-xs"
-                                        style={{ 
-                                            background: `linear-gradient(45deg, ${card.color.split(' ')[1]}, ${card.color.split(' ')[3]})`,
-                                            color: 'white'
-                                        }}
                                         whileHover={{ rotate: 360 }}
                                         transition={{ duration: 0.5 }}
                                     >
@@ -231,11 +227,6 @@ export default function Contact() {
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
                                 className="btn-scrap text-xl px-8 py-4 inline-block"
-                                style={{
-                                    background: 'linear-gradient(45deg, #f472b6, #8b5cf6, #3b82f6)',
-                                    color: 'white',
-                                    fontSize: '1.2rem'
-                                }}
                                 whileHover={{ 
                                     scale: 1.05,
                                     rotate: [0, -1, 1, 0],

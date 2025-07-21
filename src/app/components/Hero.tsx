@@ -1,98 +1,353 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Hero() {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+    
+    // Parallax effect
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start start", "end start"]
+    });
+    
+    // Transform values for parallax
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const objectsY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []);
+
     return (
-        <section id="home" className="min-h-screen flex flex-col items-center justify-center px-4 pt-32 md:pt-40 text-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-950">
-            {/* Avatar + nom */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="mb-10"
+        <section ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+        
+            {/* Texte en arrière-plan avec défilement et parallax */}
+            <motion.div 
+                className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+                style={{ y: backgroundY }}
             >
-                <div className="inline-block p-1 rounded-md bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-300 shadow-lg">
-                <Image
-                    src="/assets/gaelle.jpg"
-                    alt="Gaëlle Boucher"
-                    width={160}
-                    height={160}
-                    className="rounded-full object-cover border-4 border-white shadow-md"
-                />
+                <motion.div 
+                    className="flex whitespace-nowrap"
+                    animate={{ x: ["100%", "-100%"] }}
+                    transition={{
+                        duration: 25,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                >
+                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
+                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                </motion.div>
+            </motion.div>
+
+            {/* Objets 3D flottants avec parallax */}
+            <motion.div style={{ y: objectsY }}>
+                
+                {/* Pyramide orange (top-left) */}
+                <motion.div 
+                    className="absolute top-32 left-48 w-24 h-24 z-20"
+                    animate={{
+                        y: [0, -25, -15, -30, 0],
+                        x: [0, 8, -5, 12, 0],
+                        rotate: [0, 8, 15, 5, 0]
+                    }}
+                    transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                >
+                    <Image 
+                        src="/assets/pyramid.webp"
+                        alt=""
+                        width={96}
+                        height={96}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Sphère violette (left) */}
+                <motion.div 
+                    className="absolute left-72 top-96 w-20 h-20 z-20"
+                    animate={{
+                        y: [0, -18, -8, -25, -12, 0],
+                        x: [0, 15, -8, 20, -12, 0],
+                        scale: [1, 1.05, 0.95, 1.08, 0.98, 1]
+                    }}
+                    transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -1
+                    }}
+                >
+                    <Image 
+                        src="/assets/sphere.webp"
+                        alt=""
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Étoile turquoise (top-right) */}
+                <motion.div 
+                    className="absolute top-48 right-48 w-24 h-24 z-20"
+                    animate={{
+                        y: [0, -20, -35, -18, -28, 0],
+                        rotate: [0, 25, 15, 35, 10, 0],
+                        scale: [1, 1.1, 0.9, 1.05, 0.95, 1]
+                    }}
+                    transition={{
+                        duration: 9,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -2
+                    }}
+                >
+                    <Image 
+                        src="/assets/star.webp"
+                        alt=""
+                        width={96}
+                        height={96}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Cylindre bleu (bottom-left) */}
+                <motion.div 
+                    className="absolute bottom-32 left-80 w-20 h-32 z-20"
+                    animate={{
+                        y: [0, -22, -8, -18, 0],
+                        x: [0, -10, 15, -5, 0],
+                        rotate: [0, -12, -20, -8, 0]
+                    }}
+                    transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -0.5
+                    }}
+                >
+                    <Image 
+                        src="/assets/cylinder.webp"
+                        alt=""
+                        width={80}
+                        height={128}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Cube vert/jaune (bottom-right) */}
+                <motion.div 
+                    className="absolute bottom-48 right-72 w-20 h-20 z-20"
+                    animate={{
+                        y: [0, -28, -12, -35, -15, 0],
+                        rotate: [12, 30, 45, 25, 50, 12],
+                        scale: [1, 1.12, 0.88, 1.15, 0.92, 1]
+                    }}
+                    transition={{
+                        duration: 6.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -1.5
+                    }}
+                >
+                    <Image 
+                        src="/assets/cube-yellow.webp"
+                        alt=""
+                        width={80}
+                        height={80}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+                {/* Cube jaune (right) */}
+                <motion.div 
+                    className="absolute right-96 top-80 w-18 h-18 z-20"
+                    animate={{
+                        y: [0, -15, -25, -18, 0],
+                        x: [0, 8, -12, 5, 0],
+                        rotate: [45, 60, 30, 75, 45]
+                    }}
+                    transition={{
+                        duration: 5.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: -3
+                    }}
+                >
+                    <Image 
+                        src="/assets/cube-green.webp"
+                        alt=""
+                        width={72}
+                        height={72}
+                        className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                </motion.div>
+
+            </motion.div>
+
+            {/* Contenu central avec parallax */}
+            <motion.div 
+                className="relative z-30 text-center max-w-lg mx-auto px-6"
+                style={{ y: textY }}
+            >
+                
+                {/* Salutation et nom */}
+                <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                        Hi, I&apos;m <em className="font-bold not-italic">Gaëlle</em>!
+                    </h2>
+                    <p className="text-lg text-gray-600">
+                        Frontend Developer
+                    </p>
+                </div>
+
+                {/* Photo de profil avec effet flip 3D */}
+                <motion.div 
+                    className={`mb-6 relative w-48 h-48 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                    style={{ transitionDelay: '400ms' }}
+                >
+                    <motion.div
+                        className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
+                    >
+                        {/* FACE AVANT */}
+                        <div className="absolute w-full h-full rounded-3xl overflow-hidden [backface-visibility:hidden] shadow-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                            <div className="relative w-full h-full rounded-3xl overflow-hidden bg-white">
+                                <Image 
+                                    src="/assets/gaelle.jpg" 
+                                    alt="Gaëlle Boucher" 
+                                    className="w-full h-full object-cover rounded-3xl"
+                                    width={500}
+                                    height={500}
+                                />
+                            </div>
+                        </div>
+
+                        {/* FACE ARRIÈRE */}
+                        <div className="absolute w-full h-full rounded-3xl bg-white flex items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-2xl">
+                            
+                            {/* Conteneur pour le texte rotatif */}
+                            <div className="relative w-48 h-48">
+                                
+                                {/* Texte rotatif */}
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{
+                                        duration: 15,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
+                                    className="absolute inset-0 w-48 h-48"
+                                >
+                                    <svg className="w-full h-full" viewBox="0 0 200 200">
+                                        <defs>
+                                            <path
+                                                id="textPath"
+                                                d="M 100,100 m -85,0 a 85,85 0 1,1 170,0 a 85,85 0 1,1 -170,0"
+                                            />
+                                        </defs>
+                                        <text className="text-xs font-medium fill-gray-500 uppercase tracking-[0.3em]">
+                                            <textPath href="#textPath" startOffset="0%">
+                                                • SCROLL DOWN • AND KNOW ME BETTER 
+                                            </textPath>
+                                        </text>
+                                    </svg>
+                                </motion.div>
+                                
+                                {/* Flèche vers le bas au centre */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <motion.div
+                                        animate={{ y: [0, 8, 0] }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        <svg 
+                                            className="w-6 h-6 text-gray-600" 
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path 
+                                                strokeLinecap="round" 
+                                                strokeLinejoin="round" 
+                                                strokeWidth={2} 
+                                                d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+                                            />
+                                        </svg>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+
+                {/* Social proof */}
+                <div className={`mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
+                    <div className="flex items-center justify-center space-x-2">
+                        <div className="flex -space-x-2">
+                            <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-red-500 rounded-full border-2 border-white shadow-lg"></div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white shadow-lg"></div>
+                            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-teal-500 rounded-full border-2 border-white shadow-lg"></div>
+                        </div>
+                        <span className="text-sm text-gray-600 ml-3 font-medium">5+ projets</span>
+                    </div>
+                </div>
+
+                {/* CTA Button avec effet CodePen */}
+                <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
+                    <button className="group relative inline-flex items-center justify-center px-8 py-4 font-semibold text-gray-900 bg-white border border-gray-200 rounded-full shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:bg-gray-50">
+                        
+                        {/* Arrière-plan animé */}
+                        <span className="absolute inset-0 w-0 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500 ease-out group-hover:w-full"></span>
+                        
+                        {/* Contenu */}
+                        <span className="relative flex items-center gap-3 group-hover:text-white transition-colors duration-300">
+                            Let&apos;s Work Together!
+                            
+                            {/* Flèche avec animation continue */}
+                            <motion.div
+                                animate={{ x: [0, 6, 0] }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            >
+                                <svg 
+                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path 
+                                        strokeLinecap="round" 
+                                        strokeLinejoin="round" 
+                                        strokeWidth={2} 
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                                    />
+                                </svg>
+                            </motion.div>
+                        </span>
+                    </button>
                 </div>
             </motion.div>
-
-            {/* Titre + job */}
-            <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500 mb-6"
-            >
-                Gaëlle <span className="text-white dark:text-gray-100">Boucher</span>
-            </motion.h1>
-
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="mb-4"
-            >
-                <span className="inline-block px-6 py-2 bg-white dark:bg-gray-800 rounded-full shadow text-lg font-medium text-gray-800 dark:text-gray-200">
-                Développeuse front-end
-                </span>
-            </motion.div>
-
-            {/* Phrase d'accroche */}
-            <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-gray-700 dark:text-gray-300 max-w-xl mx-auto mb-10"
-            >
-                Je crée des expériences digitales qui racontent votre histoire
-            </motion.p>
-
-            {/* Boutons */}
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-                <Link href="#projects">
-                <span className="inline-block px-6 py-3 bg-yellow-400 text-gray-900 font-bold rounded-full shadow hover:scale-105 transition-transform">
-                    Voir mes projets
-                </span>
-                </Link>
-                <Link href="#contact">
-                <span className="inline-block px-6 py-3 bg-white/10 border border-white/30 text-white rounded-full shadow hover:scale-105 transition-transform">
-                    Me contacter
-                </span>
-                </Link>
-            </motion.div>
-
-            {/* Flèche */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-16 flex flex-col items-center"
-            >
-                <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="text-yellow-400"
-                >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-                </motion.div>
-                <p className="mt-2 text-sm text-gray-500">Découvrez mon univers</p>
-            </motion.div>
         </section>
-    )
+    );
 }
