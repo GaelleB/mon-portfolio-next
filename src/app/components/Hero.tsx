@@ -73,7 +73,7 @@ export default function Hero() {
                         alt=""
                         width={96}
                         height={96}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain drop-shadow-lg"
                     />
                 </motion.div>
 
@@ -319,18 +319,13 @@ export default function Hero() {
                     </div>
                 </div>
 
-                {/* CTA Button avec effet CodePen */}
+                {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <button className="group relative inline-flex items-center justify-center px-8 py-4 font-semibold text-gray-900 bg-white border border-gray-200 rounded-full shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:bg-gray-50">
-                        
-                        {/* Arrière-plan animé */}
-                        <span className="absolute inset-0 w-0 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500 ease-out group-hover:w-full"></span>
-                        
-                        {/* Contenu */}
-                        <span className="relative flex items-center gap-3 group-hover:text-white transition-colors duration-300">
+                    <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-lg font-bold h-15 leading-15 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
+                        <span className="cta-text inline-block px-8 py-0 transition-all duration-300 group-hover:pr-4">
                             Let&apos;s Work Together!
-                            
-                            {/* Flèche avec animation continue */}
+                        </span>
+                        <span className="cta-arrow inline-block bg-black text-white h-15 w-15 text-center rounded-full -mr-15 transition-all duration-300 text-xl leading-15 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
                             <motion.div
                                 animate={{ x: [0, 6, 0] }}
                                 transition={{
@@ -338,23 +333,12 @@ export default function Hero() {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
+                                className="inline-block"
                             >
-                                <svg 
-                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" 
-                                    fill="none" 
-                                    stroke="currentColor" 
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path 
-                                        strokeLinecap="round" 
-                                        strokeLinejoin="round" 
-                                        strokeWidth={2} 
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3" 
-                                    />
-                                </svg>
+                                ↓
                             </motion.div>
                         </span>
-                    </button>
+                    </div>
                 </div>
             </motion.div>
         </section>
