@@ -14,9 +14,9 @@ export default function Hero() {
         offset: ["start start", "end start"]
     });
     
-    // Transform values for parallax
+    // Transform values for parallax - objects stay fixed, only background moves
     const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const objectsY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+    const objectsY = "0%"; // Objects stay completely fixed
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
     useEffect(() => {
