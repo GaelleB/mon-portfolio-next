@@ -24,7 +24,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
         
             {/* Texte énorme en arrière-plan avec défilement et parallax */}
             <motion.div 

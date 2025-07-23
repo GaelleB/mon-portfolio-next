@@ -105,7 +105,7 @@ export default function About() {
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.25, ANIMATION_CONFIG.CV_START + 0.15, 1], [0, 1, 1]);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div id="about" ref={containerRef} className="relative">
       {/* Section avec hauteur pour permettre le scroll */}
       <div className="h-[400vh]">
         {/* Contenu sticky qui reste fixe pendant le scroll */}
