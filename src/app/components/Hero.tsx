@@ -15,7 +15,6 @@ export default function Hero() {
     });
     
     // Transform values for parallax - objects stay fixed, only background moves
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const objectsY = "0%"; // Objects stay completely fixed
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
@@ -26,31 +25,60 @@ export default function Hero() {
     return (
         <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
         
-            {/* Texte énorme en arrière-plan avec défilement et parallax */}
-            <motion.div 
+            {/* Texte en arrière-plan avec défilement sans parallax */}
+            <div 
                 className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
-                style={{ y: backgroundY }}
             >
                 <motion.div 
                     className="flex whitespace-nowrap"
-                    animate={{ x: ["100%", "-100%"] }}
+                    animate={{ x: ["0%", "-50%"] }}
                     transition={{
-                        duration: 25,
+                        duration: 120,
                         repeat: Infinity,
                         ease: "linear"
                     }}
                 >
-                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    {/* Première série */}
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
                         GAËLLE
                     </h1>
-                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
                         BOUCHER
                     </h1>
-                    <h1 className="text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[18rem] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
                         GAËLLE
                     </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
+                    
+                    {/* Deuxième série identique pour continuité */}
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        GAËLLE
+                    </h1>
+                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                        BOUCHER
+                    </h1>
                 </motion.div>
-            </motion.div>
+            </div>
 
             {/* Objets 3D flottants avec parallax */}
             <motion.div style={{ y: objectsY }}>
