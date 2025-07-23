@@ -53,13 +53,18 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     <div className="max-w-4xl mx-auto px-6 text-center">
       <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
         {paragraph.title && (
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
             {paragraph.title}
           </h2>
         )}
       </div>
       <div className="glass-card px-16 py-12 mx-auto flex items-center justify-center">
-        <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+        <p className="text-2xl leading-relaxed" style={{ 
+          fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif',
+          color: '#4D4D4D',
+          fontSize: '24px',
+          fontWeight: 400
+        }}>
           {paragraph.content}
         </p>
       </div>
