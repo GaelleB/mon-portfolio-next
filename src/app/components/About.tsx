@@ -58,7 +58,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
           </h2>
         )}
       </div>
-      <div className="glass-card p-12 mx-auto">
+      <div className="glass-card px-16 py-12 mx-auto flex items-center justify-center">
         <p className="text-lg md:text-xl leading-relaxed text-gray-700">
           {paragraph.content}
         </p>
