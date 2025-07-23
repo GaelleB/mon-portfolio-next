@@ -28,21 +28,21 @@ export default function About() {
   // Animations affinées pour chaque paragraphe (style Framer)
   const paragraph1Y = useTransform(scrollYProgress, [0, 0.3], ["60vh", "0vh"]);
   const paragraph1Rotate = useTransform(scrollYProgress, [0, 0.2, 0.4], ["2deg", "2deg", "0deg"]);
-  const paragraph1Scale = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.9, 1, 1, 0.95]);
-  const paragraph1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.8, 1], [0, 1, 1, 0]);
+  const paragraph1Scale = useTransform(scrollYProgress, [0, 0.15, 0.3, 0.6], [0.9, 1, 1, 0.95]);
+  const paragraph1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.3, 1], [0, 1, 1, 1]);
 
   const paragraph2Y = useTransform(scrollYProgress, [0.3, 0.6], ["60vh", "0vh"]);
   const paragraph2Rotate = useTransform(scrollYProgress, [0.3, 0.45, 0.65], ["2deg", "2deg", "0deg"]);
-  const paragraph2Scale = useTransform(scrollYProgress, [0.3, 0.4, 0.8, 1], [0.9, 1, 1, 0.95]);
-  const paragraph2Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.8, 1], [0, 1, 1, 0]);
+  const paragraph2Scale = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 0.85], [0.9, 1, 1, 0.95]);
+  const paragraph2Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 1], [0, 1, 1, 1]);
 
   const paragraph3Y = useTransform(scrollYProgress, [0.6, 0.85], ["60vh", "0vh"]);
   const paragraph3Rotate = useTransform(scrollYProgress, [0.6, 0.75], ["2deg", "0deg"]);
-  const paragraph3Scale = useTransform(scrollYProgress, [0.6, 0.7, 0.8, 1], [0.9, 1, 1, 0.95]);
-  const paragraph3Opacity = useTransform(scrollYProgress, [0.6, 0.7, 0.8, 1], [0, 1, 1, 0]);
+  const paragraph3Scale = useTransform(scrollYProgress, [0.6, 0.7, 0.85, 1], [0.9, 1, 1, 0.95]);
+  const paragraph3Opacity = useTransform(scrollYProgress, [0.6, 0.7, 0.85, 0.9], [0, 1, 1, 0]);
 
-  // Animation du CV avec scale
-  const cvY = useTransform(scrollYProgress, [0.85, 1], ["60vh", "0vh"]);
+  // Animation du CV - arrive du HAUT après le 3ème paragraphe
+  const cvY = useTransform(scrollYProgress, [0.85, 1], ["-60vh", "0vh"]);
   const cvScale = useTransform(scrollYProgress, [0.85, 0.95], [0.8, 1]);
   const cvOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
 
@@ -96,11 +96,13 @@ export default function About() {
               className="absolute inset-0 flex items-center justify-center"
             >
               <div className="max-w-4xl mx-auto px-6 text-center">
-                {paragraphs[0].title && (
-                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
-                    {paragraphs[0].title}
-                  </h2>
-                )}
+                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
+                  {paragraphs[0].title && (
+                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
+                      {paragraphs[0].title}
+                    </h2>
+                  )}
+                </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
                   <p className="text-lg md:text-xl leading-relaxed text-gray-700">
                     {paragraphs[0].content}
@@ -121,11 +123,13 @@ export default function About() {
               className="absolute inset-0 flex items-center justify-center"
             >
               <div className="max-w-4xl mx-auto px-6 text-center">
-                {paragraphs[1].title && (
-                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
-                    {paragraphs[1].title}
-                  </h2>
-                )}
+                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
+                  {paragraphs[1].title && (
+                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
+                      {paragraphs[1].title}
+                    </h2>
+                  )}
+                </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
                   <p className="text-lg md:text-xl leading-relaxed text-gray-700">
                     {paragraphs[1].content}
@@ -146,11 +150,13 @@ export default function About() {
               className="absolute inset-0 flex items-center justify-center"
             >
               <div className="max-w-4xl mx-auto px-6 text-center">
-                {paragraphs[2].title && (
-                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
-                    {paragraphs[2].title}
-                  </h2>
-                )}
+                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
+                  {paragraphs[2].title && (
+                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
+                      {paragraphs[2].title}
+                    </h2>
+                  )}
+                </div>
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
                   <p className="text-lg md:text-xl leading-relaxed text-gray-700">
                     {paragraphs[2].content}
@@ -169,9 +175,11 @@ export default function About() {
               }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h2 className="text-6xl md:text-8xl font-black text-gray-900">
-                READ MY CV
-              </h2>
+              <div className="bg-white/90 backdrop-blur-sm rounded-full px-8 py-4 shadow-lg border border-gray-200">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                  Read My CV
+                </h2>
+              </div>
             </motion.div>
           </div>
         </div>
