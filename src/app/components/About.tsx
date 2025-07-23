@@ -5,8 +5,8 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 // Configuration des animations
 const ANIMATION_CONFIG = {
-  PARAGRAPH_DURATION: 0.3,
-  CV_START: 0.75,
+  PARAGRAPH_DURATION: 0.15,
+  CV_START: 0.65,
   PARAGRAPH_3_END: 0.75, // Fin du 3ème paragraphe
   INITIAL_ROTATION: "2deg",
   INITIAL_SCALE: 0.9,
@@ -100,10 +100,10 @@ export default function About() {
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
-  // Animation du CV - apparaît en dessous des 3 paragraphes superposés
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], ["30vh", "40vh"]);
+  // Animation du CV - glissade poétique comme dans les specs
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], ["30vh", "45vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0.8, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.02, ANIMATION_CONFIG.CV_START + 0.05, 1], [0, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.02, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.05], [0, 1, 0]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -134,7 +134,7 @@ export default function About() {
                 y: cvY,
                 scale: cvScale,
                 opacity: cvOpacity,
-                zIndex: 10
+                zIndex: 0
               }}
               className="absolute inset-0 flex items-center justify-center"
             >
