@@ -1,83 +1,181 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const paragraphs = [
+  {
+    title: "About Me",
+    content: "My web design journey began with a solid foundation in design principles, meticulously honed through years of formal education. I hold a degree in Graphic Design from XYZ University, where I not only acquired technical expertise but also developed a profound appreciation for the beautiful union of aesthetics and functionality."
+  },
+  {
+    title: "",
+    content: "My tech stack mirrors the vibrant diversity of the web itself. From the core languages of HTML5, CSS3, and JavaScript to the arsenal of design tools like Adobe Creative Suite and Sketch, I stay well-equipped. However, I believe in constantly pushing the boundaries, exploring emerging technologies and design trends."
+  },
+  {
+    title: "",
+    content: "I believe that great design is not just about how something looks, but how it makes people feel. Every project is an opportunity to create something meaningful, functional, and beautiful that connects with users on a deeper level."
+  }
+];
 
 export default function About() {
-    const passions = [
-        { icon: '🗽', title: 'NYC Lover', text: "Inspirée par l'énergie de New York, je crée des expériences digitales qui ne dorment jamais !" },
-        { icon: '📺', title: 'Sériephile', text: "Je dévore des séries entre deux lignes de code. Mon code est aussi addictif qu'une bonne série." },
-        { icon: '🎧', title: 'Music Addict', text: 'Chaque projet a sa playlist, chaque ligne de code a son rythme.' },
-        { icon: '🎨', title: 'Code Artistique', text: "Pour moi, le code est un art. J'aime créer des interfaces qui racontent des histoires." },
-    ]
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
 
-    return (
-        <section id="about" className="bg-base-100 py-20 px-6 text-gray-800">
-            <div className="max-w-6xl mx-auto">
-                {/* Titre */}
-                <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-5xl font-handwriting text-center mb-16"
-                >
-                <span className="bg-gradient-to-r from-yellow-400 via-pink-400 to-pink-500 bg-clip-text text-transparent">
-                    À propos de moi
-                </span>
-                {/* Soulignement fin multicolore */}
-                <div className="mt-2 w-48 h-1 mx-auto bg-gradient-to-r from-yellow-400 via-pink-400 to-pink-500 rounded-full" />
-                </motion.h2>
+  // Animations affinées pour chaque paragraphe (style Framer)
+  const paragraph1Y = useTransform(scrollYProgress, [0, 0.3], ["60vh", "0vh"]);
+  const paragraph1Rotate = useTransform(scrollYProgress, [0, 0.2, 0.4], ["2deg", "2deg", "0deg"]);
+  const paragraph1Scale = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.9, 1, 1, 0.95]);
+  const paragraph1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.8, 1], [0, 1, 1, 0]);
 
-                <div className="grid md:grid-cols-2 gap-12">
-                    {/* Bloc texte */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="bg-white rounded-lg shadow-xl p-8 relative"
-                    >
-                        {/* Scotch rose en bas */}
-                        <div className="absolute -bottom-3 left-4 w-24 h-6 bg-pink-300/70 rotate-[-5deg] z-10" />
-                        {/* Scotch jaune en haut */}
-                        <div className="absolute -top-3 right-6 w-20 h-5 bg-yellow-300/70 rotate-[4deg] z-10" />
+  const paragraph2Y = useTransform(scrollYProgress, [0.3, 0.6], ["60vh", "0vh"]);
+  const paragraph2Rotate = useTransform(scrollYProgress, [0.3, 0.45, 0.65], ["2deg", "2deg", "0deg"]);
+  const paragraph2Scale = useTransform(scrollYProgress, [0.3, 0.4, 0.8, 1], [0.9, 1, 1, 0.95]);
+  const paragraph2Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.8, 1], [0, 1, 1, 0]);
 
-                        <div className="relative z-20">
-                        <p className="font-semibold text-xl mb-4">
-                            Salut, moi c’est <span className="text-pink-500">Gaëlle</span> !
-                        </p>
-                        <p className="mb-3 leading-relaxed">
-                            Je suis une développeuse web passionnée qui puise son inspiration dans les séries, la musique et l’effervescence de New York.
-                        </p>
-                        <p className="leading-relaxed">
-                            Mon code raconte des histoires. J’aime mélanger la rigueur du front-end avec une touche sensible, poétique et très personnelle.
-                        </p>
-                        </div>
-                    </motion.div>
+  const paragraph3Y = useTransform(scrollYProgress, [0.6, 0.85], ["60vh", "0vh"]);
+  const paragraph3Rotate = useTransform(scrollYProgress, [0.6, 0.75], ["2deg", "0deg"]);
+  const paragraph3Scale = useTransform(scrollYProgress, [0.6, 0.7, 0.8, 1], [0.9, 1, 1, 0.95]);
+  const paragraph3Opacity = useTransform(scrollYProgress, [0.6, 0.7, 0.8, 1], [0, 1, 1, 0]);
 
-                    {/* Cartes passions */}
-                    <div className="space-y-6">
-                        {passions.map((passion, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.15 }}
-                            className="bg-white rounded-lg shadow-md p-6 relative"
-                        >
-                            {/* Stickers scrapbooking */}
-                            <div className="absolute -top-2 left-4 w-20 h-4 bg-yellow-300/80 rotate-[-3deg]" />
-                            <div className="absolute -bottom-2 right-4 w-24 h-4 bg-pink-300/80 rotate-[3deg]" />
+  // Animation du CV avec scale
+  const cvY = useTransform(scrollYProgress, [0.85, 1], ["60vh", "0vh"]);
+  const cvScale = useTransform(scrollYProgress, [0.85, 0.95], [0.8, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
 
-                            <div className="relative z-10 flex items-start gap-4">
-                            <span className="text-3xl">{passion.icon}</span>
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-800 mb-1">{passion.title}</h3>
-                                <p className="text-sm text-gray-600">{passion.text}</p>
-                            </div>
-                            </div>
-                        </motion.div>
-                        ))}
-                    </div>
+  return (
+    <div ref={containerRef} className="relative">
+      {/* Section avec hauteur pour permettre le scroll */}
+      <div className="h-[400vh]">
+        {/* Contenu sticky qui reste fixe pendant le scroll */}
+        <div className="sticky top-0 h-screen bg-white overflow-hidden">
+          {/* Formes organiques violettes en arrière-plan */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Forme violette (gauche) */}
+            <div 
+              className="absolute top-20 left-20 w-80 h-40 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full blur-sm opacity-60"
+              style={{
+                clipPath: "ellipse(65% 45% at 40% 60%)",
+                transform: "rotate(-20deg)"
+              }}
+            />
+            
+            {/* Forme bleue (droite) */}
+            <div 
+              className="absolute top-32 right-20 w-72 h-36 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full blur-sm opacity-60"
+              style={{
+                clipPath: "ellipse(70% 50% at 60% 40%)",
+                transform: "rotate(15deg)"
+              }}
+            />
+            
+            {/* Forme violette du bas */}
+            <div 
+              className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-96 h-24 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full blur-sm opacity-50"
+              style={{
+                clipPath: "ellipse(80% 30% at 50% 50%)",
+                transform: "translateX(-50%) rotate(-5deg)"
+              }}
+            />
+          </div>
+
+          {/* Paragraphes superposés */}
+          <div className="relative h-full flex items-center justify-center">
+            {/* Paragraph 1 */}
+            <motion.div
+              style={{
+                y: paragraph1Y,
+                rotate: paragraph1Rotate,
+                scale: paragraph1Scale,
+                opacity: paragraph1Opacity,
+                zIndex: 3
+              }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="max-w-4xl mx-auto px-6 text-center">
+                {paragraphs[0].title && (
+                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
+                    {paragraphs[0].title}
+                  </h2>
+                )}
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    {paragraphs[0].content}
+                  </p>
                 </div>
-            </div>
-        </section>
-    )
+              </div>
+            </motion.div>
+
+            {/* Paragraph 2 */}
+            <motion.div
+              style={{
+                y: paragraph2Y,
+                rotate: paragraph2Rotate,
+                scale: paragraph2Scale,
+                opacity: paragraph2Opacity,
+                zIndex: 2
+              }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="max-w-4xl mx-auto px-6 text-center">
+                {paragraphs[1].title && (
+                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
+                    {paragraphs[1].title}
+                  </h2>
+                )}
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    {paragraphs[1].content}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Paragraph 3 */}
+            <motion.div
+              style={{
+                y: paragraph3Y,
+                rotate: paragraph3Rotate,
+                scale: paragraph3Scale,
+                opacity: paragraph3Opacity,
+                zIndex: 1
+              }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div className="max-w-4xl mx-auto px-6 text-center">
+                {paragraphs[2].title && (
+                  <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-16">
+                    {paragraphs[2].title}
+                  </h2>
+                )}
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+                    {paragraphs[2].content}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* READ MY CV */}
+            <motion.div
+              style={{
+                y: cvY,
+                scale: cvScale,
+                opacity: cvOpacity,
+                zIndex: 10
+              }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <h2 className="text-6xl md:text-8xl font-black text-gray-900">
+                READ MY CV
+              </h2>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
