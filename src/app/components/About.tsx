@@ -107,7 +107,7 @@ export default function About() {
   return (
     <div id="about" ref={containerRef} className="relative">
       {/* Section avec hauteur pour permettre le scroll */}
-      <div className="h-[400vh]">
+      <div className="h-[250vh]">
         {/* Contenu sticky qui reste fixe pendant le scroll */}
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
