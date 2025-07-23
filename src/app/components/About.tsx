@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 const ANIMATION_CONFIG = {
   PARAGRAPH_DURATION: 0.3,
   CV_START: 0.75,
+  PARAGRAPH_3_END: 0.75, // Fin du 3ème paragraphe
   INITIAL_ROTATION: "2deg",
   INITIAL_SCALE: 0.9,
   INITIAL_Y: "60vh"
@@ -90,19 +91,19 @@ export default function About() {
   };
 
   const paragraph3Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.CV_START], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
     rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.15], [ANIMATION_CONFIG.INITIAL_ROTATION, "0deg"]),
-    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.CV_START, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 0.95]),
-    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.CV_START, 0.9], [0, 1, 1, 1]),
+    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 0.95]),
+    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, 1], [0, 1, 1, 1]),
     zIndex: 3
   };
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
-  // Animation du CV - caché sous les paragraphes puis descend en scrollant
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.1, ANIMATION_CONFIG.CV_START, 1], ["0vh", "0vh", "45vh"]);
+  // Animation du CV - apparaît en dessous des 3 paragraphes superposés
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], ["30vh", "40vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0.8, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.25, ANIMATION_CONFIG.CV_START + 0.15, 1], [0, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.02, ANIMATION_CONFIG.CV_START + 0.05, 1], [0, 1, 1]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
