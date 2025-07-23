@@ -102,7 +102,7 @@ export default function About() {
   // Animation du CV - caché sous les paragraphes puis descend en scrollant
   const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.1, ANIMATION_CONFIG.CV_START, 1], ["0vh", "0vh", "45vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0.8, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.02, ANIMATION_CONFIG.CV_START, 1], [0, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.25, ANIMATION_CONFIG.CV_START + 0.15, 1], [0, 1, 1]);
 
   return (
     <div ref={containerRef} className="relative">
