@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 const ANIMATION_CONFIG = {
   PARAGRAPH_DURATION: 0.15,
   CV_START: 0.65,
-  PARAGRAPH_3_END: 0.75, // Fin du 3ème paragraphe
+  PARAGRAPH_3_END: 0.75,
   INITIAL_ROTATION: "2deg",
   INITIAL_SCALE: 0.9,
   INITIAL_Y: "60vh"
