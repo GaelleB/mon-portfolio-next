@@ -14,7 +14,7 @@ const ANIMATION_CONFIG = {
 
 const paragraphs = [
   {
-    title: "About Me",
+    title: "",
     content: "My web design journey began with a solid foundation in design principles, meticulously honed through years of formal education. I hold a degree in Graphic Design from XYZ University, where I not only acquired technical expertise but also developed a profound appreciation for the beautiful union of aesthetics and functionality."
   },
   {
@@ -51,13 +51,6 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     className="absolute inset-0 flex items-center justify-center"
   >
     <div className="max-w-4xl mx-auto px-6 text-center">
-      <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
-        {paragraph.title && (
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-            {paragraph.title}
-          </h2>
-        )}
-      </div>
       <div className="glass-card px-16 py-12 mx-auto flex items-center justify-center">
         <p className="text-2xl leading-relaxed" style={{ 
           fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif',
@@ -117,6 +110,13 @@ export default function About() {
       <div className="h-[400vh]">
         {/* Contenu sticky qui reste fixe pendant le scroll */}
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
+          {/* Titre fixe About Me */}
+          <div className="absolute top-40 left-0 right-0 h-20 md:h-24 flex items-center justify-center z-50">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+              About Me
+            </h2>
+          </div>
+          
           {/* Paragraphes superposés */}
           <div className="relative h-full flex items-center justify-center">
             {paragraphs.map((paragraph, index) => (
