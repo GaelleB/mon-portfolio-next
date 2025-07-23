@@ -20,3 +20,16 @@
 .flip-card:hover {
   transform: perspective(1000px) rotateX(-10deg) rotateY(165deg) !important;
 }
+
+/* About section glassmorphism card */
+.glass-card {
+  border-radius: 48px;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  width: 768px;
+  height: 280px;
+}

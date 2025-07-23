@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+
+// Configuration des animations
+const ANIMATION_CONFIG = {
+  PARAGRAPH_DURATION: 0.3,
+  CV_START: 0.85,
+  INITIAL_ROTATION: "2deg",
+  INITIAL_SCALE: 0.9,
+  INITIAL_Y: "60vh"
+} as const;
 
 const paragraphs = [
   {
@@ -18,6 +27,46 @@ const paragraphs = [
   }
 ];
 
+// Composant réutilisable pour chaque carte
+interface ParagraphCardProps {
+  paragraph: typeof paragraphs[0];
+  animation: {
+    y: MotionValue<string>;
+    rotate: MotionValue<string>;
+    scale: MotionValue<number>;
+    opacity: MotionValue<number>;
+    zIndex: number;
+  };
+}
+
+const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) => (
+  <motion.div
+    style={{
+      y: animation.y,
+      rotate: animation.rotate,
+      scale: animation.scale,
+      opacity: animation.opacity,
+      zIndex: animation.zIndex
+    }}
+    className="absolute inset-0 flex items-center justify-center"
+  >
+    <div className="max-w-4xl mx-auto px-6 text-center">
+      <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
+        {paragraph.title && (
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
+            {paragraph.title}
+          </h2>
+        )}
+      </div>
+      <div className="glass-card p-12 mx-auto">
+        <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+          {paragraph.content}
+        </p>
+      </div>
+    </div>
+  </motion.div>
+);
+
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -25,26 +74,37 @@ export default function About() {
     offset: ["start center", "end center"]
   });
 
-  // Animations affinées pour chaque paragraphe (style Framer)
-  const paragraph1Y = useTransform(scrollYProgress, [0, 0.3], ["60vh", "0vh"]);
-  const paragraph1Rotate = useTransform(scrollYProgress, [0, 0.2, 0.4], ["2deg", "2deg", "0deg"]);
-  const paragraph1Scale = useTransform(scrollYProgress, [0, 0.15, 0.3, 0.6], [0.9, 1, 1, 0.95]);
-  const paragraph1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.3, 1], [0, 1, 1, 1]);
+  // Animations pour chaque paragraphe (hooks au niveau supérieur)
+  const paragraph1Animation = {
+    y: useTransform(scrollYProgress, [0, ANIMATION_CONFIG.PARAGRAPH_DURATION], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    rotate: useTransform(scrollYProgress, [0, 0.15, ANIMATION_CONFIG.PARAGRAPH_DURATION], [ANIMATION_CONFIG.INITIAL_ROTATION, ANIMATION_CONFIG.INITIAL_ROTATION, "0deg"]),
+    scale: useTransform(scrollYProgress, [0, 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 0.95]),
+    opacity: useTransform(scrollYProgress, [0, 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION, 1], [0, 1, 1, 1]),
+    zIndex: 1
+  };
 
-  const paragraph2Y = useTransform(scrollYProgress, [0.3, 0.6], ["60vh", "0vh"]);
-  const paragraph2Rotate = useTransform(scrollYProgress, [0.3, 0.45, 0.65], ["2deg", "2deg", "0deg"]);
-  const paragraph2Scale = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 0.85], [0.9, 1, 1, 0.95]);
-  const paragraph2Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 1], [0, 1, 1, 1]);
+  const paragraph2Animation = {
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.15, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [ANIMATION_CONFIG.INITIAL_ROTATION, ANIMATION_CONFIG.INITIAL_ROTATION, "0deg"]),
+    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 0.95]),
+    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [0, 1, 1, 1]),
+    zIndex: 2
+  };
 
-  const paragraph3Y = useTransform(scrollYProgress, [0.6, 0.85], ["60vh", "0vh"]);
-  const paragraph3Rotate = useTransform(scrollYProgress, [0.6, 0.75], ["2deg", "0deg"]);
-  const paragraph3Scale = useTransform(scrollYProgress, [0.6, 0.7, 0.85, 1], [0.9, 1, 1, 0.95]);
-  const paragraph3Opacity = useTransform(scrollYProgress, [0.6, 0.7, 0.85, 0.9], [0, 1, 1, 0]);
+  const paragraph3Animation = {
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.CV_START], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.15], [ANIMATION_CONFIG.INITIAL_ROTATION, "0deg"]),
+    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.CV_START, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 0.95]),
+    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.CV_START, 0.9], [0, 1, 1, 1]),
+    zIndex: 3
+  };
+
+  const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
   // Animation du CV - arrive du HAUT après le 3ème paragraphe
-  const cvY = useTransform(scrollYProgress, [0.85, 1], ["-60vh", "0vh"]);
-  const cvScale = useTransform(scrollYProgress, [0.85, 0.95], [0.8, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], ["-60vh", "0vh"]);
+  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0.8, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0, 1]);
 
   return (
     <div ref={containerRef} className="relative">
@@ -52,118 +112,15 @@ export default function About() {
       <div className="h-[400vh]">
         {/* Contenu sticky qui reste fixe pendant le scroll */}
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
-          {/* Formes organiques violettes en arrière-plan */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Forme violette (gauche) */}
-            <div 
-              className="absolute top-20 left-20 w-80 h-40 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full blur-sm opacity-60"
-              style={{
-                clipPath: "ellipse(65% 45% at 40% 60%)",
-                transform: "rotate(-20deg)"
-              }}
-            />
-            
-            {/* Forme bleue (droite) */}
-            <div 
-              className="absolute top-32 right-20 w-72 h-36 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full blur-sm opacity-60"
-              style={{
-                clipPath: "ellipse(70% 50% at 60% 40%)",
-                transform: "rotate(15deg)"
-              }}
-            />
-            
-            {/* Forme violette du bas */}
-            <div 
-              className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-96 h-24 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full blur-sm opacity-50"
-              style={{
-                clipPath: "ellipse(80% 30% at 50% 50%)",
-                transform: "translateX(-50%) rotate(-5deg)"
-              }}
-            />
-          </div>
-
           {/* Paragraphes superposés */}
           <div className="relative h-full flex items-center justify-center">
-            {/* Paragraph 1 */}
-            <motion.div
-              style={{
-                y: paragraph1Y,
-                rotate: paragraph1Rotate,
-                scale: paragraph1Scale,
-                opacity: paragraph1Opacity,
-                zIndex: 3
-              }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <div className="max-w-4xl mx-auto px-6 text-center">
-                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
-                  {paragraphs[0].title && (
-                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
-                      {paragraphs[0].title}
-                    </h2>
-                  )}
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    {paragraphs[0].content}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Paragraph 2 */}
-            <motion.div
-              style={{
-                y: paragraph2Y,
-                rotate: paragraph2Rotate,
-                scale: paragraph2Scale,
-                opacity: paragraph2Opacity,
-                zIndex: 2
-              }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <div className="max-w-4xl mx-auto px-6 text-center">
-                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
-                  {paragraphs[1].title && (
-                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
-                      {paragraphs[1].title}
-                    </h2>
-                  )}
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    {paragraphs[1].content}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Paragraph 3 */}
-            <motion.div
-              style={{
-                y: paragraph3Y,
-                rotate: paragraph3Rotate,
-                scale: paragraph3Scale,
-                opacity: paragraph3Opacity,
-                zIndex: 1
-              }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <div className="max-w-4xl mx-auto px-6 text-center">
-                <div className="h-20 md:h-24 mb-16 flex items-center justify-center">
-                  {paragraphs[2].title && (
-                    <h2 className="text-5xl md:text-6xl font-bold text-gray-900">
-                      {paragraphs[2].title}
-                    </h2>
-                  )}
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-12 shadow-lg max-w-3xl mx-auto">
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    {paragraphs[2].content}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            {paragraphs.map((paragraph, index) => (
+              <ParagraphCard
+                key={index}
+                paragraph={paragraph}
+                animation={paragraphAnimations[index]}
+              />
+            ))}
 
             {/* READ MY CV */}
             <motion.div
