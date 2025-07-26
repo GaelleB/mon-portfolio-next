@@ -224,7 +224,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         </motion.div>
       )}
       <motion.div 
-        className="w-[373px] h-[394px] p-6 mx-auto relative"
+        className="w-[375px] h-[395px] p-6 relative m-2"
         style={{ perspective: '1000px' }}
       >
         {/* Carte qui flip */}
