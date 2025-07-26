@@ -85,7 +85,7 @@ export default function Hero() {
                 
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
-                    className="absolute top-25 left-130 w-50 h-50 z-20"
+                    className="absolute top-25 left-130 w-100 h-100 z-20"
                     animate={{
                         y: [0, -25, -15, -30, 0],
                         x: [0, 8, -5, 12, 0],
@@ -99,15 +99,19 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/pyramid.webp"
                         alt=""
-                        width={96}
-                        height={96}
+                        width={400}
+                        height={400}
                         className="w-full h-full object-contain drop-shadow-lg"
+                        style={{
+                            backfaceVisibility: 'hidden',
+                            transform: 'translateZ(0)'
+                        }}
                     />
                 </motion.div>
 
                 {/* Sphère violette (left) */}
                 <motion.div 
-                    className="absolute left-120 top-90 w-50 h-50 z-20"
+                    className="absolute left-120 top-90 w-75 h-75 z-20"
                     animate={{
                         y: [0, -18, -8, -25, -12, 0],
                         x: [0, 15, -8, 20, -12, 0],
@@ -122,15 +126,15 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/sphere.webp"
                         alt=""
-                        width={80}
-                        height={80}
+                        width={300}
+                        height={300}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
-                    className="absolute bottom-32 left-150 w-50 h-50 z-20"
+                    className="absolute bottom-32 left-150 w-60 h-90 z-20"
                     animate={{
                         y: [0, -22, -8, -18, 0],
                         x: [0, -10, 15, -5, 0],
@@ -145,15 +149,15 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/cylinder.webp"
                         alt=""
-                        width={80}
-                        height={128}
+                        width={240}
+                        height={360}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
 
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
-                    className="absolute top-30 right-120 w-50 h-50 z-20"
+                    className="absolute top-30 right-120 w-75 h-75 z-20"
                     animate={{
                         y: [0, -20, -35, -18, -28, 0],
                         rotate: [0, 25, 15, 35, 10, 0],
@@ -168,15 +172,15 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/star.webp"
                         alt=""
-                        width={96}
-                        height={96}
+                        width={300}
+                        height={300}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
 
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
-                    className="absolute right-120 top-90 w-50 h-50 z-20"
+                    className="absolute right-120 top-90 w-62 h-62 z-20"
                     animate={{
                         y: [0, -15, -25, -18, 0],
                         x: [0, 8, -12, 5, 0],
@@ -191,15 +195,15 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/cube-green.webp"
                         alt=""
-                        width={72}
-                        height={72}
+                        width={250}
+                        height={250}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
-                    className="absolute bottom-30 right-140 w-50 h-50 z-20"
+                    className="absolute bottom-30 right-140 w-65 h-65 z-20"
                     animate={{
                         y: [0, -28, -12, -35, -15, 0],
                         rotate: [12, 30, 45, 25, 50, 12],
@@ -214,8 +218,8 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/cube-yellow.webp"
                         alt=""
-                        width={80}
-                        height={80}
+                        width={260}
+                        height={260}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
