@@ -68,7 +68,7 @@ const NotionIcon = () => (
 
 const ChatGPTIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80} className="object-contain" />
+    <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80} className="object-contain" style={{ transform: 'scale(1.5)' }} />
   </div>
 );
 
@@ -191,9 +191,14 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: index < 3 ? -50 : 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: (index % 3) * 0.1 + (index < 3 ? 0.1 : 0.4) }}
+      initial={{ scale: 0.8 }}
+      whileInView={{ scale: 1 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2,
+        ease: "easeOut"
+      }}
+      style={{ willChange: 'transform' }}
       className="text-center group cursor-pointer relative"
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setShowTooltip(true)}
@@ -219,7 +224,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         </motion.div>
       )}
       <motion.div 
-        className="w-[381px] h-[394px] p-6 mx-auto relative"
+        className="w-[373px] h-[394px] p-6 mx-auto relative"
         style={{ perspective: '1000px' }}
       >
         {/* Carte qui flip */}
@@ -233,17 +238,15 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
           <motion.div 
             className="absolute inset-0 flex flex-col items-center justify-center"
             style={{ 
-              borderRadius: '48px',
-              backgroundColor: 'rgba(255, 255, 255, 0.98)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: '5px solid rgba(220, 220, 220, 0.4)',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.08)',
+              borderRadius: '24px',
+              backgroundColor: 'white',
+              backdropFilter: 'blur(5px)',
+              border: '25px solid rgba(102, 112, 255, 0.04)',
               opacity: '1',
               backfaceVisibility: 'hidden'
             }}
           >
-            <div className="mb-6">
+            <div className="mb-3">
               <tech.IconComponent />
             </div>
             <p className="font-semibold text-2xl text-gray-900" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
@@ -256,14 +259,12 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
             className="absolute inset-0 flex flex-col items-center justify-center p-8"
             style={{ 
               borderRadius: '48px',
-              backgroundColor: 'rgba(255, 255, 255, 0.98)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: '5px solid rgba(220, 220, 220, 0.4)',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.08)',
+              backdropFilter: 'blur(5px)',
+              border: 'none',
+              boxShadow: 'none',
               opacity: '1',
               backfaceVisibility: 'hidden',
-              transform: 'rotateX(180deg)'
+              transform: 'perspective(500px) rotateX(180deg)'
             }}
           >
             <p className="text-lg leading-relaxed text-gray-700 text-center" style={{ 
@@ -285,17 +286,31 @@ export default function Stack() {
       <div className="max-w-[1200px] mx-auto px-6">
         
         {/* Titre */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-20 relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
             My Stack
           </h2>
         </div>
 
-        {/* Container principal avec grille de technologies */}
-        <div className="grid grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {technologies.map((tech, index) => (
-            <TechCard key={tech.name} tech={tech} index={index} />
-          ))}
+        {/* Container avec objet 3D fixe */}
+        <div className="relative min-h-[800px]">
+          {/* Objet 3D fixe au centre */}
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
+            <Image 
+              src="/assets/3d/cube-green.webp" 
+              alt="3D Object" 
+              width={800} 
+              height={600} 
+              className="opacity-80"
+            />
+          </div>
+          
+          {/* Container principal avec grille de technologies qui scrollent */}
+          <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto relative z-10">
+            {technologies.map((tech, index) => (
+              <TechCard key={tech.name} tech={tech} index={index} />
+            ))}
+          </div>
         </div>
 
       </div>
