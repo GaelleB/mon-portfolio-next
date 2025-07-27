@@ -4,6 +4,7 @@ import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import About from './components/About'
 import Stack from './components/Stack'
+import Projects from './components/Projects'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <About />
       <Stack />
+      <Projects />
     </main>
   )
 }
