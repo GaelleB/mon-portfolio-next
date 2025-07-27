@@ -10,7 +10,7 @@ const projects = [
         title: 'Les Mailles de Sylvie',
         year: '2025',
         category: 'Site Vitrine',
-        image: 'https://images.unsplash.com/photo-1586281380923-c584ee33d1e9?w=720&h=720&fit=crop',
+        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
         tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
         github: 'https://github.com/GaelleB/les-mailles-de-sylvie',
         demo: 'https://les-mailles-de-sylvie.vercel.app'
@@ -106,7 +106,7 @@ export default function Projects() {
                                 className="relative rounded-[48px] p-6 backdrop-blur-[5px]"
                                 style={{ 
                                     backgroundColor: 'rgba(102, 112, 255, 0.05)',
-                                    width: '564px',
+                                    width: '608px',
                                     maxWidth: '100%'
                                 }}
                             >
@@ -116,11 +116,11 @@ export default function Projects() {
                                         src={project.image}
                                         alt={project.title}
                                         width={564}
-                                        height={375}
+                                        height={382}
                                         className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         style={{ 
                                             width: '100%',
-                                            height: '375px'
+                                            height: '424px'
                                         }}
                                     />
                                     
@@ -155,8 +155,8 @@ export default function Projects() {
                                 </div>
                             </div>
                             
-                            {/* Project Info */}
-                            <div className="mt-6">
+                            {/* Project Info - aligned with image, not card border */}
+                            <div className="mt-6 ml-6">
                                 <p className="text-sm text-gray-500 uppercase tracking-wider mb-2">
                                     {project.category}
                                 </p>
