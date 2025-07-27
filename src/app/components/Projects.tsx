@@ -120,8 +120,8 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                         <span className="text-gray-900 font-medium text-base mr-3">
                             View Project
                         </span>
-                        <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-360deg]">
-                            <span className="text-white text-base">→</span>
+                        <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-700 rotate-90 group-hover:rotate-[270deg]">
+                            <span className="text-white text-base">↓</span>
                         </div>
                     </a>
                 </motion.div>
