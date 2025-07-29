@@ -20,7 +20,6 @@ export default function Navigation() {
                 { name: 'Home', element: document.getElementById('home') || document.querySelector('section:first-child') },
                 { name: 'About', element: document.getElementById('about') },
                 { name: 'Stack', element: document.getElementById('stack') },
-                { name: 'Services', element: document.getElementById('services') },
                 { name: 'Projects', element: document.getElementById('projects') },
                 { name: 'Contact', element: document.getElementById('contact') }
             ];
@@ -50,7 +49,6 @@ export default function Navigation() {
         { name: 'Home', href: '#home' },
         { name: 'About', href: '#about' },
         { name: 'Stack', href: '#stack' },
-        { name: 'Services', href: '#services' },
         { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' }
     ];
