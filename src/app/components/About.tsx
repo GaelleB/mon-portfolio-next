@@ -100,10 +100,6 @@ export default function About() {
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
-  // Animation du CV - glissade poétique comme dans les specs
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], ["30vh", "45vh"]);
-  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, 1], [0.8, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START - 0.02, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.05], [0, 1, 0]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -129,40 +125,24 @@ export default function About() {
             ))}
 
             {/* READ MY CV */}
-            <motion.div
+            <div
               style={{
-                y: cvY,
-                scale: cvScale,
-                opacity: cvOpacity,
-                zIndex: 0
+                position: 'absolute',
+                bottom: '20vh',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 10
               }}
-              className="absolute inset-0 flex items-center justify-center"
             >
-              <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-lg font-bold h-15 leading-15 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
-                <span className="cta-text inline-block px-8 py-0 transition-all duration-300 group-hover:pr-4 text-gray-800 text-xl">
+              <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-2xl font-bold h-20 leading-20 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
+                <span className="cta-text inline-block px-12 py-0 transition-all duration-300 group-hover:pr-6">
                   Read My CV
                 </span>
-                <span className="cta-arrow inline-block bg-black text-white h-15 w-15 text-center rounded-full -mr-15 transition-all duration-300 text-xl leading-15 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
-                  <motion.div
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    className="inline-block"
-                  >
-                    <svg 
-                      className="w-6 h-6 text-white" 
-                      fill="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-                    </svg>
-                  </motion.div>
+                <span className="cta-arrow inline-block bg-black text-white h-20 w-20 text-center rounded-full -mr-20 transition-all duration-300 text-3xl leading-20 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
+                  📄
                 </span>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
