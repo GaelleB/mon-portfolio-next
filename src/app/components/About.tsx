@@ -100,6 +100,10 @@ export default function About() {
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
+  // Animation du CV - descend depuis les paragraphes après que le 3ème soit en place
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.15, 1], ["0%", "60%", "70%"]);
+  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1, 1], [0.8, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.05, 0.95], [0, 1, 1]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -125,16 +129,16 @@ export default function About() {
             ))}
 
             {/* READ MY CV */}
-            <div
+            <motion.div
               style={{
-                position: 'absolute',
-                bottom: '20vh',
-                left: '50%',
-                transform: 'translateX(-50%)',
+                y: cvY,
+                scale: cvScale,
+                opacity: cvOpacity,
                 zIndex: 10
               }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-2xl font-bold h-20 leading-20 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
+              <div style={{ pointerEvents: 'auto' }} className="cta-button group inline-block border-4 border-gray-300 rounded-full text-2xl font-bold h-20 leading-20 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
                 <span className="cta-text inline-block px-12 py-0 transition-all duration-300 group-hover:pr-6">
                   Read My CV
                 </span>
@@ -142,7 +146,7 @@ export default function About() {
                   📄
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
