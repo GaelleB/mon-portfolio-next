@@ -101,10 +101,10 @@ export default function About() {
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
-  // Animation du CV - descente lente puis immobilité totale
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, 0.9, 1], ["-10vh", "35vh", "35vh"]);
-  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, 0.9, 1], [0.8, 1, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.05, 1], [0, 1, 1]);
+  // Animation du CV - sort de derrière la carte (en bas) puis descend très lentement
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1, 1], ["15vh", "20vh", "35vh"]);
+  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1, 1], [0.9, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.02, 1], [0, 1, 1]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -186,7 +186,7 @@ export default function About() {
                 y: cvY,
                 scale: cvScale,
                 opacity: cvOpacity,
-                zIndex: 10
+                zIndex: 5
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
