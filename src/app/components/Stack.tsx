@@ -191,7 +191,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
 
   return (
     <motion.div
-      initial={{ scale: 0.8 }}
+      initial={{ scale: 0.95 }}
       whileInView={{ scale: 1 }}
       transition={{ 
         duration: 0.6, 
@@ -199,7 +199,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         ease: "easeOut"
       }}
       style={{ willChange: 'transform' }}
-      className="text-center group cursor-pointer relative"
+      className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
@@ -224,7 +224,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         </motion.div>
       )}
       <motion.div 
-        className="w-[375px] h-[395px] p-6 relative m-2"
+        className="w-[400px] h-[400px] p-10 relative"
         style={{ perspective: '1000px' }}
       >
         {/* Carte qui flip */}
@@ -238,7 +238,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
           <motion.div 
             className="absolute inset-0 flex flex-col items-center justify-center"
             style={{ 
-              borderRadius: '24px',
+              borderRadius: '48px',
               backgroundColor: 'white',
               backdropFilter: 'blur(5px)',
               border: '25px solid rgba(102, 112, 255, 0.04)',
@@ -287,7 +287,7 @@ export default function Stack() {
         
         {/* Titre */}
         <div className="text-center mb-20 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+          <h2 className="text-4xl font-medium text-gray-900 mb-6" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '38px', fontWeight: 500 }}>
             My Stack
           </h2>
         </div>
@@ -306,7 +306,7 @@ export default function Stack() {
           </div>
           
           {/* Container principal avec grille de technologies qui scrollent */}
-          <div className="grid grid-cols-3 gap-8 max-w-5xl mx-auto relative z-10">
+          <div className="grid grid-cols-3 gap-3 max-w-6xl mx-auto relative z-10">
             {technologies.map((tech, index) => (
               <TechCard key={tech.name} tech={tech} index={index} />
             ))}
