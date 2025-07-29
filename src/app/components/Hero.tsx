@@ -239,7 +239,7 @@ export default function Hero() {
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                         Hi, I&apos;m <em className="font-bold not-italic">Gaëlle</em>!
                     </h2>
-                    <p className="text-lg text-gray-600">
+                    <p className="text-2xl text-gray-600 font-bold" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', lineHeight: '33.6px' }}>
                         Frontend Developer
                     </p>
                 </div>
@@ -355,22 +355,12 @@ export default function Hero() {
 
                 {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="cta-button group inline-block border-3 border-gray-300 rounded-full text-base font-semibold h-12 leading-12 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
-                        <span className="cta-text inline-block px-6 py-0 transition-all duration-300 group-hover:pr-3">
+                    <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-2xl font-bold h-20 leading-20 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
+                        <span className="cta-text inline-block px-12 py-0 transition-all duration-300 group-hover:pr-6">
                             Let&apos;s Work Together!
                         </span>
-                        <span className="cta-arrow inline-block bg-black text-white h-12 w-12 text-center rounded-full -mr-12 transition-all duration-300 text-lg leading-12 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
-                            <motion.div
-                                animate={{ x: [0, 6, 0] }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                                className="inline-block"
-                            >
-                                ↓
-                            </motion.div>
+                        <span className="cta-arrow inline-block bg-black text-white h-20 w-20 text-center rounded-full -mr-20 transition-all duration-300 text-3xl leading-20 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
+                            ↓
                         </span>
                     </div>
                 </div>
