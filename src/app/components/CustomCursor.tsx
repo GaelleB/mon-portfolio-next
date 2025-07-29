@@ -22,9 +22,9 @@ export default function CustomCursor() {
             if (footer) {
                 const footerRect = footer.getBoundingClientRect()
                 const isInFooter = e.clientY >= footerRect.top && 
-                                  e.clientY <= footerRect.bottom &&
-                                  e.clientX >= footerRect.left && 
-                                  e.clientX <= footerRect.right
+                                    e.clientY <= footerRect.bottom &&
+                                    e.clientX >= footerRect.left && 
+                                    e.clientX <= footerRect.right
                 
                 // Si on entre dans la zone contact, initialiser la position
                 if (isInFooter && !isInContactSection) {
@@ -76,7 +76,7 @@ export default function CustomCursor() {
                 element.removeEventListener('mouseleave', handleMouseLeave)
             })
         }
-    }, [])
+    }, [isInContactSection])
 
     const variants = {
         default: {
