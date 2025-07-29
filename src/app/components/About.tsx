@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import Image from "next/image";
 
 // Configuration des animations
 const ANIMATION_CONFIG = {
@@ -16,15 +17,15 @@ const ANIMATION_CONFIG = {
 const paragraphs = [
   {
     title: "",
-    content: "Greetings! I'm Gaëlle, and I navigate the exciting world of web design, where every pixel serves a purpose. Combining a deep understanding of user experience with a knack for transforming ideas into visually stunning interfaces, I approach each project with a burning passion to craft something truly remarkable."
+    content: "Avant de devenir développeuse web, j'étais auxiliaire de puériculture. Je travaillais en néonatalogie, entourée de silences, de machines, et de tout petits humains. C'était un métier exigeant, profondément humain. Et puis un jour, j'ai eu besoin de créer autrement. Alors j'ai appris à coder."
   },
   {
     title: "",
-    content: "My tech stack mirrors the vibrant diversity of the web itself. From the core languages of HTML5, CSS3, and JavaScript to the arsenal of design tools like Adobe Creative Suite and Figma, I stay well-equipped. However, I believe in constantly pushing the boundaries, exploring emerging technologies and design trends."
+    content: "Je vis au rythme du clavier, mais aussi de la musique, des séries et des livres. J'ai toujours aimé les histoires, celles qu'on lit, qu'on entend, qu'on regarde. Elles me nourrissent autant que le design ou le code. Les séries et la musique, c'est mon moteur. Ça m'inspire autant que Figma."
   },
   {
     title: "",
-    content: "I believe that great design is not just about how something looks, but how it makes people feel. Every project is an opportunity to create something meaningful, functional, and beautiful that connects with users on a deeper level."
+    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu. Je veux raconter ton histoire, à travers chaque ligne. Et te créer un espace qui te ressemble."
   }
 ];
 
@@ -118,8 +119,59 @@ export default function About() {
             </h2>
           </div>
           
+          {/* Objets 3D décoratifs */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Casque à gauche */}
+            <motion.div 
+              className="absolute left-100 top-80 w-64 h-64 z-5"
+              style={{ transform: 'translateY(-50%)' }}
+              animate={{
+                y: [0, -8, -3, -12, 0],
+                rotate: [0, -4, 2, -6, 0],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: -2
+              }}
+            >
+              <Image 
+                src="/assets/3d/casque.png"
+                alt=""
+                width={200}
+                height={200}
+                className="w-full h-full object-contain drop-shadow-xl"
+              />
+            </motion.div>
+
+            {/* Biberon à droite */}
+            <motion.div 
+              className="absolute right-100 top-80 w-64 h-64 z-5"
+              style={{ transform: 'translateY(-50%)' }}
+              animate={{
+                y: [0, -10, -5, -8, 0],
+                rotate: [0, 3, -2, 5, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0
+              }}
+            >
+              <Image 
+                src="/assets/3d/biberon.png"
+                alt=""
+                width={200}
+                height={200}
+                className="w-full h-full object-contain drop-shadow-xl"
+              />
+            </motion.div>
+          </div>
+
           {/* Paragraphes superposés */}
-          <div className="relative h-full flex items-center justify-center">
+          <div className="relative h-full flex items-center justify-center z-20">
             {paragraphs.map((paragraph, index) => (
               <ParagraphCard
                 key={index}
