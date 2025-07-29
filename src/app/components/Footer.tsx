@@ -25,13 +25,13 @@ export default function Footer() {
                                 href="mailto:contact@gaelleb.dev?subject=Demande d'appel découverte"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Call Me">Call Me</span>
+                            <span data-cursor-text="Call Me">Call Me</span>
                             </motion.a>
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Email Me">gaelleboucher.dev@gmail.com</span>
+                            <span data-cursor-text="Email Me">gaelleboucher.dev@gmail.com</span>
                             </motion.a>
                         </div>
                     </div>
@@ -46,19 +46,19 @@ export default function Footer() {
                                 href="#home"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit Home Page">Home</span>
+                            <span data-cursor-text="Visit Home Page">Home</span>
                             </motion.a>
                             <motion.a
                                 href="#"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit 404 Page">404 Page</span>
+                            <span data-cursor-text="Visit 404 Page">404 Page</span>
                             </motion.a>
                             <motion.a
                                 href="#"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit Licensing Page">Licensing</span>
+                            <span data-cursor-text="Visit Licensing Page">Licensing</span>
                             </motion.a>
                         </div>
                     </div>
@@ -75,15 +75,15 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit My Framer Page">Framer</span>
+                            <span data-cursor-text="Visit My Framer Page">Framer</span>
                             </motion.a>
                             <motion.a
-                                href="https://twitter.com"
+                                href="https://github.com/GaelleB"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit My X Page">X</span>
+                            <span data-cursor-text="Visit My GitHub Page">GitHub</span>
                             </motion.a>
                             <motion.a
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
@@ -91,7 +91,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-<span data-cursor-text="Visit My LinkedIn Profile">LinkedIn</span>
+                            <span data-cursor-text="Visit My LinkedIn Profile">LinkedIn</span>
                             </motion.a>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ export default function Footer() {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="border-t border-gray-200 pt-8"
+                    className="pt-8"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         {/* Copyright */}
@@ -112,23 +112,22 @@ export default function Footer() {
                                 © Copyright 2025
                             </p>
                         </div>
+                        <div className="text-center md:text-right">
+                            <p className="text-gray-600 font-body">
+                                Made by{" "}
+                                <motion.a
+                                    href="https://www.linkedin.com/in/gaelle-boucher/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
+                                    whileHover={{ scale: 1.05 }}
+                                >
+                                    <span data-cursor-text="Visit My Profile">Gaëlle</span>
+                                </motion.a>
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
-            </div>
-
-            {/* Logo COHÉSION en bas */}
-            <div className="bg-black text-white py-8">
-                <div className="max-w-6xl mx-auto px-6">
-                    <motion.h1
-                        className="text-6xl md:text-8xl font-black text-center tracking-wider"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                    >
-                        COHÉSION
-                    </motion.h1>
-                </div>
             </div>
         </footer>
     );
