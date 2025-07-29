@@ -17,7 +17,7 @@ export default function Footer() {
                 >
                     {/* Colonne 1 - Contact Me */}
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-handwriting text-gray-800">
+                        <h3 className="text-2xl font-body font-bold text-gray-800">
                             Contact Me
                         </h3>
                         <div className="space-y-4">
@@ -42,7 +42,7 @@ export default function Footer() {
 
                     {/* Colonne 2 - Useful Links */}
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-handwriting text-gray-800">
+                        <h3 className="text-2xl font-body font-bold text-gray-800">
                             Useful Links
                         </h3>
                         <div className="space-y-4">
@@ -75,7 +75,7 @@ export default function Footer() {
 
                     {/* Colonne 3 - Social */}
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-handwriting text-gray-800">
+                        <h3 className="text-2xl font-body font-bold text-gray-800">
                             Social
                         </h3>
                         <div className="space-y-4">
