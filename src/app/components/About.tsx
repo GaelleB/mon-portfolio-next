@@ -113,7 +113,7 @@ export default function About() {
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
           <div className="absolute top-40 left-0 right-0 h-20 md:h-24 flex items-center justify-center z-50">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+            <h2 className="text-4xl font-medium text-gray-900 mb-6" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '38px', fontWeight: 500 }}>
               About Me
             </h2>
           </div>
