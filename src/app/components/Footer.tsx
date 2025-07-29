@@ -25,15 +25,17 @@ export default function Footer() {
                                 href="mailto:contact@gaelleb.dev?subject=Demande d'appel découverte"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Call Me"
                             >
-                                Book a Call
+                                Call Me
                             </motion.a>
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Email Me"
                             >
-                                contact@gaelleb.dev
+                                gaelleboucher.dev@gmail.com
                             </motion.a>
                         </div>
                     </div>
@@ -48,6 +50,7 @@ export default function Footer() {
                                 href="#home"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Visit Home Page"
                             >
                                 Home
                             </motion.a>
@@ -55,6 +58,7 @@ export default function Footer() {
                                 href="#"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Visit 404 Page"
                             >
                                 404 Page
                             </motion.a>
@@ -62,6 +66,7 @@ export default function Footer() {
                                 href="#"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Licensing"
                             >
                                 Licensing
                             </motion.a>
@@ -80,6 +85,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Visit My Framer Page"
                             >
                                 Framer
                             </motion.a>
@@ -89,6 +95,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Visit My X Page"
                             >
                                 X
                             </motion.a>
@@ -98,6 +105,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
                                 whileHover={{ x: 5 }}
+                                data-cursor-text="Visit My LinkedIn Profile"
                             >
                                 LinkedIn
                             </motion.a>
@@ -118,32 +126,6 @@ export default function Footer() {
                         <div className="text-center md:text-left">
                             <p className="text-gray-600 font-body">
                                 © Copyright 2025
-                            </p>
-                        </div>
-
-                        {/* Crédits */}
-                        <div className="text-center md:text-right">
-                            <p className="text-gray-600 font-body">
-                                Made by{" "}
-                                <motion.a
-                                    href="https://uilub.design"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    Uilub.design
-                                </motion.a>
-                                {" "}in{" "}
-                                <motion.a
-                                    href="https://framer.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    Framer
-                                </motion.a>
                             </p>
                         </div>
                     </div>
