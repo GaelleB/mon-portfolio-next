@@ -107,7 +107,7 @@ export default function Hero() {
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
                     className="absolute top-30 left-115 w-70 h-70 z-20"
-                    style={{ transform: 'rotate(180deg)' }}
+                    style={{ transform: 'rotate(75deg)' }}
                     animate={{
                         y: [0, -8, -5, -10, 0],
                         x: [0, 3, -2, 4, 0],
@@ -133,7 +133,7 @@ export default function Hero() {
 
                 {/* Sphère violette (left) */}
                 <motion.div 
-                    className="absolute left-100 top-80 w-70 h-70 z-20"
+                    className="absolute left-100 top-85 w-70 h-70 z-20"
                     animate={{
                         y: [0, -6, -3, -8, -4, 0],
                         x: [0, 5, -3, 6, -4, 0],
@@ -156,8 +156,8 @@ export default function Hero() {
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
-                    className="absolute bottom-20 left-120 w-60 h-90 z-20"
-                    style={{ transform: 'scaleX(-1)' }}
+                    className="absolute bottom-10 left-130 w-60 h-90 z-20"
+                    style={{ transform: 'scaleX(1) rotate(180deg)' }}
                     animate={{
                         y: [0, -7, -3, -6, 0],
                         x: [0, -3, 5, -2, 0],
@@ -203,7 +203,7 @@ export default function Hero() {
 
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
-                    className="absolute right-100 top-80 w-70 h-70 z-20"
+                    className="absolute right-100 top-85 w-70 h-70 z-20"
                     animate={{
                         y: [0, -5, -8, -6, 0],
                         x: [0, 3, -4, 2, 0],
@@ -226,7 +226,7 @@ export default function Hero() {
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
-                    className="absolute bottom-25 right-120 w-70 h-70 z-20"
+                    className="absolute bottom-15 right-120 w-70 h-70 z-20"
                     animate={{
                         y: [0, -9, -4, -12, -5, 0],
                         rotate: [4, 10, 15, 8, 16, 4],
