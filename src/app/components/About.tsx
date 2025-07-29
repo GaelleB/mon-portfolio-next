@@ -138,11 +138,11 @@ export default function About() {
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div style={{ pointerEvents: 'auto' }} className="cta-button group inline-block border-4 border-gray-300 rounded-full text-2xl font-bold h-20 leading-20 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
-                <span className="cta-text inline-block px-12 py-0 transition-all duration-300 group-hover:pr-6">
+              <div style={{ pointerEvents: 'auto', borderColor: '#EFF0FF' }} className="group inline-flex items-center bg-white border-[5px] rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer">
+                <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
                   Read My CV
                 </span>
-                <span className="cta-arrow inline-block bg-black text-white h-20 w-20 text-center rounded-full -mr-20 transition-all duration-300 text-3xl leading-20 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
+                <span className="inline-flex items-center justify-center bg-black text-white min-h-[65px] min-w-[65px] h-[65px] w-[65px] rounded-full -mr-[72px] transition-all duration-300 text-[24px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]" style={{ aspectRatio: '1/1', flexShrink: 0 }}>
                   📄
                 </span>
               </div>
