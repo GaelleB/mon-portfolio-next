@@ -359,7 +359,7 @@ export default function Hero() {
                         <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
                             Let&apos;s Work Together!
                         </span>
-                        <span className="inline-flex items-center justify-center bg-black text-white h-[72px] w-[72px] rounded-full -mr-[72px] transition-all duration-300 text-[26px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
+                        <span className="inline-flex items-center justify-center bg-black text-white min-h-[65px] min-w-[65px] h-[65px] w-[65px] rounded-full -mr-[72px] transition-all duration-300 text-[26px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]" style={{ aspectRatio: '1/1', flexShrink: 0 }}>
                             ↓
                         </span>
                     </div>
