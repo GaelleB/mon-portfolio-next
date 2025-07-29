@@ -100,10 +100,10 @@ export default function About() {
 
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
-  // Animation du CV - descend depuis les paragraphes après que le 3ème soit en place
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.15, 1], ["0%", "60%", "70%"]);
-  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1, 1], [0.8, 1, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.05, 0.95], [0, 1, 1]);
+  // Animation du CV - descente lente puis immobilité totale
+  const cvY = useTransform(scrollYProgress, [0.78, 0.92, 0.95, 1], ["0vh", "40vh", "40vh", "40vh"]);
+  const cvScale = useTransform(scrollYProgress, [0.78, 0.92, 1], [0.8, 1, 1]);
+  const cvOpacity = useTransform(scrollYProgress, [0.78, 0.8, 0.95, 1], [0, 1, 1, 1]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
