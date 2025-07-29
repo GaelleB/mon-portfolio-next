@@ -294,8 +294,8 @@ export default function Stack() {
 
         {/* Container avec objet 3D fixe */}
         <div className="relative min-h-[800px]">
-          {/* Objet 3D fixe au centre */}
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
+          {/* Objet 3D fixe au centre, mais seulement dans cette section */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
             <Image 
               src="/assets/3d/cube-green.webp" 
               alt="3D Object" 
