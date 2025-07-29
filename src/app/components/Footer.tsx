@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-50 relative overflow-hidden">
+        <footer id="contact" className="bg-gray-50 relative overflow-hidden">
             <div className="max-w-6xl mx-auto px-6 pt-16 pb-8 relative z-10">
                 {/* Section principale - 3 colonnes */}
                 <motion.div
