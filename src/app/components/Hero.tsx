@@ -23,7 +23,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20">
         
             {/* Texte en arrière-plan avec défilement sans parallax */}
             <div 
@@ -85,10 +85,11 @@ export default function Hero() {
                 
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
-                    className="absolute top-25 left-130 w-100 h-100 z-20"
+                    className="absolute top-30 left-115 w-70 h-70 z-20"
+                    style={{ transform: 'rotate(180deg)' }}
                     animate={{
-                        y: [0, -25, -15, -30, 0],
-                        x: [0, 8, -5, 12, 0],
+                        y: [0, -8, -5, -10, 0],
+                        x: [0, 3, -2, 4, 0],
                     }}
                     transition={{
                         duration: 8,
@@ -111,10 +112,10 @@ export default function Hero() {
 
                 {/* Sphère violette (left) */}
                 <motion.div 
-                    className="absolute left-120 top-90 w-75 h-75 z-20"
+                    className="absolute left-100 top-80 w-70 h-70 z-20"
                     animate={{
-                        y: [0, -18, -8, -25, -12, 0],
-                        x: [0, 15, -8, 20, -12, 0],
+                        y: [0, -6, -3, -8, -4, 0],
+                        x: [0, 5, -3, 6, -4, 0],
                     }}
                     transition={{
                         duration: 6,
@@ -134,10 +135,11 @@ export default function Hero() {
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
-                    className="absolute bottom-32 left-150 w-60 h-90 z-20"
+                    className="absolute bottom-20 left-120 w-60 h-90 z-20"
+                    style={{ transform: 'scaleX(-1)' }}
                     animate={{
-                        y: [0, -22, -8, -18, 0],
-                        x: [0, -10, 15, -5, 0],
+                        y: [0, -7, -3, -6, 0],
+                        x: [0, -3, 5, -2, 0],
                     }}
                     transition={{
                         duration: 7,
@@ -157,10 +159,10 @@ export default function Hero() {
 
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
-                    className="absolute top-30 right-120 w-75 h-75 z-20"
+                    className="absolute top-30 right-115 w-75 h-75 z-20"
                     animate={{
-                        y: [0, -20, -35, -18, -28, 0],
-                        rotate: [0, 25, 15, 35, 10, 0],
+                        y: [0, -6, -12, -6, -9, 0],
+                        rotate: [0, 8, 5, 12, 3, 0],
                     }}
                     transition={{
                         duration: 9,
@@ -180,10 +182,10 @@ export default function Hero() {
 
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
-                    className="absolute right-120 top-90 w-62 h-62 z-20"
+                    className="absolute right-100 top-80 w-70 h-70 z-20"
                     animate={{
-                        y: [0, -15, -25, -18, 0],
-                        x: [0, 8, -12, 5, 0],
+                        y: [0, -5, -8, -6, 0],
+                        x: [0, 3, -4, 2, 0],
                     }}
                     transition={{
                         duration: 5.5,
@@ -203,10 +205,10 @@ export default function Hero() {
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
-                    className="absolute bottom-30 right-140 w-65 h-65 z-20"
+                    className="absolute bottom-25 right-120 w-70 h-70 z-20"
                     animate={{
-                        y: [0, -28, -12, -35, -15, 0],
-                        rotate: [12, 30, 45, 25, 50, 12],
+                        y: [0, -9, -4, -12, -5, 0],
+                        rotate: [4, 10, 15, 8, 16, 4],
                     }}
                     transition={{
                         duration: 6.5,
@@ -353,11 +355,11 @@ export default function Hero() {
 
                 {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="cta-button group inline-block border-4 border-gray-300 rounded-full text-lg font-bold h-15 leading-15 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
-                        <span className="cta-text inline-block px-8 py-0 transition-all duration-300 group-hover:pr-4">
+                    <div className="cta-button group inline-block border-3 border-gray-300 rounded-full text-base font-semibold h-12 leading-12 overflow-hidden transition-all duration-300 cursor-pointer hover:border-gray-400">
+                        <span className="cta-text inline-block px-6 py-0 transition-all duration-300 group-hover:pr-3">
                             Let&apos;s Work Together!
                         </span>
-                        <span className="cta-arrow inline-block bg-black text-white h-15 w-15 text-center rounded-full -mr-15 transition-all duration-300 text-xl leading-15 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
+                        <span className="cta-arrow inline-block bg-black text-white h-12 w-12 text-center rounded-full -mr-12 transition-all duration-300 text-lg leading-12 group-hover:mr-0 group-hover:[transform:rotate(-360deg)]">
                             <motion.div
                                 animate={{ x: [0, 6, 0] }}
                                 transition={{
