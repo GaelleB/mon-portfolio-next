@@ -23,19 +23,15 @@ export default function Footer() {
                         <div className="space-y-4">
                             <motion.a
                                 href="mailto:contact@gaelleb.dev?subject=Demande d'appel découverte"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Call Me"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                Call Me
+<span data-cursor-text="Call Me">Call Me</span>
                             </motion.a>
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Email Me"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                gaelleboucher.dev@gmail.com
+<span data-cursor-text="Email Me">gaelleboucher.dev@gmail.com</span>
                             </motion.a>
                         </div>
                     </div>
@@ -48,27 +44,21 @@ export default function Footer() {
                         <div className="space-y-4">
                             <motion.a
                                 href="#home"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Visit Home Page"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                Home
+<span data-cursor-text="Visit Home Page">Home</span>
                             </motion.a>
                             <motion.a
                                 href="#"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Visit 404 Page"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                404 Page
+<span data-cursor-text="Visit 404 Page">404 Page</span>
                             </motion.a>
                             <motion.a
                                 href="#"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Licensing"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                Licensing
+<span data-cursor-text="Visit Licensing Page">Licensing</span>
                             </motion.a>
                         </div>
                     </div>
@@ -83,31 +73,25 @@ export default function Footer() {
                                 href="https://framer.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Visit My Framer Page"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                Framer
+<span data-cursor-text="Visit My Framer Page">Framer</span>
                             </motion.a>
                             <motion.a
                                 href="https://twitter.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Visit My X Page"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                X
+<span data-cursor-text="Visit My X Page">X</span>
                             </motion.a>
                             <motion.a
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-gray-600 hover:text-pink-500 transition-colors duration-300 font-body"
-                                whileHover={{ x: 5 }}
-                                data-cursor-text="Visit My LinkedIn Profile"
+                                className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                                LinkedIn
+<span data-cursor-text="Visit My LinkedIn Profile">LinkedIn</span>
                             </motion.a>
                         </div>
                     </div>

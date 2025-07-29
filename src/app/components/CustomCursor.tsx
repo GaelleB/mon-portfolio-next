@@ -62,7 +62,7 @@ export default function CustomCursor() {
         window.addEventListener('mousemove', mouseMove)
 
         // Ajouter les écouteurs pour les éléments interactifs
-        const interactiveElements = document.querySelectorAll('a, button, [data-cursor="pointer"]')
+        const interactiveElements = document.querySelectorAll('[data-cursor-text]')
         
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', handleMouseEnter)
@@ -87,7 +87,7 @@ export default function CustomCursor() {
             borderRadius: '50%'
         },
         button: {
-            x: mousePosition.x - 40,
+            x: mousePosition.x + 20,
             y: mousePosition.y - 20,
             scale: 1,
             backgroundColor: '#f97316',
@@ -114,7 +114,7 @@ export default function CustomCursor() {
                         scale: { duration: 0.2, ease: "easeOut" }
                     }}
                     style={{
-                        width: isHovering ? '80px' : '24px',
+                        width: isHovering ? '160px' : '24px',
                         height: isHovering ? '40px' : '24px'
                     }}
                 >
@@ -122,7 +122,7 @@ export default function CustomCursor() {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="flex items-center justify-center h-full w-full text-white text-xs font-handwriting font-medium"
+                            className="flex items-center justify-center h-full w-full text-white text-xs font-handwriting font-medium px-3 whitespace-nowrap"
                         >
                             {hoverText}
                         </motion.div>
