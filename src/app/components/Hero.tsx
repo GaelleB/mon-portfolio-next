@@ -355,7 +355,7 @@ export default function Hero() {
 
                 {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="group inline-flex items-center bg-white border-4 border-gray-300 rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer">
+                    <div className="group inline-flex items-center bg-white border-[5px] rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer" style={{ borderColor: '#EFF0FF' }}>
                         <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
                             Let&apos;s Work Together!
                         </span>
