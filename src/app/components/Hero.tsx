@@ -6,7 +6,17 @@ import Image from 'next/image';
 
 export default function Hero() {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
+    
+    // Textes qui changent toutes les 3 secondes
+    const rotatingTexts = [
+        "Frontend Developer",
+        "React/Next Developer", 
+        "Web Developer",
+        "Creative Coder",
+        "Digital Artist"
+    ];
     
     // Parallax effect
     const { scrollYProgress } = useScroll({
@@ -21,6 +31,17 @@ export default function Hero() {
     useEffect(() => {
         setIsLoaded(true);
     }, []);
+
+    // Animation automatique du texte toutes les 3 secondes
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prevIndex) => 
+                (prevIndex + 1) % rotatingTexts.length
+            );
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [rotatingTexts.length]);
 
     return (
         <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20">
@@ -39,42 +60,42 @@ export default function Hero() {
                     }}
                 >
                     {/* Première série */}
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
                     
                     {/* Deuxième série identique pour continuité */}
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] font-black text-black leading-none tracking-tighter select-none mr-20">
+                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
                         BOUCHER
                     </h1>
                 </motion.div>
@@ -230,30 +251,45 @@ export default function Hero() {
 
             {/* Contenu central avec parallax */}
             <motion.div 
-                className="relative z-30 text-center max-w-lg mx-auto px-6"
+                className="relative z-30 text-center max-w-lg mx-auto px-6 -translate-y-5"
                 style={{ y: textY }}
             >
                 
                 {/* Salutation et nom */}
                 <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-                        Hi, I&apos;m <em className="font-bold not-italic">Gaëlle</em>!
+                    <h2 className="text-gray-900 mb-2" style={{ fontSize: '56px' }}>
+                        <span style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 500 }}>Hi, I&apos;m </span>
+                        <em className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontSize: '48px', fontWeight: 700 }}>Gaëlle</em>
+                        <span style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 500 }}>!</span>
                     </h2>
-                    <p className="text-2xl text-gray-600 font-bold" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', lineHeight: '33.6px' }}>
-                        Frontend Developer
-                    </p>
+                    <motion.p 
+                        key={currentTextIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-gray-600" 
+                        style={{ 
+                            fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', 
+                            fontSize: '20px',
+                            fontWeight: 400,
+                            lineHeight: '24px'
+                        }}
+                    >
+                        {rotatingTexts[currentTextIndex]}
+                    </motion.p>
                 </div>
 
                 {/* Photo de profil avec effet flip 3D */}
                 <motion.div 
-                    className={`mb-6 relative w-75 h-75 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                    className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     style={{ transitionDelay: '400ms' }}
                 >
                     <motion.div
                         className="relative w-full h-full transition-transform duration-700 flip-card"
                         style={{ 
                             transformStyle: 'preserve-3d',
-                            transform: 'perspective(1000px) rotateX(10deg) rotateY(15deg) rotateZ(0deg)'
+                            transform: 'perspective(1000px) rotateX(4deg) rotateY(5deg) rotateZ(0deg)'
                         }}
                     >
                         {/* FACE AVANT */}
@@ -355,7 +391,7 @@ export default function Hero() {
 
                 {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="group inline-flex items-center bg-white border-[5px] rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer" style={{ borderColor: '#EFF0FF' }}>
+                    <div className="group inline-flex items-center bg-white border-[5px] rounded-[48px] h-[72px] overflow-hidden transition-all duration-300 cursor-pointer" style={{ borderColor: '#EFF0FF', fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '24px', fontWeight: 700 }}>
                         <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
                             Let&apos;s Work Together!
                         </span>
