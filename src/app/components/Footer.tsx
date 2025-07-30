@@ -22,10 +22,10 @@ export default function Footer() {
                         </h3>
                         <div className="space-y-4">
                             <motion.a
-                                href="mailto:contact@gaelleb.dev?subject=Demande d'appel découverte"
+                                href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                            <span data-cursor-text="Call Me">Call Me</span>
+                            <span data-cursor-text="Call Me">Book a call</span>
                             </motion.a>
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
