@@ -54,12 +54,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
   >
     <div className="max-w-4xl mx-auto px-6 text-center">
       <div className="glass-card px-16 py-12 mx-auto flex items-center justify-center">
-        <p className="text-2xl leading-relaxed" style={{ 
-          fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif',
-          color: '#4D4D4D',
-          fontSize: '24px',
-          fontWeight: 400
-        }}>
+        <p className="paragraph-text text-gray-custom text-2xl leading-relaxed">
           {paragraph.content}
         </p>
       </div>
@@ -114,7 +109,7 @@ export default function About() {
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
           <div className="absolute top-40 left-0 right-0 h-20 md:h-24 flex items-center justify-center z-50">
-            <h2 className="text-4xl font-medium text-gray-900 mb-6" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '38px', fontWeight: 500 }}>
+            <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
               About Me
             </h2>
           </div>
@@ -190,11 +185,11 @@ export default function About() {
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div style={{ pointerEvents: 'auto', borderColor: '#EFF0FF' }} className="group inline-flex items-center bg-white border-[5px] rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer">
-                <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
+              <div style={{ pointerEvents: 'auto' }} className="cta-button">
+                <span className="cta-button-text">
                   Read My CV
                 </span>
-                <span className="inline-flex items-center justify-center bg-black text-white min-h-[65px] min-w-[65px] h-[65px] w-[65px] rounded-full -mr-[72px] transition-all duration-300 text-[24px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]" style={{ aspectRatio: '1/1', flexShrink: 0 }}>
+                <span className="cta-button-icon" style={{ fontSize: '24px' }}>
                   📄
                 </span>
               </div>

@@ -267,9 +267,8 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
               transform: 'perspective(500px) rotateX(180deg)'
             }}
           >
-            <p className="text-lg leading-relaxed text-gray-700 text-center" style={{ 
-              fontFamily: 'Inter, system-ui, sans-serif',
-              color: '#4D4D4D'
+            <p className="text-gray-custom text-lg leading-relaxed text-gray-700 text-center" style={{ 
+              fontFamily: 'Inter, system-ui, sans-serif'
             }}>
               {tech.description}
             </p>
@@ -287,7 +286,7 @@ export default function Stack() {
         
         {/* Titre */}
         <div className="text-center mb-20 relative z-10">
-          <h2 className="text-4xl font-medium text-gray-900 mb-6" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '38px', fontWeight: 500 }}>
+          <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
             My Stack
           </h2>
         </div>

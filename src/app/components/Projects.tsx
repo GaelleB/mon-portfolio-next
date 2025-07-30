@@ -183,7 +183,7 @@ export default function Projects() {
                     viewport={{ once: true }}
                     className="text-center mb-20"
                 >
-                    <h2 className="text-4xl font-medium text-gray-900 mb-6" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '38px', fontWeight: 500 }}>
+                    <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
                         Projects
                     </h2>
                 </motion.div>
@@ -205,13 +205,12 @@ export default function Projects() {
                 >
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="group inline-flex items-center bg-white border-[5px] rounded-[48px] text-xl font-bold h-[72px] overflow-hidden transition-all duration-300 cursor-pointer"
-                        style={{ borderColor: '#EFF0FF' }}
+                        className="cta-button"
                     >
-                        <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
+                        <span className="cta-button-text">
                             {showAll ? 'View Less' : 'View More'}
                         </span>
-                        <span className="inline-flex items-center justify-center bg-black text-white min-h-[65px] min-w-[65px] h-[65px] w-[65px] rounded-full -mr-[72px] transition-all duration-300 text-[26px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]" style={{ aspectRatio: '1/1', flexShrink: 0 }}>
+                        <span className="cta-button-icon">
                             {showAll ? '↑' : '↓'}
                         </span>
                     </button>

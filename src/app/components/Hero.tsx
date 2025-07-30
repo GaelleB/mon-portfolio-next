@@ -60,42 +60,42 @@ export default function Hero() {
                     }}
                 >
                     {/* Première série */}
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
                     
                     {/* Deuxième série identique pour continuité */}
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
                     </h1>
-                    <h1 className="text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 900 }}>
+                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
                     </h1>
                 </motion.div>
@@ -258,9 +258,9 @@ export default function Hero() {
                 {/* Salutation et nom */}
                 <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
                     <h2 className="text-gray-900 mb-2" style={{ fontSize: '56px' }}>
-                        <span style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 500 }}>Hi, I&apos;m </span>
+                        <span className="font-public-sans" style={{ fontWeight: 500 }}>Hi, I&apos;m </span>
                         <em className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontSize: '48px', fontWeight: 700 }}>Gaëlle</em>
-                        <span style={{ fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontWeight: 500 }}>!</span>
+                        <span className="font-public-sans" style={{ fontWeight: 500 }}>!</span>
                     </h2>
                     <motion.p 
                         key={currentTextIndex}
@@ -268,9 +268,8 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="text-gray-600" 
+                        className="font-public-sans text-gray-600" 
                         style={{ 
-                            fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', 
                             fontSize: '20px',
                             fontWeight: 400,
                             lineHeight: '24px'
@@ -391,11 +390,11 @@ export default function Hero() {
 
                 {/* CTA Button */}
                 <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="group inline-flex items-center bg-white border-[5px] rounded-[48px] h-[72px] overflow-hidden transition-all duration-300 cursor-pointer" style={{ borderColor: '#EFF0FF', fontFamily: '"Public Sans", "Public Sans Placeholder", sans-serif', fontSize: '24px', fontWeight: 700 }}>
-                        <span className="inline-block px-[48px] py-[24px] text-black transition-all duration-300 group-hover:pr-[24px] group-hover:pl-[48px]">
+                    <div className="cta-button font-public-sans" style={{ fontSize: '24px', fontWeight: 700 }}>
+                        <span className="cta-button-text">
                             Let&apos;s Work Together!
                         </span>
-                        <span className="inline-flex items-center justify-center bg-black text-white min-h-[65px] min-w-[65px] h-[65px] w-[65px] rounded-full -mr-[72px] transition-all duration-300 text-[26px] group-hover:mr-0 group-hover:[transform:rotate(-360deg)]" style={{ aspectRatio: '1/1', flexShrink: 0 }}>
+                        <span className="cta-button-icon">
                             ↓
                         </span>
                     </div>
