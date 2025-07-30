@@ -205,7 +205,8 @@ export default function Projects() {
                 >
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="cta-button"
+                        className="cta-button font-public-sans"
+                        style={{ fontSize: '24px', fontWeight: 700, color: '#000000', lineHeight: '33.6px' }}
                     >
                         <span className="cta-button-text">
                             {showAll ? 'View Less' : 'View More'}
