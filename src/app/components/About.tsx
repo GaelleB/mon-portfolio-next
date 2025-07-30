@@ -185,7 +185,7 @@ export default function About() {
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div style={{ pointerEvents: 'auto' }} className="cta-button">
+              <div style={{ pointerEvents: 'auto', fontSize: '24px', fontWeight: 700, color: '#000000', lineHeight: '33.6px' }} className="cta-button font-public-sans">
                 <span className="cta-button-text">
                   Read My CV
                 </span>
