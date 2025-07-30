@@ -13,10 +13,18 @@ export default function Home() {
     <main className="min-h-screen">
       <CustomCursor />
       <Navigation />
-      <Hero />
-      <About />
-      <Stack />
-      <Projects />
+      <section>
+        <Hero />
+      </section>
+      <section>
+        <About />
+      </section>
+      <section>
+        <Stack />
+      </section>
+      <section>
+        <Projects />
+      </section>
       <Footer />
     </main>
   )

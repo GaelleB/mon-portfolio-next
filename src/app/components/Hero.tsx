@@ -60,44 +60,44 @@ export default function Hero() {
                     }}
                 >
                     {/* Première série */}
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
+                    </div>
                     
                     {/* Deuxième série identique pour continuité */}
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         GAËLLE
-                    </h1>
-                    <h1 className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    </div>
+                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
                         BOUCHER
-                    </h1>
+                    </div>
                 </motion.div>
             </div>
 
@@ -120,7 +120,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/pyramid.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Pyramide orange flottante"
                         width={400}
                         height={400}
                         className="w-full h-full object-contain drop-shadow-lg"
@@ -147,7 +147,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/sphere.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Sphère violette en lévitation"
                         width={300}
                         height={300}
                         className="w-full h-full object-contain drop-shadow-2xl"
@@ -171,7 +171,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/cylinder.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Cylindre bleu en rotation"
                         width={240}
                         height={360}
                         className="w-full h-full object-contain drop-shadow-2xl"
@@ -194,7 +194,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/star.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Étoile turquoise brillante"
                         width={300}
                         height={300}
                         className="w-full h-full object-contain drop-shadow-2xl"
@@ -217,7 +217,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/cube-green.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Cube vert et jaune géométrique"
                         width={250}
                         height={250}
                         className="w-full h-full object-contain drop-shadow-2xl"
@@ -240,7 +240,7 @@ export default function Hero() {
                 >
                     <Image 
                         src="/assets/3d/cube-yellow.webp"
-                        alt=""
+                        alt="Objet 3D décoratif - Cube jaune lumineux en rotation"
                         width={260}
                         height={260}
                         className="w-full h-full object-contain drop-shadow-2xl"
@@ -257,11 +257,11 @@ export default function Hero() {
                 
                 {/* Salutation et nom */}
                 <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-                    <h2 className="text-gray-900 mb-2" style={{ fontSize: '56px' }}>
+                    <h1 className="text-gray-900 mb-2" style={{ fontSize: '56px' }}>
                         <span className="font-public-sans" style={{ fontWeight: 500 }}>Hi, I&apos;m </span>
                         <em className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontSize: '48px', fontWeight: 700 }}>Gaëlle</em>
                         <span className="font-public-sans" style={{ fontWeight: 500 }}>!</span>
-                    </h2>
+                    </h1>
                     <motion.p 
                         key={currentTextIndex}
                         initial={{ opacity: 0, y: 10 }}
@@ -299,7 +299,7 @@ export default function Hero() {
                             <div className="relative w-full h-full rounded-3xl overflow-hidden">
                                 <Image 
                                     src="/assets/gaelle.png" 
-                                    alt="Gaëlle Boucher" 
+                                    alt="Gaëlle Boucher - Développeuse Front-End, photo de profil professionnelle" 
                                     className="w-full h-full rounded-3xl"
                                     style={{ 
                                         display: 'block',

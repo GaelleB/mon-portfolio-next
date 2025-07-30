@@ -5,13 +5,20 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Gaëlle Boucher - Front-End Developer | NYC Inspired Portfolio',
-  description: 'Portfolio de Gaëlle Boucher, développeuse front-end passionnée, inspirée par l\'énergie de New York City',
-  keywords: 'développeur front-end, React, Next.js, TypeScript, portfolio, NYC',
+  title: 'Gaëlle Boucher - Développeuse Front-End | Portfolio',
+  description: 'Portfolio de Gaëlle Boucher, développeuse front-end spécialisée en React et Next.js. Créatrice de sites web sur mesure.',
+  keywords: 'développeuse front-end, React, Next.js, TypeScript, portfolio, sites web sur mesure',
+  robots: 'index, follow',
+  viewport: 'width=device-width, initial-scale=1',
+  alternates: {
+    canonical: 'https://mon-portfolio-next-mu.vercel.app'
+  },
   openGraph: {
-    title: 'Gaëlle Boucher - Front-End Developer',
-    description: 'Building digital experiences from the city that never sleeps',
+    title: 'Gaëlle Boucher - Développeuse Front-End',
+    description: 'Développeuse front-end spécialisée en React et Next.js. Créatrice de sites web sur mesure.',
     type: 'website',
+    url: 'https://mon-portfolio-next-mu.vercel.app',
+    locale: 'fr_FR'
   }
 }
 

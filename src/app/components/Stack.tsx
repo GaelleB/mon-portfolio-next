@@ -297,7 +297,7 @@ export default function Stack() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
             <Image 
               src="/assets/3d/cube-green.webp" 
-              alt="3D Object" 
+              alt="Cube 3D géométrique décoratif en arrière-plan de la section technologies" 
               width={800} 
               height={600} 
               className="opacity-80"

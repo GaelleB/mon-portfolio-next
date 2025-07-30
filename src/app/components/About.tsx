@@ -133,7 +133,7 @@ export default function About() {
             >
               <Image 
                 src="/assets/3d/casque.png"
-                alt=""
+                alt="Casque audio 3D représentant la passion pour la musique et les séries"
                 width={200}
                 height={200}
                 className="w-full h-full object-contain drop-shadow-xl"
@@ -157,7 +157,7 @@ export default function About() {
             >
               <Image 
                 src="/assets/3d/biberon.png"
-                alt=""
+                alt="Biberon 3D symbolisant le passé d'auxiliaire de puériculture en néonatalogie"
                 width={200}
                 height={200}
                 className="w-full h-full object-contain drop-shadow-xl"

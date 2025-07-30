@@ -54,7 +54,7 @@ export default function Navigation() {
     ];
 
     return (
-        <>
+        <header>
             {/* Bande transparente/floue pleine largeur */}
             <motion.div 
                 className="fixed top-0 left-0 w-full z-40 backdrop-blur-md"
@@ -68,6 +68,8 @@ export default function Navigation() {
             {/* Navigation par-dessus la bande */}
             <motion.nav 
                 className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50"
+                role="navigation" 
+                aria-label="Navigation principale"
             >
                 <div className="bg-white rounded-full px-2 py-2 shadow-lg border border-gray-200/50" style={{ backgroundColor: 'white' }}>
                     <div className="flex items-center space-x-1">
@@ -102,6 +104,6 @@ export default function Navigation() {
                     </div>
                 </div>
             </motion.nav>
-        </>
+        </header>
     );
 }
