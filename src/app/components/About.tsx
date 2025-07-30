@@ -181,7 +181,7 @@ export default function About() {
                 y: cvY,
                 scale: cvScale,
                 opacity: cvOpacity,
-                zIndex: 5
+                zIndex: 0
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
