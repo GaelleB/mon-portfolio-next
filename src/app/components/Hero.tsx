@@ -5,15 +5,15 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero() {
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true);
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
     
     // Textes qui changent toutes les 3 secondes
     const rotatingTexts = [
+        "Web Developer",
         "Frontend Developer",
         "React/Next Developer", 
-        "Web Developer",
         "Creative Coder",
         "Digital Artist"
     ];
@@ -28,19 +28,26 @@ export default function Hero() {
     const objectsY = "0%"; // Objects stay completely fixed
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
-    useEffect(() => {
-        setIsLoaded(true);
-    }, []);
 
-    // Animation automatique du texte toutes les 3 secondes
+    // Animation automatique du texte toutes les 3 secondes (avec délai initial)
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTextIndex((prevIndex) => 
-                (prevIndex + 1) % rotatingTexts.length
-            );
-        }, 3000);
+        let interval: NodeJS.Timeout;
+        
+        // Délai de 2 secondes avant de commencer l'animation
+        const timeoutId = setTimeout(() => {
+            setCurrentTextIndex(1); // Passe au deuxième texte après 2s
+            
+            interval = setInterval(() => {
+                setCurrentTextIndex((prevIndex) => 
+                    (prevIndex + 1) % rotatingTexts.length
+                );
+            }, 3000);
+        }, 2000);
 
-        return () => clearInterval(interval);
+        return () => {
+            clearTimeout(timeoutId);
+            if (interval) clearInterval(interval);
+        };
     }, [rotatingTexts.length]);
 
     return (
