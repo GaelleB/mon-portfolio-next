@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero() {
-    const [isLoaded, setIsLoaded] = useState(true);
+    const isLoaded = true;
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
     
