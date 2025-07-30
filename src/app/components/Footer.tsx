@@ -70,12 +70,12 @@ export default function Footer() {
                         </h3>
                         <div className="space-y-4">
                             <motion.a
-                                href="https://framer.com"
+                                href="https://www.malt.fr/profile/gaelleboucher"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
-                            <span data-cursor-text="Visit My Framer Page">Framer</span>
+                            <span data-cursor-text="Visit My Malt Profile">Malt</span>
                             </motion.a>
                             <motion.a
                                 href="https://github.com/GaelleB"
