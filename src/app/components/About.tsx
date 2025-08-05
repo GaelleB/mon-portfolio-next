@@ -124,7 +124,7 @@ export default function About() {
           <div className="absolute inset-0 pointer-events-none">
             {/* Casque à gauche */}
             <motion.div 
-              className="absolute left-60 top-80 w-64 h-64 z-5"
+              className="absolute left-50 top-60 w-64 h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
                 y: [0, -8, -3, -12, 0],
@@ -148,7 +148,7 @@ export default function About() {
 
             {/* Biberon à droite */}
             <motion.div 
-              className="absolute right-60 top-80 w-64 h-64 z-5"
+              className="absolute right-50 top-60 w-64 h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
                 y: [0, -10, -5, -8, 0],
