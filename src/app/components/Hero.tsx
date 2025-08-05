@@ -1,13 +1,16 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero() {
     const isLoaded = true;
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
+    const objectsRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLDivElement>(null);
+    const subtitleRef = useRef<HTMLDivElement>(null);
     
     // Textes qui changent toutes les 3 secondes
     const rotatingTexts = [
@@ -18,15 +21,43 @@ export default function Hero() {
         "Digital Artist"
     ];
     
-    // Parallax effect
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"]
-    });
+    // État du parallaxe pour Framer Motion
+    const [parallaxOffset, setParallaxOffset] = useState(0);
     
-    // Transform values for parallax - objects stay fixed, only background moves
-    const objectsY = "0%"; // Objects stay completely fixed
-    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    // Effet parallaxe unifié - TOUS les éléments montent exactement ensemble
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const displacement = scrollY * -0.3;
+            
+            // Mettre à jour l'état pour que Framer Motion l'utilise
+            setParallaxOffset(displacement);
+            
+            // Photo profil uniquement
+            const profilePhoto = document.querySelector('section#home .profile-block .flip-card');
+            if (profilePhoto) {
+                (profilePhoto as HTMLElement).style.transform = `translateY(${displacement}px)`;
+            }
+            
+            // Titre - MÊME vitesse que les autres + centrage
+            if (titleRef.current) {
+                const opacity = Math.max(1 - (scrollY / 400), 0);
+                titleRef.current.style.transform = `translateX(-50%) translateY(${displacement}px)`;
+                titleRef.current.style.opacity = opacity.toString();
+            }
+            
+            // Sous-titre - MÊME vitesse que les autres + centrage
+            if (subtitleRef.current) {
+                subtitleRef.current.style.transform = `translateX(-50%) translateY(${displacement}px)`;
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
 
     // Animation automatique du texte toutes les 3 secondes (avec délai initial)
@@ -67,56 +98,56 @@ export default function Hero() {
                     }}
                 >
                     {/* Première série */}
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
                     
                     {/* Deuxième série identique pour continuité */}
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         GAËLLE
                     </div>
-                    <div className="font-public-sans text-[240px] text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900 }}>
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
                         BOUCHER
                     </div>
                 </motion.div>
             </div>
 
             {/* Objets 3D flottants avec parallax */}
-            <motion.div style={{ y: objectsY }}>
+            <div ref={objectsRef}>
                 
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
-                    className="absolute top-30 left-115 w-70 h-70 z-20"
-                    style={{ transform: 'rotate(75deg)' }}
+                    className="absolute w-70 h-70 z-20 hero-3d-object"
+                    style={{ top: '5%', left: '20%', y: parallaxOffset }}
                     animate={{
-                        y: [0, -8, -5, -10, 0],
+                        y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset],
                         x: [0, 3, -2, 4, 0],
                     }}
                     transition={{
@@ -140,9 +171,10 @@ export default function Hero() {
 
                 {/* Sphère violette (left) */}
                 <motion.div 
-                    className="absolute left-100 top-85 w-70 h-70 z-20"
+                    className="absolute w-70 h-70 z-20 hero-3d-object"
+                    style={{ top: '33%', left: '15%', y: parallaxOffset }}
                     animate={{
-                        y: [0, -6, -3, -8, -4, 0],
+                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset],
                         x: [0, 5, -3, 6, -4, 0],
                     }}
                     transition={{
@@ -163,10 +195,10 @@ export default function Hero() {
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
-                    className="absolute bottom-10 left-130 w-60 h-90 z-20"
-                    style={{ transform: 'scaleX(1) rotate(180deg)' }}
+                    className="absolute w-60 h-90 z-20 hero-3d-object"
+                    style={{ bottom: '-5%', left: '25%', y: parallaxOffset}}
                     animate={{
-                        y: [0, -7, -3, -6, 0],
+                        y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset],
                         x: [0, -3, 5, -2, 0],
                     }}
                     transition={{
@@ -179,7 +211,7 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/cylinder.webp"
                         alt="Objet 3D décoratif - Cylindre bleu en rotation"
-                        width={240}
+                        width={300}
                         height={360}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
@@ -187,9 +219,10 @@ export default function Hero() {
 
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
-                    className="absolute top-30 right-115 w-75 h-75 z-20"
+                    className="absolute w-75 h-75 z-20 hero-3d-object"
+                    style={{ top: '5%', right: '20%', y: parallaxOffset }}
                     animate={{
-                        y: [0, -6, -12, -6, -9, 0],
+                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset],
                         rotate: [0, 8, 5, 12, 3, 0],
                     }}
                     transition={{
@@ -202,17 +235,18 @@ export default function Hero() {
                     <Image 
                         src="/assets/3d/star.webp"
                         alt="Objet 3D décoratif - Étoile turquoise brillante"
-                        width={300}
-                        height={300}
+                        width={250}
+                        height={250}
                         className="w-full h-full object-contain drop-shadow-2xl"
                     />
                 </motion.div>
 
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
-                    className="absolute right-100 top-85 w-70 h-70 z-20"
+                    className="absolute w-70 h-70 z-20 hero-3d-object"
+                    style={{ top: '33%', right: '15%', y: parallaxOffset }}
                     animate={{
-                        y: [0, -5, -8, -6, 0],
+                        y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset],
                         x: [0, 3, -4, 2, 0],
                     }}
                     transition={{
@@ -233,9 +267,10 @@ export default function Hero() {
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
-                    className="absolute bottom-15 right-120 w-70 h-70 z-20"
+                    className="absolute w-70 h-70 z-20 hero-3d-object"
+                    style={{ bottom: '0%', right: '22%', y: parallaxOffset }}
                     animate={{
-                        y: [0, -9, -4, -12, -5, 0],
+                        y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset],
                         rotate: [4, 10, 15, 8, 16, 4],
                     }}
                     transition={{
@@ -254,43 +289,73 @@ export default function Hero() {
                     />
                 </motion.div>
 
-            </motion.div>
+            </div>
 
-            {/* Contenu central avec parallax */}
-            <motion.div 
-                className="relative z-30 text-center max-w-lg mx-auto px-6 -translate-y-5"
-                style={{ y: textY }}
+            {/* Contenu central avec positionnement absolu */}
+            <div 
+                className="relative z-30 text-center mx-auto"
+                style={{ height: '600px', width: '100%' }}
             >
                 
-                {/* Salutation et nom */}
-                <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-                    <h1 className="text-gray-900 mb-2" style={{ fontSize: '56px' }}>
-                        <span className="font-public-sans" style={{ fontWeight: 500 }}>Hi, I&apos;m </span>
-                        <em className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontSize: '48px', fontWeight: 700 }}>Gaëlle</em>
-                        <span className="font-public-sans" style={{ fontWeight: 500 }}>!</span>
+                {/* Salutation seule */}
+                <div 
+                    ref={titleRef}
+                    className={`absolute transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} 
+                    style={{ 
+                        transitionDelay: '200ms',
+                        top: '10px',
+                        left: '50%',
+                        transform: 'translateX(-50%)'
+                    }}
+                >
+                    <h1 className="font-public-sans" style={{ fontWeight: 500, color: '#000000', fontSize: '48px', lineHeight: '48px' }}>
+                        Hi, I&apos;m <span className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontWeight: 700 }}>Gaëlle</span>!
                     </h1>
+                </div>
+
+                {/* Texte qui change seul */}
+                <div 
+                    ref={subtitleRef}
+                    className={`absolute transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} 
+                    style={{ 
+                        transitionDelay: '300ms',
+                        top: '80px',
+                        left: '50%',
+                        transform: 'translateX(-50%)'
+                    }}
+                >
                     <motion.p 
                         key={currentTextIndex}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="font-public-sans text-gray-600" 
+                        className="font-public-sans" 
                         style={{ 
                             fontSize: '20px',
                             fontWeight: 400,
-                            lineHeight: '24px'
+                            lineHeight: '24px',
+                            color: '#4D4D4D'
                         }}
                     >
                         {rotatingTexts[currentTextIndex]}
                     </motion.p>
                 </div>
 
-                {/* Photo de profil avec effet flip 3D */}
-                <motion.div 
-                    className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
-                    style={{ transitionDelay: '400ms' }}
+                {/* Bloc Photo + Social proof + CTA */}
+                <div 
+                    className="profile-block absolute"
+                    style={{ 
+                        top: '115px',
+                        left: '50%',
+                        transform: 'translateX(-50%)'
+                    }}
                 >
+                    {/* Photo de profil avec effet flip 3D */}
+                    <motion.div 
+                        className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                        style={{ transitionDelay: '400ms' }}
+                    >
                     <motion.div
                         className="relative w-full h-full transition-transform duration-700 flip-card"
                         style={{ 
@@ -383,30 +448,31 @@ export default function Hero() {
                     </motion.div>
                 </motion.div>
 
-                {/* Social proof */}
-                <div className={`mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
-                    <div className="flex items-center justify-center space-x-2">
-                        <div className="flex -space-x-2">
-                            <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-red-500 rounded-full border-2 border-white shadow-lg"></div>
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white shadow-lg"></div>
-                            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-teal-500 rounded-full border-2 border-white shadow-lg"></div>
+                    {/* Social proof */}
+                    <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms', transform: 'translateY(6px)' }}>
+                        <div className="flex items-center justify-center space-x-2">
+                            <div className="flex -space-x-2">
+                                <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-red-500 rounded-full border-2 border-white shadow-lg"></div>
+                                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white shadow-lg"></div>
+                                <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-teal-500 rounded-full border-2 border-white shadow-lg"></div>
+                            </div>
+                            <span className="text-sm text-gray-600 ml-3 font-medium">5+ projets</span>
                         </div>
-                        <span className="text-sm text-gray-600 ml-3 font-medium">5+ projets</span>
                     </div>
-                </div>
 
-                {/* CTA Button */}
-                <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
-                    <div className="cta-button font-public-sans" style={{ fontSize: '24px', fontWeight: 700 }}>
-                        <span className="cta-button-text">
-                            Let&apos;s Work Together!
-                        </span>
-                        <span className="cta-button-icon">
-                            ↓
-                        </span>
+                    {/* CTA Button */}
+                    <div className={`mb-7 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms', transform: 'translateY(14px)' }}>
+                        <div className="cta-button font-public-sans">
+                            <span className="cta-button-text">
+                                Let&apos;s Work Together!
+                            </span>
+                            <span className="cta-button-icon">
+                                ↓
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </section>
     );
 }
