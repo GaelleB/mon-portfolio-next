@@ -52,8 +52,12 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     }}
     className="absolute inset-0 flex items-center justify-center"
   >
-    <div className="max-w-4xl mx-auto px-6 text-center">
-      <div className="glass-card px-16 py-12 mx-auto flex items-center justify-center">
+    <div className="relative w-full max-w-4xl p-6">
+      {/* Calque 1 : blur + fond indigo ultra-dilué */}
+      <div className="glass-bg absolute inset-0 z-0" />
+
+      {/* Calque 2 : carte blanche nette */}
+      <div className="glass-foreground relative z-10 flex items-center justify-center text-center">
         <p className="paragraph-text text-gray-custom text-2xl leading-relaxed">
           {paragraph.content}
         </p>
@@ -108,7 +112,7 @@ export default function About() {
         {/* Contenu sticky qui reste fixe pendant le scroll */}
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
-          <div className="absolute top-40 left-0 right-0 h-20 md:h-24 flex items-center justify-center z-50">
+          <div className="absolute top-30 left-0 right-0 h-20 md:h-24 flex items-center justify-center z-50">
             <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
               About Me
             </h2>
@@ -118,7 +122,7 @@ export default function About() {
           <div className="absolute inset-0 pointer-events-none">
             {/* Casque à gauche */}
             <motion.div 
-              className="absolute left-100 top-80 w-64 h-64 z-5"
+              className="absolute left-60 top-80 w-64 h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
                 y: [0, -8, -3, -12, 0],
@@ -142,7 +146,7 @@ export default function About() {
 
             {/* Biberon à droite */}
             <motion.div 
-              className="absolute right-100 top-80 w-64 h-64 z-5"
+              className="absolute right-60 top-80 w-64 h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
                 y: [0, -10, -5, -8, 0],
