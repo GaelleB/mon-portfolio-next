@@ -24,32 +24,14 @@ export default function Hero() {
     // État du parallaxe pour Framer Motion
     const [parallaxOffset, setParallaxOffset] = useState(0);
     
-    // Effet parallaxe unifié - TOUS les éléments montent exactement ensemble
+    // Effet parallaxe React-only - plus de manipulation DOM !
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
             const displacement = scrollY * -0.3;
             
-            // Mettre à jour l'état pour que Framer Motion l'utilise
+            // UNIQUEMENT mettre à jour l'état React
             setParallaxOffset(displacement);
-            
-            // Photo profil uniquement
-            const profilePhoto = document.querySelector('section#home .profile-block .flip-card');
-            if (profilePhoto) {
-                (profilePhoto as HTMLElement).style.transform = `translateY(${displacement}px)`;
-            }
-            
-            // Titre - MÊME vitesse que les autres + centrage
-            if (titleRef.current) {
-                const opacity = Math.max(1 - (scrollY / 400), 0);
-                titleRef.current.style.transform = `translateX(-50%) translateY(${displacement}px)`;
-                titleRef.current.style.opacity = opacity.toString();
-            }
-            
-            // Sous-titre - MÊME vitesse que les autres + centrage
-            if (subtitleRef.current) {
-                subtitleRef.current.style.transform = `translateX(-50%) translateY(${displacement}px)`;
-            }
         };
         
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -298,30 +280,29 @@ export default function Hero() {
             >
                 
                 {/* Salutation seule */}
-                <div 
+                <motion.div 
                     ref={titleRef}
-                    className={`absolute transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} 
+                    className={`absolute ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
                     style={{ 
-                        transitionDelay: '200ms',
                         top: '10px',
                         left: '50%',
-                        transform: 'translateX(-50%)'
+                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`,
+                        opacity: Math.max(1 - (Math.abs(parallaxOffset) / 120), 0)
                     }}
                 >
                     <h1 className="font-public-sans" style={{ fontWeight: 500, color: '#000000', fontSize: '48px', lineHeight: '48px' }}>
                         Hi, I&apos;m <span className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontWeight: 700 }}>Gaëlle</span>!
                     </h1>
-                </div>
+                </motion.div>
 
                 {/* Texte qui change seul */}
-                <div 
+                <motion.div 
                     ref={subtitleRef}
-                    className={`absolute transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} 
+                    className={`absolute ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
                     style={{ 
-                        transitionDelay: '300ms',
                         top: '80px',
                         left: '50%',
-                        transform: 'translateX(-50%)'
+                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`
                     }}
                 >
                     <motion.p 
@@ -340,7 +321,7 @@ export default function Hero() {
                     >
                         {rotatingTexts[currentTextIndex]}
                     </motion.p>
-                </div>
+                </motion.div>
 
                 {/* Bloc Photo + Social proof + CTA */}
                 <div 
@@ -353,14 +334,13 @@ export default function Hero() {
                 >
                     {/* Photo de profil avec effet flip 3D */}
                     <motion.div 
-                        className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
-                        style={{ transitionDelay: '400ms' }}
+                        className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     >
                     <motion.div
-                        className="relative w-full h-full transition-transform duration-700 flip-card"
+                        className="relative w-full h-full flip-card"
                         style={{ 
                             transformStyle: 'preserve-3d',
-                            transform: 'perspective(1000px) rotateX(4deg) rotateY(5deg) rotateZ(0deg)'
+                            transform: `perspective(1000px) rotateX(4deg) rotateY(5deg) rotateZ(0deg) translateY(${parallaxOffset}px)`
                         }}
                     >
                         {/* FACE AVANT */}
@@ -395,12 +375,7 @@ export default function Hero() {
                                 
                                 {/* Texte rotatif */}
                                 <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{
-                                        duration: 15,
-                                        repeat: Infinity,
-                                        ease: "linear"
-                                    }}
+                                    animate={false}
                                     className="absolute inset-0 w-full h-full"
                                 >
                                     <svg className="w-full h-full" viewBox="0 0 176 176">
@@ -421,12 +396,7 @@ export default function Hero() {
                                 {/* Cercle intérieur avec bordure */}
                                 <div className="w-25 h-25 rounded-full bg-white flex items-center justify-center border-2 border-black" >
                                     <motion.div
-                                        animate={{ y: [0, 6, 0] }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
+                                        animate={false}
                                     >
                                         <svg 
                                             className="w-5 h-5 text-gray-600" 
