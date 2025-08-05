@@ -106,6 +106,7 @@ export default function About() {
   const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["15vh", "35vh", "35vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [0.9, 1, 1]);
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
+  const cvZIndex = useTransform(scrollYProgress, [0.8, 0.85], [0, 4]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -187,16 +188,22 @@ export default function About() {
                 y: cvY,
                 scale: cvScale,
                 opacity: cvOpacity,
-                zIndex: 0
+                zIndex: cvZIndex
               }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <div style={{ pointerEvents: 'auto', fontSize: '24px', fontWeight: 700, color: '#000000', lineHeight: '33.6px' }} className="cta-button font-public-sans">
+              <div style={{ pointerEvents: 'auto' }} className="cta-button font-public-sans">
                 <span className="cta-button-text">
                   Read My CV
                 </span>
-                <span className="cta-button-icon" style={{ fontSize: '24px' }}>
-                  📄
+                <span className="cta-button-icon" style={{ fontSize: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                    <polyline points="13,2 13,9 20,9"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <line x1="10" y1="9" x2="8" y2="9"/>
+                  </svg>
                 </span>
               </div>
             </motion.div>
