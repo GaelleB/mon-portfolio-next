@@ -46,6 +46,20 @@
   font-weight: 400;
 }
 
+/* Responsive adjustments for 3D objects with percentage positions */
+@media (max-width: 768px) {
+  /* Ajustements mineurs pour mobile - les pourcentages s'adaptent déjà */
+  .hero-3d-object {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-3d-object {
+    transform: scale(0.7);
+  }
+}
+
 /* Color utilities */
 .text-gray-custom {
   color: #4D4D4D;
@@ -55,16 +69,24 @@
   border-color: #EFF0FF;
 }
 
+/* Profile Block Container */
+.profile-block {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-position: 47.5% 24.1%;
+  object-fit: cover;
+}
+
 /* CTA Button Components */
 .cta-button {
   display: inline-flex;
   align-items: center;
   background-color: white;
-  border: 5px solid #EFF0FF;
+  border: 6px solid #EFF0FF;
   border-radius: 48px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  height: 72px;
+  color: #000000;
   overflow: hidden;
   transition: all 300ms;
   cursor: pointer;
@@ -72,7 +94,10 @@
 
 .cta-button-text {
   display: inline-block;
-  padding: 24px 48px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-right: 9px;
+  padding: 18px 53px;
   color: black;
   transition: all 300ms;
 }
