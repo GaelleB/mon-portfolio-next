@@ -82,15 +82,12 @@ export default function CustomCursor() {
         default: {
             x: mousePosition.x - 12,
             y: mousePosition.y - 12,
-            scale: 1,
-            backgroundColor: '#f97316',
-            borderRadius: '50%'
+            scale: 1
         },
         button: {
             x: mousePosition.x + 20,
             y: mousePosition.y - 20,
             scale: 1,
-            backgroundColor: '#f97316',
             borderRadius: '20px'
         }
     }
@@ -100,7 +97,7 @@ export default function CustomCursor() {
             {/* Bille orange qui suit la souris avec délai - seulement dans la section contact */}
             {isInContactSection && (
                 <motion.div
-                    className="fixed top-0 left-0 pointer-events-none z-[9999]"
+                    className="fixed top-0 left-0 pointer-events-none z-[9999] bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
                     variants={variants}
                     animate={cursorVariant}
                     initial={{ 
