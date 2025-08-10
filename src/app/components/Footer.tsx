@@ -131,14 +131,14 @@ export default function Footer() {
             </div>
             
             {/* Texte coupé en bas */}
-            <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden z-0">
+            <div className="absolute bottom-0 left-0 right-0 h-28 overflow-hidden z-0">
                 <div className="absolute bottom-0 left-0 right-0">
                     <div className="font-public-sans text-black leading-none tracking-tighter select-none" 
                         style={{ 
                             fontWeight: 900, 
-                            fontSize: '165px', 
-                            lineHeight: '165px',
-                            transform: 'translateY(45%)',
+                            fontSize: '167px', 
+                            lineHeight: '167px',
+                            transform: 'translateY(35%)',
                             width: '100vw',
                             textAlign: 'center'
                         }}>
