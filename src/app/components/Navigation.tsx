@@ -71,27 +71,27 @@ export default function Navigation() {
                 role="navigation" 
                 aria-label="Navigation principale"
             >
-                <div className="bg-white rounded-full px-2 py-2 shadow-lg border border-gray-200/50" style={{ backgroundColor: 'white' }}>
-                    <div className="flex items-center space-x-1">
+                <div className="bg-white rounded-full px-0.5 py-0.5 shadow-lg border border-gray-200/50" style={{ backgroundColor: 'white' }}>
+                    <div className="flex items-center -space-x-0.5">
                         {navItems.map((item) => (
                             <motion.a
                                 key={item.name}
                                 href={item.href}
                                 onClick={() => setActiveSection(item.name)}
                                 className={`
-                                    relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300
+                                    relative px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300
                                     ${activeSection === item.name 
                                         ? 'text-white' 
                                         : 'text-gray-700 hover:text-gray-900'
                                     }
                                 `}
-                                whileHover={{ scale: 1.05 }}
+                                whileHover={activeSection !== item.name ? { scale: 1.05 } : {}}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 {activeSection === item.name && (
                                     <motion.div
                                         layoutId="activeTab"
-                                        className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
+                                        className="absolute inset-y-0.5 inset-x-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
                                         initial={false}
                                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                     />
