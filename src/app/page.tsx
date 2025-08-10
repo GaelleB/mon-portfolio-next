@@ -28,7 +28,7 @@ export default function Home() {
       <Footer />
       
       {/* Footer avec effet de texte coupé */}
-      <footer className="relative h-20 overflow-hidden bg-white">
+      <footer className="relative h-20 overflow-hidden bg-gray-50">
         <div className="absolute bottom-0 left-0 right-0">
           <div className="font-public-sans text-black leading-none tracking-tighter select-none" 
             style={{ 
