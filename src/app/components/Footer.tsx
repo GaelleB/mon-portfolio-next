@@ -55,7 +55,7 @@ export default function Footer() {
                             <span data-cursor-text="Visit 404 Page">404 Page</span>
                             </motion.a>
                             <motion.a
-                                href="#"
+                                href="/licensing"
                                 className="block text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
                             >
                             <span data-cursor-text="Visit Licensing Page">Licensing</span>
