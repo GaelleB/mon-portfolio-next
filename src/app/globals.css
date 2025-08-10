@@ -184,5 +184,5 @@
 
 .cta-button-reverse:hover .cta-button-icon-reverse {
   margin-left: 0;
-  transform: rotate(360deg); /* Ajoute la rotation comme les autres boutons */
+  transform: rotate(360deg);
 }
