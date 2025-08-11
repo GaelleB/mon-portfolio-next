@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   description: 'Portfolio de Gaëlle Boucher, développeuse front-end spécialisée en React et Next.js. Créatrice de sites web sur mesure.',
   keywords: 'développeuse front-end, React, Next.js, TypeScript, portfolio, sites web sur mesure',
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1',
   alternates: {
     canonical: 'https://mon-portfolio-next-mu.vercel.app'
   },
@@ -20,6 +19,11 @@ export const metadata: Metadata = {
     url: 'https://mon-portfolio-next-mu.vercel.app',
     locale: 'fr_FR'
   }
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1
 }
 
 export default function RootLayout({
