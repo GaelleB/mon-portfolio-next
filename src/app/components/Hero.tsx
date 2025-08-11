@@ -336,13 +336,30 @@ export default function Hero() {
                     <motion.div 
                         className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     >
-                    <motion.div
-                        className="relative w-full h-full flip-card"
+                    {/* Zone de hover invisible élargie */}
+                    <div 
+                        className="absolute inset-0 cursor-pointer"
                         style={{ 
-                            transformStyle: 'preserve-3d',
-                            transform: `perspective(1000px) rotateX(4deg) rotateY(5deg) rotateZ(0deg) translateY(${parallaxOffset}px)`
+                            padding: '40px',
+                            margin: '-40px'
                         }}
                     >
+                        <motion.div
+                            className="relative w-full h-full transition-transform duration-700 flip-card"
+                            initial={{ rotateY: 5 }}
+                            whileHover={{ 
+                                rotateY: 185,
+                                transition: { duration: 0.1, ease: "easeInOut" }
+                            }}
+                            animate={{ 
+                                rotateY: 5,
+                                transition: { duration: 0.1, ease: "easeInOut" }
+                            }}
+                            style={{ 
+                                transformStyle: 'preserve-3d',
+                                transform: `perspective(1000px) rotateX(4deg) rotateZ(0deg) translateY(${parallaxOffset}px)`
+                            }}
+                        >
                         {/* FACE AVANT */}
                         <div className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl" style={{ 
                             backfaceVisibility: 'hidden',
@@ -375,17 +392,22 @@ export default function Hero() {
                                 
                                 {/* Texte rotatif */}
                                 <motion.div
-                                    animate={false}
+                                    animate={{ rotate: [0, 360] }}
+                                    transition={{
+                                        duration: 15,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
                                     className="absolute inset-0 w-full h-full"
                                 >
                                     <svg className="w-full h-full" viewBox="0 0 176 176">
                                         <defs>
                                             <path
                                                 id="textPath"
-                                                d="M 88,88 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
+                                                d="M 88,88 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0"
                                             />
                                         </defs>
-                                        <text className="text-lg font-medium black justify-center uppercase tracking-widest">
+                                        <text className="text-lg font-medium black uppercase tracking-widest">
                                             <textPath href="#textPath" startOffset="0%">
                                                 • SCROLL DOWN • AND KNOW ME BETTER 
                                             </textPath>
@@ -396,7 +418,14 @@ export default function Hero() {
                                 {/* Cercle intérieur avec bordure */}
                                 <div className="w-25 h-25 rounded-full bg-white flex items-center justify-center border-2 border-black" >
                                     <motion.div
-                                        animate={false}
+                                        animate={{ 
+                                            y: [0, -8, 0]
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
                                     >
                                         <svg 
                                             className="w-5 h-5 text-gray-600" 
@@ -415,7 +444,8 @@ export default function Hero() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                        </motion.div>
+                    </div>
                 </motion.div>
 
                     {/* Social proof */}
