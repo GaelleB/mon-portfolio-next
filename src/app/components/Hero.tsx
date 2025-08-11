@@ -388,7 +388,7 @@ export default function Hero() {
                         <div className="absolute w-full h-full rounded-3xl bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
                             
                             {/* Cercle extérieur avec bordure */}
-                            <div className="relative w-44 h-44 rounded-full bg-white flex items-center justify-center border-2 border-black">
+                            <div className="relative w-48 h-48 rounded-full bg-white flex items-center justify-center border-2 border-black">
                                 
                                 {/* Texte rotatif */}
                                 <motion.div
@@ -404,7 +404,7 @@ export default function Hero() {
                                         <defs>
                                             <path
                                                 id="textPath"
-                                                d="M 88,88 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0"
+                                                d="M 88,88 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
                                             />
                                         </defs>
                                         <text className="text-lg font-medium black uppercase tracking-widest">
