@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Composants d'icônes avec vraies icônes SVG
 const ReactIcon = () => (
@@ -280,39 +280,69 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
 };
 
 export default function Stack() {
-  return (
-    <div id="stack" className="relative min-h-screen bg-white py-20">
-      <div className="max-w-[1200px] mx-auto px-6">
-        
-        {/* Titre */}
-        <div className="text-center mb-20 relative z-10">
-          <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-            My Stack
-          </h2>
-        </div>
+  const [showCube, setShowCube] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-        {/* Container avec objet 3D fixe */}
-        <div className="relative min-h-[800px]">
-          {/* Objet 3D fixe au centre, mais seulement dans cette section */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowCube(entry.isIntersecting);
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '-10% 0px -10% 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      {/* Cube 3D en position fixed, visible seulement quand on est dans la section */}
+      <AnimatePresence>
+        {showCube && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="fixed inset-0 flex items-center justify-center z-30 pointer-events-none"
+          >
             <Image 
               src="/assets/3d/cube-green.webp" 
               alt="Cube 3D géométrique décoratif en arrière-plan de la section technologies" 
-              width={800} 
+              width={600} 
               height={600} 
               className="opacity-80"
             />
-          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div id="stack" ref={sectionRef} className="relative min-h-screen bg-white py-20">
+        <div className="max-w-[1200px] mx-auto px-6 relative z-40">
           
-          {/* Container principal avec grille de technologies qui scrollent */}
-          <div className="grid grid-cols-3 gap-3 max-w-6xl mx-auto relative z-10">
+          {/* Titre */}
+          <div className="text-center mb-20">
+            <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
+              My Stack
+            </h2>
+          </div>
+
+          {/* Grille de technologies */}
+          <div className="grid grid-cols-3 gap-3 max-w-6xl mx-auto">
             {technologies.map((tech, index) => (
               <TechCard key={tech.name} tech={tech} index={index} />
             ))}
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
+    </>
   );
 }
