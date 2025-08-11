@@ -349,11 +349,11 @@ export default function Hero() {
                             initial={{ rotateY: 5 }}
                             whileHover={{ 
                                 rotateY: 185,
-                                transition: { duration: 0.1, ease: "easeInOut" }
+                                transition: { duration: 0.4, ease: "easeInOut" }
                             }}
                             animate={{ 
                                 rotateY: 5,
-                                transition: { duration: 0.1, ease: "easeInOut" }
+                                transition: { duration: 0.2, ease: "easeInOut" }
                             }}
                             style={{ 
                                 transformStyle: 'preserve-3d',
