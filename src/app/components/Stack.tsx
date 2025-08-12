@@ -140,6 +140,7 @@ const technologies = [
   { name: 'Git', IconComponent: GitIcon, description: 'Git is my essential version control system...' }
 ];
 
+// Card flip avec tooltip
 const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -248,22 +249,22 @@ export default function Stack() {
           <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
             <motion.div 
               style={{ 
-                y: useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]) // Suivi le scroll
+                y: useTransform(scrollYProgress, [0, 1], [-600, 600]) // Suit les cards
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                ease: "easeOut",
-                y: {
+              viewport={{ once: true }}
+              animate={{
+                translateY: [0, -20, 0], // Rebond avec translateY au lieu de y
+              }}
+              transition={{
+                opacity: { duration: 0.6, ease: "easeOut" },
+                scale: { duration: 0.6, ease: "easeOut" },
+                translateY: {
                   duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }
-              }}
-              viewport={{ once: true }}
-              animate={{
-                y: [0, -20, 0], // Animation de rebond
               }}
             >
               <Image 
