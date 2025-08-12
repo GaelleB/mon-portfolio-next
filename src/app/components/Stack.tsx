@@ -140,34 +140,57 @@ const technologies = [
   { name: 'Git', IconComponent: GitIcon, description: 'Git is my essential version control system...' }
 ];
 
-// Carte tech
 const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <motion.div
       initial={{ scale: 0.95 }}
       whileInView={{ scale: 1 }}
-      transition={{ duration: 0.6, delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2, ease: "easeOut" }}
+      transition={{
+        duration: 0.6,
+        delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2,
+        ease: "easeOut"
+      }}
       className="text-center group cursor-pointer relative z-10"
       onClick={() => setIsFlipped(!isFlipped)}
     >
-      <motion.div className="w-[400px] h-[400px] p-10 relative" style={{ perspective: '1000px' }}>
+      <motion.div
+        className="w-[400px] h-[400px] p-6 relative"
+        style={{ perspective: "1000px" }}
+      >
         <motion.div
           className="w-full h-full relative"
-          style={{ transformStyle: 'preserve-3d' }}
+          style={{ transformStyle: "preserve-3d" }}
           animate={{ rotateX: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <motion.div className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ borderRadius: '48px', backgroundColor: 'white', backdropFilter: 'blur(5px)', border: '25px solid rgba(102, 112, 255, 0.04)', backfaceVisibility: 'hidden' }}>
-            <div className="mb-3">
-              <tech.IconComponent />
+          {/* Face avant */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ backfaceVisibility: "hidden" }}
+          >
+            <div className="glass-bg-tech absolute inset-0 z-0" />
+            <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center">
+              <div className="mb-3">
+                <tech.IconComponent />
+              </div>
+              <p className="font-semibold text-2xl text-gray-900">{tech.name}</p>
             </div>
-            <p className="font-semibold text-2xl text-gray-900">{tech.name}</p>
           </motion.div>
-          <motion.div className="absolute inset-0 flex flex-col items-center justify-center p-8"
-            style={{ borderRadius: '48px', backdropFilter: 'blur(5px)', transform: 'perspective(500px) rotateX(180deg)', backfaceVisibility: 'hidden' }}>
-            <p className="text-gray-600 text-lg leading-relaxed text-center">{tech.description}</p>
+
+          {/* Face arrière */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              transform: "perspective(500px) rotateX(180deg)",
+              backfaceVisibility: "hidden"
+            }}
+          >
+            <div className="glass-bg-tech absolute inset-0 z-0" />
+            <div className="glass-foreground-tech relative z-10 flex items-center justify-center text-center p-6">
+              <p className="text-gray-custom text-lg leading-relaxed">{tech.description}</p>
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>
