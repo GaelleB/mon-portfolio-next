@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Composants d'icônes avec vraies icônes SVG
+// --- Icônes ---
 const ReactIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/react.svg" alt="React" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(95%) saturate(1094%) hue-rotate(162deg) brightness(98%) contrast(94%)' }} />
+    <Image src="/assets/icons/react.svg" alt="React" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(95%) saturate(1094%) hue-rotate(162deg) brightness(98%) contrast(94%)' }} />
   </div>
 );
 
@@ -19,7 +21,9 @@ const NextIcon = () => (
 
 const FigmaIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/figma.svg" alt="Figma" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(92%) saturate(4593%) hue-rotate(344deg) brightness(98%) contrast(95%)' }} />
+    <Image src="/assets/icons/figma.svg" alt="Figma" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(92%) saturate(4593%) hue-rotate(344deg) brightness(98%) contrast(95%)' }} />
   </div>
 );
 
@@ -31,247 +35,139 @@ const JavaScriptIcon = () => (
 
 const TypeScriptIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/typescript.svg" alt="TypeScript" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(199deg) brightness(104%) contrast(97%)' }} />
+    <Image src="/assets/icons/typescript.svg" alt="TypeScript" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(199deg) brightness(104%) contrast(97%)' }} />
   </div>
 );
 
 const HTMLIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/html.svg" alt="HTML5" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
+    <Image src="/assets/icons/html.svg" alt="HTML5" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
   </div>
 );
 
 const CSSIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/css.svg" alt="CSS3" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(22%) sepia(77%) saturate(1497%) hue-rotate(240deg) brightness(97%) contrast(83%)' }} />
+    <Image src="/assets/icons/css.svg" alt="CSS3" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(22%) sepia(77%) saturate(1497%) hue-rotate(240deg) brightness(97%) contrast(83%)' }} />
   </div>
 );
 
 const SASSIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/sass.svg" alt="SASS" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(52%) sepia(17%) saturate(2878%) hue-rotate(284deg) brightness(104%) contrast(97%)' }} />
+    <Image src="/assets/icons/sass.svg" alt="SASS" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(52%) sepia(17%) saturate(2878%) hue-rotate(284deg) brightness(104%) contrast(97%)' }} />
   </div>
 );
 
 const TailwindIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/tailwindcss.svg" alt="Tailwind CSS" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(1552%) hue-rotate(158deg) brightness(91%) contrast(85%)' }} />
+    <Image src="/assets/icons/tailwindcss.svg" alt="Tailwind CSS" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(1552%) hue-rotate(158deg) brightness(91%) contrast(85%)' }} />
   </div>
 );
 
 const NotionIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/notion.svg" alt="Notion" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)' }} />
+    <Image src="/assets/icons/notion.svg" alt="Notion" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)' }} />
   </div>
 );
 
-
 const ChatGPTIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80} className="object-contain" style={{ transform: 'scale(1.5)' }} />
+    <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80}
+      className="object-contain"
+      style={{ transform: 'scale(1.5)' }} />
   </div>
 );
 
 const NodeIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/nodejs.svg" alt="Node.js" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(89%) saturate(1553%) hue-rotate(58deg) brightness(102%) contrast(102%)' }} />
+    <Image src="/assets/icons/nodejs.svg" alt="Node.js" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(89%) saturate(1553%) hue-rotate(58deg) brightness(102%) contrast(102%)' }} />
   </div>
 );
 
 const ClaudeIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/claude.svg" alt="Claude" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(57%) sepia(51%) saturate(1097%) hue-rotate(324deg) brightness(97%) contrast(89%)' }} />
+    <Image src="/assets/icons/claude.svg" alt="Claude" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(57%) sepia(51%) saturate(1097%) hue-rotate(324deg) brightness(97%) contrast(89%)' }} />
   </div>
 );
 
 const GitHubIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/github.svg" alt="GitHub" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(94%) contrast(96%)' }} />
+    <Image src="/assets/icons/github.svg" alt="GitHub" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(94%) contrast(96%)' }} />
   </div>
 );
 
 const GitIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/git.svg" alt="Git" width={80} height={80} className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
+    <Image src="/assets/icons/git.svg" alt="Git" width={80} height={80}
+      className="object-contain"
+      style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
   </div>
 );
 
-// Technologies avec descriptions et vraies icônes
+// --- Données ---
 const technologies = [
-  { 
-    name: 'React', 
-    IconComponent: ReactIcon,
-    description: 'React revolutionizes my web development approach. It provides a component-based architecture that makes building complex UIs intuitive and maintainable.'
-  },
-  { 
-    name: 'Figma', 
-    IconComponent: FigmaIcon,
-    description: 'Figma transforms my design workflow. It offers a collaborative platform where I can create stunning interfaces and prototypes with precision.'
-  },
-  { 
-    name: 'Next.js', 
-    IconComponent: NextIcon,
-    description: 'Next.js elevates my React applications. It provides server-side rendering, routing, and optimization features out of the box.'
-  },
-  { 
-    name: 'JavaScript', 
-    IconComponent: JavaScriptIcon,
-    description: 'JavaScript powers the dynamic functionality of my web applications. It enables interactive user experiences and seamless client-server communication.'
-  },
-  { 
-    name: 'TypeScript', 
-    IconComponent: TypeScriptIcon,
-    description: 'TypeScript enhances my JavaScript development. It provides type safety and better tooling for more robust and maintainable code.'
-  },
-  { 
-    name: 'HTML', 
-    IconComponent: HTMLIcon,
-    description: 'HTML forms the backbone of all my web projects. It provides the semantic structure that makes content accessible and SEO-friendly.'
-  },
-  { 
-    name: 'CSS', 
-    IconComponent: CSSIcon,
-    description: 'CSS brings my designs to life with beautiful styling and animations. It enables responsive layouts and stunning visual experiences.'
-  },
-  { 
-    name: 'SASS', 
-    IconComponent: SASSIcon,
-    description: 'SASS enhances my CSS workflow with variables, mixins, and nested rules. It makes styling more maintainable and powerful.'
-  },
-  { 
-    name: 'Tailwind', 
-    IconComponent: TailwindIcon,
-    description: 'Tailwind accelerates my styling process. It offers utility-first CSS that allows rapid prototyping and consistent design systems.'
-  },
-  { 
-    name: 'Notion', 
-    IconComponent: NotionIcon,
-    description: 'Notion organizes my entire workflow. It serves as my second brain for project planning, documentation, and knowledge management.'
-  },
-  { 
-    name: 'Node.js', 
-    IconComponent: NodeIcon,
-    description: 'Node.js powers my backend development. It enables JavaScript on the server side and provides a robust runtime for building scalable applications.'
-  },
-  { 
-    name: 'ChatGPT', 
-    IconComponent: ChatGPTIcon,
-    description: 'ChatGPT accelerates my development process. It helps with code generation, debugging, and provides instant solutions to complex programming challenges.'
-  },
-  { 
-    name: 'Claude', 
-    IconComponent: ClaudeIcon,
-    description: 'Claude assists in my development workflow with intelligent code analysis and suggestions. It helps optimize my code and explore new programming approaches.'
-  },
-  { 
-    name: 'GitHub', 
-    IconComponent: GitHubIcon,
-    description: 'GitHub serves as my code repository and collaboration platform. It enables version control, project management, and seamless teamwork on development projects.'
-  },
-  { 
-    name: 'Git', 
-    IconComponent: GitIcon,
-    description: 'Git is my essential version control system. It tracks changes, manages branches, and ensures code integrity throughout the development process.'
-  }
+  { name: 'React', IconComponent: ReactIcon, description: 'React revolutionizes my web development approach...' },
+  { name: 'Figma', IconComponent: FigmaIcon, description: 'Figma transforms my design workflow...' },
+  { name: 'Next.js', IconComponent: NextIcon, description: 'Next.js elevates my React applications...' },
+  { name: 'JavaScript', IconComponent: JavaScriptIcon, description: 'JavaScript powers the dynamic functionality...' },
+  { name: 'TypeScript', IconComponent: TypeScriptIcon, description: 'TypeScript enhances my JavaScript development...' },
+  { name: 'HTML', IconComponent: HTMLIcon, description: 'HTML forms the backbone of all my web projects...' },
+  { name: 'CSS', IconComponent: CSSIcon, description: 'CSS brings my designs to life...' },
+  { name: 'SASS', IconComponent: SASSIcon, description: 'SASS enhances my CSS workflow...' },
+  { name: 'Tailwind', IconComponent: TailwindIcon, description: 'Tailwind accelerates my styling process...' },
+  { name: 'Notion', IconComponent: NotionIcon, description: 'Notion organizes my entire workflow...' },
+  { name: 'Node.js', IconComponent: NodeIcon, description: 'Node.js powers my backend development...' },
+  { name: 'ChatGPT', IconComponent: ChatGPTIcon, description: 'ChatGPT accelerates my development process...' },
+  { name: 'Claude', IconComponent: ClaudeIcon, description: 'Claude assists in my development workflow...' },
+  { name: 'GitHub', IconComponent: GitHubIcon, description: 'GitHub serves as my code repository...' },
+  { name: 'Git', IconComponent: GitIcon, description: 'Git is my essential version control system...' }
 ];
 
-// Composant carte technologie avec effet flip
+// Carte tech
 const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
   return (
     <motion.div
       initial={{ scale: 0.95 }}
       whileInView={{ scale: 1 }}
-      transition={{ 
-        duration: 0.6, 
-        delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2,
-        ease: "easeOut"
-      }}
-      style={{ willChange: 'transform' }}
-      className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
+      transition={{ duration: 0.6, delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2, ease: "easeOut" }}
+      className="text-center group cursor-pointer relative z-10"
       onClick={() => setIsFlipped(!isFlipped)}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
-      onMouseMove={handleMouseMove}
     >
-      {/* Tooltip qui suit la souris */}
-      {showTooltip && !isFlipped && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          className="absolute z-50 pointer-events-none"
-          style={{
-            left: mousePosition.x,
-            top: mousePosition.y - 50,
-            transform: 'translateX(-50%)'
-          }}
-        >
-          <div className="bg-white rounded-full shadow-lg px-4 py-2 text-sm border border-gray-200 whitespace-nowrap">
-            <span className="text-gray-700 font-medium">Tap to Flip</span>
-          </div>
-        </motion.div>
-      )}
-      <motion.div 
-        className="w-[400px] h-[400px] p-10 relative"
-        style={{ perspective: '1000px' }}
-      >
-        {/* Carte qui flip */}
+      <motion.div className="w-[400px] h-[400px] p-10 relative" style={{ perspective: '1000px' }}>
         <motion.div
           className="w-full h-full relative"
           style={{ transformStyle: 'preserve-3d' }}
           animate={{ rotateX: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          {/* Face avant */}
-          <motion.div 
-            className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ 
-              borderRadius: '48px',
-              backgroundColor: 'white',
-              backdropFilter: 'blur(5px)',
-              border: '25px solid rgba(102, 112, 255, 0.04)',
-              opacity: '1',
-              backfaceVisibility: 'hidden'
-            }}
-          >
+          <motion.div className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ borderRadius: '48px', backgroundColor: 'white', backdropFilter: 'blur(5px)', border: '25px solid rgba(102, 112, 255, 0.04)', backfaceVisibility: 'hidden' }}>
             <div className="mb-3">
               <tech.IconComponent />
             </div>
-            <p className="font-semibold text-2xl text-gray-900" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-              {tech.name}
-            </p>
+            <p className="font-semibold text-2xl text-gray-900">{tech.name}</p>
           </motion.div>
-
-          {/* Face arrière */}
-          <motion.div 
-            className="absolute inset-0 flex flex-col items-center justify-center p-8"
-            style={{ 
-              borderRadius: '48px',
-              backdropFilter: 'blur(5px)',
-              border: 'none',
-              boxShadow: 'none',
-              opacity: '1',
-              backfaceVisibility: 'hidden',
-              transform: 'perspective(500px) rotateX(180deg)'
-            }}
-          >
-            <p className="text-gray-custom text-lg leading-relaxed text-gray-700 text-center" style={{ 
-              fontFamily: 'Inter, system-ui, sans-serif'
-            }}>
-              {tech.description}
-            </p>
+          <motion.div className="absolute inset-0 flex flex-col items-center justify-center p-8"
+            style={{ borderRadius: '48px', backdropFilter: 'blur(5px)', transform: 'perspective(500px) rotateX(180deg)', backfaceVisibility: 'hidden' }}>
+            <p className="text-gray-600 text-lg leading-relaxed text-center">{tech.description}</p>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -279,70 +175,75 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
   );
 };
 
+// Section Stack corrigée
 export default function Stack() {
-  const [showCube, setShowCube] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowCube(entry.isIntersecting);
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '-10% 0px -10% 0px'
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
   return (
-    <>
-      {/* Cube 3D en position fixed, visible seulement quand on est dans la section */}
-      <AnimatePresence>
-        {showCube && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="fixed inset-0 flex items-center justify-center z-30 pointer-events-none"
-          >
-            <Image 
-              src="/assets/3d/cube-green.webp" 
-              alt="Cube 3D géométrique décoratif en arrière-plan de la section technologies" 
-              width={600} 
-              height={600} 
-              className="opacity-80"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div id="stack" ref={sectionRef} className="relative bg-white overflow-hidden">
+      
+      {/* Container pour l'effet de scroll */}
+      <div className="relative min-h-[200vh] py-20">
+        
+        {/* Objet 3D qui suit le scroll derrière les cartes */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
+            <motion.div 
+              style={{ 
+                y: useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]) // Suit le scroll
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 0.6, 
+                ease: "easeOut",
+                y: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              viewport={{ once: true }}
+              animate={{
+                y: [0, -20, 0], // Animation de rebond
+              }}
+            >
+              <Image 
+                src="/assets/3d/cube-green.webp" 
+                alt="Cube 3D"
+                width={400} 
+                height={400} 
+                className="opacity-60 drop-shadow-xl"
+              />
+            </motion.div>
+          </div>
+        </div>
 
-      <div id="stack" ref={sectionRef} className="relative min-h-screen bg-white py-20">
-        <div className="max-w-[1200px] mx-auto px-6 relative z-40">
+        {/* Contenu qui défile par-dessus */}
+        <div className="relative z-10">
           
-          {/* Titre */}
-          <div className="text-center mb-20">
-            <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-              My Stack
-            </h2>
-          </div>
+          <div className="max-w-[1400px] mx-auto px-6">
+            
+            {/* Titre */}
+            <div className="text-center mb-16">
+              <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
+                My stack
+              </h2>
+            </div>
 
-          {/* Grille de technologies */}
-          <div className="grid grid-cols-3 gap-3 max-w-6xl mx-auto">
-            {technologies.map((tech, index) => (
-              <TechCard key={tech.name} tech={tech} index={index} />
-            ))}
+            {/* Grille unique des technologies */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {technologies.map((tech, index) => (
+                <TechCard key={tech.name} tech={tech} index={index} />
+              ))}
+            </div>
           </div>
-
         </div>
       </div>
-    </>
+    </div>
   );
 }
