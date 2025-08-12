@@ -142,6 +142,16 @@ const technologies = [
 
 const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
 
   return (
     <motion.div
@@ -152,13 +162,34 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2,
         ease: "easeOut"
       }}
-      className="text-center group cursor-pointer relative z-10"
+      className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
       onClick={() => setIsFlipped(!isFlipped)}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      onMouseMove={handleMouseMove}
     >
-      <motion.div
-        className="w-[400px] h-[400px] p-6 relative"
-        style={{ perspective: "1000px" }}
-      >
+      {/* Tooltip */}
+      {showTooltip && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          className="absolute z-50 pointer-events-none"
+          style={{
+            left: mousePosition.x,
+            top: mousePosition.y - 50,
+            transform: 'translateX(-50%)'
+          }}
+        >
+          <div className="bg-white rounded-full shadow-lg px-4 py-2 text-sm border border-gray-200 whitespace-nowrap">
+            <span className="text-gray-700 font-medium">
+              {isFlipped ? "Tap to Flip" : "Tap to Flip"}
+            </span>
+          </div>
+        </motion.div>
+      )}
+
+      <motion.div className="w-[400px] h-[400px] p-6 relative" style={{ perspective: "1000px" }}>
         <motion.div
           className="w-full h-full relative"
           style={{ transformStyle: "preserve-3d" }}
