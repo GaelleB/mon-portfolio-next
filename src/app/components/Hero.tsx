@@ -334,7 +334,7 @@ export default function Hero() {
                 >
                     {/* Photo de profil avec effet flip 3D */}
                     <motion.div 
-                        className={`mb-10 relative w-65 h-65 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
+                        className={`mb-10 relative w-72 h-72 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     >
                     {/* Zone de hover invisible élargie */}
                     <div 
@@ -361,15 +361,15 @@ export default function Hero() {
                             }}
                         >
                         {/* FACE AVANT */}
-                        <div className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl" style={{ 
+                        <div className="absolute w-full h-full rounded-[3rem] overflow-hidden shadow-2xl" style={{ 
                             backfaceVisibility: 'hidden',
-                            background: '#6366f1'
+                            transform: 'perspective(500px) rotateY(8deg)'
                         }}>
-                            <div className="relative w-full h-full rounded-3xl overflow-hidden">
+                            <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
                                 <Image 
-                                    src="/assets/gaelle.png" 
+                                    src="/assets/gaelle.jpg" 
                                     alt="Gaëlle Boucher - Développeuse Front-End, photo de profil professionnelle" 
-                                    className="w-full h-full rounded-3xl"
+                                    className="w-full h-full rounded-[3rem]"
                                     style={{ 
                                         display: 'block',
                                         width: '100%',
@@ -385,7 +385,7 @@ export default function Hero() {
                         </div>
 
                         {/* FACE ARRIÈRE */}
-                        <div className="absolute w-full h-full rounded-3xl bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
+                        <div className="absolute w-full h-full rounded-[3rem] bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
                             
                             {/* Cercle extérieur avec bordure */}
                             <div className="relative w-48 h-48 rounded-full bg-white flex items-center justify-center border-2 border-black">
