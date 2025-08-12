@@ -249,7 +249,7 @@ export default function Stack() {
           <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
             <motion.div 
               style={{ 
-                y: useTransform(scrollYProgress, [0, 1], [-600, 600]) // Suit les cards
+                y: useTransform(scrollYProgress, [0, 1], [-850, 950]) // Suivi des cards
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -270,8 +270,8 @@ export default function Stack() {
               <Image 
                 src="/assets/3d/cube-green.webp" 
                 alt="Cube 3D"
-                width={800} 
-                height={800} 
+                width={1000} 
+                height={1000} 
                 className="opacity-60 drop-shadow-xl"
               />
             </motion.div>
