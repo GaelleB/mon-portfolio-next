@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 
 // Icônes
 const ReactIcon = () => (
@@ -141,10 +141,13 @@ const technologies = [
 ];
 
 // Card flip avec tooltip
-const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number }) => {
+const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], index: number, scrollYProgress: MotionValue<number> }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // Animation de scale basée sur le scroll
+  const cardScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 0.95]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -156,13 +159,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
 
   return (
     <motion.div
-      initial={{ scale: 0.95 }}
-      whileInView={{ scale: 1 }}
-      transition={{
-        duration: 0.6,
-        delay: (index % 3) * 0.1 + Math.floor(index / 3) * 0.2,
-        ease: "easeOut"
-      }}
+      style={{ scale: cardScale }}
       className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setShowTooltip(true)}
@@ -190,7 +187,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
         </motion.div>
       )}
 
-      <motion.div className="w-[400px] h-[400px] p-6 relative" style={{ perspective: "1000px" }}>
+      <motion.div className="w-[450px] h-[450px] p-6 relative" style={{ perspective: "1000px" }}>
         <motion.div
           className="w-full h-full relative"
           style={{ transformStyle: "preserve-3d" }}
@@ -249,7 +246,7 @@ export default function Stack() {
           <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
             <motion.div 
               style={{ 
-                y: useTransform(scrollYProgress, [0, 1], [-850, 950]) // Suivi des cards
+                y: useTransform(scrollYProgress, [0, 1], [-700, 850]) // Suivi des cards
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -291,9 +288,9 @@ export default function Stack() {
             </div>
 
             {/* Grille unique des technologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
               {technologies.map((tech, index) => (
-                <TechCard key={tech.name} tech={tech} index={index} />
+                <TechCard key={tech.name} tech={tech} index={index} scrollYProgress={scrollYProgress} />
               ))}
             </div>
           </div>
