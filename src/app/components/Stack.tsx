@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// --- Icônes ---
+// Icônes
 const ReactIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/react.svg" alt="React" width={80} height={80}
@@ -121,7 +121,7 @@ const GitIcon = () => (
   </div>
 );
 
-// --- Données ---
+// Données
 const technologies = [
   { name: 'React', IconComponent: ReactIcon, description: 'React revolutionizes my web development approach...' },
   { name: 'Figma', IconComponent: FigmaIcon, description: 'Figma transforms my design workflow...' },
@@ -229,7 +229,7 @@ const TechCard = ({ tech, index }: { tech: typeof technologies[0], index: number
   );
 };
 
-// Section Stack corrigée
+// Section Stack
 export default function Stack() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -248,7 +248,7 @@ export default function Stack() {
           <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
             <motion.div 
               style={{ 
-                y: useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]) // Suit le scroll
+                y: useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]) // Suivi le scroll
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -269,8 +269,8 @@ export default function Stack() {
               <Image 
                 src="/assets/3d/cube-green.webp" 
                 alt="Cube 3D"
-                width={400} 
-                height={400} 
+                width={800} 
+                height={800} 
                 className="opacity-60 drop-shadow-xl"
               />
             </motion.div>
