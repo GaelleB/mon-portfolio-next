@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin', 'latin-ext'] })
 
 export const metadata: Metadata = {
   title: 'Gaëlle Boucher - Développeuse Front-End | Portfolio',
@@ -33,6 +33,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
+      <head>
+        <meta charSet="utf-8" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
