@@ -4,14 +4,22 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import Image from 'next/image'
 
-// Hook pour suivre la position de la souris
+// Hook pour suivre la position de la souris avec contraintes
 const useMousePosition = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     
     const handleMouseMove = (e: React.MouseEvent) => {
         const rect = e.currentTarget.getBoundingClientRect();
+        const tooltipWidth = 140; // Largeur approximative du tooltip
+        
+        // Contraindre la position X pour éviter le débordement
+        let x = e.clientX - rect.left;
+        const minX = tooltipWidth / 2;
+        const maxX = rect.width - tooltipWidth / 2;
+        x = Math.max(minX, Math.min(maxX, x));
+        
         setMousePosition({
-            x: e.clientX - rect.left,
+            x: x,
             y: e.clientY - rect.top
         });
     };
@@ -93,7 +101,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="group cursor-pointer relative"
+            className="cursor-pointer relative"
             onMouseEnter={() => setShowCTA(true)}
             onMouseLeave={() => setShowCTA(false)}
             onMouseMove={handleMouseMove}
@@ -115,16 +123,13 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                         href={project.demo || project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="pointer-events-auto"
+                        className="inline-flex items-center bg-white rounded-full pl-6 pr-0 h-12 shadow-lg hover:shadow-xl transition-all duration-300 pointer-events-auto group whitespace-nowrap"
                     >
-                        <div className="cta-button-glass-small font-public-sans pointer-events-auto">
-                            <div className="glass-bg-button-small" />
-                            <div className="glass-foreground-button-small">
-                                <span className="text-gray-900 font-medium text-base mr-3">View Project</span>
-                                <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-700 rotate-90 group-hover:rotate-[270deg]">
-                                    <span className="text-white text-base">↗</span>
-                                </div>
-                            </div>
+                        <span className="text-gray-900 font-medium text-base mr-3">
+                            View Project
+                        </span>
+                        <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-360deg]">
+                            <span className="text-white text-base">→</span>
                         </div>
                     </a>
                 </motion.div>
@@ -132,7 +137,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
 
             {/* Card container with backdrop blur */}
             <div 
-                className="relative rounded-[48px] p-6 backdrop-blur-[5px]"
+                className="relative rounded-[48px] p-6 backdrop-blur-[5px] hover:bg-white/70 transition-all duration-300"
                 style={{ 
                     backgroundColor: 'rgba(102, 112, 255, 0.05)',
                     width: '608px',

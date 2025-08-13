@@ -97,32 +97,15 @@
   transform: rotate(-360deg);
 }
 
-/* CTA Button Glassmorphism Small */
-.cta-button-glass-small {
-  display: inline-flex;
-  position: relative;
-  cursor: pointer;
-}
-
-.glass-bg-button-small {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(5px);
-  background-color: rgba(102, 112, 255, 0.05);
-  border-radius: 24px;
-  z-index: 0;
-}
-
-.glass-foreground-button-small {
-  position: relative;
-  z-index: 1;
+/* Tooltip Simple */
+.tooltip-simple {
   display: inline-flex;
   align-items: center;
   background-color: white;
-  border-radius: 20px;
-  margin: 3px;
+  border-radius: 24px;
   padding: 0 20px 0 24px;
   height: 48px;
+  cursor: pointer;
 }
 
 /* Old CTA Button (kept for compatibility) */
