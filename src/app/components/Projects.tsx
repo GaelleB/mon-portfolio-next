@@ -115,13 +115,16 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                         href={project.demo || project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center bg-white rounded-full pl-6 pr-0 h-12 shadow-lg hover:shadow-xl transition-all duration-300 pointer-events-auto group"
+                        className="pointer-events-auto"
                     >
-                        <span className="text-gray-900 font-medium text-base mr-3">
-                            View Project
-                        </span>
-                        <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-700 rotate-90 group-hover:rotate-[270deg]">
-                            <span className="text-white text-base">↓</span>
+                        <div className="cta-button-glass-small font-public-sans pointer-events-auto">
+                            <div className="glass-bg-button-small" />
+                            <div className="glass-foreground-button-small">
+                                <span className="text-gray-900 font-medium text-base mr-3">View Project</span>
+                                <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-700 rotate-90 group-hover:rotate-[270deg]">
+                                    <span className="text-white text-base">↗</span>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </motion.div>
@@ -205,15 +208,13 @@ export default function Projects() {
                 >
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="cta-button font-public-sans"
-                        style={{ fontSize: '24px', fontWeight: 700, color: '#000000', lineHeight: '33.6px' }}
+                        className="cta-button-glass font-public-sans"
                     >
-                        <span className="cta-button-text">
-                            {showAll ? 'View Less' : 'View More'}
-                        </span>
-                        <span className="cta-button-icon">
-                            {showAll ? '↑' : '↓'}
-                        </span>
+                        <div className="glass-bg-button" />
+                        <div className="glass-foreground-button">
+                            <span className="cta-button-text-glass">{showAll ? 'View Less' : 'View More'}</span>
+                            <span className="cta-button-icon-glass">{showAll ? '↑' : '↓'}</span>
+                        </div>
                     </button>
                 </motion.div>
             </div>

@@ -462,13 +462,19 @@ export default function Hero() {
 
                     {/* CTA Button */}
                     <div className={`mb-7 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms', transform: 'translateY(14px)' }}>
-                        <div className="cta-button font-public-sans">
-                            <span className="cta-button-text">
-                                Let&apos;s Work Together!
-                            </span>
-                            <span className="cta-button-icon">
-                                ↓
-                            </span>
+                        <div className="cta-button-glass font-public-sans">
+                            {/* Calque 1 : blur de fond */}
+                            <div className="glass-bg-button" />
+                            
+                            {/* Calque 2 : contenu blanc par-dessus */}
+                            <div className="glass-foreground-button">
+                                <span className="cta-button-text-glass">
+                                    Let&apos;s Work Together!
+                                </span>
+                                <span className="cta-button-icon-glass">
+                                    ↓
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
