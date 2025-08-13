@@ -108,6 +108,21 @@
   cursor: pointer;
 }
 
+/* Force curseur invisible sur cards projet */
+.project-card-no-cursor,
+.project-card-no-cursor *,
+.project-card-no-cursor a,
+.project-card-no-cursor div,
+.project-card-no-cursor span {
+  cursor: none !important;
+}
+
+.project-card-no-cursor:hover,
+.project-card-no-cursor:hover *,
+.project-card-no-cursor:hover a {
+  cursor: none !important;
+}
+
 
 /* Old CTA Button (kept for compatibility) */
 .cta-button {

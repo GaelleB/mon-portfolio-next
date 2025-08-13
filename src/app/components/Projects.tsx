@@ -101,7 +101,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="cursor-pointer relative group"
+            className="project-card-no-cursor relative group"
             onMouseEnter={() => setShowCTA(true)}
             onMouseLeave={() => setShowCTA(false)}
             onMouseMove={handleMouseMove}
