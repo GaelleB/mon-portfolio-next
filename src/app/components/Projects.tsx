@@ -137,12 +137,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
 
             {/* Card container with backdrop blur */}
             <div 
-                className="relative rounded-[48px] p-6 backdrop-blur-[5px] overflow-hidden"
-                style={{ 
-                    backgroundColor: 'rgba(102, 112, 255, 0.05)',
-                    width: '608px',
-                    maxWidth: '100%'
-                }}
+                className="relative glass-backdrop project-card-container overflow-hidden"
             >
                 {/* Image container */}
                 <div className="relative overflow-hidden rounded-[24px] group cursor-pointer">
@@ -217,7 +212,7 @@ export default function Projects() {
                         onClick={() => setShowAll(!showAll)}
                         className="cta-button-glass font-public-sans"
                     >
-                        <div className="glass-bg-button" />
+                        <div className="glass-bg-button glass-backdrop" />
                         <div className="glass-foreground-button">
                             <span className="cta-button-text-glass">{showAll ? 'View Less' : 'View More'}</span>
                             <span className="cta-button-icon-glass">{showAll ? '↑' : '↓'}</span>

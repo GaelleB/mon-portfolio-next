@@ -56,7 +56,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
   >
     <div className="relative w-full max-w-4xl p-6">
       {/* Calque 1 : blur + fond indigo ultra-dilué */}
-      <div className="glass-bg absolute inset-0 z-0" />
+      <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
       {/* Calque 2 : carte blanche nette */}
       <div className="glass-foreground relative z-10 flex items-center justify-center text-center">
@@ -193,7 +193,7 @@ export default function About() {
               className="absolute inset-0 flex items-center justify-center"
             >
               <div style={{ pointerEvents: 'auto' }} className="cta-button-glass font-public-sans">
-                <div className="glass-bg-button" />
+                <div className="glass-bg-button glass-backdrop" />
                 <div className="glass-foreground-button">
                   <span className="cta-button-text-glass">Read My CV</span>
                   <span className="cta-button-icon-glass">

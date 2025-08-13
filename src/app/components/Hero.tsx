@@ -464,7 +464,7 @@ export default function Hero() {
                     <div className={`mb-7 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms', transform: 'translateY(14px)' }}>
                         <div className="cta-button-glass font-public-sans">
                             {/* Calque 1 : blur de fond */}
-                            <div className="glass-bg-button" />
+                            <div className="glass-bg-button glass-backdrop" />
                             
                             {/* Calque 2 : contenu blanc par-dessus */}
                             <div className="glass-foreground-button">

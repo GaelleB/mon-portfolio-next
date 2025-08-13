@@ -199,7 +199,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
             className="absolute inset-0 flex items-center justify-center"
             style={{ backfaceVisibility: "hidden" }}
           >
-            <div className="glass-bg-tech absolute inset-0 z-0" />
+            <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
             <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center">
               <div className="mb-3">
                 <tech.IconComponent />
@@ -216,7 +216,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
               backfaceVisibility: "hidden"
             }}
           >
-            <div className="glass-bg-tech absolute inset-0 z-0" />
+            <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
             <div className="glass-foreground-tech relative z-10 flex items-center justify-center text-center p-6">
               <p className="text-gray-custom text-lg leading-relaxed">{tech.description}</p>
             </div>
