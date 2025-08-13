@@ -101,7 +101,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="cursor-pointer relative"
+            className="cursor-pointer relative group"
             onMouseEnter={() => setShowCTA(true)}
             onMouseLeave={() => setShowCTA(false)}
             onMouseMove={handleMouseMove}
@@ -137,7 +137,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
 
             {/* Card container with backdrop blur */}
             <div 
-                className="relative rounded-[48px] p-6 backdrop-blur-[5px] hover:bg-white/70 transition-all duration-300"
+                className="relative rounded-[48px] p-6 backdrop-blur-[5px] overflow-hidden"
                 style={{ 
                     backgroundColor: 'rgba(102, 112, 255, 0.05)',
                     width: '608px',
@@ -145,18 +145,20 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                 }}
             >
                 {/* Image container */}
-                <div className="relative overflow-hidden rounded-[24px]">
+                <div className="relative overflow-hidden rounded-[24px] group cursor-pointer">
                     <Image
                         src={project.image}
                         alt={project.title}
                         width={564}
                         height={382}
-                        className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full object-cover transition-all duration-500 group-hover:scale-105"
                         style={{ 
                             width: '100%',
                             height: '424px'
                         }}
                     />
+                    {/* Overlay blanc au hover */}
+                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none" />
                 </div>
             </div>
             
