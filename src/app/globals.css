@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Caveat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Caveat:wght@400;500;600;700&display=swap");
 
 .font-handwriting {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
 }
 
 .font-body {
-  font-family: 'Public Sans', sans-serif;
+  font-family: "Public Sans", sans-serif;
 }
 
 .font-public-sans {
@@ -121,7 +121,6 @@
   cursor: none !important;
 }
 
-
 /* Old CTA Button (kept for compatibility) */
 .cta-button {
   display: inline-flex;
@@ -185,7 +184,7 @@
   display: inline-flex;
   align-items: center;
   background-color: white;
-  border: 6px solid #EFF0FF;
+  border: 6px solid #eff0ff;
   border-radius: 48px;
   color: #000000;
   overflow: hidden;
@@ -296,7 +295,7 @@
 /* UTILITY CLASSES */
 
 .text-gray-custom {
-  color: #4D4D4D;
+  color: #4d4d4d;
 }
 
 .pt-65 {
@@ -304,5 +303,5 @@
 }
 
 .border-lavender {
-  border-color: #EFF0FF;
+  border-color: #eff0ff;
 }
