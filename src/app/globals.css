@@ -65,7 +65,7 @@
 }
 
 .cta-button-text-glass {
-  padding: 20px 48px;
+  padding: 18px 46px;
   font-size: 24px;
   font-weight: 700;
   color: black;
@@ -82,12 +82,12 @@
   justify-content: center;
   background-color: black;
   color: white;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  margin-right: -81px;
+  margin-right: -71px;
   transition: all 300ms;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .cta-button-glass:hover .cta-button-icon-glass {
@@ -252,11 +252,6 @@
 }
 
 /* STACK SECTION */
-
-/* 3D Flip card animation */
-.flip-card:hover {
-  transform: perspective(1000px) rotateX(-10deg) rotateY(165deg) !important;
-}
 
 /* Glassmorphism background for tech cards */
 .glass-bg-tech {

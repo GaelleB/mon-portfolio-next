@@ -79,45 +79,15 @@ export default function Hero() {
                         ease: "linear"
                     }}
                 >
-                    {/* Première série */}
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
-                    
-                    {/* Deuxième série identique pour continuité */}
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        GAËLLE
-                    </div>
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none mr-20" style={{ fontWeight: 900, fontSize: '240px', lineHeight: '288px', color: '#000000' }}>
-                        BOUCHER
-                    </div>
+                    {/* Texte qui défile en boucle */}
+                    {Array(12).fill(null).map((_, index) => (
+                        <div 
+                            key={index}
+                            className="font-public-sans font-black text-[240px] leading-[288px] text-black tracking-tighter select-none mr-20"
+                        >
+                            {index % 2 === 0 ? 'GAËLLE' : 'BOUCHER'}
+                        </div>
+                    ))}
                 </motion.div>
             </div>
 
@@ -129,11 +99,11 @@ export default function Hero() {
                     className="absolute w-70 h-70 z-20 hero-3d-object"
                     style={{ top: '5%', left: '20%', y: parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset],
-                        x: [0, 3, -2, 4, 0],
+                        y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset - 15, parallaxOffset - 8, parallaxOffset],
+                        x: [0, 3, -2, 4, 0, -1, 0],
                     }}
                     transition={{
-                        duration: 8,
+                        duration: 12,
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
@@ -143,10 +113,10 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Pyramide orange flottante"
                         width={400}
                         height={400}
-                        className="w-full h-full object-contain drop-shadow-lg"
+                        className="w-full h-full object-contain"
                         style={{
                             backfaceVisibility: 'hidden',
-                            transform: 'translateZ(0)'
+                            transform: 'translateZ(0) rotate(12deg)'
                         }}
                     />
                 </motion.div>
@@ -156,14 +126,14 @@ export default function Hero() {
                     className="absolute w-70 h-70 z-20 hero-3d-object"
                     style={{ top: '33%', left: '15%', y: parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset],
-                        x: [0, 5, -3, 6, -4, 0],
+                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset],
+                        x: [0, 5, -3, 6, -4, 0, 2, 0],
                     }}
                     transition={{
-                        duration: 6,
+                        duration: 14,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: -1
+                        delay: -3
                     }}
                 >
                     <Image 
@@ -171,23 +141,23 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Sphère violette en lévitation"
                         width={300}
                         height={300}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain"
                     />
                 </motion.div>
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
-                    className="absolute w-60 h-90 z-20 hero-3d-object"
-                    style={{ bottom: '-5%', left: '25%', y: parallaxOffset}}
+                    className="absolute w-70 h-90 z-20 hero-3d-object"
+                    style={{ bottom: '-5%', left: '21%', y: parallaxOffset}}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset],
-                        x: [0, -3, 5, -2, 0],
+                        y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset - 14, parallaxOffset - 9, parallaxOffset],
+                        x: [0, -3, 5, -2, 0, 1, 0],
                     }}
                     transition={{
-                        duration: 7,
+                        duration: 16,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: -0.5
+                        delay: -6
                     }}
                 >
                     <Image 
@@ -195,23 +165,26 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Cylindre bleu en rotation"
                         width={300}
                         height={360}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain"
+                        style={{
+                            transform: 'scaleX(-1)'
+                        }}
                     />
                 </motion.div>
 
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
-                    className="absolute w-75 h-75 z-20 hero-3d-object"
+                    className="absolute w-70 h-70 z-20 hero-3d-object"
                     style={{ top: '5%', right: '20%', y: parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset],
-                        rotate: [0, 8, 5, 12, 3, 0],
+                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset - 16, parallaxOffset - 10, parallaxOffset],
+                        rotate: [0, 8, 5, 12, 3, 0, -5, 0],
                     }}
                     transition={{
-                        duration: 9,
+                        duration: 18,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: -2
+                        delay: -9
                     }}
                 >
                     <Image 
@@ -219,7 +192,7 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Étoile turquoise brillante"
                         width={250}
                         height={250}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain"
                     />
                 </motion.div>
 
@@ -228,14 +201,14 @@ export default function Hero() {
                     className="absolute w-70 h-70 z-20 hero-3d-object"
                     style={{ top: '33%', right: '15%', y: parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset],
-                        x: [0, 3, -4, 2, 0],
+                        y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset - 13, parallaxOffset - 7, parallaxOffset],
+                        x: [0, 3, -4, 2, 0, -2, 0],
                     }}
                     transition={{
-                        duration: 5.5,
+                        duration: 20,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: -3
+                        delay: -12
                     }}
                 >
                     <Image 
@@ -243,23 +216,23 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Cube vert et jaune géométrique"
                         width={250}
                         height={250}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain"
                     />
                 </motion.div>
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '0%', right: '22%', y: parallaxOffset }}
+                    style={{ bottom: '0%', right: '21%', y: parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset],
-                        rotate: [4, 10, 15, 8, 16, 4],
+                        y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
+                        rotate: [4, 10, 15, 8, 16, 4, -8, 4],
                     }}
                     transition={{
-                        duration: 6.5,
+                        duration: 22,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: -1.5
+                        delay: -15
                     }}
                 >
                     <Image 
@@ -267,7 +240,7 @@ export default function Hero() {
                         alt="Objet 3D décoratif - Cube jaune lumineux en rotation"
                         width={260}
                         height={260}
-                        className="w-full h-full object-contain drop-shadow-2xl"
+                        className="w-full h-full object-contain"
                     />
                 </motion.div>
 
@@ -285,13 +258,13 @@ export default function Hero() {
                     className={`absolute ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
                     style={{ 
                         top: '10px',
-                        left: '50%',
+                        left: '50.5%',
                         transform: `translateX(-50%) translateY(${parallaxOffset}px)`,
                         opacity: Math.max(1 - (Math.abs(parallaxOffset) / 120), 0)
                     }}
                 >
-                    <h1 className="font-public-sans" style={{ fontWeight: 500, color: '#000000', fontSize: '48px', lineHeight: '48px' }}>
-                        Hi, I&apos;m <span className="italic" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif', fontWeight: 700 }}>Gaëlle</span>!
+                    <h1 className="font-public-sans font-medium text-black text-5xl leading-[48px]">
+                        Hi, I&apos;m <span className="italic font-bold" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif' }}>Gaëlle</span>!
                     </h1>
                 </motion.div>
 
@@ -311,13 +284,7 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="font-public-sans" 
-                        style={{ 
-                            fontSize: '20px',
-                            fontWeight: 400,
-                            lineHeight: '24px',
-                            color: '#4D4D4D'
-                        }}
+                        className="font-public-sans text-xl font-normal leading-6 text-gray-600"
                     >
                         {rotatingTexts[currentTextIndex]}
                     </motion.p>
@@ -337,47 +304,35 @@ export default function Hero() {
                         className={`mb-10 relative w-72 h-72 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     >
                     {/* Zone de hover invisible élargie */}
-                    <div 
-                        className="absolute inset-0 cursor-pointer"
+                    <motion.div 
+                        className="flip-card-hover-zone absolute inset-0 cursor-pointer p-10 -m-10"
                         style={{ 
-                            padding: '40px',
-                            margin: '-40px'
+                            y: parallaxOffset
                         }}
+                        initial="rest"
+                        whileHover="hover"
+                        animate="rest"
                     >
                         <motion.div
-                            className="relative w-full h-full transition-transform duration-700 flip-card"
-                            initial={{ rotateY: 5 }}
-                            whileHover={{ 
-                                rotateY: 185,
-                                transition: { duration: 0.4, ease: "easeInOut" }
-                            }}
-                            animate={{ 
-                                rotateY: 5,
-                                transition: { duration: 0.2, ease: "easeInOut" }
-                            }}
-                            style={{ 
-                                transformStyle: 'preserve-3d',
-                                transform: `perspective(1000px) rotateX(4deg) rotateZ(0deg) translateY(${parallaxOffset}px)`
-                            }}
-                        >
+                            className="relative w-full h-full flip-card [transform-style:preserve-3d]"
+                                variants={{
+                                    hover: { rotateY: 185 },
+                                    rest: { rotateY: 5 }
+                                }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                style={{ 
+                                    transform: 'perspective(1000px) rotateX(4deg) rotateZ(0deg)'
+                                }}
+                            >
                         {/* FACE AVANT */}
-                        <div className="absolute w-full h-full rounded-[3rem] overflow-hidden shadow-2xl" style={{ 
-                            backfaceVisibility: 'hidden',
+                        <div className="absolute w-full h-full rounded-[3rem] overflow-hidden shadow-2xl [backface-visibility:hidden]" style={{ 
                             transform: 'perspective(500px) rotateY(8deg)'
                         }}>
                             <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
                                 <Image 
                                     src="/assets/gaelle.jpg" 
                                     alt="Gaëlle Boucher - Développeuse Front-End, photo de profil professionnelle" 
-                                    className="w-full h-full rounded-[3rem]"
-                                    style={{ 
-                                        display: 'block',
-                                        width: '100%',
-                                        height: '100%',
-                                        borderRadius: 'inherit',
-                                        objectPosition: '47.9% 24.1%',
-                                        objectFit: 'cover'
-                                    }}
+                                    className="block w-full h-full rounded-[inherit] object-cover object-[47.9%_24.1%]"
                                     width={500}
                                     height={500}
                                 />
@@ -385,7 +340,7 @@ export default function Hero() {
                         </div>
 
                         {/* FACE ARRIÈRE */}
-                        <div className="absolute w-full h-full rounded-[3rem] bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
+                        <div className="absolute w-full h-full rounded-[3rem] bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl [backface-visibility:hidden]">
                             
                             {/* Cercle extérieur avec bordure */}
                             <div className="relative w-48 h-48 rounded-full bg-white flex items-center justify-center border-2 border-black">
@@ -404,12 +359,12 @@ export default function Hero() {
                                         <defs>
                                             <path
                                                 id="textPath"
-                                                d="M 88,88 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"
+                                                d="M 88,88 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0"
                                             />
                                         </defs>
-                                        <text className="text-lg font-medium black uppercase tracking-widest">
+                                        <text className="text-md font-medium black uppercase tracking-wider">
                                             <textPath href="#textPath" startOffset="0%">
-                                                • SCROLL DOWN • AND KNOW ME BETTER 
+                                                • SCROLL&nbsp;&nbsp;DOWN • AND&nbsp;&nbsp;KNOW&nbsp;&nbsp;ME&nbsp;&nbsp;BETTER
                                             </textPath>
                                         </text>
                                     </svg>
@@ -428,7 +383,7 @@ export default function Hero() {
                                         }}
                                     >
                                         <svg 
-                                            className="w-5 h-5 text-gray-600" 
+                                            className="w-8 h-8 text-gray-600" 
                                             fill="none" 
                                             stroke="currentColor" 
                                             viewBox="0 0 24 24"
@@ -445,11 +400,11 @@ export default function Hero() {
                             </div>
                         </div>
                         </motion.div>
-                    </div>
+                    </motion.div>
                 </motion.div>
 
                     {/* Social proof */}
-                    <div className={`mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms', transform: 'translateY(6px)' }}>
+                    <div className={`mb-0 transition-all duration-1000 delay-[600ms] translate-y-[-22px] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <div className="flex items-center justify-center space-x-2">
                             <div className="flex -space-x-2">
                                 <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-red-500 rounded-full border-2 border-white shadow-lg"></div>
@@ -461,7 +416,7 @@ export default function Hero() {
                     </div>
 
                     {/* CTA Button */}
-                    <div className={`mb-7 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms', transform: 'translateY(14px)' }}>
+                    <div className={`mb-1 transition-all duration-1000 delay-[800ms] translate-y-[10px] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <div className="cta-button-glass font-public-sans">
                             {/* Calque 1 : blur de fond */}
                             <div className="glass-bg-button glass-backdrop" />
