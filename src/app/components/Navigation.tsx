@@ -1,14 +1,11 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 export default function Navigation() {
     const [activeSection, setActiveSection] = useState('Home');
     
-    // Scroll-based transparency
-    const { scrollY } = useScroll();
-    const navOpacity = useTransform(scrollY, [0, 100], [0.9, 0.7]);
     
     // Auto-detect active section based on scroll position
     useEffect(() => {
@@ -57,11 +54,13 @@ export default function Navigation() {
         <header>
             {/* Bande transparente/floue pleine largeur */}
             <motion.div 
-                className="fixed top-0 left-0 w-full z-40 backdrop-blur-md"
+                className="fixed top-0 left-0 w-full z-40"
                 style={{ 
                     height: '76px',
-                    opacity: navOpacity,
-                    backgroundColor: 'rgba(255, 255, 255, 0.3)'
+                    opacity: 1,
+                    backdropFilter: 'blur(10px)',
+                    backgroundColor: 'rgba(255, 255, 255, 0)',
+                    width: '100%'
                 }}
             />
             
