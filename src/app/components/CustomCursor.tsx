@@ -7,8 +7,9 @@ export default function CustomCursor() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
     const [isHovering, setIsHovering] = useState(false)
     const [cursorVariant, setCursorVariant] = useState('default')
-    const [isInContactSection, setIsInContactSection] = useState(false)
+    const [isInInteractiveZone, setIsInInteractiveZone] = useState(false)
     const [hoverText, setHoverText] = useState('Call Me')
+    const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
         const mouseMove = (e: MouseEvent) => {
@@ -17,30 +18,46 @@ export default function CustomCursor() {
                 y: e.clientY
             })
 
-            // Vérifier si la souris est dans la zone footer
+            // Vérifier si on est sur une page interactive ou dans le footer
+            const is404Page = window.location.pathname === '/not-found' || window.location.pathname.includes('404')
+            const isLicensingPage = window.location.pathname === '/licensing'
+            
+            let isInFooter = false
             const footer = document.querySelector('footer')
             if (footer) {
                 const footerRect = footer.getBoundingClientRect()
-                const isInFooter = e.clientY >= footerRect.top && 
-                                    e.clientY <= footerRect.bottom &&
-                                    e.clientX >= footerRect.left && 
-                                    e.clientX <= footerRect.right
-                
-                // Si on entre dans la zone contact, initialiser la position
-                if (isInFooter && !isInContactSection) {
-                    setMousePosition({
-                        x: e.clientX,
-                        y: e.clientY
-                    })
-                }
-                
-                setIsInContactSection(isInFooter)
+                isInFooter = e.clientY >= footerRect.top && 
+                            e.clientY <= footerRect.bottom &&
+                            e.clientX >= footerRect.left && 
+                            e.clientX <= footerRect.right
             }
+            
+            const shouldShowCursor = isInFooter || is404Page || isLicensingPage
+            
+            // Réinitialiser si on quitte toutes les zones interactives
+            if (!shouldShowCursor && isInInteractiveZone) {
+                // Annuler tout délai en cours
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout)
+                    setHoverTimeout(null)
+                }
+                setIsHovering(false)
+                setCursorVariant('default')
+                setHoverText('Call Me')
+            }
+            
+            setIsInInteractiveZone(shouldShowCursor)
         }
 
         const handleMouseEnter = (e: Event) => {
             const target = e.target as HTMLElement
             const cursorText = target.getAttribute('data-cursor-text')
+            
+            // Annule le timeout si on entre sur un autre lien
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout)
+                setHoverTimeout(null)
+            }
             
             setIsHovering(true)
             setCursorVariant('button')
@@ -52,10 +69,20 @@ export default function CustomCursor() {
             }
         }
 
-        const handleMouseLeave = () => {
-            setIsHovering(false)
-            setCursorVariant('default')
-            setHoverText('Call Me')
+        const handleMouseLeave = (e: Event) => {
+            // Vérifie si on va vers un autre élément avec data-cursor-text
+            const relatedTarget = (e as MouseEvent).relatedTarget as HTMLElement
+            const isGoingToAnotherLink = relatedTarget?.closest('[data-cursor-text]')
+            
+            if (!isGoingToAnotherLink) {
+                // Délai seulement si on ne va PAS vers un autre lien
+                const timeoutId = setTimeout(() => {
+                    setIsHovering(false)
+                    setCursorVariant('default')
+                    setHoverText('Call Me')
+                }, 150)
+                setHoverTimeout(timeoutId)
+            }
         }
 
         // Ajouter les écouteurs d'événements pour le mouvement de la souris
@@ -75,8 +102,12 @@ export default function CustomCursor() {
                 element.removeEventListener('mouseenter', handleMouseEnter)
                 element.removeEventListener('mouseleave', handleMouseLeave)
             })
+            // Nettoyer le timeout si le composant se démonte
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout)
+            }
         }
-    }, [isInContactSection])
+    }, [hoverTimeout, isHovering, isInInteractiveZone])
 
     const variants = {
         default: {
@@ -87,15 +118,14 @@ export default function CustomCursor() {
         button: {
             x: mousePosition.x + 20,
             y: mousePosition.y - 20,
-            scale: 1,
-            borderRadius: '20px'
+            scale: 1
         }
     }
 
     return (
         <>
-            {/* Bille orange qui suit la souris avec délai - seulement dans la section contact */}
-            {isInContactSection && (
+            {/* Bille orange qui suit la souris avec délai - dans les zones interactives */}
+            {isInInteractiveZone && (
                 <motion.div
                     className="fixed top-0 left-0 pointer-events-none z-[9999] bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
                     variants={variants}
@@ -112,7 +142,8 @@ export default function CustomCursor() {
                     }}
                     style={{
                         width: isHovering ? '160px' : '24px',
-                        height: isHovering ? '40px' : '24px'
+                        height: isHovering ? '40px' : '24px',
+                        borderRadius: isHovering ? '20px' : '12px'
                     }}
                 >
                     {isHovering && (
