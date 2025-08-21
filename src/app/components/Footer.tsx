@@ -23,15 +23,17 @@ export default function Footer() {
                         <div className="space-y-4">
                             <motion.a
                                 href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="Call Me"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="Call Me">Book a call</span>
+                                Book a call
                             </motion.a>
                             <motion.a
                                 href="mailto:contact@gaelleb.dev"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="Email Me"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="Email Me">gaelleboucher.dev@gmail.com</span>
+                                gaelleboucher.dev@gmail.com
                             </motion.a>
                         </div>
                     </div>
@@ -44,21 +46,24 @@ export default function Footer() {
                         <div className="space-y-4">
                             <motion.a
                                 href="#home"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="Visit Home Page"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="Visit Home Page">Home</span>
+                                Home
                             </motion.a>
                             <motion.a
                                 href="/nonexistent-page"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="Visit 404 Page"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="Visit 404 Page">404 Page</span>
+                                404 Page
                             </motion.a>
                             <motion.a
                                 href="/licensing"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="Visit Licensing Page"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="Visit Licensing Page">Licensing</span>
+                                Licensing
                             </motion.a>
                         </div>
                     </div>
@@ -73,25 +78,28 @@ export default function Footer() {
                                 href="https://www.malt.fr/profile/gaelleboucher"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="My Malt Profile"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="My Malt Profile">Malt</span>
+                                Malt
                             </motion.a>
                             <motion.a
                                 href="https://github.com/GaelleB"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="My GitHub Page"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="My GitHub Page">GitHub</span>
+                                GitHub
                             </motion.a>
                             <motion.a
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body"
+                                data-cursor-text="My LinkedIn Profile"
+                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                            <span data-cursor-text="My LinkedIn Profile">LinkedIn</span>
+                                LinkedIn
                             </motion.a>
                         </div>
                     </div>
@@ -119,10 +127,11 @@ export default function Footer() {
                                     href="https://www.linkedin.com/in/gaelle-boucher/"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    data-cursor-text="Visit My Profile"
                                     className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
                                     whileHover={{ scale: 1.05 }}
                                 >
-                                    <span data-cursor-text="Visit My Profile">Gaëlle</span>
+                                    Gaëlle
                                 </motion.a>
                             </p>
                         </div>
