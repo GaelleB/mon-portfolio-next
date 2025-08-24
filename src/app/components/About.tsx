@@ -7,10 +7,10 @@ import Image from "next/image";
 // Configuration des animations
 const ANIMATION_CONFIG = {
   PARAGRAPH_DURATION: 0.2,
-  PARAGRAPH_3_END: 0.6,  // Cards finissent à 0.6
-  CV_START: 0.6,         // CV commence à 0.6  
-  CV_END: 0.8,           // CV stable jusqu'à 0.8
-  SECTION_MOVE: 0.9,     // Section remonte seulement à partir de 0.9
+  PARAGRAPH_3_END: 0.6,
+  CV_START: 0.6,
+  CV_END: 0.8,
+  SECTION_MOVE: 0.9,
   INITIAL_ROTATION: "2deg", 
   INITIAL_SCALE: 0.9,
   INITIAL_Y: "60vh"
@@ -95,7 +95,7 @@ export default function About() {
   const paragraph3Animation = {
     y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
     rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1], ["1deg", "1deg", "0deg"]),
-    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 1]),
+    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [0, 1, 1, 1]),
     zIndex: 3
   };
@@ -103,8 +103,8 @@ export default function About() {
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
   // Animation du CV - apparaît à 0.6, se place jusqu'à 0.8, puis reste stable  
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["15vh", "35vh", "35vh"]);
-  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [0.9, 1, 1]);
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["10vh", "30vh", "30vh"]);
+  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [1, 1, 1]);
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
   const cvZIndex = useTransform(scrollYProgress, [0.8, 0.85], [0, 4]);
 

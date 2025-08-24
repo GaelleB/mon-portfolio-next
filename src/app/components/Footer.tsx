@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-65">
+        <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-86">
             <div className="max-w-6xl mx-auto px-6 pb-42 relative z-20">
                 {/* Section principale - 3 colonnes */}
                 <motion.div
@@ -13,14 +13,14 @@ export default function Footer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="grid md:grid-cols-3 gap-12 mb-16"
+                    className="grid md:grid-cols-3 gap-6 mb-8"
                 >
                     {/* Colonne 1 - Contact Me */}
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                         <h2 className="text-2xl font-body font-bold text-black">
                             Contact Me
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-1">
                             <motion.a
                                 href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
                                 data-cursor-text="Call Me"
@@ -39,11 +39,11 @@ export default function Footer() {
                     </div>
 
                     {/* Colonne 2 - Useful Links */}
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                         <h2 className="text-2xl font-body font-bold text-black">
                             Useful Links
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-1">
                             <motion.a
                                 href="#home"
                                 data-cursor-text="Visit Home Page"
@@ -69,11 +69,11 @@ export default function Footer() {
                     </div>
 
                     {/* Colonne 3 - Social */}
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                         <h2 className="text-2xl font-body font-bold text-black">
                             Social
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-1">
                             <motion.a
                                 href="https://www.malt.fr/profile/gaelleboucher"
                                 target="_blank"
