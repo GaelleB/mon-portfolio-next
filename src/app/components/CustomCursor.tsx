@@ -150,7 +150,7 @@ export default function CustomCursor() {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="flex items-center justify-center h-full w-full text-white text-xs font-handwriting font-medium px-3 whitespace-nowrap"
+                            className="flex items-center justify-center h-full w-full text-white text-xs font-medium px-3 whitespace-nowrap"
                         >
                             {hoverText}
                         </motion.div>
