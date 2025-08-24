@@ -223,7 +223,7 @@ export default function Hero() {
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '5%', right: '25%', y: parallaxOffset }}
+                    style={{ bottom: '10%', right: '25%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
                         rotate: [4, 10, 15, 8, 16, 4, -8, 4],
