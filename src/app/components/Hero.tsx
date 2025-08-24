@@ -319,7 +319,7 @@ export default function Hero() {
                                     hover: { rotateY: 185 },
                                     rest: { rotateY: 5 }
                                 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                transition={{ duration: 0.2, ease: "easeInOut" }}
                                 style={{ 
                                     transform: 'perspective(1000px) rotateX(4deg) rotateZ(0deg)'
                                 }}
