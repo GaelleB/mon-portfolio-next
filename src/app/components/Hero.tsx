@@ -97,7 +97,7 @@ export default function Hero() {
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '5%', left: '20%', y: parallaxOffset }}
+                    style={{ top: '15%', left: '25%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset - 15, parallaxOffset - 8, parallaxOffset],
                         x: [0, 3, -2, 4, 0, -1, 0],
@@ -124,7 +124,7 @@ export default function Hero() {
                 {/* Sphère violette (left) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '33%', left: '15%', y: parallaxOffset }}
+                    style={{ top: '37%', left: '20%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset],
                         x: [0, 5, -3, 6, -4, 0, 2, 0],
@@ -148,7 +148,7 @@ export default function Hero() {
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
                     className="absolute w-70 h-90 z-20 hero-3d-object"
-                    style={{ bottom: '-5%', left: '21%', y: parallaxOffset}}
+                    style={{ bottom: '5%', left: '25%', y: parallaxOffset}}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset - 14, parallaxOffset - 9, parallaxOffset],
                         x: [0, -3, 5, -2, 0, 1, 0],
@@ -175,7 +175,7 @@ export default function Hero() {
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '5%', right: '20%', y: parallaxOffset }}
+                    style={{ top: '15%', right: '25%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset - 16, parallaxOffset - 10, parallaxOffset],
                         rotate: [0, 8, 5, 12, 3, 0, -5, 0],
@@ -199,7 +199,7 @@ export default function Hero() {
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '33%', right: '15%', y: parallaxOffset }}
+                    style={{ top: '37%', right: '20%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset - 13, parallaxOffset - 7, parallaxOffset],
                         x: [0, 3, -4, 2, 0, -2, 0],
@@ -223,7 +223,7 @@ export default function Hero() {
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '0%', right: '21%', y: parallaxOffset }}
+                    style={{ bottom: '5%', right: '25%', y: parallaxOffset }}
                     animate={{
                         y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
                         rotate: [4, 10, 15, 8, 16, 4, -8, 4],
