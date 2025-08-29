@@ -31,106 +31,170 @@
     height: 150px !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    width: 2100px !important;
-    height: 210px !important;
+    width: 250px !important;
+    height: 250px !important;
   }
 }
 
 #home .hero-3d-object:nth-child(1) {
   /* Pyramide orange - top-left desktop, top-right mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 15% !important;
-    right: 10% !important;
+    position: absolute !important;
+    top: 15vh !important;
+    right: 5vw !important;
     left: auto !important;
     bottom: auto !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    top: 15% !important;
+    position: absolute !important;
+    top: 23% !important;
+    left: 5% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    top: 10% !important;
     left: 15% !important;
+    right: auto !important;
+    bottom: auto !important;
   }
 }
 
 #home .hero-3d-object:nth-child(2) {
   /* Sphère violette - left desktop, top-center mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 5% !important;
-    left: 50% !important;
+    position: absolute !important;
+    top: 5vh !important;
+    left: 50vw !important;
     right: auto !important;
     bottom: auto !important;
     transform: translateX(-50%) !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    top: 37% !important;
-    left: 10% !important;
+    position: absolute !important;
+    top: 41% !important;
+    left: -5% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    top: 35% !important;
+    left: 5% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 }
 
 #home .hero-3d-object:nth-child(3) {
   /* Cylindre bleu - bottom-left desktop, top-left mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 15% !important;
-    left: 5% !important;
+    position: absolute !important;
+    top: 15vh !important;
+    left: 5vw !important;
     right: auto !important;
     bottom: auto !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    bottom: 5% !important;
-    left: 15% !important;
+    position: absolute !important;
+    bottom: 15% !important;
+    left: 4% !important;
+    top: auto !important;
+    right: auto !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    bottom: 1% !important;
+    left: 12% !important;
+    top: auto !important;
+    right: auto !important;
   }
 }
 
 #home .hero-3d-object:nth-child(4) {
   /* Étoile turquoise - top-right desktop, bottom-right mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 70% !important;
+    position: absolute !important;
+    top: 76vh !important;
     bottom: auto !important;
-    right: 5% !important;
+    right: 2vw !important;
     left: auto !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    top: 15% !important;
+    position: absolute !important;
+    top: 23% !important;
+    right: 5% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    top: 10% !important;
     right: 15% !important;
+    left: auto !important;
+    bottom: auto !important;
   }
 }
 
 #home .hero-3d-object:nth-child(5) {
   /* Cube vert - right desktop, bottom-center mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 75% !important;
+    position: absolute !important;
+    top: 85vh !important;
     bottom: auto !important;
-    left: 50% !important;
+    left: 50vw !important;
     right: auto !important;
     transform: translateX(-50%) !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    top: 37% !important;
-    right: 10% !important;
+    position: absolute !important;
+    top: 41% !important;
+    right: -5% !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    top: 35% !important;
+    right: 5% !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 }
 
 #home .hero-3d-object:nth-child(6) {
   /* Cube jaune - bottom-right desktop, bottom-left mobile */
   @media (max-width: 767px) {
-    position: fixed !important;
-    top: 70% !important;
+    position: absolute !important;
+    top: 76vh !important;
     bottom: auto !important;
-    left: 5% !important;
+    left: 2vw !important;
     right: auto !important;
     z-index: 20 !important;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    bottom: 10% !important;
-    right: 15% !important;
+    position: absolute !important;
+    bottom: 15% !important;
+    right: 4% !important;
+    top: auto !important;
+    left: auto !important;
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+    position: absolute !important;
+    bottom: 5% !important;
+    right: 12% !important;
+    top: auto !important;
+    left: auto !important;
   }
 }
 

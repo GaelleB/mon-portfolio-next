@@ -7,6 +7,7 @@ import Image from 'next/image';
 export default function Hero() {
     const isLoaded = true;
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const objectsRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
@@ -24,9 +25,23 @@ export default function Hero() {
     // État du parallaxe pour Framer Motion
     const [parallaxOffset, setParallaxOffset] = useState(0);
     
-    // Effet parallaxe React-only - plus de manipulation DOM !
+    // Détection mobile et tablette
+    useEffect(() => {
+        const checkIsMobile = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        
+        checkIsMobile();
+        window.addEventListener('resize', checkIsMobile);
+        
+        return () => window.removeEventListener('resize', checkIsMobile);
+    }, []);
+    
+    // Effet parallaxe React-only - désactivé en mobile/tablette
     useEffect(() => {
         const handleScroll = () => {
+            if (isMobile) return; // Pas de parallax en mobile/tablette
+            
             const scrollY = window.scrollY;
             const displacement = scrollY * -0.3;
             
@@ -39,7 +54,7 @@ export default function Hero() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [isMobile]);
 
 
     // Animation automatique du texte toutes les 3 secondes (avec délai initial)
@@ -66,9 +81,9 @@ export default function Hero() {
     return (
         <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20">
         
-            {/* Texte en arrière-plan avec défilement sans parallax */}
+            {/* Texte en arrière-plan avec défilement sans parallax - caché en mobile */}
             <div 
-                className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+                className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none overflow-hidden"
             >
                 <motion.div 
                     className="flex whitespace-nowrap"
@@ -97,9 +112,9 @@ export default function Hero() {
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', left: '25%', y: parallaxOffset }}
+                    style={{ top: '15%', left: '25%', y: isMobile ? 0 : parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset - 15, parallaxOffset - 8, parallaxOffset],
+                        y: isMobile ? [0, -8, -5, -10, -15, -8, 0] : [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset - 15, parallaxOffset - 8, parallaxOffset],
                         x: [0, 3, -2, 4, 0, -1, 0],
                     }}
                     transition={{
@@ -124,9 +139,9 @@ export default function Hero() {
                 {/* Sphère violette (left) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '37%', left: '20%', y: parallaxOffset }}
+                    style={{ top: '37%', left: '20%', y: isMobile ? 0 : parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset],
+                        y: isMobile ? [0, -6, -3, -8, -4, -12, -6, 0] : [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset],
                         x: [0, 5, -3, 6, -4, 0, 2, 0],
                     }}
                     transition={{
@@ -148,9 +163,9 @@ export default function Hero() {
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
                     className="absolute w-70 h-90 z-20 hero-3d-object"
-                    style={{ bottom: '5%', left: '25%', y: parallaxOffset}}
+                    style={{ bottom: '5%', left: '25%', y: isMobile ? 0 : parallaxOffset}}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset - 14, parallaxOffset - 9, parallaxOffset],
+                        y: isMobile ? [0, -7, -3, -6, -14, -9, 0] : [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset - 14, parallaxOffset - 9, parallaxOffset],
                         x: [0, -3, 5, -2, 0, 1, 0],
                     }}
                     transition={{
@@ -175,9 +190,9 @@ export default function Hero() {
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', right: '25%', y: parallaxOffset }}
+                    style={{ top: '15%', right: '25%', y: isMobile ? 0 : parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset - 16, parallaxOffset - 10, parallaxOffset],
+                        y: isMobile ? [0, -6, -12, -6, -9, -16, -10, 0] : [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset - 16, parallaxOffset - 10, parallaxOffset],
                         rotate: [0, 8, 5, 12, 3, 0, -5, 0],
                     }}
                     transition={{
@@ -199,9 +214,9 @@ export default function Hero() {
                 {/* Cube vert/jaune (right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '37%', right: '20%', y: parallaxOffset }}
+                    style={{ top: '37%', right: '20%', y: isMobile ? 0 : parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset - 13, parallaxOffset - 7, parallaxOffset],
+                        y: isMobile ? [0, -5, -8, -6, -13, -7, 0] : [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset - 13, parallaxOffset - 7, parallaxOffset],
                         x: [0, 3, -4, 2, 0, -2, 0],
                     }}
                     transition={{
@@ -223,9 +238,9 @@ export default function Hero() {
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '10%', right: '25%', y: parallaxOffset }}
+                    style={{ bottom: '10%', right: '25%', y: isMobile ? 0 : parallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
+                        y: isMobile ? [0, -9, -4, -12, -5, -17, -11, 0] : [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
                         rotate: [4, 10, 15, 8, 16, 4, -8, 4],
                     }}
                     transition={{
@@ -259,7 +274,7 @@ export default function Hero() {
                     style={{ 
                         top: '10px',
                         left: '50.5%',
-                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`,
+                        transform: `translateX(-50%) translateY(${isMobile ? 0 : parallaxOffset}px)`,
                         opacity: Math.max(1 - (Math.abs(parallaxOffset) / 120), 0)
                     }}
                 >
@@ -275,7 +290,7 @@ export default function Hero() {
                     style={{ 
                         top: '80px',
                         left: '50%',
-                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`
+                        transform: `translateX(-50%) translateY(${isMobile ? 0 : parallaxOffset}px)`
                     }}
                 >
                     <motion.p 
@@ -303,30 +318,30 @@ export default function Hero() {
                     <motion.div 
                         className={`mb-10 relative w-72 h-72 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
                     >
-                    {/* Zone de hover invisible élargie */}
+                    {/* Zone de hover invisible élargie - désactivée en mobile */}
                     <motion.div 
-                        className="flip-card-hover-zone absolute inset-0 cursor-pointer p-10 -m-10"
+                        className="flip-card-hover-zone absolute inset-0 p-10 -m-10 md:cursor-pointer"
                         style={{ 
-                            y: parallaxOffset
+                            y: isMobile ? 0 : parallaxOffset
                         }}
                         initial="rest"
-                        whileHover="hover"
+                        whileHover={isMobile ? {} : "hover"}
                         animate="rest"
                     >
                         <motion.div
                             className="relative w-full h-full flip-card [transform-style:preserve-3d]"
                                 variants={{
-                                    hover: { rotateY: 185 },
-                                    rest: { rotateY: 5 }
+                                    hover: { rotateY: isMobile ? 0 : 185 },
+                                    rest: { rotateY: isMobile ? 0 : 5 }
                                 }}
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
                                 style={{ 
-                                    transform: 'perspective(1000px) rotateX(4deg) rotateZ(0deg)'
+                                    transform: isMobile ? 'none' : 'perspective(1000px) rotateX(4deg) rotateZ(0deg)'
                                 }}
                             >
                         {/* FACE AVANT */}
                         <div className="absolute w-full h-full rounded-[3rem] overflow-hidden shadow-2xl [backface-visibility:hidden]" style={{ 
-                            transform: 'perspective(500px) rotateY(8deg)'
+                            transform: isMobile ? 'none' : 'perspective(500px) rotateY(8deg)'
                         }}>
                             <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
                                 <Image 
