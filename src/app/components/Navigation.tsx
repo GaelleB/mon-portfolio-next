@@ -6,12 +6,27 @@ import { useState, useEffect } from 'react';
 export default function Navigation() {
     const [activeSection, setActiveSection] = useState('Home');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isNavVisible, setIsNavVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     
     
-    // Auto-detect active section based on scroll position
+    // Auto-detect active section + hide/show navigation
     useEffect(() => {
         const handleScroll = () => {
-            const scrollPosition = window.scrollY + 100; // Offset for better detection
+            const currentScrollY = window.scrollY;
+            const scrollPosition = currentScrollY + 100; // Offset for better detection
+            
+            // Hide/show navigation based on scroll direction
+            if (currentScrollY < lastScrollY || currentScrollY < 100) {
+                // Scrolling up or near top
+                setIsNavVisible(true);
+            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down and not near top
+                setIsNavVisible(false);
+                setIsMobileMenuOpen(false); // Close mobile menu when hiding nav
+            }
+            
+            setLastScrollY(currentScrollY);
             
             // Get all sections
             const sections = [
@@ -41,7 +56,8 @@ export default function Navigation() {
         handleScroll(); // Check initial position
         
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [lastScrollY]);
+
 
     const navItems = [
         { name: 'Home', href: '#home' },
@@ -70,6 +86,11 @@ export default function Navigation() {
                 className="hidden md:block fixed top-6 left-1/2 transform -translate-x-1/2 z-50"
                 role="navigation" 
                 aria-label="Navigation principale"
+                animate={{
+                    y: isNavVisible ? 0 : -100,
+                    opacity: isNavVisible ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <div className="bg-white rounded-full px-0.5 py-0.5 shadow-lg border border-gray-200/50" style={{ backgroundColor: 'white' }}>
                     <div className="flex items-center -space-x-0.5">
@@ -106,7 +127,14 @@ export default function Navigation() {
             </motion.nav>
 
             {/* Navigation Mobile - Menu Burger */}
-            <div className="md:hidden fixed top-6 right-6 z-50">
+            <motion.div 
+                className="md:hidden fixed top-6 right-6 z-50"
+                animate={{
+                    y: isNavVisible ? 0 : -100,
+                    opacity: isNavVisible ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
                 <motion.button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="p-3"
@@ -172,7 +200,7 @@ export default function Navigation() {
                         ))}
                     </div>
                 </motion.div>
-            </div>
+            </motion.div>
         </header>
     );
 }
