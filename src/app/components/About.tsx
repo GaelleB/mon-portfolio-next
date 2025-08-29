@@ -4,13 +4,13 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 
-// Configuration des animations
+// Configuration des animations - vraiment lentes
 const ANIMATION_CONFIG = {
-  PARAGRAPH_DURATION: 0.2,
-  PARAGRAPH_3_END: 0.6,
-  CV_START: 0.6,
-  CV_END: 0.8,
-  SECTION_MOVE: 0.9,
+  PARAGRAPH_DURATION: 0.3,
+  PARAGRAPH_3_END: 0.8,
+  CV_START: 0.8,
+  CV_END: 0.95,
+  SECTION_MOVE: 0.98,
   INITIAL_ROTATION: "2deg", 
   INITIAL_SCALE: 0.9,
   INITIAL_Y: "60vh"
@@ -54,7 +54,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     }}
     className="absolute inset-0 flex items-center justify-center"
   >
-    <div className="relative w-full max-w-4xl p-4 md:p-6 mx-4 md:mx-0">
+    <div className="relative w-full max-w-4xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
       {/* Calque 1 : blur + fond indigo ultra-dilué */}
       <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
@@ -91,16 +91,16 @@ export default function About() {
 
   // Animations pour chaque paragraphe (hooks au niveau supérieur) 
   const paragraph1Animation = {
-    y: useTransform(scrollYProgress, [0, ANIMATION_CONFIG.PARAGRAPH_DURATION], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
-    rotate: useTransform(scrollYProgress, [0, 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 1.5], ["1deg", "1deg", "0deg"]),
-    scale: useTransform(scrollYProgress, [0, 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 1]),
-    opacity: useTransform(scrollYProgress, [0.05, 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION, 1], [0, 1, 1, 1]),
+    y: useTransform(scrollYProgress, [0, 1], ["0vh", "0vh"]), // Toujours positionné
+    rotate: useTransform(scrollYProgress, [0, 0.02, ANIMATION_CONFIG.PARAGRAPH_DURATION - 0.02], ["2deg", "2deg", "0deg"]), // Redressement très lent
+    scale: useTransform(scrollYProgress, [0, 1], [1, 1]), // Toujours à l'échelle normale
+    opacity: useTransform(scrollYProgress, [0, 1], [1, 1]), // Toujours visible
     zIndex: 1
   };
 
   const paragraph2Animation = {
     y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
-    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2.5], ["-1deg", "-1deg", "0deg"]),
+    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.01, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 - 0.02], ["-3deg", "-3deg", "0deg"]), // Redressement très lent
     scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [0, 1, 1, 1]),
     zIndex: 2
@@ -108,7 +108,7 @@ export default function About() {
 
   const paragraph3Animation = {
     y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
-    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_3_END + 0.1], ["1deg", "1deg", "0deg"]),
+    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.01, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.02], ["3deg", "3deg", "0deg"]), // Redressement très lent
     scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [0, 1, 1, 1]),
     zIndex: 3
@@ -117,10 +117,10 @@ export default function About() {
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
   // Animation du CV - apparaît à 0.6, se place jusqu'à 0.8, puis reste stable  
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["10vh", "30vh", "30vh"]);
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["10vh", "25vh", "25vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [1, 1, 1]);
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
-  const cvZIndex = useTransform(scrollYProgress, [0.8, 0.85], [0, 4]);
+  const cvZIndex = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END - 0.1, ANIMATION_CONFIG.CV_END], [0, 0, 4]);
 
   return (
     <div id="about" ref={containerRef} className="relative">
@@ -197,8 +197,8 @@ export default function About() {
             {/* Contenu sticky qui reste fixe pendant le scroll */}
             <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
-          <div className="absolute top-20 md:top-24 lg:top-30 left-0 right-0 h-16 md:h-18 lg:h-20 flex items-center justify-center z-50">
-            <h2 className="section-title text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 mb-4 md:mb-5 lg:mb-6">
+          <div className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 h-16 md:h-18 lg:h-20 flex items-center justify-center z-50">
+            <h2 className="section-title text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900">
               About Me
             </h2>
           </div>
@@ -207,17 +207,17 @@ export default function About() {
           <div className="absolute inset-0 pointer-events-none">
             {/* Casque à gauche */}
             <motion.div 
-              className="absolute left-10 md:left-32 lg:left-50 top-1/2 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 z-5"
+              className="absolute left-10 md:left-20 lg:left-32 xl:left-50 top-1/2 lg:top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 xl:w-64 xl:h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
-                y: [0, -8, -3, -12, 0],
-                rotate: [0, -4, 2, -6, 0],
+                y: [0, -15, 0, -10, 0, -20, 0],
+                rotate: [0, -2, 1, -3, 0],
               }}
               transition={{
-                duration: 7,
+                duration: 12,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: -2
+                delay: 0
               }}
             >
               <Image 
@@ -231,17 +231,17 @@ export default function About() {
 
             {/* Biberon à droite */}
             <motion.div 
-              className="absolute right-10 md:right-32 lg:right-50 top-1/2 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 z-5"
+              className="absolute right-10 md:right-20 lg:right-32 xl:right-50 top-1/2 lg:top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 xl:w-64 xl:h-64 z-5"
               style={{ transform: 'translateY(-50%)' }}
               animate={{
-                y: [0, -10, -5, -8, 0],
-                rotate: [0, 3, -2, 5, 0],
+                y: [0, 20, 0, 15, 0, 25, 0],
+                rotate: [0, 2, -1, 4, 0],
               }}
               transition={{
-                duration: 6,
+                duration: 12,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 0
+                delay: 6
               }}
             >
               <Image 
