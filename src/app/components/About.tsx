@@ -59,8 +59,8 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
       <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
       {/* Calque 2 : carte blanche nette */}
-      <div className="glass-foreground relative z-10 flex items-center justify-center text-center px-4 md:px-8 py-6 md:py-8">
-        <p className="paragraph-text text-gray-custom text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+      <div className="glass-foreground relative z-10 flex items-center justify-center text-center px-6 md:px-8 lg:px-10 py-8 md:py-10 lg:py-12">
+        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-3xl">
           {paragraph.content}
         </p>
       </div>
@@ -75,19 +75,6 @@ export default function About() {
     offset: ["start center", "end center"]
   });
   
-  // Détection mobile pour désactiver les animations
-  const [isMobile, setIsMobile] = React.useState(false);
-  
-  React.useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
 
   // Animations pour chaque paragraphe (hooks au niveau supérieur) 
   const paragraph1Animation = {
@@ -124,78 +111,10 @@ export default function About() {
 
   return (
     <div id="about" ref={containerRef} className="relative">
-      {/* Version Mobile - Affichage vertical statique */}
-      {isMobile && (
-        <div className="md:hidden bg-white py-20">
-          {/* Titre avec objets 3D sur les côtés */}
-          <div className="relative flex items-center justify-center px-8 mb-8">
-            {/* Casque à gauche */}
-            <div className="w-16 h-16 mr-6">
-              <Image 
-                src="/assets/3d/casque.png"
-                alt="Casque audio 3D"
-                width={64}
-                height={64}
-                className="w-full h-full object-contain drop-shadow-lg"
-              />
-            </div>
-            
-            {/* Titre centré */}
-            <h2 className="section-title text-2xl font-medium text-gray-900">
-              About Me
-            </h2>
-            
-            {/* Biberon à droite */}
-            <div className="w-16 h-16 ml-6">
-              <Image 
-                src="/assets/3d/biberon.png"
-                alt="Biberon 3D"
-                width={64}
-                height={64}
-                className="w-full h-full object-contain drop-shadow-lg"
-              />
-            </div>
-          </div>
-          
-          {/* Paragraphes verticaux */}
-          <div className="space-y-10 px-6">
-            {paragraphs.map((paragraph, index) => (
-              <div key={index} className="bg-white rounded-2xl px-6 py-8 text-center shadow-md border border-gray-100">
-                <p className="paragraph-text text-gray-custom text-base leading-relaxed">
-                  {paragraph.content}
-                </p>
-              </div>
-            ))}
-          </div>
-          
-          {/* Bouton CV */}
-          <div className="flex justify-center mt-15">
-            <div className="cta-button-glass font-public-sans">
-              <div className="glass-bg-button glass-backdrop" />
-              <div className="glass-foreground-button">
-                <span className="cta-button-text-glass text-base">Read My CV</span>
-                <span className="cta-button-icon-glass">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                    <polyline points="13,2 13,9 20,9"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                    <line x1="10" y1="9" x2="8" y2="9"/>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Version Desktop/Tablette - Animations scroll */}
-      {!isMobile && (
-        <div className="hidden md:block">
-          {/* Section avec hauteur pour permettre le scroll */}
-          <div className="h-[220vh] lg:h-[250vh]">
-            {/* Contenu sticky qui reste fixe pendant le scroll */}
-            <div className="sticky top-0 h-screen bg-white overflow-hidden">
+      {/* Section avec hauteur pour permettre le scroll */}
+      <div className="h-[220vh] lg:h-[250vh]">
+        {/* Contenu sticky qui reste fixe pendant le scroll */}
+        <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
           <div className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 h-16 md:h-18 lg:h-20 flex items-center justify-center z-50">
             <h2 className="section-title text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900">
@@ -291,10 +210,8 @@ export default function About() {
               </div>
             </motion.div>
           </div>
-            </div>
-          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
