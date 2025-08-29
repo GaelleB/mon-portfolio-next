@@ -424,7 +424,8 @@ export default function Hero() {
                             {/* Calque 2 : contenu blanc par-dessus */}
                             <div className="glass-foreground-button">
                                 <span className="cta-button-text-glass">
-                                    Let&apos;s Work Together!
+                                    <span className="hidden md:inline">Let&apos;s Work Together!</span>
+                                    <span className="md:hidden">Contact Me</span>
                                 </span>
                                 <span className="cta-button-icon-glass">
                                     ↓

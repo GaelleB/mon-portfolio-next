@@ -40,8 +40,8 @@
   /* Pyramide orange - top-left desktop, top-right mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: 10% !important;
-    right: 15% !important;
+    top: 15% !important;
+    right: 10% !important;
     left: auto !important;
     bottom: auto !important;
     z-index: 20 !important;
@@ -56,7 +56,7 @@
   /* Sphère violette - left desktop, top-center mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: 10% !important;
+    top: 5% !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
@@ -73,8 +73,8 @@
   /* Cylindre bleu - bottom-left desktop, top-left mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: 10% !important;
-    left: 15% !important;
+    top: 15% !important;
+    left: 5% !important;
     right: auto !important;
     bottom: auto !important;
     z-index: 20 !important;
@@ -89,9 +89,9 @@
   /* Étoile turquoise - top-right desktop, bottom-right mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: auto !important;
-    bottom: 5% !important;
-    right: 15% !important;
+    top: 70% !important;
+    bottom: auto !important;
+    right: 5% !important;
     left: auto !important;
     z-index: 20 !important;
   }
@@ -105,8 +105,8 @@
   /* Cube vert - right desktop, bottom-center mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: auto !important;
-    bottom: 5% !important;
+    top: 75% !important;
+    bottom: auto !important;
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%) !important;
@@ -122,9 +122,9 @@
   /* Cube jaune - bottom-right desktop, bottom-left mobile */
   @media (max-width: 767px) {
     position: fixed !important;
-    top: auto !important;
-    bottom: 5% !important;
-    left: 15% !important;
+    top: 70% !important;
+    bottom: auto !important;
+    left: 5% !important;
     right: auto !important;
     z-index: 20 !important;
   }
