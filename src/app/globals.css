@@ -420,6 +420,116 @@
 
 /* ABOUT SECTION */
 
+/* Objets 3D responsive pour la section About */
+.about-3d-object-1 {
+  /* Casque - côtés en desktop/tablette paysage */
+  left: 2.5rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 16rem !important;
+  height: 16rem !important;
+}
+
+.about-3d-object-2 {
+  /* Biberon - côtés en desktop/tablette paysage */
+  right: 2.5rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 16rem !important;
+  height: 16rem !important;
+}
+
+@media (min-width: 640px) {
+  .about-3d-object-1,
+  .about-3d-object-2 {
+    width: 20rem !important;
+    height: 20rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .about-3d-object-1 {
+    left: 5rem !important;
+    width: 24rem !important;
+    height: 24rem !important;
+  }
+  .about-3d-object-2 {
+    right: 5rem !important;
+    width: 24rem !important;
+    height: 24rem !important;
+  }
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .about-3d-object-1 {
+    left: 15rem !important;
+    top: 50% !important;
+    width: 14rem !important;
+    height: 14rem !important;
+  }
+  .about-3d-object-2 {
+    right: 15rem !important;
+    top: 50% !important;
+    width: 14rem !important;
+    height: 14rem !important;
+  }
+}
+
+@media (min-width: 1280px) and (orientation: landscape) {
+  .about-3d-object-1 {
+    left: 20rem !important;
+    width: 16rem !important;
+    height: 16rem !important;
+  }
+  .about-3d-object-2 {
+    right: 20rem !important;
+    width: 16rem !important;
+    height: 16rem !important;
+  }
+}
+
+/* Position verticale en mobile et tablette portrait */
+@media (max-width: 1023px) and (orientation: portrait), 
+       (max-width: 767px) {
+  .about-3d-object-1 {
+    left: 50% !important;
+    top: 8rem !important;
+    transform: translateX(-50%) !important;
+    width: 14rem !important;
+    height: 14rem !important;
+  }
+  .about-3d-object-2 {
+    left: 50% !important;
+    right: auto !important;
+    bottom: 5rem !important;
+    top: auto !important;
+    transform: translateX(-50%) !important;
+    width: 14rem !important;
+    height: 14rem !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) and (orientation: portrait) {
+  .about-3d-object-1,
+  .about-3d-object-2 {
+    width: 18rem !important;
+    height: 18rem !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  .about-3d-object-1 {
+    top: 9rem;
+    width: 30rem;
+    height: 30rem;
+  }
+  .about-3d-object-2 {
+    bottom: 6rem;
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
 /* Glassmorphism background */
 .glass-bg {
   border-radius: 48px;
@@ -432,7 +542,6 @@
   background-color: white;
   border-radius: 24px;
   opacity: 1;
-  min-height: 280px;
 }
 
 /* STACK SECTION */

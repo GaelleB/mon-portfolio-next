@@ -6,10 +6,10 @@ import Image from "next/image";
 
 // Configuration des animations - vraiment lentes
 const ANIMATION_CONFIG = {
-  PARAGRAPH_DURATION: 0.3,
-  PARAGRAPH_3_END: 0.8,
-  CV_START: 0.8,
-  CV_END: 0.95,
+  PARAGRAPH_DURATION: 0.25,
+  PARAGRAPH_3_END: 0.65,
+  CV_START: 0.65,
+  CV_END: 0.8,
   SECTION_MOVE: 0.98,
   INITIAL_ROTATION: "2deg", 
   INITIAL_SCALE: 0.9,
@@ -54,13 +54,13 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     }}
     className="absolute inset-0 flex items-center justify-center"
   >
-    <div className="relative w-full max-w-4xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
+    <div className="relative w-full max-w-5xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
       {/* Calque 1 : blur + fond indigo ultra-dilué */}
       <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
       {/* Calque 2 : carte blanche nette */}
-      <div className="glass-foreground relative z-10 flex items-center justify-center text-center px-6 md:px-8 lg:px-10 py-8 md:py-10 lg:py-12">
-        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-3xl">
+      <div className="glass-foreground relative z-10 flex items-center justify-center text-center lg:py-9 lg:px-10">
+        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl">
           {paragraph.content}
         </p>
       </div>
@@ -104,7 +104,7 @@ export default function About() {
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
   // Animation du CV - apparaît à 0.6, se place jusqu'à 0.8, puis reste stable  
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["10vh", "25vh", "25vh"]);
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["15vh", "30vh", "30vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [1, 1, 1]);
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
   const cvZIndex = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END - 0.1, ANIMATION_CONFIG.CV_END], [0, 0, 4]);
@@ -112,7 +112,7 @@ export default function About() {
   return (
     <div id="about" ref={containerRef} className="relative">
       {/* Section avec hauteur pour permettre le scroll */}
-      <div className="h-[220vh] lg:h-[250vh]">
+      <div className="h-[280vh] lg:h-[320vh]">
         {/* Contenu sticky qui reste fixe pendant le scroll */}
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           {/* Titre fixe About Me */}
@@ -122,12 +122,11 @@ export default function About() {
             </h2>
           </div>
           
-          {/* Objets 3D décoratifs */}
+          {/* Objets 3D décoratifs avec positionnement responsive */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Casque à gauche */}
+            {/* Casque - côtés en desktop/tablette paysage, au-dessus des cards en mobile/tablette portrait */}
             <motion.div 
-              className="absolute left-10 md:left-20 lg:left-32 xl:left-50 top-1/2 lg:top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 xl:w-64 xl:h-64 z-5"
-              style={{ transform: 'translateY(-50%)' }}
+              className="absolute z-5 about-3d-object-1"
               animate={{
                 y: [0, -15, 0, -10, 0, -20, 0],
                 rotate: [0, -2, 1, -3, 0],
@@ -148,10 +147,9 @@ export default function About() {
               />
             </motion.div>
 
-            {/* Biberon à droite */}
+            {/* Biberon - côtés en desktop/tablette paysage, en dessous des cards en mobile/tablette portrait */}
             <motion.div 
-              className="absolute right-10 md:right-20 lg:right-32 xl:right-50 top-1/2 lg:top-[40%] w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 xl:w-64 xl:h-64 z-5"
-              style={{ transform: 'translateY(-50%)' }}
+              className="absolute z-5 about-3d-object-2"
               animate={{
                 y: [0, 20, 0, 15, 0, 25, 0],
                 rotate: [0, 2, -1, 4, 0],
