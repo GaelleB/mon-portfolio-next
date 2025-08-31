@@ -8,6 +8,7 @@ export default function Navigation() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [isNavigating, setIsNavigating] = useState(false);
     
     
     // Auto-detect active section + hide/show navigation
@@ -16,14 +17,16 @@ export default function Navigation() {
             const currentScrollY = window.scrollY;
             const scrollPosition = currentScrollY + 100; // Offset for better detection
             
-            // Hide/show navigation based on scroll direction
-            if (currentScrollY < lastScrollY || currentScrollY < 100) {
-                // Scrolling up or near top
-                setIsNavVisible(true);
-            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Scrolling down and not near top
-                setIsNavVisible(false);
-                setIsMobileMenuOpen(false); // Close mobile menu when hiding nav
+            // Hide/show navigation based on scroll direction (but not when navigating)
+            if (!isNavigating) {
+                if (currentScrollY < lastScrollY || currentScrollY < 100) {
+                    // Scrolling up or near top
+                    setIsNavVisible(true);
+                } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    // Scrolling down and not near top
+                    setIsNavVisible(false);
+                    setIsMobileMenuOpen(false); // Close mobile menu when hiding nav
+                }
             }
             
             setLastScrollY(currentScrollY);
@@ -56,7 +59,7 @@ export default function Navigation() {
         handleScroll(); // Check initial position
         
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    }, [lastScrollY, isNavigating]);
 
 
     const navItems = [
@@ -66,6 +69,17 @@ export default function Navigation() {
         { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' }
     ];
+
+    const handleNavClick = (itemName: string) => {
+        setActiveSection(itemName);
+        setIsNavigating(true);
+        setIsNavVisible(true); // Force navigation to be visible
+        
+        // Reset navigation state after scroll animation completes
+        setTimeout(() => {
+            setIsNavigating(false);
+        }, 1000); // 1 second should be enough for smooth scroll to complete
+    };
 
     return (
         <header>
@@ -98,7 +112,7 @@ export default function Navigation() {
                             <motion.a
                                 key={item.name}
                                 href={item.href}
-                                onClick={() => setActiveSection(item.name)}
+                                onClick={() => handleNavClick(item.name)}
                                 className={`
                                     relative px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300
                                     ${activeSection === item.name 
@@ -183,7 +197,7 @@ export default function Navigation() {
                                 key={item.name}
                                 href={item.href}
                                 onClick={() => {
-                                    setActiveSection(item.name);
+                                    handleNavClick(item.name);
                                     setIsMobileMenuOpen(false);
                                 }}
                                 className={`
