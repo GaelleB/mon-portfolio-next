@@ -18,8 +18,20 @@
 
 .paragraph-text {
   font-family: "Public Sans", "Public Sans Placeholder", sans-serif;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .paragraph-text {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .paragraph-text {
+    font-size: 24px;
+  }
 }
 
 /* HERO SECTION */
@@ -76,7 +88,7 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     position: absolute !important;
     top: 41% !important;
-    left: -5% !important;
+    left: 5% !important;
     right: auto !important;
     bottom: auto !important;
     transform: none !important;
@@ -157,7 +169,7 @@
   @media (min-width: 768px) and (max-width: 1023px) {
     position: absolute !important;
     top: 41% !important;
-    right: -5% !important;
+    right: 5% !important;
     left: auto !important;
     bottom: auto !important;
     transform: none !important;
@@ -420,8 +432,7 @@
   background-color: white;
   border-radius: 24px;
   opacity: 1;
-  padding: 45px;
-  height: 220px;
+  min-height: 280px;
 }
 
 /* STACK SECTION */
