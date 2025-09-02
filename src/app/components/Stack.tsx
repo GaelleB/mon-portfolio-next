@@ -255,39 +255,6 @@ export default function Stack() {
       {/* Container pour l'effet de scroll */}
       <div className="relative min-h-[200vh] py-20">
         
-        {/* Objet 3D qui suit le scroll derrière les cartes */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
-            <motion.div 
-              style={{ 
-                y: useTransform(scrollYProgress, [0, 1], [-700, 850]) // Suivi des cards
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              animate={{
-                translateY: [0, -20, 0], // Rebond avec translateY au lieu de y
-              }}
-              transition={{
-                opacity: { duration: 0.6, ease: "easeOut" },
-                scale: { duration: 0.6, ease: "easeOut" },
-                translateY: {
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
-            >
-              <Image 
-                src="/assets/3d/cube-green.webp" 
-                alt="Cube 3D"
-                width={1400} 
-                height={1400} 
-                className="opacity-60 drop-shadow-xl"
-              />
-            </motion.div>
-          </div>
-        </div>
 
         {/* Contenu qui défile par-dessus */}
         <div className="relative z-10">
