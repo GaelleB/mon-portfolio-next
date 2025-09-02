@@ -8,18 +8,18 @@ export default function Footer() {
         <>
             <style jsx>{`
                 .footer-text {
-                    font-size: 45px;
-                    line-height: 45px;
+                    font-size: 43px;
+                    line-height: 0.9em;
                     position: relative;
                     left: 50%;
-                    transform: translateY(45%) translateX(-50%);
+                    transform: translateY(52%) translateX(-50%);
                 }
 
                 /* Mobile large */
                 @media (min-width: 480px) {
                     .footer-text {
-                        font-size: 50px;
-                        line-height: 50px;
+                        font-size: 45px;
+                        line-height: 0.9em;
                     }
                 }
 
@@ -42,16 +42,16 @@ export default function Footer() {
                 /* Desktop small (MacBook Air) */
                 @media (min-width: 1024px) {
                     .footer-text {
-                        font-size: 120px;
-                        line-height: 120px;
+                        font-size: 105px;
+                        line-height: 0.9em;
                     }
                 }
 
                 /* Desktop medium */
                 @media (min-width: 1280px) {
                     .footer-text {
-                        font-size: 160px;
-                        line-height: 160px;
+                        font-size: 135px;
+                        line-height: 0.9em;
                     }
                 }
 
@@ -66,32 +66,32 @@ export default function Footer() {
                 /* Large desktop */
                 @media (min-width: 1600px) {
                     .footer-text {
-                        font-size: 200px;
-                        line-height: 200px;
+                        font-size: 195px;
+                        line-height: 0.9em;
                     }
                 }
             `}</style>
-            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-100">
-            <div className="max-w-6xl mx-auto px-6 pb-42 relative z-20">
+            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-20 md:pt-100 rounded-t-[40px]">
+            <div className="max-w-6xl mx-auto px-0 lg:px-6 pb-42 relative z-20">
                 {/* Section principale - 3 colonnes */}
-                <div className="grid md:grid-cols-3 gap-8 md:gap-16 mb-8">
+                <div className="grid md:grid-cols-3 gap-8 md:gap-16 lg:gap-20 mb-8">
                     {/* Colonne 1 - Contact Me */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black px-4">
+                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
                             Contact Me
                         </h2>
                         <div className="space-y-1">
                             <motion.a
                                 href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
                                 data-cursor-text="Call Me"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 Book a call
                             </motion.a>
                             <motion.a
-                                href="mailto:contact@gaelleb.dev"
+                                href="mailto:gaelleboucher.dev@gmail.com"
                                 data-cursor-text="Email Me"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 gaelleboucher.dev@gmail.com
                             </motion.a>
@@ -100,28 +100,28 @@ export default function Footer() {
 
                     {/* Colonne 2 - Useful Links */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black px-4">
+                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
                             Useful Links
                         </h2>
                         <div className="space-y-1">
                             <motion.a
                                 href="#home"
                                 data-cursor-text="Visit Home Page"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 Home
                             </motion.a>
                             <motion.a
                                 href="/nonexistent-page"
                                 data-cursor-text="Visit 404 Page"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 404 Page
                             </motion.a>
                             <motion.a
                                 href="/licensing"
                                 data-cursor-text="Visit Licensing Page"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 Licensing
                             </motion.a>
@@ -130,7 +130,7 @@ export default function Footer() {
 
                     {/* Colonne 3 - Social */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black px-4">
+                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
                             Social
                         </h2>
                         <div className="space-y-1">
@@ -139,7 +139,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 data-cursor-text="My Malt Profile"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 Malt
                             </motion.a>
@@ -148,7 +148,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 data-cursor-text="My GitHub Page"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 GitHub
                             </motion.a>
@@ -157,7 +157,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 data-cursor-text="My LinkedIn Profile"
-                                className="block text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 LinkedIn
                             </motion.a>
@@ -171,16 +171,16 @@ export default function Footer() {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="pt-70"
+                    className="pt-16 md:pt-70"
                 >
-                    <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
                         {/* Copyright */}
-                        <div className="text-center md:text-left">
+                        <div className="text-left px-4">
                             <p className="text-lg text-gray-600 font-body">
                                 © Copyright 2025
                             </p>
                         </div>
-                        <div className="text-center md:text-right">
+                        <div className="text-left md:text-right px-4">
                             <p className="text-lg text-gray-600 font-body">
                                 Made by{" "}
                                 <motion.a
@@ -188,7 +188,8 @@ export default function Footer() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     data-cursor-text="Visit My Profile"
-                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-300"
+                                    className="font-semibold transition-colors duration-300"
+                                    style={{ color: 'rgb(102, 112, 255)' }}
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     Gaëlle
