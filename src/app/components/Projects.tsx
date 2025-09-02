@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 
 // Hook pour suivre la position de la souris avec contraintes
@@ -94,14 +94,26 @@ const projects = [
 const ProjectCard = ({ project, index }: { project: typeof projects[0], index: number }) => {
     const [showCTA, setShowCTA] = useState(false);
     const { mousePosition, handleMouseMove } = useMousePosition();
+    const cardRef = useRef<HTMLDivElement>(null);
+    
+    // Scroll progress individuel pour chaque card
+    const { scrollYProgress: cardScrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ["start 0.8", "end 0.1"]
+    });
+    
+    // Animation de scale - grandissent en entrant seulement
+    const cardScale = useTransform(cardScrollYProgress, [0, 0.3], [0.85, 1]);
 
     return (
         <motion.div
+            ref={cardRef}
+            style={{ scale: cardScale }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="project-card-no-cursor relative group"
+            className="project-card-no-cursor relative group w-full max-w-[450px] md:max-w-[400px] lg:max-w-none mx-4 lg:mx-0"
             onMouseEnter={() => setShowCTA(true)}
             onMouseLeave={() => setShowCTA(false)}
             onMouseMove={handleMouseMove}
@@ -149,7 +161,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                         className="w-full object-cover transition-all duration-500 group-hover:scale-105"
                         style={{ 
                             width: '100%',
-                            height: '424px'
+                            height: '240px'
                         }}
                     />
                     {/* Overlay blanc au hover */}
@@ -194,7 +206,7 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Projects Grid - 2 columns layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 max-w-7xl mx-auto justify-items-center lg:justify-items-stretch">
                     {visibleProjects.map((project, index) => (
                         <ProjectCard key={project.id} project={project} index={index} />
                     ))}
