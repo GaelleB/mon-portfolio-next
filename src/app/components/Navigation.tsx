@@ -89,8 +89,8 @@ export default function Navigation() {
                 style={{ 
                     height: '76px',
                     opacity: 1,
-                    backdropFilter: 'blur(10px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0)',
+                    backdropFilter: 'blur(15px)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
                     width: '100%'
                 }}
             />
