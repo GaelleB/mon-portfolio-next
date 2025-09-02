@@ -571,11 +571,15 @@
 
 /* Glassmorphism white foreground for tech cards */
 .glass-foreground-tech {
-  width: 85%;
-  height: 85%;
+  width: 88%;
+  height: 88%;
   background-color: white;
   border-radius: 24px;
   opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* UTILITY CLASSES - Glassmorphism */

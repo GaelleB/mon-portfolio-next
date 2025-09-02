@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 // Icônes
 const ReactIcon = () => (
@@ -141,13 +141,20 @@ const technologies = [
 ];
 
 // Card flip avec tooltip
-const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], index: number, scrollYProgress: MotionValue<number> }) => {
+const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
   
-  // Animation de scale basée sur le scroll
-  const cardScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.15, 0.9]);
+  // Scroll progress individuel pour chaque card
+  const { scrollYProgress: cardScrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 0.8", "end 0.1"]
+  });
+  
+  // Animation de scale - grandissent en entrant seulement
+  const cardScale = useTransform(cardScrollYProgress, [0, 0.3], [0.85, 1]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -159,6 +166,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
 
   return (
     <motion.div
+      ref={cardRef}
       style={{ scale: cardScale }}
       className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
       onClick={() => setIsFlipped(!isFlipped)}
@@ -187,7 +195,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
         </motion.div>
       )}
 
-      <motion.div className="w-[450px] h-[450px] p-6 relative" style={{ perspective: "1000px" }}>
+      <motion.div className="w-[440px] h-[480px] p-4 relative" style={{ perspective: "1000px" }}>
         <motion.div
           className="w-full h-full relative"
           style={{ transformStyle: "preserve-3d" }}
@@ -273,8 +281,8 @@ export default function Stack() {
               <Image 
                 src="/assets/3d/cube-green.webp" 
                 alt="Cube 3D"
-                width={1000} 
-                height={1000} 
+                width={1400} 
+                height={1400} 
                 className="opacity-60 drop-shadow-xl"
               />
             </motion.div>
@@ -294,9 +302,9 @@ export default function Stack() {
             </div>
 
             {/* Grille unique des technologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-20 lg:gap-24 max-w-7xl mx-auto justify-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-2 max-w-7xl mx-auto justify-items-center">
               {technologies.map((tech, index) => (
-                <TechCard key={tech.name} tech={tech} index={index} scrollYProgress={scrollYProgress} />
+                <TechCard key={tech.name} tech={tech} index={index} />
               ))}
             </div>
           </div>
