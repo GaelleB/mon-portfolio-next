@@ -147,7 +147,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   // Animation de scale basée sur le scroll
-  const cardScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 0.95]);
+  const cardScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.15, 0.9]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -294,7 +294,7 @@ export default function Stack() {
             </div>
 
             {/* Grille unique des technologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto justify-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-20 lg:gap-24 max-w-7xl mx-auto justify-items-center">
               {technologies.map((tech, index) => (
                 <TechCard key={tech.name} tech={tech} index={index} scrollYProgress={scrollYProgress} />
               ))}
