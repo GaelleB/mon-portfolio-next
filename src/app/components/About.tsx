@@ -54,7 +54,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
     }}
     className="absolute inset-0 flex items-center justify-center"
   >
-    <div className="relative w-full max-w-5xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
+    <div className="relative w-full max-w-5xl md:max-w-3xl lg:max-w-5xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
       {/* Calque 1 : blur + fond indigo ultra-dilué */}
       <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
@@ -72,7 +72,7 @@ export default function About() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024); // Include tablette
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -112,7 +112,7 @@ export default function About() {
   const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
 
   // Animation du CV - apparaît à 0.6, se place jusqu'à 0.8, puis reste stable  
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], ["12vh", "25vh", "25vh"]);
+  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], [isMobile ? "12vh" : "12vh", isMobile ? "25vh" : "30vh", isMobile ? "25vh" : "30vh"]);
   const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [1, 1, 1]);
   const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
   const cvZIndex = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END - 0.1, ANIMATION_CONFIG.CV_END], [0, 0, 4]);

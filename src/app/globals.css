@@ -447,16 +447,46 @@
   }
 }
 
-@media (min-width: 768px) {
+/* Tablette paysage spécifiquement */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  #about .about-3d-object-1 {
+    display: block !important;
+    position: absolute !important;
+    left: 2rem !important;
+    top: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    width: 16rem !important;
+    height: 16rem !important;
+    opacity: 1 !important;
+    z-index: 5 !important;
+  }
+  #about .about-3d-object-2 {
+    display: block !important;
+    position: absolute !important;
+    right: 2rem !important;
+    top: 50% !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    width: 16rem !important;
+    height: 16rem !important;
+    opacity: 1 !important;
+    z-index: 5 !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
   .about-3d-object-1 {
     left: 5rem !important;
-    width: 24rem !important;
-    height: 24rem !important;
+    width: 20rem !important;
+    height: 20rem !important;
   }
   .about-3d-object-2 {
     right: 5rem !important;
-    width: 24rem !important;
-    height: 24rem !important;
+    width: 20rem !important;
+    height: 20rem !important;
   }
 }
 
