@@ -17,17 +17,8 @@ export default function Navigation() {
             const currentScrollY = window.scrollY;
             const scrollPosition = currentScrollY + 100; // Offset for better detection
             
-            // Hide/show navigation based on scroll direction (but not when navigating)
-            if (!isNavigating) {
-                if (currentScrollY < lastScrollY || currentScrollY < 100) {
-                    // Scrolling up or near top
-                    setIsNavVisible(true);
-                } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                    // Scrolling down and not near top
-                    setIsNavVisible(false);
-                    setIsMobileMenuOpen(false); // Close mobile menu when hiding nav
-                }
-            }
+            // Keep navigation always visible
+            setIsNavVisible(true);
             
             setLastScrollY(currentScrollY);
             
