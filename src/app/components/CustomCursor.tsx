@@ -141,16 +141,19 @@ export default function CustomCursor() {
                         scale: { duration: 0.2, ease: "easeOut" }
                     }}
                     style={{
-                        width: isHovering ? '160px' : '24px',
-                        height: isHovering ? '40px' : '24px',
-                        borderRadius: isHovering ? '20px' : '12px'
+                        width: isHovering ? 'auto' : '24px',
+                        height: isHovering ? 'auto' : '24px',
+                        borderRadius: isHovering ? '20px' : '12px',
+                        minWidth: isHovering ? '80px' : '24px',
+                        minHeight: isHovering ? '40px' : '24px',
+                        padding: isHovering ? '8px 16px' : '0'
                     }}
                 >
                     {isHovering && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="flex items-center justify-center h-full w-full text-white text-xs font-medium px-3 whitespace-nowrap"
+                            className="flex items-center justify-center h-full w-full text-white text-xs sm:text-sm font-medium whitespace-nowrap text-center"
                         >
                             {hoverText}
                         </motion.div>
