@@ -430,7 +430,7 @@ export default function Hero() {
 
                     {/* CTA Button */}
                     <div className={`mb-1 transition-all duration-1000 delay-[800ms] translate-y-[10px] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <div className="cta-button-glass font-public-sans">
+                        <a href="#contact" className="cta-button-glass font-public-sans">
                             {/* Calque 1 : blur de fond */}
                             <div className="glass-bg-button glass-backdrop" />
                             
@@ -444,7 +444,7 @@ export default function Hero() {
                                     ↓
                                 </span>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
