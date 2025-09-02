@@ -166,13 +166,13 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
       onMouseLeave={() => setShowTooltip(false)}
       onMouseMove={handleMouseMove}
     >
-      {/* Tooltip */}
+      {/* Tooltip - Desktop/Tablette seulement */}
       {showTooltip && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          className="absolute z-50 pointer-events-none"
+          className="absolute z-50 pointer-events-none hidden md:block"
           style={{
             left: mousePosition.x,
             top: mousePosition.y - 50,
@@ -200,11 +200,16 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
             style={{ backfaceVisibility: "hidden" }}
           >
             <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
-            <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center">
+            <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center h-full">
               <div className="mb-3">
                 <tech.IconComponent />
               </div>
               <p className="font-semibold text-2xl text-gray-900">{tech.name}</p>
+              
+              {/* Texte d'instruction - Mobile seulement, positionné en bas */}
+              <p className="text-gray-600 text-sm md:hidden absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                Tap to Flip
+              </p>
             </div>
           </motion.div>
 
@@ -223,6 +228,7 @@ const TechCard = ({ tech, scrollYProgress }: { tech: typeof technologies[0], ind
           </motion.div>
         </motion.div>
       </motion.div>
+
     </motion.div>
   );
 };
@@ -288,7 +294,7 @@ export default function Stack() {
             </div>
 
             {/* Grille unique des technologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto justify-items-center">
               {technologies.map((tech, index) => (
                 <TechCard key={tech.name} tech={tech} index={index} scrollYProgress={scrollYProgress} />
               ))}
