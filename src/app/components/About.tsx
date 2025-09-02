@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 
@@ -27,7 +27,7 @@ const paragraphs = [
   },
   {
     title: "",
-    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu. Je veux raconter ton histoire, à travers chaque ligne. Et te créer un espace qui te ressemble."
+    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu.<br />Je veux raconter ton histoire, à travers chaque ligne. Et te créer un espace qui te ressemble."
   }
 ];
 
@@ -60,8 +60,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
 
       {/* Calque 2 : carte blanche nette */}
       <div className="glass-foreground relative z-10 flex items-center justify-center text-center lg:py-9 lg:px-10">
-        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl">
-          {paragraph.content}
+        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
         </p>
       </div>
     </div>
@@ -70,6 +69,15 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"]
@@ -86,7 +94,7 @@ export default function About() {
   };
 
   const paragraph2Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [isMobile ? "40vh" : ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
     rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.01, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 - 0.02], ["-3deg", "-3deg", "0deg"]), // Redressement très lent
     scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [0, 1, 1, 1]),
@@ -94,7 +102,7 @@ export default function About() {
   };
 
   const paragraph3Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [isMobile ? "30vh" : ANIMATION_CONFIG.INITIAL_Y, isMobile ? "-2vh" : "0vh"]),
     rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.01, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.02], ["3deg", "3deg", "0deg"]), // Redressement très lent
     scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [0, 1, 1, 1]),
