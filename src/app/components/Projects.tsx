@@ -27,71 +27,83 @@ const useMousePosition = () => {
     return { mousePosition, handleMouseMove };
 };
 
-const projects = [
-    {
-        id: 1,
-        title: 'Les Mailles de Sylvie',
-        year: '2025',
-        category: 'Site Vitrine',
-        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
-        tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-        github: 'https://github.com/GaelleB/les-mailles-de-sylvie',
-        demo: 'https://les-mailles-de-sylvie.vercel.app'
-    },
-    {
-        id: 2,
-        title: 'Portfolio Next.js',
-        year: '2025',
-        category: 'Portfolio',
-        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
-        tech: ['Next.js', 'TypeScript', 'Framer Motion'],
-        github: 'https://github.com/GaelleB/mon-portfolio-next',
-        demo: 'https://mon-portfolio-next-mu.vercel.app'
-    },
-    {
-        id: 3,
-        title: 'GB WebAssist Linktree',
-        year: '2025',
-        category: 'Business Tool',
-        image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=720&h=720&fit=crop',
-        tech: ['React', 'TypeScript', 'Vite'],
-        github: 'https://github.com/GaelleB/linktree-gbwebassist',
-        demo: 'https://linktree-gbwebassist.vercel.app'
-    },
-    {
-        id: 4,
-        title: 'Groupomania',
-        year: '2022',
-        category: 'Social Network',
-        image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=720&h=720&fit=crop',
-        tech: ['Vue.js', 'Node.js', 'MySQL'],
-        github: 'https://github.com/GaelleB/Groupomania',
-        demo: null
-    },
-    {
-        id: 5,
-        title: 'Piiquante API',
-        year: '2022',
-        category: 'Backend API',
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=720&h=720&fit=crop',
-        tech: ['Node.js', 'Express', 'MongoDB'],
-        github: 'https://github.com/GaelleB/Piiquante',
-        demo: null
-    },
-    {
-        id: 6,
-        title: 'Portfolio Original',
-        year: '2022',
-        category: 'Portfolio',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=720&h=720&fit=crop',
-        tech: ['HTML5', 'SASS', 'JavaScript'],
-        github: 'https://github.com/GaelleB/Portfolio',
-        demo: 'https://gaelleb.github.io/Portfolio/'
-    }
+const projects: Project[] = [
+    // {
+    //     id: 1,
+    //     title: 'Les Mailles de Sylvie',
+    //     year: '2025',
+    //     category: 'Site Vitrine',
+    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
+    //     tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    //     github: 'https://github.com/GaelleB/les-mailles-de-sylvie',
+    //     demo: 'https://les-mailles-de-sylvie.vercel.app'
+    // },
+    // {
+    //     id: 2,
+    //     title: 'Portfolio Next.js',
+    //     year: '2025',
+    //     category: 'Portfolio',
+    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
+    //     tech: ['Next.js', 'TypeScript', 'Framer Motion'],
+    //     github: 'https://github.com/GaelleB/mon-portfolio-next',
+    //     demo: 'https://mon-portfolio-next-mu.vercel.app'
+    // },
+    // {
+    //     id: 3,
+    //     title: 'Code in the City',
+    //     year: '2025',
+    //     category: 'Web Application',
+    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
+    //     tech: ['React', 'Next.js', 'JavaScript'],
+    //     github: 'https://github.com/GaelleB/code-in-the-city',
+    //     demo: 'https://code-in-the-city.vercel.app/'
+    // },
+    // {
+    //     id: 4,
+    //     title: 'Groupomania',
+    //     year: '2022',
+    //     category: 'Social Network',
+    //     image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=720&h=720&fit=crop',
+    //     tech: ['Vue.js', 'Node.js', 'MySQL'],
+    //     github: 'https://github.com/GaelleB/Groupomania',
+    //     demo: null
+    // },
+    // {
+    //     id: 5,
+    //     title: 'Piiquante API',
+    //     year: '2022',
+    //     category: 'Backend API',
+    //     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=720&h=720&fit=crop',
+    //     tech: ['Node.js', 'Express', 'MongoDB'],
+    //     github: 'https://github.com/GaelleB/Piiquante',
+    //     demo: null
+    // },
+    // {
+    //     id: 6,
+    //     title: 'Portfolio Original',
+    //     year: '2022',
+    //     category: 'Portfolio',
+    //     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=720&h=720&fit=crop',
+    //     tech: ['HTML5', 'SASS', 'JavaScript'],
+    //     github: 'https://github.com/GaelleB/Portfolio',
+    //     demo: 'https://gaelleb.github.io/Portfolio/'
+    // }
 ]
 
+// Type pour un projet
+type Project = {
+    id: number;
+    title: string;
+    year: string;
+    category: string;
+    image: string;
+    tech: string[];
+    github: string;
+    demo: string | null;
+};
+
 // Composant pour une card de projet
-const ProjectCard = ({ project, index }: { project: typeof projects[0], index: number }) => {
+const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
     const [showCTA, setShowCTA] = useState(false);
     const { mousePosition, handleMouseMove } = useMousePosition();
     const cardRef = useRef<HTMLDivElement>(null);
@@ -161,7 +173,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
                         className="w-full object-cover transition-all duration-500 group-hover:scale-105"
                         style={{ 
                             width: '100%',
-                            height: '240px'
+                            height: window.innerWidth >= 1280 ? '320px' : '240px'
                         }}
                     />
                     {/* Overlay blanc au hover */}
@@ -206,31 +218,66 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Projects Grid - 2 columns layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 max-w-7xl mx-auto justify-items-center lg:justify-items-stretch">
-                    {visibleProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
-                </div>
-
-                {/* View More/Less Button */}
-                <motion.div
-                    className="text-center mt-16"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: true }}
-                >
-                    <button
-                        onClick={() => setShowAll(!showAll)}
-                        className="cta-button-glass font-public-sans"
-                    >
-                        <div className="glass-bg-button glass-backdrop" />
-                        <div className="glass-foreground-button">
-                            <span className="cta-button-text-glass">{showAll ? 'View Less' : 'View More'}</span>
-                            <span className="cta-button-icon-glass">{showAll ? '↑' : '↓'}</span>
+                {visibleProjects.length > 0 ? (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 max-w-7xl mx-auto justify-items-center lg:justify-items-stretch">
+                            {visibleProjects.map((project, index) => (
+                                <ProjectCard key={project.id} project={project} index={index} />
+                            ))}
                         </div>
-                    </button>
-                </motion.div>
+
+                        {/* View More/Less Button */}
+                        <motion.div
+                            className="text-center mt-16"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            viewport={{ once: true }}
+                        >
+                            <button
+                                onClick={() => setShowAll(!showAll)}
+                                className="cta-button-glass font-public-sans"
+                            >
+                                <div className="glass-bg-button glass-backdrop" />
+                                <div className="glass-foreground-button">
+                                    <span className="cta-button-text-glass">{showAll ? 'View Less' : 'View More'}</span>
+                                    <span className="cta-button-icon-glass">{showAll ? '↑' : '↓'}</span>
+                                </div>
+                            </button>
+                        </motion.div>
+                    </>
+                ) : (
+                    /* Temporary message when no projects are available */
+                    <motion.div 
+                        className="text-center py-20"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        viewport={{ once: true }}
+                    >
+                        <div className="max-w-2xl mx-auto">
+                            <div className="glass-bg glass-backdrop absolute inset-0 z-0 rounded-2xl" />
+                            <div className="glass-foreground relative z-10 py-12 px-8 rounded-2xl">
+                                <div className="mb-6">
+                                    <span className="text-6xl">🚧</span>
+                                </div>
+                                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                                    Projets en cours
+                                </h3>
+                                <p className="text-lg text-gray-600 leading-relaxed">
+                                    Actuellement en train de coder...
+                                    <br />
+                                    Les projets arrivent bientôt !
+                                </p>
+                                <div className="mt-8 flex justify-center space-x-2">
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
             </div>
         </section>
     )
