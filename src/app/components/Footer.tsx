@@ -71,19 +71,13 @@ export default function Footer() {
                     }
                 }
             `}</style>
-            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-86">
+            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-100">
             <div className="max-w-6xl mx-auto px-6 pb-42 relative z-20">
                 {/* Section principale - 3 colonnes */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="grid md:grid-cols-3 gap-6 mb-8"
-                >
+                <div className="grid md:grid-cols-3 gap-8 md:gap-16 mb-8">
                     {/* Colonne 1 - Contact Me */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black">
+                        <h2 className="text-2xl font-body font-bold text-black px-4">
                             Contact Me
                         </h2>
                         <div className="space-y-1">
@@ -106,7 +100,7 @@ export default function Footer() {
 
                     {/* Colonne 2 - Useful Links */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black">
+                        <h2 className="text-2xl font-body font-bold text-black px-4">
                             Useful Links
                         </h2>
                         <div className="space-y-1">
@@ -136,7 +130,7 @@ export default function Footer() {
 
                     {/* Colonne 3 - Social */}
                     <div className="space-y-3">
-                        <h2 className="text-2xl font-body font-bold text-black">
+                        <h2 className="text-2xl font-body font-bold text-black px-4">
                             Social
                         </h2>
                         <div className="space-y-1">
@@ -169,7 +163,7 @@ export default function Footer() {
                             </motion.a>
                         </div>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Section du bas */}
                 <motion.div
@@ -177,7 +171,7 @@ export default function Footer() {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="pt-8"
+                    className="pt-70"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         {/* Copyright */}
