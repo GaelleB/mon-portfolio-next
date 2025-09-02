@@ -195,7 +195,7 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
         </motion.div>
       )}
 
-      <motion.div className="w-[320px] md:w-[360px] lg:w-[440px] h-[360px] md:h-[400px] lg:h-[480px] p-4 relative" style={{ perspective: "1000px" }}>
+      <motion.div className="w-[430px] md:w-[360px] lg:w-[440px] h-[400px] md:h-[400px] lg:h-[480px] p-4 relative" style={{ perspective: "1000px" }}>
         <motion.div
           className="w-full h-full relative"
           style={{ transformStyle: "preserve-3d" }}
