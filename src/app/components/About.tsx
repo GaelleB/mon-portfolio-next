@@ -199,7 +199,13 @@ export default function About() {
               }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <div style={{ pointerEvents: 'auto' }} className="cta-button-glass font-public-sans">
+              <a 
+                href="https://www.linkedin.com/in/gaelle-boucher/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ pointerEvents: 'auto' }} 
+                className="cta-button-glass font-public-sans"
+              >
                 <div className="glass-bg-button glass-backdrop" />
                 <div className="glass-foreground-button">
                   <span className="cta-button-text-glass text-base md:text-lg lg:text-xl">Read My CV</span>
@@ -213,7 +219,7 @@ export default function About() {
                     </svg>
                   </span>
                 </div>
-              </div>
+              </a>
             </motion.div>
           </div>
         </div>
