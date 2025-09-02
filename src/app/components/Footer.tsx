@@ -5,7 +5,73 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-86">
+        <>
+            <style jsx>{`
+                .footer-text {
+                    font-size: 45px;
+                    line-height: 45px;
+                    position: relative;
+                    left: 50%;
+                    transform: translateY(45%) translateX(-50%);
+                }
+
+                /* Mobile large */
+                @media (min-width: 480px) {
+                    .footer-text {
+                        font-size: 50px;
+                        line-height: 50px;
+                    }
+                }
+
+                /* Tablette portrait iPad */
+                @media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+                    .footer-text {
+                        font-size: 85px;
+                        line-height: 85px;
+                    }
+                }
+
+                /* Tablette paysage */
+                @media (min-width: 768px) and (orientation: landscape) and (max-width: 1023px) {
+                    .footer-text {
+                        font-size: 100px;
+                        line-height: 100px;
+                    }
+                }
+
+                /* Desktop small (MacBook Air) */
+                @media (min-width: 1024px) {
+                    .footer-text {
+                        font-size: 120px;
+                        line-height: 120px;
+                    }
+                }
+
+                /* Desktop medium */
+                @media (min-width: 1280px) {
+                    .footer-text {
+                        font-size: 160px;
+                        line-height: 160px;
+                    }
+                }
+
+                /* MacBook Air 13" et écrans similaires */
+                @media (min-width: 1440px) and (max-width: 1600px) {
+                    .footer-text {
+                        font-size: 162px;
+                        line-height: 162px;
+                    }
+                }
+
+                /* Large desktop */
+                @media (min-width: 1600px) {
+                    .footer-text {
+                        font-size: 200px;
+                        line-height: 200px;
+                    }
+                }
+            `}</style>
+            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-86">
             <div className="max-w-6xl mx-auto px-6 pb-42 relative z-20">
                 {/* Section principale - 3 colonnes */}
                 <motion.div
@@ -142,12 +208,9 @@ export default function Footer() {
             {/* Texte coupé en bas */}
             <div className="absolute bottom-0 left-0 right-0 h-28 overflow-hidden z-0">
                 <div className="absolute bottom-0 left-0 right-0">
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none" 
+                    <div className="font-public-sans text-black leading-none tracking-tighter select-none whitespace-nowrap footer-text" 
                         style={{ 
-                            fontWeight: 900, 
-                            fontSize: '167px', 
-                            lineHeight: '167px',
-                            transform: 'translateY(35%)',
+                            fontWeight: 900,
                             width: '100vw',
                             textAlign: 'center'
                         }}>
@@ -156,5 +219,6 @@ export default function Footer() {
                 </div>
             </div>
         </footer>
+        </>
     );
 }
