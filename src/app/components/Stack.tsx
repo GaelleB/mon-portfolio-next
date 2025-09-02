@@ -244,10 +244,6 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
 // Section Stack
 export default function Stack() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
 
   return (
     <div id="stack" ref={sectionRef} className="relative bg-white overflow-hidden">
