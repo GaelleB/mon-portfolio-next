@@ -159,6 +159,7 @@ export default function About() {
                 alt="Casque audio 3D représentant la passion pour la musique et les séries"
                 width={200}
                 height={200}
+                loading="lazy"
                 className="w-full h-full object-contain drop-shadow-xl"
               />
             </motion.div>
@@ -182,6 +183,7 @@ export default function About() {
                 alt="Biberon 3D symbolisant le passé d'auxiliaire de puériculture en néonatalogie"
                 width={200}
                 height={200}
+                loading="lazy"
                 className="w-full h-full object-contain drop-shadow-xl"
               />
             </motion.div>

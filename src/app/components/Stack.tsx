@@ -8,6 +8,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const ReactIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/react.svg" alt="React" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(95%) saturate(1094%) hue-rotate(162deg) brightness(98%) contrast(94%)' }} />
   </div>
@@ -15,13 +16,14 @@ const ReactIcon = () => (
 
 const NextIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/nextjs.svg" alt="Next.js" width={80} height={80} className="object-contain" />
+    <Image src="/assets/icons/nextjs.svg" alt="Next.js" width={80} height={80} loading="lazy" className="object-contain" />
   </div>
 );
 
 const FigmaIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/figma.svg" alt="Figma" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(92%) saturate(4593%) hue-rotate(344deg) brightness(98%) contrast(95%)' }} />
   </div>
@@ -29,13 +31,14 @@ const FigmaIcon = () => (
 
 const JavaScriptIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/javascript.jpg" alt="JavaScript" width={80} height={80} className="object-contain" />
+    <Image src="/assets/icons/javascript.jpg" alt="JavaScript" width={80} height={80} loading="lazy" className="object-contain" />
   </div>
 );
 
 const TypeScriptIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/typescript.svg" alt="TypeScript" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(199deg) brightness(104%) contrast(97%)' }} />
   </div>
@@ -44,6 +47,7 @@ const TypeScriptIcon = () => (
 const HTMLIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/html.svg" alt="HTML5" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
   </div>
@@ -52,6 +56,7 @@ const HTMLIcon = () => (
 const CSSIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/css.svg" alt="CSS3" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(22%) sepia(77%) saturate(1497%) hue-rotate(240deg) brightness(97%) contrast(83%)' }} />
   </div>
@@ -60,6 +65,7 @@ const CSSIcon = () => (
 const SASSIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/sass.svg" alt="SASS" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(52%) sepia(17%) saturate(2878%) hue-rotate(284deg) brightness(104%) contrast(97%)' }} />
   </div>
@@ -68,6 +74,7 @@ const SASSIcon = () => (
 const TailwindIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/tailwindcss.svg" alt="Tailwind CSS" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(1552%) hue-rotate(158deg) brightness(91%) contrast(85%)' }} />
   </div>
@@ -76,6 +83,7 @@ const TailwindIcon = () => (
 const NotionIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/notion.svg" alt="Notion" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)' }} />
   </div>
@@ -84,6 +92,7 @@ const NotionIcon = () => (
 const ChatGPTIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ transform: 'scale(1.5)' }} />
   </div>
@@ -92,6 +101,7 @@ const ChatGPTIcon = () => (
 const NodeIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/nodejs.svg" alt="Node.js" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(89%) saturate(1553%) hue-rotate(58deg) brightness(102%) contrast(102%)' }} />
   </div>
@@ -100,6 +110,7 @@ const NodeIcon = () => (
 const ClaudeIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/claude.svg" alt="Claude" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(57%) sepia(51%) saturate(1097%) hue-rotate(324deg) brightness(97%) contrast(89%)' }} />
   </div>
@@ -108,6 +119,7 @@ const ClaudeIcon = () => (
 const GitHubIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/github.svg" alt="GitHub" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(94%) contrast(96%)' }} />
   </div>
@@ -116,6 +128,7 @@ const GitHubIcon = () => (
 const GitIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
     <Image src="/assets/icons/git.svg" alt="Git" width={80} height={80}
+      loading="lazy"
       className="object-contain"
       style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
   </div>
@@ -279,6 +292,7 @@ export default function Stack() {
                 alt="Cube 3D"
                 width={1400} 
                 height={1400} 
+                loading="lazy"
                 className="opacity-60 drop-shadow-xl"
               />
             </motion.div>
