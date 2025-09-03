@@ -52,15 +52,15 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
       opacity: animation.opacity,
       zIndex: animation.zIndex
     }}
-    className="absolute inset-0 flex items-center justify-center"
+    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center"
   >
-    <div className="relative w-full max-w-5xl md:max-w-3xl lg:max-w-5xl p-4 md:p-6 mx-4 md:mx-8 lg:mx-12 xl:mx-0">
+    <div className="relative w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl p-3 sm:p-4 md:p-6 mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-0">
       {/* Calque 1 : blur + fond indigo ultra-dilué */}
       <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
 
       {/* Calque 2 : carte blanche nette */}
-      <div className="glass-foreground relative z-10 flex items-center justify-center text-center lg:py-9 lg:px-10">
-        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
+      <div className="glass-foreground relative z-10 flex items-center justify-center text-center py-6 px-6 md:py-12 md:px-8 lg:py-10 lg:px-12 h-[200px] md:h-[250px] lg:min-h-[200px]">
+        <p className="paragraph-text text-gray-custom text-xs md:text-sm lg:text-base xl:text-lg leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
         </p>
       </div>
     </div>
@@ -70,9 +70,14 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTabletPortrait, setIsTabletPortrait] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024); // Include tablette
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // Include tablette
+      // Détection tablette en portrait (768-1023px largeur)
+      setIsTabletPortrait(window.innerWidth >= 768 && window.innerWidth < 1024 && window.innerHeight > window.innerWidth);
+    };
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -102,7 +107,10 @@ export default function About() {
   };
 
   const paragraph3Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [isMobile ? "30vh" : ANIMATION_CONFIG.INITIAL_Y, isMobile ? "-2vh" : "0vh"]),
+    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [
+      isMobile ? "30vh" : ANIMATION_CONFIG.INITIAL_Y, 
+      isTabletPortrait ? "0vh" : "0vh"
+    ]),
     rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.01, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.02], ["3deg", "3deg", "0deg"]), // Redressement très lent
     scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1]),
     opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [0, 1, 1, 1]),
