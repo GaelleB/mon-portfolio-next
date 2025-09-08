@@ -8,6 +8,8 @@ export default function Hero() {
     const isLoaded = true;
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
+    const [isTabletLandscape, setIsTabletLandscape] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const objectsRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
@@ -25,19 +27,29 @@ export default function Hero() {
     // État du parallaxe pour Framer Motion
     const [parallaxOffset, setParallaxOffset] = useState(0);
     
+    // Parallax ajusté selon l'appareil - réduit en tablette paysage
+    const effectiveParallaxOffset = isTabletLandscape ? parallaxOffset * 0.6 : parallaxOffset;
+    
+    // Objets qui ont besoin d'être centrés (sphère et cube vert en mobile/tablette portrait)
+    const needsCentering = isMobile || (isTablet && !isTabletLandscape);
+    
     // Détection mobile et tablette
     useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 1024);
+        const checkDeviceTypes = () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            setIsMobile(width < 768); // Mobile
+            setIsTablet(width >= 768 && width < 1024); // Tablette
+            setIsTabletLandscape(width >= 768 && width < 1024 && width > height); // Tablette paysage
         };
         
-        checkIsMobile();
-        window.addEventListener('resize', checkIsMobile);
+        checkDeviceTypes();
+        window.addEventListener('resize', checkDeviceTypes);
         
-        return () => window.removeEventListener('resize', checkIsMobile);
+        return () => window.removeEventListener('resize', checkDeviceTypes);
     }, []);
     
-    // Effet parallaxe React-only - réactivé partout
+    // Effet parallaxe React-only - activé sur tous les appareils
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
@@ -110,9 +122,9 @@ export default function Hero() {
                 {/* Pyramide orange (top-left) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', left: '25%', y: parallaxOffset }}
+                    style={{ top: '15%', left: '25%', y: effectiveParallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 8, parallaxOffset - 5, parallaxOffset - 10, parallaxOffset - 15, parallaxOffset - 8, parallaxOffset],
+                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 8, effectiveParallaxOffset - 5, effectiveParallaxOffset - 10, effectiveParallaxOffset - 15, effectiveParallaxOffset - 8, effectiveParallaxOffset],
                         x: [0, 3, -2, 4, 0, -1, 0],
                     }}
                     transition={{
@@ -135,35 +147,45 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Sphère violette (left) */}
-                <motion.div 
+                <div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '37%', left: '20%', y: parallaxOffset }}
-                    animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 3, parallaxOffset - 8, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset],
-                        x: [0, 5, -3, 6, -4, 0, 2, 0],
-                    }}
-                    transition={{
-                        duration: 14,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -3
+                    style={{ 
+                        top: '37%', 
+                        left: '20%', 
+                        transform: needsCentering 
+                            ? `translateX(-50%) translateY(${effectiveParallaxOffset}px)` 
+                            : `translateY(${effectiveParallaxOffset}px)` 
                     }}
                 >
-                    <Image 
-                        src="/assets/3d/sphere.webp"
-                        alt="Objet 3D décoratif - Sphère violette en lévitation"
-                        width={300}
-                        height={300}
-                        className="w-full h-full object-contain"
-                    />
-                </motion.div>
+                    <motion.div 
+                        className="w-full h-full"
+                        animate={{
+                            y: [0, -6, -3, -8, -4, -12, -6, 0],
+                            x: [0, 5, -3, 6, -4, 0, 2, 0],
+                        }}
+                        transition={{
+                            duration: 14,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: -3
+                        }}
+                    >
+                        <Image 
+                            src="/assets/3d/sphere.webp"
+                            alt="Objet 3D décoratif - Sphère violette en lévitation"
+                            width={300}
+                            height={300}
+                            className="w-full h-full object-contain"
+                        />
+                    </motion.div>
+                </div>
 
                 {/* Cylindre bleu (bottom-left) */}
                 <motion.div 
                     className="absolute w-70 h-90 z-20 hero-3d-object"
-                    style={{ bottom: '5%', left: '25%', y: parallaxOffset}}
+                    style={{ bottom: '5%', left: '25%', y: effectiveParallaxOffset}}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 7, parallaxOffset - 3, parallaxOffset - 6, parallaxOffset - 14, parallaxOffset - 9, parallaxOffset],
+                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 7, effectiveParallaxOffset - 3, effectiveParallaxOffset - 6, effectiveParallaxOffset - 14, effectiveParallaxOffset - 9, effectiveParallaxOffset],
                         x: [0, -3, 5, -2, 0, 1, 0],
                     }}
                     transition={{
@@ -188,9 +210,9 @@ export default function Hero() {
                 {/* Étoile turquoise (top-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', right: '25%', y: parallaxOffset }}
+                    style={{ top: '15%', right: '25%', y: effectiveParallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 6, parallaxOffset - 12, parallaxOffset - 6, parallaxOffset - 9, parallaxOffset - 16, parallaxOffset - 10, parallaxOffset],
+                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 6, effectiveParallaxOffset - 12, effectiveParallaxOffset - 6, effectiveParallaxOffset - 9, effectiveParallaxOffset - 16, effectiveParallaxOffset - 10, effectiveParallaxOffset],
                         rotate: [0, 8, 5, 12, 3, 0, -5, 0],
                     }}
                     transition={{
@@ -210,35 +232,45 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Cube vert/jaune (right) */}
-                <motion.div 
+                <div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '37%', right: '20%', y: parallaxOffset }}
-                    animate={{
-                        y: [parallaxOffset, parallaxOffset - 5, parallaxOffset - 8, parallaxOffset - 6, parallaxOffset - 13, parallaxOffset - 7, parallaxOffset],
-                        x: [0, 3, -4, 2, 0, -2, 0],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -12
+                    style={{ 
+                        top: '37%', 
+                        right: '20%', 
+                        transform: needsCentering 
+                            ? `translateX(-50%) translateY(${effectiveParallaxOffset}px)` 
+                            : `translateY(${effectiveParallaxOffset}px)` 
                     }}
                 >
-                    <Image 
-                        src="/assets/3d/cube-green.webp"
-                        alt="Objet 3D décoratif - Cube vert et jaune géométrique"
-                        width={250}
-                        height={250}
-                        className="w-full h-full object-contain"
-                    />
-                </motion.div>
+                    <motion.div 
+                        className="w-full h-full"
+                        animate={{
+                            y: [0, -5, -8, -6, -13, -7, 0],
+                            x: [0, 3, -4, 2, 0, -2, 0],
+                        }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: -12
+                        }}
+                    >
+                        <Image 
+                            src="/assets/3d/cube-green.webp"
+                            alt="Objet 3D décoratif - Cube vert et jaune géométrique"
+                            width={250}
+                            height={250}
+                            className="w-full h-full object-contain"
+                        />
+                    </motion.div>
+                </div>
 
                 {/* Cube jaune (bottom-right) */}
                 <motion.div 
                     className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '10%', right: '25%', y: parallaxOffset }}
+                    style={{ bottom: '10%', right: '25%', y: effectiveParallaxOffset }}
                     animate={{
-                        y: [parallaxOffset, parallaxOffset - 9, parallaxOffset - 4, parallaxOffset - 12, parallaxOffset - 5, parallaxOffset - 17, parallaxOffset - 11, parallaxOffset],
+                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 9, effectiveParallaxOffset - 4, effectiveParallaxOffset - 12, effectiveParallaxOffset - 5, effectiveParallaxOffset - 17, effectiveParallaxOffset - 11, effectiveParallaxOffset],
                         rotate: [4, 10, 15, 8, 16, 4, -8, 4],
                     }}
                     transition={{
@@ -272,8 +304,8 @@ export default function Hero() {
                     style={{ 
                         top: '10px',
                         left: '50.5%',
-                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`,
-                        opacity: Math.max(1 - (Math.abs(parallaxOffset) / 120), 0)
+                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`,
+                        opacity: Math.max(1 - (Math.abs(effectiveParallaxOffset) / 120), 0)
                     }}
                 >
                     <h1 className="font-public-sans font-medium text-black text-5xl leading-[48px]">
@@ -288,7 +320,7 @@ export default function Hero() {
                     style={{ 
                         top: '80px',
                         left: '50%',
-                        transform: `translateX(-50%) translateY(${parallaxOffset}px)`
+                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`
                     }}
                 >
                     <motion.p 
@@ -320,7 +352,7 @@ export default function Hero() {
                     <motion.div 
                         className="flip-card-hover-zone absolute inset-0 p-10 -m-10 md:cursor-pointer"
                         style={{ 
-                            y: parallaxOffset
+                            y: effectiveParallaxOffset
                         }}
                         initial="rest"
                         whileHover={isMobile ? {} : "hover"}
