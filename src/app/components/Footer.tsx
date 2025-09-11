@@ -78,19 +78,19 @@ export default function Footer() {
                     {/* Colonne 1 - Contact Me */}
                     <div className="space-y-3">
                         <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
-                            Contact Me
+                            Contactez-moi
                         </h2>
                         <div className="space-y-1">
                             <motion.a
                                 href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
-                                data-cursor-text="Call Me"
+                                data-cursor-text="Appelez-moi"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                                Book a call
+                                Réservez un appel
                             </motion.a>
                             <motion.a
                                 href="mailto:gaelleboucher.dev@gmail.com"
-                                data-cursor-text="Email Me"
+                                data-cursor-text="Écrivez-moi"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 gaelleboucher.dev@gmail.com
@@ -101,22 +101,22 @@ export default function Footer() {
                     {/* Colonne 2 - Useful Links */}
                     <div className="space-y-3">
                         <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
-                            Useful Links
+                            Liens utiles
                         </h2>
                         <div className="space-y-1">
                             <motion.a
                                 href="#home"
-                                data-cursor-text="Visit Home Page"
+                                data-cursor-text="Aller à l'accueil"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                                Home
+                                Accueil
                             </motion.a>
                             <motion.a
                                 href="/licensing"
-                                data-cursor-text="Visit Licensing Page"
+                                data-cursor-text="Voir les licences"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
-                                Licensing
+                                Licences
                             </motion.a>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ export default function Footer() {
                                 href="https://www.malt.fr/profile/gaelleboucher"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor-text="My Malt Profile"
+                                data-cursor-text="Mon profil Malt"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 Malt
@@ -140,7 +140,7 @@ export default function Footer() {
                                 href="https://github.com/GaelleB"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor-text="My GitHub Page"
+                                data-cursor-text="Mon GitHub"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 GitHub
@@ -149,7 +149,7 @@ export default function Footer() {
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor-text="My LinkedIn Profile"
+                                data-cursor-text="Mon profil LinkedIn"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
                             >
                                 LinkedIn
@@ -175,12 +175,12 @@ export default function Footer() {
                         </div>
                         <div className="text-left md:text-right px-4">
                             <p className="text-lg text-gray-600 font-body">
-                                Made by{" "}
+                                Fait par{" "}
                                 <motion.a
                                     href="https://www.linkedin.com/in/gaelle-boucher/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    data-cursor-text="Visit My Profile"
+                                    data-cursor-text="Voir mon profil"
                                     className="font-semibold transition-colors duration-300"
                                     style={{ color: 'rgb(102, 112, 255)' }}
                                     whileHover={{ scale: 1.05 }}

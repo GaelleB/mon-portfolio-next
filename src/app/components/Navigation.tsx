@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 export default function Navigation() {
-    const [activeSection, setActiveSection] = useState('Home');
+    const [activeSection, setActiveSection] = useState('Accueil');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -24,10 +24,10 @@ export default function Navigation() {
             
             // Get all sections
             const sections = [
-                { name: 'Home', element: document.getElementById('home') || document.querySelector('section:first-child') },
-                { name: 'About', element: document.getElementById('about') },
-                { name: 'Stack', element: document.getElementById('stack') },
-                { name: 'Projects', element: document.getElementById('projects') },
+                { name: 'Accueil', element: document.getElementById('home') || document.querySelector('section:first-child') },
+                { name: 'À propos', element: document.getElementById('about') },
+                { name: 'Compétences', element: document.getElementById('stack') },
+                { name: 'Projets', element: document.getElementById('projects') },
                 { name: 'Contact', element: document.getElementById('contact') }
             ];
             
@@ -54,10 +54,10 @@ export default function Navigation() {
 
 
     const navItems = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Stack', href: '#stack' },
-        { name: 'Projects', href: '#projects' },
+        { name: 'Accueil', href: '#home' },
+        { name: 'À propos', href: '#about' },
+        { name: 'Compétences', href: '#stack' },
+        { name: 'Projets', href: '#projects' },
         { name: 'Contact', href: '#contact' }
     ];
 

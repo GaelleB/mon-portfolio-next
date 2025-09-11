@@ -136,21 +136,16 @@ const GitIcon = () => (
 
 // Données
 const technologies = [
-  { name: 'React', IconComponent: ReactIcon, description: 'React revolutionizes my web development approach...' },
-  { name: 'Figma', IconComponent: FigmaIcon, description: 'Figma transforms my design workflow...' },
-  { name: 'Next.js', IconComponent: NextIcon, description: 'Next.js elevates my React applications...' },
-  { name: 'JavaScript', IconComponent: JavaScriptIcon, description: 'JavaScript powers the dynamic functionality...' },
-  { name: 'TypeScript', IconComponent: TypeScriptIcon, description: 'TypeScript enhances my JavaScript development...' },
-  { name: 'HTML', IconComponent: HTMLIcon, description: 'HTML forms the backbone of all my web projects...' },
-  { name: 'CSS', IconComponent: CSSIcon, description: 'CSS brings my designs to life...' },
-  { name: 'SASS', IconComponent: SASSIcon, description: 'SASS enhances my CSS workflow...' },
-  { name: 'Tailwind', IconComponent: TailwindIcon, description: 'Tailwind accelerates my styling process...' },
-  { name: 'Notion', IconComponent: NotionIcon, description: 'Notion organizes my entire workflow...' },
-  { name: 'Node.js', IconComponent: NodeIcon, description: 'Node.js powers my backend development...' },
-  { name: 'ChatGPT', IconComponent: ChatGPTIcon, description: 'ChatGPT accelerates my development process...' },
-  { name: 'Claude', IconComponent: ClaudeIcon, description: 'Claude assists in my development workflow...' },
-  { name: 'GitHub', IconComponent: GitHubIcon, description: 'GitHub serves as my code repository...' },
-  { name: 'Git', IconComponent: GitIcon, description: 'Git is my essential version control system...' }
+  { name: 'React', IconComponent: ReactIcon, description: 'React révolutionne le développement web avec ses composants réutilisables et sa gestion d\'état moderne.' },
+  { name: 'TypeScript', IconComponent: TypeScriptIcon, description: 'TypeScript améliore le développement JavaScript avec le typage statique et une meilleure maintenabilité.' },
+  { name: 'HTML', IconComponent: HTMLIcon, description: 'HTML forme l’épine dorsale de tous les projets web en structurant le contenu de manière sémantique.' },
+  { name: 'CSS', IconComponent: CSSIcon, description: 'CSS donne vie aux designs avec des styles élégants et des animations fluides.' },
+  { name: 'Tailwind', IconComponent: TailwindIcon, description: 'Tailwind accélère le processus de stylisation avec ses classes utilitaires et son approche mobile-first.' },
+  { name: 'Figma', IconComponent: FigmaIcon, description: 'Figma transforme le workflow de design grâce à ses outils collaboratifs et ses prototypes interactifs.' },
+  { name: 'Git', IconComponent: GitIcon, description: 'Git est le système de contrôle de version essentiel pour traquer les changements et collaborer efficacement.' },
+  { name: 'GitHub', IconComponent: GitHubIcon, description: 'GitHub sert de référentiel pour le code avec la collaboration et le contrôle de version intégrés.' },
+  { name: 'ChatGPT', IconComponent: ChatGPTIcon, description: 'ChatGPT accélère le processus de développement en assistant sur la logique et la résolution de problèmes.' },
+  { name: 'Claude', IconComponent: ClaudeIcon, description: 'Claude assiste le workflow de développement avec ses analyses précises et ses suggestions pertinentes.' }
 ];
 
 // Card flip avec tooltip
@@ -218,7 +213,7 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
         >
           <div className="bg-white rounded-full shadow-lg px-4 py-2 text-sm border border-gray-200 whitespace-nowrap">
             <span className="text-gray-700 font-medium">
-              {isFlipped ? "Tap to Flip" : "Tap to Flip"}
+              {isFlipped ? "Tape pour retourner" : "Tape pour retourner"}
             </span>
           </div>
         </motion.div>
@@ -258,7 +253,7 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
               
               {/* Texte d'instruction - Mobile seulement, positionné en bas */}
               <p className="text-gray-600 text-sm md:hidden absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                Tap to Flip
+                Tape pour retourner
               </p>
             </div>
           </motion.div>
@@ -339,7 +334,7 @@ export default function Stack() {
             {/* Titre */}
             <div className="text-center mb-16">
               <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-                My stack
+                Mes compétences
               </h2>
             </div>
 

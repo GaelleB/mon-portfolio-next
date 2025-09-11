@@ -213,7 +213,7 @@ export default function Projects() {
                     className="text-center mb-20"
                 >
                     <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-                        Projects
+                        Projets
                     </h2>
                 </motion.div>
 

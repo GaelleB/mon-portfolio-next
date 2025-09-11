@@ -408,7 +408,7 @@ export default function Hero() {
                                         </defs>
                                         <text className="text-md font-medium black uppercase tracking-wider">
                                             <textPath href="#textPath" startOffset="0%">
-                                                • SCROLL&nbsp;&nbsp;DOWN • AND&nbsp;&nbsp;KNOW&nbsp;&nbsp;ME&nbsp;&nbsp;BETTER
+                                                • SCROLLE&nbsp;&nbsp;EN&nbsp;&nbsp;BAS • ET&nbsp;&nbsp;DÉCOUVRE&nbsp;&nbsp;MOI&nbsp;&nbsp;MIEUX
                                             </textPath>
                                         </text>
                                     </svg>
@@ -468,8 +468,8 @@ export default function Hero() {
                             {/* Calque 2 : contenu blanc par-dessus */}
                             <div className="glass-foreground-button">
                                 <span className="cta-button-text-glass">
-                                    <span className="hidden md:inline">Let&apos;s Work Together!</span>
-                                    <span className="md:hidden">Contact Me</span>
+                                    <span className="hidden md:inline">Travaillons Ensemble !</span>
+                                    <span className="md:hidden">Contacte-moi</span>
                                 </span>
                                 <span className="cta-button-icon-glass">
                                     ↓
