@@ -89,7 +89,7 @@ export default function Hero() {
     }, [rotatingTexts.length]);
 
     return (
-        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20">
+        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20" suppressHydrationWarning={true}>
         
             {/* Texte en arrière-plan avec défilement sans parallax - caché en mobile */}
             <div 
