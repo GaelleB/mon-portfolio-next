@@ -112,13 +112,6 @@ export default function Footer() {
                                 Home
                             </motion.a>
                             <motion.a
-                                href="/nonexistent-page"
-                                data-cursor-text="Visit 404 Page"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                404 Page
-                            </motion.a>
-                            <motion.a
                                 href="/licensing"
                                 data-cursor-text="Visit Licensing Page"
                                 className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
