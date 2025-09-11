@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -158,7 +158,23 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
   const [isFlipped, setIsFlipped] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [useFlip3D, setUseFlip3D] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // Détection des navigateurs mobiles problématiques
+  useEffect(() => {
+    const checkFlip3DSupport = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
+      const isSafariMobile = isIOS && /safari/.test(userAgent) && !/chrome/.test(userAgent);
+      const isOldAndroid = /android/.test(userAgent) && /android [1-4]/.test(userAgent);
+      
+      // Désactiver 3D pour Safari mobile et anciens Android
+      setUseFlip3D(!(isSafariMobile || isOldAndroid));
+    };
+    
+    checkFlip3DSupport();
+  }, []);
   
   // Scroll progress individuel pour chaque card
   const { scrollYProgress: cardScrollYProgress } = useScroll({
@@ -211,14 +227,27 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
       <motion.div className="w-[430px] md:w-[360px] lg:w-[440px] h-[400px] md:h-[400px] lg:h-[480px] p-4 relative" style={{ perspective: "1000px" }}>
         <motion.div
           className="w-full h-full relative"
-          style={{ transformStyle: "preserve-3d" }}
-          animate={{ rotateX: isFlipped ? 180 : 0 }}
+          style={{ 
+            transformStyle: useFlip3D ? "preserve-3d" : "flat",
+            transform: "translateZ(0)",
+            willChange: isFlipped ? "transform" : "auto"
+          }}
+          animate={useFlip3D ? 
+            { rotateX: isFlipped ? 180 : 0 } : 
+            { scale: isFlipped ? 0.95 : 1 }
+          }
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {/* Face avant */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
-            style={{ backfaceVisibility: "hidden" }}
+            style={useFlip3D ? { 
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "translateZ(0)"
+            } : {}}
+            animate={{ opacity: isFlipped ? 0 : 1 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
           >
             <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
             <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center h-full">
@@ -237,10 +266,13 @@ const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => 
           {/* Face arrière */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
-            style={{
-              transform: "perspective(500px) rotateX(180deg)",
-              backfaceVisibility: "hidden"
-            }}
+            style={useFlip3D ? {
+              transform: "rotateX(180deg) translateZ(0)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden"
+            } : {}}
+            animate={{ opacity: isFlipped ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
           >
             <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
             <div className="glass-foreground-tech relative z-10 flex items-center justify-center text-center p-6">
