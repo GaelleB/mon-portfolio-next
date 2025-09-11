@@ -304,8 +304,7 @@ export default function Hero() {
                     style={{ 
                         top: '10px',
                         left: '50.5%',
-                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`,
-                        opacity: Math.max(1 - (Math.abs(effectiveParallaxOffset) / 120), 0)
+                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`
                     }}
                 >
                     <h1 className="font-public-sans font-medium text-black text-5xl leading-[48px]">
