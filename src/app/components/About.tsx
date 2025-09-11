@@ -134,7 +134,7 @@ export default function About() {
           {/* Titre fixe About Me */}
           <div className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 h-16 md:h-18 lg:h-20 flex items-center justify-center z-50">
             <h2 className="section-title text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900">
-              About Me
+              À propos
             </h2>
           </div>
           

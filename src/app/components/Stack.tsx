@@ -14,11 +14,6 @@ const ReactIcon = () => (
   </div>
 );
 
-const NextIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/nextjs.svg" alt="Next.js" width={80} height={80} loading="lazy" className="object-contain" />
-  </div>
-);
 
 const FigmaIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
@@ -29,11 +24,6 @@ const FigmaIcon = () => (
   </div>
 );
 
-const JavaScriptIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/javascript.jpg" alt="JavaScript" width={80} height={80} loading="lazy" className="object-contain" />
-  </div>
-);
 
 const TypeScriptIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
@@ -62,14 +52,6 @@ const CSSIcon = () => (
   </div>
 );
 
-const SASSIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/sass.svg" alt="SASS" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(52%) sepia(17%) saturate(2878%) hue-rotate(284deg) brightness(104%) contrast(97%)' }} />
-  </div>
-);
 
 const TailwindIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
@@ -80,14 +62,6 @@ const TailwindIcon = () => (
   </div>
 );
 
-const NotionIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/notion.svg" alt="Notion" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)' }} />
-  </div>
-);
 
 const ChatGPTIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
@@ -98,14 +72,6 @@ const ChatGPTIcon = () => (
   </div>
 );
 
-const NodeIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/nodejs.svg" alt="Node.js" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(89%) saturate(1553%) hue-rotate(58deg) brightness(102%) contrast(102%)' }} />
-  </div>
-);
 
 const ClaudeIcon = () => (
   <div className="w-20 h-20 flex items-center justify-center">
