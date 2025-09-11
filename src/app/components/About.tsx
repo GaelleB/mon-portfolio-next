@@ -27,7 +27,7 @@ const paragraphs = [
   },
   {
     title: "",
-    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu.<br />Je veux raconter ton histoire, à travers chaque ligne. Et te créer un espace qui te ressemble."
+    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu, mais à créer des sites qui te ressemblent et qui performent."
   }
 ];
 
@@ -60,7 +60,7 @@ const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) =
 
       {/* Calque 2 : carte blanche nette */}
       <div className="glass-foreground relative z-10 flex items-center justify-center text-center py-6 px-6 md:py-12 md:px-8 lg:py-10 lg:px-12 h-[200px] md:h-[250px] lg:min-h-[200px]">
-        <p className="paragraph-text text-gray-custom text-xs md:text-sm lg:text-base xl:text-lg leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
+        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
         </p>
       </div>
     </div>
