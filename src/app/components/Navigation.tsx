@@ -119,7 +119,7 @@ export default function Navigation() {
                                         layoutId="activeTab"
                                         className="absolute inset-y-0.5 inset-x-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
                                         initial={false}
-                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        transition={{ type: "spring", stiffness: 800, damping: 25 }}
                                     />
                                 )}
                                 <span className="relative z-10">
