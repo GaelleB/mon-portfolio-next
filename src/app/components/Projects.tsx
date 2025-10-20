@@ -28,8 +28,18 @@ const useMousePosition = () => {
 };
 
 const projects: Project[] = [
+    {
+        id: 1,
+        title: 'Netflix clone',
+        year: '2025',
+        category: 'Clone site existant',
+        image: '/assets/netflix.webp',
+        tech: ['Next.js', 'JavaScript', 'CSS'],
+        github: 'https://github.com/GaelleB/netflix-clone',
+        demo: 'https://netflix-clone-tan-xi.vercel.app/'
+    },
     // {
-    //     id: 1,
+    //     id: 2,
     //     title: 'Les Mailles de Sylvie',
     //     year: '2025',
     //     category: 'Site Vitrine',
@@ -39,7 +49,7 @@ const projects: Project[] = [
     //     demo: 'https://les-mailles-de-sylvie.vercel.app'
     // },
     // {
-    //     id: 2,
+    //     id: 3,
     //     title: 'Portfolio Next.js',
     //     year: '2025',
     //     category: 'Portfolio',
@@ -49,7 +59,7 @@ const projects: Project[] = [
     //     demo: 'https://mon-portfolio-next-mu.vercel.app'
     // },
     // {
-    //     id: 3,
+    //     id: 4,
     //     title: 'Code in the City',
     //     year: '2025',
     //     category: 'Web Application',
@@ -59,7 +69,7 @@ const projects: Project[] = [
     //     demo: 'https://code-in-the-city.vercel.app/'
     // },
     // {
-    //     id: 4,
+    //     id: 5,
     //     title: 'Groupomania',
     //     year: '2022',
     //     category: 'Social Network',
@@ -69,7 +79,7 @@ const projects: Project[] = [
     //     demo: null
     // },
     // {
-    //     id: 5,
+    //     id: 6,
     //     title: 'Piiquante API',
     //     year: '2022',
     //     category: 'Backend API',
@@ -79,7 +89,7 @@ const projects: Project[] = [
     //     demo: null
     // },
     // {
-    //     id: 6,
+    //     id: 7,
     //     title: 'Portfolio Original',
     //     year: '2022',
     //     category: 'Portfolio',
