@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:gaelleb.github.io)"
-    ],
-    "deny": []
-  }
-}
