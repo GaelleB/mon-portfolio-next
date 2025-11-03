@@ -48,16 +48,16 @@ const projects: Project[] = [
         github: 'https://github.com/GaelleB/halloween-site',
         demo: 'https://halloween-site.vercel.app/'
     },
-    // {
-    //     id: 3,
-    //     title: 'Portfolio Next.js',
-    //     year: '2025',
-    //     category: 'Portfolio',
-    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
-    //     tech: ['Next.js', 'TypeScript', 'Framer Motion'],
-    //     github: 'https://github.com/GaelleB/mon-portfolio-next',
-    //     demo: 'https://mon-portfolio-next-mu.vercel.app'
-    // },
+    {
+        id: 3,
+        title: 'Groupomania',
+        year: '2025',
+        category: 'Portfolio',
+        image: '/assets/groupomania.png',
+        tech: ['Next.js', 'TypeScript'],
+        github: 'https://github.com/GaelleB/groupomania-next',
+        demo: 'https://groupomania-next.vercel.app/'
+    },
     // {
     //     id: 4,
     //     title: 'Code in the City',
