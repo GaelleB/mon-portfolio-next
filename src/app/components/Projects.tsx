@@ -38,16 +38,16 @@ const projects: Project[] = [
         github: 'https://github.com/GaelleB/netflix-clone',
         demo: 'https://netflix-clone-tan-xi.vercel.app/'
     },
-    // {
-    //     id: 2,
-    //     title: 'Les Mailles de Sylvie',
-    //     year: '2025',
-    //     category: 'Site Vitrine',
-    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
-    //     tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    //     github: 'https://github.com/GaelleB/les-mailles-de-sylvie',
-    //     demo: 'https://les-mailles-de-sylvie.vercel.app'
-    // },
+    {
+        id: 2,
+        title: 'Debug or Treat - Halloween Site',
+        year: '2025',
+        category: 'Site Vitrine',
+        image: '/assets/happy-halloween.jpg',
+        tech: ['Astro'],
+        github: 'https://github.com/GaelleB/halloween-site',
+        demo: 'https://halloween-site.vercel.app/'
+    },
     // {
     //     id: 3,
     //     title: 'Portfolio Next.js',
