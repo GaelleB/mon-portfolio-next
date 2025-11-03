@@ -1,29 +1,29 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 // Hook pour suivre la position de la souris avec contraintes
 const useMousePosition = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    
+
     const handleMouseMove = (e: React.MouseEvent) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const tooltipWidth = 140; // Largeur approximative du tooltip
-        
+
         // Contraindre la position X pour éviter le débordement
         let x = e.clientX - rect.left;
         const minX = tooltipWidth / 2;
         const maxX = rect.width - tooltipWidth / 2;
         x = Math.max(minX, Math.min(maxX, x));
-        
+
         setMousePosition({
             x: x,
             y: e.clientY - rect.top
         });
     };
-    
+
     return { mousePosition, handleMouseMove };
 };
 
@@ -115,15 +115,30 @@ type Project = {
 // Composant pour une card de projet
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
     const [showCTA, setShowCTA] = useState(false);
+    const [imageHeight, setImageHeight] = useState('240px');
     const { mousePosition, handleMouseMove } = useMousePosition();
     const cardRef = useRef<HTMLDivElement>(null);
-    
+
+    // Détection de la taille d'écran pour la hauteur de l'image
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const updateImageHeight = () => {
+            setImageHeight(window.innerWidth >= 1280 ? '320px' : '240px');
+        };
+
+        updateImageHeight();
+        window.addEventListener('resize', updateImageHeight);
+
+        return () => window.removeEventListener('resize', updateImageHeight);
+    }, []);
+
     // Scroll progress individuel pour chaque card
     const { scrollYProgress: cardScrollYProgress } = useScroll({
         target: cardRef,
         offset: ["start 0.8", "end 0.1"]
     });
-    
+
     // Animation de scale - grandissent en entrant seulement
     const cardScale = useTransform(cardScrollYProgress, [0, 0.3], [0.85, 1]);
 
@@ -181,9 +196,9 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
                         width={564}
                         height={382}
                         className="w-full object-cover transition-all duration-500 group-hover:scale-105"
-                        style={{ 
+                        style={{
                             width: '100%',
-                            height: window.innerWidth >= 1280 ? '320px' : '240px'
+                            height: imageHeight
                         }}
                     />
                     {/* Overlay blanc au hover */}

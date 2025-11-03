@@ -35,6 +35,8 @@ export default function Hero() {
     
     // Détection mobile et tablette
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const checkDeviceTypes = () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -42,25 +44,27 @@ export default function Hero() {
             setIsTablet(width >= 768 && width < 1024); // Tablette
             setIsTabletLandscape(width >= 768 && width < 1024 && width > height); // Tablette paysage
         };
-        
+
         checkDeviceTypes();
         window.addEventListener('resize', checkDeviceTypes);
-        
+
         return () => window.removeEventListener('resize', checkDeviceTypes);
     }, []);
     
     // Effet parallaxe React-only - activé sur tous les appareils
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const handleScroll = () => {
             const scrollY = window.scrollY;
             const displacement = scrollY * -0.3;
-            
+
             // UNIQUEMENT mettre à jour l'état React
             setParallaxOffset(displacement);
         };
-        
+
         window.addEventListener('scroll', handleScroll, { passive: true });
-        
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };

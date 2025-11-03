@@ -73,6 +73,8 @@ export default function About() {
   const [isTabletPortrait, setIsTabletPortrait] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024); // Include tablette
       // Détection tablette en portrait (768-1023px largeur)

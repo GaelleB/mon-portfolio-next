@@ -13,15 +13,17 @@ export default function Navigation() {
     
     // Auto-detect active section + hide/show navigation
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
             const scrollPosition = currentScrollY + 100; // Offset for better detection
-            
+
             // Keep navigation always visible
             setIsNavVisible(true);
-            
+
             setLastScrollY(currentScrollY);
-            
+
             // Get all sections
             const sections = [
                 { name: 'Accueil', element: document.getElementById('home') || document.querySelector('section:first-child') },
@@ -30,14 +32,14 @@ export default function Navigation() {
                 { name: 'Projets', element: document.getElementById('projects') },
                 { name: 'Contact', element: document.getElementById('contact') }
             ];
-            
+
             // Find the current active section
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
                 if (section.element) {
                     const rect = section.element.getBoundingClientRect();
                     const elementTop = rect.top + window.scrollY;
-                    
+
                     if (scrollPosition >= elementTop - 200) {
                         setActiveSection(section.name);
                         break;
@@ -45,10 +47,10 @@ export default function Navigation() {
                 }
             }
         };
-        
+
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Check initial position
-        
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY, isNavigating]);
 

@@ -19,19 +19,21 @@ export default function CustomCursor() {
             })
 
             // Vérifier si on est sur une page interactive ou dans le footer
-            const is404Page = window.location.pathname === '/not-found' || window.location.pathname.includes('404')
-            const isLicensingPage = window.location.pathname === '/licensing'
-            
+            const is404Page = typeof window !== 'undefined' && (window.location.pathname === '/not-found' || window.location.pathname.includes('404'))
+            const isLicensingPage = typeof window !== 'undefined' && window.location.pathname === '/licensing'
+
             let isInFooter = false
-            const footer = document.querySelector('footer')
-            if (footer) {
-                const footerRect = footer.getBoundingClientRect()
-                isInFooter = e.clientY >= footerRect.top && 
-                            e.clientY <= footerRect.bottom &&
-                            e.clientX >= footerRect.left && 
-                            e.clientX <= footerRect.right
+            if (typeof document !== 'undefined') {
+                const footer = document.querySelector('footer')
+                if (footer) {
+                    const footerRect = footer.getBoundingClientRect()
+                    isInFooter = e.clientY >= footerRect.top &&
+                                e.clientY <= footerRect.bottom &&
+                                e.clientX >= footerRect.left &&
+                                e.clientX <= footerRect.right
+                }
             }
-            
+
             const shouldShowCursor = isInFooter || is404Page || isLicensingPage
             
             // Réinitialiser si on quitte toutes les zones interactives
@@ -86,18 +88,22 @@ export default function CustomCursor() {
         }
 
         // Ajouter les écouteurs d'événements pour le mouvement de la souris
-        window.addEventListener('mousemove', mouseMove)
+        if (typeof window !== 'undefined') {
+            window.addEventListener('mousemove', mouseMove)
+        }
 
         // Ajouter les écouteurs pour les éléments interactifs
-        const interactiveElements = document.querySelectorAll('[data-cursor-text]')
-        
+        const interactiveElements = typeof document !== 'undefined' ? document.querySelectorAll('[data-cursor-text]') : []
+
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', handleMouseEnter)
             element.addEventListener('mouseleave', handleMouseLeave)
         })
 
         return () => {
-            window.removeEventListener('mousemove', mouseMove)
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('mousemove', mouseMove)
+            }
             interactiveElements.forEach(element => {
                 element.removeEventListener('mouseenter', handleMouseEnter)
                 element.removeEventListener('mouseleave', handleMouseLeave)
