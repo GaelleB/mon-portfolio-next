@@ -31,7 +31,7 @@ const projects: Project[] = [
     {
         id: 1,
         title: 'Netflix clone',
-        year: '2025',
+        year: 'Octobre 2025',
         category: 'Clone site existant',
         image: '/assets/netflix.webp',
         tech: ['Next.js', 'JavaScript', 'CSS'],
@@ -41,8 +41,8 @@ const projects: Project[] = [
     {
         id: 2,
         title: 'Debug or Treat - Halloween Site',
-        year: '2025',
-        category: 'Site Vitrine',
+        year: 'Octobre 2025',
+        category: 'Site interactif',
         image: '/assets/happy-halloween.jpg',
         tech: ['Astro'],
         github: 'https://github.com/GaelleB/halloween-site',
@@ -51,23 +51,23 @@ const projects: Project[] = [
     {
         id: 3,
         title: 'Groupomania',
-        year: '2025',
+        year: 'Octobre 2025',
         category: 'Portfolio',
         image: '/assets/groupomania.png',
         tech: ['Next.js', 'TypeScript'],
         github: 'https://github.com/GaelleB/groupomania-next',
         demo: 'https://groupomania-next.vercel.app/'
     },
-    // {
-    //     id: 4,
-    //     title: 'Code in the City',
-    //     year: '2025',
-    //     category: 'Web Application',
-    //     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=720&h=720&fit=crop',
-    //     tech: ['React', 'Next.js', 'JavaScript'],
-    //     github: 'https://github.com/GaelleB/code-in-the-city',
-    //     demo: 'https://code-in-the-city.vercel.app/'
-    // },
+    {
+        id: 4,
+        title: 'Code in the City',
+        year: 'Juin2025',
+        category: 'Blog personnel',
+        image: '/assets/code-in-the-city.png',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        github: 'https://github.com/GaelleB/code-in-the-city',
+        demo: 'https://code-in-the-city.vercel.app/'
+    },
     // {
     //     id: 5,
     //     title: 'Groupomania',
