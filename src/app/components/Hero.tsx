@@ -1,488 +1,367 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 export default function Hero() {
-    const isLoaded = true;
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
-    const [isTablet, setIsTablet] = useState(false);
-    const [isTabletLandscape, setIsTabletLandscape] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
-    const objectsRef = useRef<HTMLDivElement>(null);
-    const titleRef = useRef<HTMLDivElement>(null);
-    const subtitleRef = useRef<HTMLDivElement>(null);
-    
-    // Textes qui changent toutes les 3 secondes
+
+    // Textes rotatifs éditoriaux
     const rotatingTexts = [
-        "Web Developer",
-        "Frontend Developer",
-        "React/Next Developer", 
-        "Creative Coder",
-        "Digital Artist"
+        "Pour webzines et maisons d'édition",
+        "Développeuse React/Next spécialisée en contenu éditorial",
+        "Quand le code rencontre la mise en page",
+        "Des interfaces narratives pour la culture"
     ];
-    
-    // État du parallaxe pour Framer Motion
-    const [parallaxOffset, setParallaxOffset] = useState(0);
-    
-    // Parallax ajusté selon l'appareil - réduit en tablette paysage
-    const effectiveParallaxOffset = isTabletLandscape ? parallaxOffset * 0.6 : parallaxOffset;
-    
-    // Objets qui ont besoin d'être centrés (sphère et cube vert en mobile/tablette portrait)
-    const needsCentering = isMobile || (isTablet && !isTabletLandscape);
-    
-    // Détection mobile et tablette
+
+    // Scroll parallax pour les éléments décoratifs
+    const { scrollY } = useScroll();
+    const watermarkY = useTransform(scrollY, [0, 500], [0, -150]);
+    const lineArtY = useTransform(scrollY, [0, 500], [0, 100]);
+
+    // Détection mobile
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const checkDeviceTypes = () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            setIsMobile(width < 768); // Mobile
-            setIsTablet(width >= 768 && width < 1024); // Tablette
-            setIsTabletLandscape(width >= 768 && width < 1024 && width > height); // Tablette paysage
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
         };
 
-        checkDeviceTypes();
-        window.addEventListener('resize', checkDeviceTypes);
-
-        return () => window.removeEventListener('resize', checkDeviceTypes);
-    }, []);
-    
-    // Effet parallaxe React-only - activé sur tous les appareils
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            const displacement = scrollY * -0.3;
-
-            // UNIQUEMENT mettre à jour l'état React
-            setParallaxOffset(displacement);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-
-    // Animation automatique du texte toutes les 3 secondes (avec délai initial)
+    // Animation automatique du texte toutes les 4 secondes
     useEffect(() => {
-        let interval: NodeJS.Timeout;
-        
-        // Délai de 2 secondes avant de commencer l'animation
-        const timeoutId = setTimeout(() => {
-            setCurrentTextIndex(1); // Passe au deuxième texte après 2s
-            
-            interval = setInterval(() => {
-                setCurrentTextIndex((prevIndex) => 
-                    (prevIndex + 1) % rotatingTexts.length
-                );
-            }, 3000);
-        }, 2000);
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prevIndex) =>
+                (prevIndex + 1) % rotatingTexts.length
+            );
+        }, 4000);
 
-        return () => {
-            clearTimeout(timeoutId);
-            if (interval) clearInterval(interval);
-        };
+        return () => clearInterval(interval);
     }, [rotatingTexts.length]);
 
     return (
-        <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden pt-20" suppressHydrationWarning={true}>
-        
-            {/* Texte en arrière-plan avec défilement sans parallax - caché en mobile */}
-            <div 
-                className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none overflow-hidden"
+        <section
+            id="home"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-6 md:px-12 lg:px-16"
+            style={{ backgroundColor: '#f5f0e8' }}
+        >
+
+            {/* Numérotation éditoriale "01" en arrière-plan - Desktop only */}
+            <motion.div
+                className="hidden lg:block absolute top-32 left-12 pointer-events-none select-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
             >
-                <motion.div 
-                    className="flex whitespace-nowrap"
-                    animate={{ x: ["0%", "-50%"] }}
-                    transition={{
-                        duration: 120,
-                        repeat: Infinity,
-                        ease: "linear"
+                <span
+                    className="font-mono font-bold text-[180px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: 0.05
                     }}
                 >
-                    {/* Texte qui défile en boucle */}
-                    {Array(12).fill(null).map((_, index) => (
-                        <div 
-                            key={index}
-                            className="font-public-sans font-black text-[240px] leading-[288px] text-black tracking-tighter select-none mr-20"
-                        >
-                            {index % 2 === 0 ? 'GAËLLE' : 'BOUCHER'}
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
+                    01
+                </span>
+            </motion.div>
 
-            {/* Objets 3D flottants avec parallax */}
-            <div ref={objectsRef}>
-                
-                {/* Pyramide orange (top-left) */}
-                <motion.div 
-                    className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', left: '25%', y: effectiveParallaxOffset }}
+            {/* Typographie watermark "STORY" en arrière-plan */}
+            <motion.div
+                className="absolute pointer-events-none select-none"
+                style={{
+                    top: isMobile ? '10%' : '15%',
+                    right: isMobile ? '5%' : '10%',
+                    y: watermarkY
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+            >
+                <span
+                    className="font-serif font-bold text-[120px] md:text-[200px] lg:text-[280px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: isMobile ? 0.02 : 0.03,
+                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
+                    }}
+                >
+                    STORY
+                </span>
+            </motion.div>
+
+            {/* Illustration line art "Livre ouvert" - Desktop only */}
+            <motion.div
+                className="hidden lg:block absolute bottom-24 left-20 pointer-events-none"
+                style={{ y: lineArtY }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, delay: 0.8 }}
+            >
+                <motion.svg
+                    width="120"
+                    height="100"
+                    viewBox="0 0 120 100"
+                    fill="none"
                     animate={{
-                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 8, effectiveParallaxOffset - 5, effectiveParallaxOffset - 10, effectiveParallaxOffset - 15, effectiveParallaxOffset - 8, effectiveParallaxOffset],
-                        x: [0, 3, -2, 4, 0, -1, 0],
+                        y: [0, -8, 0]
                     }}
                     transition={{
-                        duration: 12,
+                        duration: 6,
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
                 >
-                    <Image 
-                        src="/assets/3d/pyramid.webp"
-                        alt="Objet 3D décoratif - Pyramide orange flottante"
-                        width={400}
-                        height={400}
-                        className="w-full h-full object-contain"
-                        style={{
-                            backfaceVisibility: 'hidden',
-                            transform: 'translateZ(0) rotate(12deg)'
-                        }}
+                    {/* Livre ouvert simplifié en line art */}
+                    <path
+                        d="M10 20 L10 80 L55 70 L55 15 L10 20Z"
+                        stroke="#f97316"
+                        strokeWidth="2"
+                        fill="none"
+                        opacity="0.6"
                     />
-                </motion.div>
-
-                {/* Sphère violette (left) */}
-                <div 
-                    className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ 
-                        top: '37%', 
-                        left: '20%', 
-                        transform: needsCentering 
-                            ? `translateX(-50%) translateY(${effectiveParallaxOffset}px)` 
-                            : `translateY(${effectiveParallaxOffset}px)` 
-                    }}
-                >
-                    <motion.div 
-                        className="w-full h-full"
-                        animate={{
-                            y: [0, -6, -3, -8, -4, -12, -6, 0],
-                            x: [0, 5, -3, 6, -4, 0, 2, 0],
-                        }}
-                        transition={{
-                            duration: 14,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: -3
-                        }}
-                    >
-                        <Image 
-                            src="/assets/3d/sphere.webp"
-                            alt="Objet 3D décoratif - Sphère violette en lévitation"
-                            width={300}
-                            height={300}
-                            className="w-full h-full object-contain"
-                        />
-                    </motion.div>
-                </div>
-
-                {/* Cylindre bleu (bottom-left) */}
-                <motion.div 
-                    className="absolute w-70 h-90 z-20 hero-3d-object"
-                    style={{ bottom: '5%', left: '25%', y: effectiveParallaxOffset}}
-                    animate={{
-                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 7, effectiveParallaxOffset - 3, effectiveParallaxOffset - 6, effectiveParallaxOffset - 14, effectiveParallaxOffset - 9, effectiveParallaxOffset],
-                        x: [0, -3, 5, -2, 0, 1, 0],
-                    }}
-                    transition={{
-                        duration: 16,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -6
-                    }}
-                >
-                    <Image 
-                        src="/assets/3d/cylinder.webp"
-                        alt="Objet 3D décoratif - Cylindre bleu en rotation"
-                        width={300}
-                        height={360}
-                        className="w-full h-full object-contain"
-                        style={{
-                            transform: 'scaleX(-1)'
-                        }}
+                    <path
+                        d="M110 20 L110 80 L65 70 L65 15 L110 20Z"
+                        stroke="#f97316"
+                        strokeWidth="2"
+                        fill="none"
+                        opacity="0.6"
                     />
-                </motion.div>
-
-                {/* Étoile turquoise (top-right) */}
-                <motion.div 
-                    className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ top: '15%', right: '25%', y: effectiveParallaxOffset }}
-                    animate={{
-                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 6, effectiveParallaxOffset - 12, effectiveParallaxOffset - 6, effectiveParallaxOffset - 9, effectiveParallaxOffset - 16, effectiveParallaxOffset - 10, effectiveParallaxOffset],
-                        rotate: [0, 8, 5, 12, 3, 0, -5, 0],
-                    }}
-                    transition={{
-                        duration: 18,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -9
-                    }}
-                >
-                    <Image 
-                        src="/assets/3d/star.webp"
-                        alt="Objet 3D décoratif - Étoile turquoise brillante"
-                        width={250}
-                        height={250}
-                        className="w-full h-full object-contain"
+                    <path
+                        d="M55 15 L60 12 L65 15"
+                        stroke="#f97316"
+                        strokeWidth="2"
+                        fill="none"
+                        opacity="0.6"
                     />
-                </motion.div>
+                    {/* Lignes de texte stylisées */}
+                    <line x1="20" y1="35" x2="45" y2="33" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                    <line x1="20" y1="45" x2="45" y2="43" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                    <line x1="20" y1="55" x2="45" y2="53" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                    <line x1="75" y1="35" x2="100" y2="33" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                    <line x1="75" y1="45" x2="100" y2="43" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                    <line x1="75" y1="55" x2="100" y2="53" stroke="#f97316" strokeWidth="1" opacity="0.3" />
+                </motion.svg>
+            </motion.div>
 
-                {/* Cube vert/jaune (right) */}
-                <div 
-                    className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ 
-                        top: '37%', 
-                        right: '20%', 
-                        transform: needsCentering 
-                            ? `translateX(-50%) translateY(${effectiveParallaxOffset}px)` 
-                            : `translateY(${effectiveParallaxOffset}px)` 
-                    }}
-                >
-                    <motion.div 
-                        className="w-full h-full"
-                        animate={{
-                            y: [0, -5, -8, -6, -13, -7, 0],
-                            x: [0, 3, -4, 2, 0, -2, 0],
-                        }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: -12
-                        }}
-                    >
-                        <Image 
-                            src="/assets/3d/cube-green.webp"
-                            alt="Objet 3D décoratif - Cube vert et jaune géométrique"
-                            width={250}
-                            height={250}
-                            className="w-full h-full object-contain"
-                        />
-                    </motion.div>
-                </div>
+            {/* Contenu principal */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto">
 
-                {/* Cube jaune (bottom-right) */}
-                <motion.div 
-                    className="absolute w-70 h-70 z-20 hero-3d-object"
-                    style={{ bottom: '10%', right: '25%', y: effectiveParallaxOffset }}
-                    animate={{
-                        y: [effectiveParallaxOffset, effectiveParallaxOffset - 9, effectiveParallaxOffset - 4, effectiveParallaxOffset - 12, effectiveParallaxOffset - 5, effectiveParallaxOffset - 17, effectiveParallaxOffset - 11, effectiveParallaxOffset],
-                        rotate: [4, 10, 15, 8, 16, 4, -8, 4],
-                    }}
-                    transition={{
-                        duration: 22,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: -15
-                    }}
-                >
-                    <Image 
-                        src="/assets/3d/cube-yellow.webp"
-                        alt="Objet 3D décoratif - Cube jaune lumineux en rotation"
-                        width={260}
-                        height={260}
-                        className="w-full h-full object-contain"
-                    />
-                </motion.div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-            </div>
+                    {/* Zone gauche : Textes et CTA - 7 colonnes sur desktop */}
+                    <div className="lg:col-span-7 text-center lg:text-left">
 
-            {/* Contenu central avec positionnement absolu */}
-            <div 
-                className="relative z-30 text-center mx-auto"
-                style={{ height: '600px', width: '100%' }}
-            >
-                
-                {/* Salutation seule */}
-                <motion.div 
-                    ref={titleRef}
-                    className={`absolute ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
-                    style={{ 
-                        top: '10px',
-                        left: '50.5%',
-                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`
-                    }}
-                >
-                    <h1 className="font-public-sans font-medium text-black text-5xl leading-[48px]">
-                        Hi, I&apos;m <span className="italic font-bold" style={{ fontFamily: '"PT Serif", "PT Serif Placeholder", serif' }}>Gaëlle</span>!
-                    </h1>
-                </motion.div>
-
-                {/* Texte qui change seul */}
-                <motion.div 
-                    ref={subtitleRef}
-                    className={`absolute ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
-                    style={{ 
-                        top: '80px',
-                        left: '50%',
-                        transform: `translateX(-50%) translateY(${effectiveParallaxOffset}px)`
-                    }}
-                >
-                    <motion.p 
-                        key={currentTextIndex}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                        className="font-public-sans text-xl font-normal leading-6 text-gray-600"
-                    >
-                        {rotatingTexts[currentTextIndex]}
-                    </motion.p>
-                </motion.div>
-
-                {/* Bloc Photo + Social proof + CTA */}
-                <div 
-                    className="profile-block absolute"
-                    style={{ 
-                        top: '115px',
-                        left: '50%',
-                        transform: 'translateX(-50%)'
-                    }}
-                >
-                    {/* Photo de profil avec effet flip 3D */}
-                    <motion.div 
-                        className={`mb-10 relative w-72 h-72 mx-auto group [perspective:1000px] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-80'}`} 
-                    >
-                    {/* Zone de hover invisible élargie - désactivée en mobile */}
-                    <motion.div 
-                        className="flip-card-hover-zone absolute inset-0 p-10 -m-10 md:cursor-pointer"
-                        style={{ 
-                            y: effectiveParallaxOffset
-                        }}
-                        initial="rest"
-                        whileHover={isMobile ? {} : "hover"}
-                        animate="rest"
-                    >
+                        {/* Label */}
                         <motion.div
-                            className="relative w-full h-full flip-card [transform-style:preserve-3d]"
-                                variants={{
-                                    hover: { rotateY: isMobile ? 0 : 185 },
-                                    rest: { rotateY: isMobile ? 0 : 5 }
-                                }}
-                                transition={{ duration: 0.2, ease: "easeInOut" }}
-                                style={{ 
-                                    transform: isMobile ? 'none' : 'perspective(1000px) rotateX(4deg) rotateZ(0deg)'
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <span
+                                className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-6"
+                                style={{
+                                    color: '#f97316',
+                                    letterSpacing: '0.1em'
                                 }}
                             >
-                        {/* FACE AVANT */}
-                        <div className="absolute w-full h-full rounded-[3rem] overflow-hidden shadow-2xl [backface-visibility:hidden]" style={{ 
-                            transform: isMobile ? 'none' : 'perspective(500px) rotateY(8deg)'
-                        }}>
-                            <div className="relative w-full h-full rounded-[3rem] overflow-hidden">
-                                <Image 
-                                    src="/assets/gaelle.jpg" 
-                                    alt="Gaëlle Boucher - Développeuse Front-End, photo de profil professionnelle" 
-                                    className="block w-full h-full rounded-[inherit] object-cover object-[47.9%_24.1%]"
+                                Développeuse Front-End · Projets Éditoriaux
+                            </span>
+                        </motion.div>
+
+                        {/* Titre principal */}
+                        <motion.h1
+                            className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl mb-6"
+                            style={{
+                                color: '#253439',
+                                lineHeight: '1.1'
+                            }}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            Je crée des sites où les histoires respirent
+                        </motion.h1>
+
+                        {/* Textes rotatifs */}
+                        <motion.div
+                            className="mb-6 h-16 md:h-14 flex items-center justify-center lg:justify-start"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                        >
+                            <motion.p
+                                key={currentTextIndex}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.5 }}
+                                className="font-sans text-lg md:text-xl"
+                                style={{
+                                    color: '#333333',
+                                    lineHeight: '1.4'
+                                }}
+                            >
+                                {rotatingTexts[currentTextIndex]}
+                            </motion.p>
+                        </motion.div>
+
+                        {/* Description courte */}
+                        <motion.p
+                            className="font-sans text-base md:text-lg mb-10 max-w-2xl mx-auto lg:mx-0"
+                            style={{
+                                color: '#333333',
+                                opacity: 0.9,
+                                lineHeight: '1.6'
+                            }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                        >
+                            De la néonat&apos; au code, je conçois des expériences de lecture pour médias culturels, webzines et maisons d&apos;édition.
+                        </motion.p>
+
+                        {/* CTA */}
+                        <motion.div
+                            className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                        >
+                            {/* CTA Principal */}
+                            <motion.a
+                                href="#contact"
+                                className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300 w-full sm:w-auto"
+                                style={{
+                                    backgroundColor: '#f97316',
+                                    color: '#faf7f2'
+                                }}
+                                whileHover={{
+                                    scale: 1.03,
+                                    backgroundColor: '#e86510',
+                                    boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                                }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                Parlons de ton projet
+                            </motion.a>
+
+                            {/* CTA Secondaire */}
+                            <motion.a
+                                href="#projects"
+                                className="inline-flex items-center justify-center font-sans text-base group"
+                                style={{ color: '#253439' }}
+                                whileHover={{ x: 5 }}
+                            >
+                                <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
+                                    Voir mes projets
+                                </span>
+                                <span className="ml-2 group-hover:translate-y-1 inline-block transition-transform duration-300">↓</span>
+                            </motion.a>
+                        </motion.div>
+
+                    </div>
+
+                    {/* Zone droite : Photo et social proof - 5 colonnes sur desktop */}
+                    <div className="lg:col-span-5 flex flex-col items-center justify-center">
+
+                        {/* Photo de profil */}
+                        <motion.div
+                            className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 mb-6"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, delay: 0.3 }}
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <div
+                                className="relative w-full h-full rounded-full overflow-hidden shadow-2xl"
+                                style={{
+                                    boxShadow: '0 20px 60px rgba(37, 52, 57, 0.15)'
+                                }}
+                            >
+                                <Image
+                                    src="/assets/gaelle.jpg"
+                                    alt="Gaëlle Boucher - Développeuse Front-End spécialisée projets éditoriaux"
+                                    className="w-full h-full object-cover object-[47.9%_24.1%]"
                                     width={500}
                                     height={500}
+                                    priority
+                                    style={{
+                                        filter: 'sepia(18%) saturate(85%) contrast(102%)',
+                                    }}
                                 />
                             </div>
-                        </div>
 
-                        {/* FACE ARRIÈRE */}
-                        <div className="absolute w-full h-full rounded-[3rem] bg-white/80 backdrop-blur-sm flex items-center justify-center [transform:rotateY(180deg)] shadow-2xl [backface-visibility:hidden]">
-                            
-                            {/* Cercle extérieur avec bordure */}
-                            <div className="relative w-48 h-48 rounded-full bg-white flex items-center justify-center border-2 border-black">
-                                
-                                {/* Texte rotatif */}
-                                <motion.div
-                                    animate={{ rotate: [0, 360] }}
-                                    transition={{
-                                        duration: 15,
-                                        repeat: Infinity,
-                                        ease: "linear"
-                                    }}
-                                    className="absolute inset-0 w-full h-full"
-                                >
-                                    <svg className="w-full h-full" viewBox="0 0 176 176">
-                                        <defs>
-                                            <path
-                                                id="textPath"
-                                                d="M 88,88 m -62,0 a 62,62 0 1,1 124,0 a 62,62 0 1,1 -124,0"
-                                            />
-                                        </defs>
-                                        <text className="text-md font-medium black uppercase tracking-wider">
-                                            <textPath href="#textPath" startOffset="0%">
-                                                • SCROLLE&nbsp;&nbsp;EN&nbsp;&nbsp;BAS • ET&nbsp;&nbsp;DÉCOUVRE&nbsp;&nbsp;MOI&nbsp;&nbsp;MIEUX
-                                            </textPath>
-                                        </text>
-                                    </svg>
-                                </motion.div>
-                                
-                                {/* Cercle intérieur avec bordure */}
-                                <div className="w-25 h-25 rounded-full bg-white flex items-center justify-center border-2 border-black" >
-                                    <motion.div
-                                        animate={{ 
-                                            y: [0, -8, 0]
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                    >
-                                        <svg 
-                                            className="w-8 h-8 text-gray-600" 
-                                            fill="none" 
-                                            stroke="currentColor" 
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path 
-                                                strokeLinecap="round" 
-                                                strokeLinejoin="round" 
-                                                strokeWidth={2} 
-                                                d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                                            />
-                                        </svg>
-                                    </motion.div>
-                                </div>
-                            </div>
-                        </div>
+                            {/* Bordure décorative orange */}
+                            <motion.div
+                                className="absolute inset-0 rounded-full pointer-events-none"
+                                style={{
+                                    border: '3px solid #f97316',
+                                    opacity: 0.2
+                                }}
+                                animate={{
+                                    scale: [1, 1.05, 1],
+                                    opacity: [0.2, 0.3, 0.2]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            />
                         </motion.div>
-                    </motion.div>
-                </motion.div>
 
-                    {/* Social proof */}
-                    <div className={`mb-0 transition-all duration-1000 delay-[600ms] translate-y-[-22px] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <div className="flex items-center justify-center space-x-2">
+                        {/* Social proof */}
+                        <motion.div
+                            className="flex items-center justify-center space-x-3"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 1 }}
+                        >
                             <div className="flex -space-x-2">
-                                <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-red-500 rounded-full border-2 border-white shadow-lg"></div>
-                                <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white shadow-lg"></div>
-                                <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-teal-500 rounded-full border-2 border-white shadow-lg"></div>
+                                <div
+                                    className="w-8 h-8 rounded-full border-2 shadow-md"
+                                    style={{
+                                        backgroundColor: '#f97316',
+                                        borderColor: '#f5f0e8'
+                                    }}
+                                />
+                                <div
+                                    className="w-8 h-8 rounded-full border-2 shadow-md"
+                                    style={{
+                                        backgroundColor: '#253439',
+                                        borderColor: '#f5f0e8'
+                                    }}
+                                />
+                                <div
+                                    className="w-8 h-8 rounded-full border-2 shadow-md"
+                                    style={{
+                                        backgroundColor: '#333333',
+                                        borderColor: '#f5f0e8'
+                                    }}
+                                />
                             </div>
-                            <span className="text-sm text-gray-600 ml-3 font-medium">5+ projets</span>
-                        </div>
+                            <span
+                                className="text-sm md:text-base font-medium ml-3"
+                                style={{
+                                    color: '#333333',
+                                    opacity: 0.7
+                                }}
+                            >
+                                5+ projets éditoriaux
+                            </span>
+                        </motion.div>
+
                     </div>
 
-                    {/* CTA Button */}
-                    <div className={`mb-1 transition-all duration-1000 delay-[800ms] translate-y-[10px] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <a href="#contact" className="cta-button-glass font-public-sans">
-                            {/* Calque 1 : blur de fond */}
-                            <div className="glass-bg-button glass-backdrop" />
-                            
-                            {/* Calque 2 : contenu blanc par-dessus */}
-                            <div className="glass-foreground-button">
-                                <span className="cta-button-text-glass">
-                                    <span className="hidden md:inline">Travaillons Ensemble !</span>
-                                    <span className="md:hidden">Contacte-moi</span>
-                                </span>
-                                <span className="cta-button-icon-glass">
-                                    ↓
-                                </span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
+
             </div>
+
         </section>
     );
 }
