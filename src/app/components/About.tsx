@@ -1,241 +1,407 @@
-"use client";
+'use client';
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Configuration des animations - vraiment lentes
-const ANIMATION_CONFIG = {
-  PARAGRAPH_DURATION: 0.25,
-  PARAGRAPH_3_END: 0.65,
-  CV_START: 0.65,
-  CV_END: 0.8,
-  SECTION_MOVE: 0.98,
-  INITIAL_ROTATION: "2deg", 
-  INITIAL_SCALE: 0.9,
-  INITIAL_Y: "60vh"
-} as const;
-
-const paragraphs = [
-  {
-    title: "",
-    content: "Avant de devenir développeuse web, j'étais auxiliaire de puériculture. Je travaillais en néonatalogie, entourée de silences, de machines, et de tout petits humains. C'était un métier exigeant, profondément humain. Et puis un jour, j'ai eu besoin de créer autrement. Alors j'ai appris à coder."
-  },
-  {
-    title: "",
-    content: "Je vis au rythme du clavier, mais aussi de la musique, des séries et des livres. J'ai toujours aimé les histoires, celles qu'on lit, qu'on entend, qu'on regarde. Elles me nourrissent autant que le design ou le code. Les séries et la musique, c'est mon moteur. Ça m'inspire autant que Figma."
-  },
-  {
-    title: "",
-    content: "Aujourd'hui, je crée des sites web sur mesure avec React et Next.js. Je veux des sites simples, fluides et fidèles à ceux qui les portent. Je ne cherche pas juste à afficher du contenu, mais à créer des sites qui te ressemblent et qui performent."
-  }
+// Les 3 chapitres narratifs
+const chapters = [
+    {
+        number: "01",
+        title: "Avant le code, il y avait le soin",
+        text: "J'ai d'abord été auxiliaire de puériculture en néonatalogie. Un métier de silence, de machines et de tout petits humains. Exigeant. Profondément humain.",
+        text2: "Et puis un jour, j'ai eu besoin de créer autrement. Alors j'ai appris à coder.",
+        icon: "biberon"
+    },
+    {
+        number: "02",
+        title: "Les histoires qui me nourrissent",
+        text: "Je vis au rythme du clavier, mais aussi de la musique, des séries et des livres.",
+        text2: "Les histoires — celles qu'on lit, qu'on entend, qu'on regarde — me nourrissent autant que le design ou le code. Elles sont mon moteur créatif.",
+        icon: "casque"
+    },
+    {
+        number: "03",
+        title: "Coder pour raconter",
+        text: "Aujourd'hui, je conçois des sites web sur mesure avec React et Next.js. Simples, fluides, et fidèles à ceux qui les portent.",
+        text2: "Je ne cherche pas juste à afficher du contenu. Je veux créer des expériences qui te ressemblent et qui performent.",
+        icon: "code"
+    }
 ];
 
-// Composant réutilisable pour chaque carte
-interface ParagraphCardProps {
-  paragraph: typeof paragraphs[0];
-  animation: {
-    y: MotionValue<string>;
-    rotate: MotionValue<string>;
-    scale: MotionValue<number>;
-    opacity: MotionValue<number>;
-    zIndex: number;
-  };
-}
+// Composant pour les line art SVG
+const ChapterIcon = ({ icon }: { icon: string }) => {
+    if (icon === "biberon") {
+        return (
+            <motion.svg
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                {/* Coeur plus précis, pointe bien marquée */}
+                <path
+                    d="
+                    M40 60
+                    C28 48, 20 42, 20 32
+                    C20 24, 26 20, 33 20
+                    C37 20, 40 24, 40 28
+                    C40 24, 43 20, 47 20
+                    C54 20, 60 24, 60 32
+                    C60 42, 52 48, 40 60 Z
+                    "
+                    stroke="#f97316"
+                    strokeWidth="2"
+                    fill="none"
+                    opacity="0.85"
+                />
 
-const ParagraphCard: React.FC<ParagraphCardProps> = ({ paragraph, animation }) => (
-  <motion.div
-    style={{
-      y: animation.y,
-      rotate: animation.rotate,
-      scale: animation.scale,
-      opacity: animation.opacity,
-      zIndex: animation.zIndex
-    }}
-    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center"
-  >
-    <div className="relative w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl p-3 sm:p-4 md:p-6 mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-0">
-      {/* Calque 1 : blur + fond indigo ultra-dilué */}
-      <div className="glass-bg glass-backdrop absolute inset-0 z-0" />
+                {/* Ligne ECG plus nerveuse */}
+                <polyline
+                    points="12,40 26,40 30,32 34,48 40,30 46,40 68,40"
+                    stroke="#f97316"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.9"
+                />
 
-      {/* Calque 2 : carte blanche nette */}
-      <div className="glass-foreground relative z-10 flex items-center justify-center text-center py-6 px-6 md:py-12 md:px-8 lg:py-10 lg:px-12 h-[200px] md:h-[250px] lg:min-h-[200px]">
-        <p className="paragraph-text text-gray-custom text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-4xl" dangerouslySetInnerHTML={{ __html: paragraph.content }}>
-        </p>
-      </div>
-    </div>
-  </motion.div>
-);
+                {/* Points de départ/fin */}
+                <circle cx="12" cy="40" r="1.5" fill="#f97316" opacity="0.6" />
+                <circle cx="68" cy="40" r="1.5" fill="#f97316" opacity="0.6" />
+            </motion.svg>
+        );
+    }
+
+    if (icon === "casque") {
+        return (
+            <motion.svg
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+                {/* Casque audio en line art */}
+                <path d="M20 30 Q20 15 40 15 Q60 15 60 30 L60 50" stroke="#f97316" strokeWidth="2" fill="none" opacity="0.6" />
+                <rect x="15" y="45" width="10" height="20" rx="2" stroke="#f97316" strokeWidth="2" fill="none" opacity="0.6" />
+                <rect x="55" y="45" width="10" height="20" rx="2" stroke="#f97316" strokeWidth="2" fill="none" opacity="0.6" />
+                <path d="M20 50 L20 60" stroke="#f97316" strokeWidth="2" opacity="0.6" />
+                <path d="M60 50 L60 60" stroke="#f97316" strokeWidth="2" opacity="0.6" />
+            </motion.svg>
+        );
+    }
+
+    if (icon === "code") {
+        return (
+            <motion.svg
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+                {/* Écran avec code en line art */}
+                <rect x="15" y="20" width="50" height="35" rx="2" stroke="#f97316" strokeWidth="2" fill="none" opacity="0.6" />
+                <line x1="15" y1="50" x2="65" y2="50" stroke="#f97316" strokeWidth="2" opacity="0.6" />
+                <line x1="30" y1="55" x2="50" y2="55" stroke="#f97316" strokeWidth="2" opacity="0.6" />
+                {/* Lignes de code */}
+                <line x1="20" y1="28" x2="35" y2="28" stroke="#f97316" strokeWidth="1.5" opacity="0.4" />
+                <line x1="20" y1="33" x2="45" y2="33" stroke="#f97316" strokeWidth="1.5" opacity="0.4" />
+                <line x1="20" y1="38" x2="40" y2="38" stroke="#f97316" strokeWidth="1.5" opacity="0.4" />
+                <line x1="20" y1="43" x2="50" y2="43" stroke="#f97316" strokeWidth="1.5" opacity="0.4" />
+            </motion.svg>
+        );
+    }
+
+    return null;
+};
 
 export default function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isTabletPortrait, setIsTabletPortrait] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+    // Scroll parallax pour le watermark
+    const { scrollY } = useScroll();
+    const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
 
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // Include tablette
-      // Détection tablette en portrait (768-1023px largeur)
-      setIsTabletPortrait(window.innerWidth >= 768 && window.innerWidth < 1024 && window.innerHeight > window.innerWidth);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    // Détection mobile
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"]
-  });
-  
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
 
-  // Animations pour chaque paragraphe (hooks au niveau supérieur) 
-  const paragraph1Animation = {
-    y: useTransform(scrollYProgress, [0, 1], ["0vh", "0vh"]), // Toujours positionné
-    rotate: useTransform(scrollYProgress, [0, 0.02, ANIMATION_CONFIG.PARAGRAPH_DURATION - 0.02], ["2deg", "2deg", "0deg"]), // Redressement très lent
-    scale: useTransform(scrollYProgress, [0, 1], [1, 1]), // Toujours à l'échelle normale
-    opacity: useTransform(scrollYProgress, [0, 1], [1, 1]), // Toujours visible
-    zIndex: 1
-  };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
-  const paragraph2Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2], [isMobile ? "40vh" : ANIMATION_CONFIG.INITIAL_Y, "0vh"]),
-    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.01, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 - 0.02], ["-3deg", "-3deg", "0deg"]), // Redressement très lent
-    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1, 1]),
-    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION + 0.1, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, 1], [0, 1, 1, 1]),
-    zIndex: 2
-  };
-
-  const paragraph3Animation = {
-    y: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_3_END], [
-      isMobile ? "30vh" : ANIMATION_CONFIG.INITIAL_Y, 
-      isTabletPortrait ? "0vh" : "0vh"
-    ]),
-    rotate: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.01, ANIMATION_CONFIG.PARAGRAPH_3_END - 0.02], ["3deg", "3deg", "0deg"]), // Redressement très lent
-    scale: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END], [ANIMATION_CONFIG.INITIAL_SCALE, 1, 1]),
-    opacity: useTransform(scrollYProgress, [ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.05, ANIMATION_CONFIG.PARAGRAPH_DURATION * 2 + 0.1, ANIMATION_CONFIG.PARAGRAPH_3_END, ANIMATION_CONFIG.SECTION_MOVE], [0, 1, 1, 1]),
-    zIndex: 3
-  };
-
-  const paragraphAnimations = [paragraph1Animation, paragraph2Animation, paragraph3Animation];
-
-  // Animation du CV - apparaît à 0.6, se place jusqu'à 0.8, puis reste stable  
-  const cvY = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END, ANIMATION_CONFIG.SECTION_MOVE], [isMobile ? "12vh" : "12vh", isMobile ? "25vh" : "30vh", isMobile ? "25vh" : "30vh"]);
-  const cvScale = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.05, ANIMATION_CONFIG.CV_END], [1, 1, 1]);
-  const cvOpacity = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_START + 0.02, ANIMATION_CONFIG.CV_END], [0, 1, 1]);
-  const cvZIndex = useTransform(scrollYProgress, [ANIMATION_CONFIG.CV_START, ANIMATION_CONFIG.CV_END - 0.1, ANIMATION_CONFIG.CV_END], [0, 0, 4]);
-
-  return (
-    <div id="about" ref={containerRef} className="relative">
-      {/* Section avec hauteur pour permettre le scroll */}
-      <div className="h-[280vh] lg:h-[320vh]">
-        {/* Contenu sticky qui reste fixe pendant le scroll */}
-        <div className="sticky top-0 h-screen bg-white overflow-hidden">
-          {/* Titre fixe About Me */}
-          <div className="absolute top-12 md:top-16 lg:top-20 left-0 right-0 h-16 md:h-18 lg:h-20 flex items-center justify-center z-50">
-            <h2 className="section-title text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900">
-              À propos
-            </h2>
-          </div>
-          
-          {/* Objets 3D décoratifs avec positionnement responsive */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Casque - côtés en desktop/tablette paysage, au-dessus des cards en mobile/tablette portrait */}
-            <motion.div 
-              className="absolute z-5 about-3d-object-1"
-              animate={{
-                y: [0, -15, 0, -10, 0, -20, 0],
-                rotate: [0, -2, 1, -3, 0],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0
-              }}
-            >
-              <Image 
-                src="/assets/3d/casque.png"
-                alt="Casque audio 3D représentant la passion pour la musique et les séries"
-                width={200}
-                height={200}
-                loading="lazy"
-                className="w-full h-full object-contain drop-shadow-xl"
-              />
-            </motion.div>
-
-            {/* Biberon - côtés en desktop/tablette paysage, en dessous des cards en mobile/tablette portrait */}
-            <motion.div 
-              className="absolute z-5 about-3d-object-2"
-              animate={{
-                y: [0, 20, 0, 15, 0, 25, 0],
-                rotate: [0, 2, -1, 4, 0],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 6
-              }}
-            >
-              <Image 
-                src="/assets/3d/biberon.png"
-                alt="Biberon 3D symbolisant le passé d'auxiliaire de puériculture en néonatalogie"
-                width={200}
-                height={200}
-                loading="lazy"
-                className="w-full h-full object-contain drop-shadow-xl"
-              />
-            </motion.div>
-          </div>
-
-          {/* Paragraphes superposés */}
-          <div className="relative h-full flex items-center justify-center z-20">
-            {paragraphs.map((paragraph, index) => (
-              <ParagraphCard
-                key={index}
-                paragraph={paragraph}
-                animation={paragraphAnimations[index]}
-              />
-            ))}
-
-            {/* READ MY CV */}
+    return (
+        <section
+            id="about"
+            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            style={{ backgroundColor: '#f5f0e8' }}
+        >
+            {/* Numérotation éditoriale "02" en arrière-plan */}
             <motion.div
-              style={{
-                y: cvY,
-                scale: cvScale,
-                opacity: cvOpacity,
-                zIndex: cvZIndex
-              }}
-              className="absolute inset-0 flex items-center justify-center"
+                className="hidden lg:block absolute top-32 right-12 pointer-events-none select-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
             >
-              <a 
-                href="https://www.linkedin.com/in/gaelle-boucher/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={{ pointerEvents: 'auto' }} 
-                className="cta-button-glass font-public-sans"
-              >
-                <div className="glass-bg-button glass-backdrop" />
-                <div className="glass-foreground-button">
-                  <span className="cta-button-text-glass text-base md:text-lg lg:text-xl">Voir Mon CV</span>
-                  <span className="cta-button-icon-glass">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                      <polyline points="13,2 13,9 20,9"/>
-                      <line x1="16" y1="13" x2="8" y2="13"/>
-                      <line x1="16" y1="17" x2="8" y2="17"/>
-                      <line x1="10" y1="9" x2="8" y2="9"/>
-                    </svg>
-                  </span>
-                </div>
-              </a>
+                <span
+                    className="font-mono font-bold text-[180px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: 0.05
+                    }}
+                >
+                    02
+                </span>
             </motion.div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+
+            {/* Watermark typographique "PARCOURS" en arrière-plan */}
+            <motion.div
+                className="absolute pointer-events-none select-none"
+                style={{
+                    top: isMobile ? '8%' : '12%',
+                    left: isMobile ? '5%' : '8%',
+                    y: watermarkY
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+            >
+                <span
+                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: isMobile ? 0.02 : 0.03,
+                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
+                    }}
+                >
+                    PARCOURS
+                </span>
+            </motion.div>
+
+            {/* Contenu principal */}
+            <div className="relative z-10 w-full max-w-6xl mx-auto">
+
+                {/* HEADER ÉDITORIAL */}
+                <motion.div
+                    className="text-center mb-16 md:mb-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    {/* Surtitre */}
+                    <span
+                        className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
+                        style={{
+                            color: '#f97316',
+                            letterSpacing: '0.1em'
+                        }}
+                    >
+                        Parcours · De la néonat&apos; au code
+                    </span>
+
+                    {/* Titre principal */}
+                    <h2
+                        className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
+                        style={{
+                            color: '#253439',
+                            lineHeight: '1.2'
+                        }}
+                    >
+                        Mon histoire en 3 chapitres
+                    </h2>
+
+                    {/* Chapô */}
+                    <p
+                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
+                        style={{
+                            color: '#333333',
+                            opacity: 0.9,
+                            lineHeight: '1.6'
+                        }}
+                    >
+                        De l&apos;accompagnement des tout-petits à la création d&apos;expériences numériques,
+                        voici comment je suis passée du soin au code.
+                    </p>
+                </motion.div>
+
+                {/* LES 3 CHAPITRES */}
+                <div className="space-y-16 md:space-y-20 mb-16 md:mb-20">
+                    {chapters.map((chapter, index) => (
+                        <motion.div
+                            key={index}
+                            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                        >
+                            {/* Colonne gauche : Numéro + Illustration */}
+                            <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
+                                {/* Numéro décoratif */}
+                                <motion.span
+                                    className="font-mono font-bold text-6xl md:text-7xl mb-6"
+                                    style={{
+                                        color: '#f97316',
+                                        opacity: 0.15
+                                    }}
+                                    whileHover={{ opacity: 0.3 }}
+                                >
+                                    {chapter.number}
+                                </motion.span>
+
+                                {/* Illustration line art */}
+                                <div className="mb-4 lg:mb-0">
+                                    <ChapterIcon icon={chapter.icon} />
+                                </div>
+                            </div>
+
+                            {/* Colonne droite : Titre + Texte */}
+                            <div className="lg:col-span-8">
+                                {/* Titre du chapitre */}
+                                <h3
+                                    className="font-serif font-bold text-2xl md:text-3xl mb-4"
+                                    style={{
+                                        color: '#253439',
+                                        lineHeight: '1.3'
+                                    }}
+                                >
+                                    {chapter.title}
+                                </h3>
+
+                                {/* Texte narratif */}
+                                <p
+                                    className="font-sans text-base md:text-lg mb-3"
+                                    style={{
+                                        color: '#333333',
+                                        opacity: 0.9,
+                                        lineHeight: '1.7'
+                                    }}
+                                >
+                                    {chapter.text}
+                                </p>
+
+                                <p
+                                    className="font-sans text-base md:text-lg"
+                                    style={{
+                                        color: '#333333',
+                                        opacity: 0.9,
+                                        lineHeight: '1.7'
+                                    }}
+                                >
+                                    {chapter.text2}
+                                </p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* CITATION EN EXERGUE */}
+                <motion.div
+                    className="text-center mb-16 md:mb-20 py-12 md:py-16"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <div className="max-w-3xl mx-auto">
+                        {/* Citation */}
+                        <blockquote
+                            className="font-serif text-2xl md:text-3xl lg:text-4xl mb-6 italic"
+                            style={{
+                                color: '#253439',
+                                lineHeight: '1.4'
+                            }}
+                        >
+                            &ldquo;Du soin au code, une même envie : créer des expériences qui ont du sens.&rdquo;
+                        </blockquote>
+
+                        {/* Attribution */}
+                        <p
+                            className="font-mono text-sm md:text-base uppercase tracking-wider"
+                            style={{
+                                color: '#f97316',
+                                letterSpacing: '0.1em'
+                            }}
+                        >
+                            — Gaëlle
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* CTA FINAL */}
+                <motion.div
+                    className="flex flex-col sm:flex-row gap-4 items-center justify-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    {/* CTA Principal - LinkedIn/CV */}
+                    <motion.a
+                        href="https://www.linkedin.com/in/gaelle-boucher/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300 w-full sm:w-auto"
+                        style={{
+                            backgroundColor: '#f97316',
+                            color: '#faf7f2'
+                        }}
+                        whileHover={{
+                            scale: 1.03,
+                            backgroundColor: '#e86510',
+                            boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                        }}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        <span>Voir mon LinkedIn</span>
+                        <svg
+                            className="ml-2 w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </motion.a>
+
+                    {/* CTA Secondaire - Télécharger CV */}
+                    <motion.a
+                        href="/cv-gaelle-boucher.pdf"
+                        download
+                        className="inline-flex items-center justify-center font-sans text-base group"
+                        style={{ color: '#253439' }}
+                        whileHover={{ x: 5 }}
+                    >
+                        <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
+                            Télécharger mon CV
+                        </span>
+                        <svg
+                            className="ml-2 w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M12 4v12m0 0l-4-4m4 4l4-4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+                        </svg>
+                    </motion.a>
+                </motion.div>
+
+            </div>
+        </section>
+    );
 }
