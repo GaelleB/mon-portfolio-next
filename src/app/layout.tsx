@@ -1,8 +1,25 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin', 'latin-ext'] })
+// Fonts pour le style éditorial
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-sans',
+  display: 'swap'
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-serif',
+  display: 'swap'
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-mono',
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
   title: 'Gaëlle Boucher - Développeuse Front-End | Portfolio',
@@ -36,7 +53,9 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} font-sans`}>
+        {children}
+      </body>
     </html>
   )
 }
