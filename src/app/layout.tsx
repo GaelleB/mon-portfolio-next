@@ -22,19 +22,19 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mon-portfolio-next-mu.vercel.app'),
+  metadataBase: new URL('https://gaelle-boucher.dev'),
   title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux | Portfolio',
   description: 'Développeuse front-end spécialisée en projets éditoriaux et culturels. Je crée des sites web sur mesure pour webzines, médias culturels et maisons d\'édition avec React et Next.js.',
   keywords: 'développeuse front-end, projets éditoriaux, webzine, médias culturels, maisons d\'édition, React, Next.js, TypeScript, sites web éditoriaux',
   robots: 'index, follow',
   alternates: {
-    canonical: 'https://mon-portfolio-next-mu.vercel.app'
+    canonical: 'https://gaelle-boucher.dev'
   },
   openGraph: {
     title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux',
     description: 'Je crée des sites web sur mesure pour webzines, médias culturels et maisons d\'édition. Développeuse spécialisée en projets éditoriaux.',
     type: 'website',
-    url: 'https://mon-portfolio-next-mu.vercel.app',
+    url: 'https://gaelle-boucher.dev',
     locale: 'fr_FR',
     images: [
       {

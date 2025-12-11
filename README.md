@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio de Gaëlle Boucher
 
-## Getting Started
+Portfolio personnel d'une développeuse front-end spécialisée en projets éditoriaux et culturels.
 
-First, run the development server:
+## 🎯 À propos
+
+Site web personnel présentant mon travail de développeuse front-end spécialisée dans la création de sites web sur mesure pour webzines, médias culturels et maisons d'édition.
+
+## 🛠️ Stack technique
+
+- **Framework** : Next.js 16 (App Router) avec Turbopack
+- **Langage** : TypeScript
+- **Styling** : Tailwind CSS v4
+- **Animations** : Framer Motion
+- **Fonts** : Inter, Playfair Display, JetBrains Mono (via next/font)
+
+## 🚀 Démarrage
 
 ```bash
+# Installation des dépendances
+npm install
+
+# Serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de production
+npm run build
+
+# Démarrer le serveur de production
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans le navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── components/      # Composants React
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── Stack.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Footer.tsx
+│   │   └── Navigation.tsx
+│   ├── globals.css      # Styles globaux
+│   ├── layout.tsx       # Layout principal
+│   └── page.tsx         # Page d'accueil
+public/
+└── assets/             # Images et icônes
+```
 
-## Learn More
+## 🎨 Charte graphique
 
-To learn more about Next.js, take a look at the following resources:
+- **Fond** : #f5f0e8 (beige éditorial)
+- **Accent** : #f97316 (orange)
+- **Texte** : #253439 (dark blue-gray)
+- **Typographie** : Style éditorial/magazine
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Déployé sur Vercel : [gaelle-boucher.dev](https://gaelle-boucher.dev)
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 Gaëlle Boucher - Tous droits réservés
