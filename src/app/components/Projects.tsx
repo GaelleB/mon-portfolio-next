@@ -33,6 +33,17 @@ const projects: Project[] = [
         featured: true
     },
     {
+        id: 5,
+        title: 'Flag Chronicles',
+        year: 'Décembre 2025',
+        category: 'Projet éditorial',
+        description: 'Carte interactive des États-Unis racontant l\'histoire cachée des drapeaux, capitales et villes principales de chaque État. Un voyage visuel et narratif à travers l\'Amérique.',
+        image: '/assets/flag-chronicles.png',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        github: 'https://github.com/GaelleB/flag-chronicles',
+        demo: 'https://flag-chronicles.vercel.app/'
+    },
+    {
         id: 1,
         title: 'Netflix Clone',
         year: 'Octobre 2025',
