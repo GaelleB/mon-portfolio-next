@@ -6,34 +6,22 @@ import { useState, useEffect } from 'react';
 export default function Navigation() {
     const [activeSection, setActiveSection] = useState('Accueil');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isNavVisible, setIsNavVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [isNavigating, setIsNavigating] = useState(false);
-    
-    
-    // Auto-detect active section + hide/show navigation
+
+    // Auto-detect active section
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const scrollPosition = currentScrollY + 100; // Offset for better detection
+            const scrollPosition = window.scrollY + 100;
 
-            // Keep navigation always visible
-            setIsNavVisible(true);
-
-            setLastScrollY(currentScrollY);
-
-            // Get all sections
             const sections = [
                 { name: 'Accueil', element: document.getElementById('home') || document.querySelector('section:first-child') },
                 { name: 'À propos', element: document.getElementById('about') },
-                { name: 'Compétences', element: document.getElementById('stack') },
+                { name: 'Stack', element: document.getElementById('stack') },
                 { name: 'Projets', element: document.getElementById('projects') },
                 { name: 'Contact', element: document.getElementById('contact') }
             ];
 
-            // Find the current active section
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
                 if (section.element) {
@@ -49,103 +37,66 @@ export default function Navigation() {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Check initial position
+        handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY, isNavigating]);
-
+    }, []);
 
     const navItems = [
         { name: 'Accueil', href: '#home' },
         { name: 'À propos', href: '#about' },
-        { name: 'Compétences', href: '#stack' },
+        { name: 'Stack', href: '#stack' },
         { name: 'Projets', href: '#projects' },
         { name: 'Contact', href: '#contact' }
     ];
 
     const handleNavClick = (itemName: string) => {
         setActiveSection(itemName);
-        setIsNavigating(true);
-        setIsNavVisible(true); // Force navigation to be visible
-        
-        // Reset navigation state after scroll animation completes
-        setTimeout(() => {
-            setIsNavigating(false);
-        }, 1000); // 1 second should be enough for smooth scroll to complete
+        setIsMobileMenuOpen(false);
     };
 
     return (
         <header>
-            {/* Bande transparente/floue pleine largeur - cachée en mobile */}
-            <motion.div 
-                className="hidden md:block fixed top-0 left-0 w-full z-40"
-                style={{ 
-                    height: '76px',
-                    opacity: 1,
-                    backdropFilter: 'blur(15px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                    width: '100%'
-                }}
-            />
-            
-            {/* Navigation Desktop - cachée en mobile */}
-            <motion.nav 
-                className="hidden md:block fixed top-6 left-1/2 transform -translate-x-1/2 z-50"
-                role="navigation" 
+            {/* Navigation Desktop - Style éditorial minimaliste */}
+            <nav
+                className="hidden md:block fixed top-0 left-0 w-full z-50 py-6"
+                role="navigation"
                 aria-label="Navigation principale"
-                animate={{
-                    y: isNavVisible ? 0 : -100,
-                    opacity: isNavVisible ? 1 : 0
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                style={{ backgroundColor: '#f5f0e8' }}
             >
-                <div className="bg-white rounded-full px-0.5 py-0.5 shadow-lg border border-gray-200/50" style={{ backgroundColor: 'white' }}>
-                    <div className="flex items-center -space-x-0.5">
-                        {navItems.map((item) => (
-                            <motion.a
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => handleNavClick(item.name)}
-                                className={`
-                                    relative px-5 py-2.5 rounded-full text-sm font-medium transition-colors duration-300
-                                    ${activeSection === item.name 
-                                        ? 'text-white' 
-                                        : 'text-gray-700 hover:text-gray-900'
-                                    }
-                                `}
-                                whileHover={activeSection !== item.name ? { scale: 1.05 } : {}}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                {activeSection === item.name && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute inset-y-0.5 inset-x-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-md"
-                                        initial={false}
-                                        transition={{ type: "spring", stiffness: 800, damping: 25 }}
-                                    />
-                                )}
-                                <span className="relative z-10">
-                                    {item.name}
-                                </span>
-                            </motion.a>
-                        ))}
-                    </div>
+                <div className="flex items-center justify-center gap-8">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.name}
+                            href={item.href}
+                            onClick={() => handleNavClick(item.name)}
+                            className="relative font-mono text-xs uppercase tracking-wider transition-all duration-300"
+                            style={{
+                                color: activeSection === item.name ? '#f97316' : '#253439',
+                                letterSpacing: '0.1em'
+                            }}
+                        >
+                            {item.name}
+                            {activeSection === item.name && (
+                                <motion.div
+                                    layoutId="activeUnderline"
+                                    className="absolute -bottom-1 left-0 right-0 h-0.5"
+                                    style={{ backgroundColor: '#f97316' }}
+                                    initial={false}
+                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                />
+                            )}
+                        </a>
+                    ))}
                 </div>
-            </motion.nav>
+            </nav>
 
             {/* Navigation Mobile - Menu Burger */}
-            <motion.div 
-                className="md:hidden fixed top-6 right-6 z-50"
-                animate={{
-                    y: isNavVisible ? 0 : -100,
-                    opacity: isNavVisible ? 1 : 0
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-                <motion.button
+            <div className="md:hidden fixed top-6 right-6 z-50">
+                <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="p-3"
-                    whileTap={{ scale: 0.95 }}
+                    className="p-2"
+                    aria-label="Menu"
                 >
                     <motion.div
                         animate={isMobileMenuOpen ? "open" : "closed"}
@@ -156,58 +107,57 @@ export default function Navigation() {
                                 closed: { rotate: 0, y: 0 },
                                 open: { rotate: 45, y: 6 }
                             }}
-                            className="absolute h-0.5 w-full bg-gray-300 block top-1"
+                            className="absolute h-0.5 w-full block top-1"
+                            style={{ backgroundColor: '#f97316' }}
                         />
                         <motion.span
                             variants={{
                                 closed: { opacity: 1 },
                                 open: { opacity: 0 }
                             }}
-                            className="absolute h-0.5 w-full bg-gray-300 block top-3"
+                            className="absolute h-0.5 w-full block top-3"
+                            style={{ backgroundColor: '#f97316' }}
                         />
                         <motion.span
                             variants={{
                                 closed: { rotate: 0, y: 0 },
                                 open: { rotate: -45, y: -6 }
                             }}
-                            className="absolute h-0.5 w-full bg-gray-300 block top-5"
+                            className="absolute h-0.5 w-full block top-5"
+                            style={{ backgroundColor: '#f97316' }}
                         />
                     </motion.div>
-                </motion.button>
+                </button>
 
                 {/* Menu Mobile Overlay */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={isMobileMenuOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={isMobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className={`absolute top-16 right-0 bg-white rounded-2xl shadow-xl border border-gray-200/50 p-6 min-w-[200px] ${
+                    className={`absolute top-16 right-0 rounded-lg shadow-lg p-6 min-w-[200px] ${
                         isMobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
                     }`}
+                    style={{ backgroundColor: '#f5f0e8' }}
                 >
                     <div className="flex flex-col space-y-4">
                         {navItems.map((item) => (
-                            <motion.a
+                            <a
                                 key={item.name}
                                 href={item.href}
-                                onClick={() => {
-                                    handleNavClick(item.name);
-                                    setIsMobileMenuOpen(false);
+                                onClick={() => handleNavClick(item.name)}
+                                className="font-mono text-xs uppercase tracking-wider transition-colors duration-300 pb-2"
+                                style={{
+                                    color: activeSection === item.name ? '#f97316' : '#253439',
+                                    letterSpacing: '0.1em',
+                                    borderBottom: activeSection === item.name ? '2px solid #f97316' : '2px solid transparent'
                                 }}
-                                className={`
-                                    px-4 py-2 rounded-lg text-base font-medium transition-colors duration-200
-                                    ${activeSection === item.name 
-                                        ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white' 
-                                        : 'text-gray-700 hover:bg-gray-100'
-                                    }
-                                `}
-                                whileTap={{ scale: 0.95 }}
                             >
                                 {item.name}
-                            </motion.a>
+                            </a>
                         ))}
                     </div>
                 </motion.div>
-            </motion.div>
+            </div>
         </header>
     );
 }
