@@ -1,36 +1,40 @@
-'use client'
+'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Hook pour suivre la position de la souris avec contraintes
-const useMousePosition = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const tooltipWidth = 140; // Largeur approximative du tooltip
-
-        // Contraindre la position X pour éviter le débordement
-        let x = e.clientX - rect.left;
-        const minX = tooltipWidth / 2;
-        const maxX = rect.width - tooltipWidth / 2;
-        x = Math.max(minX, Math.min(maxX, x));
-
-        setMousePosition({
-            x: x,
-            y: e.clientY - rect.top
-        });
-    };
-
-    return { mousePosition, handleMouseMove };
+// Type pour un projet
+type Project = {
+    id: number;
+    title: string;
+    year: string;
+    category: string;
+    description?: string;
+    image: string;
+    tech: string[];
+    github: string;
+    demo: string | null;
+    featured?: boolean;
 };
 
+// Liste des projets
 const projects: Project[] = [
     {
+        id: 4,
+        title: 'Code in the City',
+        year: 'Juin 2025',
+        category: 'Blog personnel',
+        description: 'Mon blog personnel sur New York : séries, musique, lieux de tournage et articles de développement web racontés comme des histoires. Une vitrine de mon univers éditorial.',
+        image: '/assets/code-in-the-city.png',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        github: 'https://github.com/GaelleB/code-in-the-city',
+        demo: 'https://code-in-the-city.vercel.app/',
+        featured: true
+    },
+    {
         id: 1,
-        title: 'Netflix clone',
+        title: 'Netflix Clone',
         year: 'Octobre 2025',
         category: 'Clone site existant',
         image: '/assets/netflix.webp',
@@ -40,7 +44,7 @@ const projects: Project[] = [
     },
     {
         id: 2,
-        title: 'Debug or Treat - Halloween Site',
+        title: 'Debug or Treat',
         year: 'Octobre 2025',
         category: 'Site interactif',
         image: '/assets/happy-halloween.jpg',
@@ -57,253 +61,404 @@ const projects: Project[] = [
         tech: ['Next.js', 'TypeScript'],
         github: 'https://github.com/GaelleB/groupomania-next',
         demo: 'https://groupomania-next.vercel.app/'
-    },
-    {
-        id: 4,
-        title: 'Code in the City',
-        year: 'Juin2025',
-        category: 'Blog personnel',
-        image: '/assets/code-in-the-city.png',
-        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
-        github: 'https://github.com/GaelleB/code-in-the-city',
-        demo: 'https://code-in-the-city.vercel.app/'
-    },
-    // {
-    //     id: 5,
-    //     title: 'Groupomania',
-    //     year: '2022',
-    //     category: 'Social Network',
-    //     image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=720&h=720&fit=crop',
-    //     tech: ['Vue.js', 'Node.js', 'MySQL'],
-    //     github: 'https://github.com/GaelleB/Groupomania',
-    //     demo: null
-    // },
-    // {
-    //     id: 6,
-    //     title: 'Piiquante API',
-    //     year: '2022',
-    //     category: 'Backend API',
-    //     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=720&h=720&fit=crop',
-    //     tech: ['Node.js', 'Express', 'MongoDB'],
-    //     github: 'https://github.com/GaelleB/Piiquante',
-    //     demo: null
-    // },
-    // {
-    //     id: 7,
-    //     title: 'Portfolio Original',
-    //     year: '2022',
-    //     category: 'Portfolio',
-    //     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=720&h=720&fit=crop',
-    //     tech: ['HTML5', 'SASS', 'JavaScript'],
-    //     github: 'https://github.com/GaelleB/Portfolio',
-    //     demo: 'https://gaelleb.github.io/Portfolio/'
-    // }
-]
+    }
+];
 
-// Type pour un projet
-type Project = {
-    id: number;
-    title: string;
-    year: string;
-    category: string;
-    image: string;
-    tech: string[];
-    github: string;
-    demo: string | null;
-};
-
-// Composant pour une card de projet
-const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-    const [showCTA, setShowCTA] = useState(false);
-    const [imageHeight, setImageHeight] = useState('240px');
-    const { mousePosition, handleMouseMove } = useMousePosition();
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    // Détection de la taille d'écran pour la hauteur de l'image
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const updateImageHeight = () => {
-            setImageHeight(window.innerWidth >= 1280 ? '320px' : '240px');
-        };
-
-        updateImageHeight();
-        window.addEventListener('resize', updateImageHeight);
-
-        return () => window.removeEventListener('resize', updateImageHeight);
-    }, []);
-
-    // Scroll progress individuel pour chaque card
-    const { scrollYProgress: cardScrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ["start 0.8", "end 0.1"]
-    });
-
-    // Animation de scale - grandissent en entrant seulement
-    const cardScale = useTransform(cardScrollYProgress, [0, 0.3], [0.85, 1]);
-
+// Composant pour le projet featured (Code in the City)
+const FeaturedProject = ({ project }: { project: Project }) => {
     return (
         <motion.div
-            ref={cardRef}
-            style={{ scale: cardScale }}
-            initial={{ opacity: 0, y: 50 }}
+            className="mb-20 md:mb-24"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="project-card-no-cursor relative group w-full max-w-[450px] md:max-w-[400px] lg:max-w-none mx-4 lg:mx-0"
-            onMouseEnter={() => setShowCTA(true)}
-            onMouseLeave={() => setShowCTA(false)}
-            onMouseMove={handleMouseMove}
+            transition={{ duration: 0.8 }}
         >
-            {/* CTA Button qui suit la souris */}
-            {showCTA && (
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    className="absolute z-50 pointer-events-none"
-                    style={{
-                        left: mousePosition.x,
-                        top: mousePosition.y - 30,
-                        transform: 'translateX(-50%)'
-                    }}
-                >
-                    <a 
-                        href={project.demo || project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-white rounded-full pl-6 pr-0 h-12 shadow-lg hover:shadow-xl transition-all duration-300 pointer-events-auto group whitespace-nowrap"
-                    >
-                        <span className="text-gray-900 font-medium text-base mr-3">
-                            View Project
-                        </span>
-                        <div className="bg-black rounded-full w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-360deg]">
-                            <span className="text-white text-base">→</span>
-                        </div>
-                    </a>
-                </motion.div>
-            )}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-            {/* Card container with backdrop blur */}
-            <div 
-                className="relative glass-backdrop project-card-container overflow-hidden"
+                {/* Image - 7 colonnes */}
+                <div className="lg:col-span-7">
+                    <motion.div
+                        className="relative rounded-2xl overflow-hidden group"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            width={800}
+                            height={600}
+                            className="w-full h-auto object-cover"
+                        />
+                        {/* Overlay orange au hover */}
+                        <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                            style={{ backgroundColor: '#f97316' }}
+                        />
+                    </motion.div>
+                </div>
+
+                {/* Texte - 5 colonnes */}
+                <div className="lg:col-span-5">
+                    {/* Badge catégorie */}
+                    <motion.span
+                        className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4 px-4 py-2 rounded-full"
+                        style={{
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            color: '#f97316',
+                            letterSpacing: '0.1em'
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        {project.category} · {project.year}
+                    </motion.span>
+
+                    {/* Titre */}
+                    <motion.h3
+                        className="font-serif font-bold text-3xl md:text-4xl mb-4"
+                        style={{
+                            color: '#253439',
+                            lineHeight: '1.2'
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        {project.title}
+                    </motion.h3>
+
+                    {/* Description */}
+                    {project.description && (
+                        <motion.p
+                            className="font-sans text-base md:text-lg mb-6"
+                            style={{
+                                color: '#333333',
+                                opacity: 0.9,
+                                lineHeight: '1.6'
+                            }}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                        >
+                            {project.description}
+                        </motion.p>
+                    )}
+
+                    {/* Tech tags */}
+                    <motion.div
+                        className="flex flex-wrap gap-2 mb-6"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                        {project.tech.map((tech, index) => (
+                            <span
+                                key={index}
+                                className="font-sans text-sm px-3 py-1 rounded-full"
+                                style={{
+                                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                                    color: '#f97316'
+                                }}
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </motion.div>
+
+                    {/* CTAs */}
+                    <motion.div
+                        className="flex flex-wrap gap-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                        {project.demo && (
+                            <motion.a
+                                href={project.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center px-6 py-3 font-sans font-medium text-sm rounded-lg transition-all duration-300"
+                                style={{
+                                    backgroundColor: '#f97316',
+                                    color: '#faf7f2'
+                                }}
+                                whileHover={{
+                                    scale: 1.05,
+                                    backgroundColor: '#e86510',
+                                    boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                                }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                Voir le site
+                                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                    <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </motion.a>
+                        )}
+                        <motion.a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center font-sans text-sm group"
+                            style={{ color: '#253439' }}
+                            whileHover={{ x: 5 }}
+                        >
+                            <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
+                                Voir sur GitHub
+                            </span>
+                            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </motion.a>
+                    </motion.div>
+                </div>
+
+            </div>
+        </motion.div>
+    );
+};
+
+// Composant pour une carte projet standard
+const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
+    return (
+        <motion.div
+            className="group"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+        >
+            {/* Image */}
+            <motion.a
+                href={project.demo || project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative rounded-xl overflow-hidden mb-4"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
             >
-                {/* Image container */}
-                <div className="relative overflow-hidden rounded-[24px] group cursor-pointer">
+                <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                         src={project.image}
                         alt={project.title}
-                        width={564}
-                        height={382}
-                        className="w-full object-cover transition-all duration-500 group-hover:scale-105"
-                        style={{
-                            width: '100%',
-                            height: imageHeight
-                        }}
+                        width={600}
+                        height={450}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    {/* Overlay blanc au hover */}
-                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none" />
+                    {/* Overlay orange au hover */}
+                    <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                        style={{ backgroundColor: '#f97316' }}
+                    />
                 </div>
+            </motion.a>
+
+            {/* Badge catégorie */}
+            <span
+                className="inline-block font-mono text-xs uppercase tracking-wider mb-2"
+                style={{
+                    color: '#f97316',
+                    letterSpacing: '0.1em'
+                }}
+            >
+                {project.category}
+            </span>
+
+            {/* Titre */}
+            <h3
+                className="font-serif font-bold text-xl md:text-2xl mb-3"
+                style={{
+                    color: '#253439',
+                    lineHeight: '1.3'
+                }}
+            >
+                {project.title}
+            </h3>
+
+            {/* Tech tags */}
+            <div className="flex flex-wrap gap-2 mb-4">
+                {project.tech.slice(0, 3).map((tech, index) => (
+                    <span
+                        key={index}
+                        className="font-sans text-xs px-2 py-1 rounded-full"
+                        style={{
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            color: '#f97316'
+                        }}
+                    >
+                        {tech}
+                    </span>
+                ))}
             </div>
-            
-            {/* Project Info - aligned with image, not card border */}
-            <div className="mt-6 ml-6">
-                <p className="text-sm text-gray-500 uppercase tracking-wider mb-2">
-                    {project.category}
-                </p>
-                <h3 className="text-2xl font-semibold text-gray-900 leading-tight">
-                    {project.title}
-                </h3>
+
+            {/* Liens */}
+            <div className="flex gap-4 text-sm">
+                {project.demo && (
+                    <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center group/link"
+                        style={{ color: '#f97316' }}
+                    >
+                        <span className="group-hover/link:underline">Voir le site</span>
+                        <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                )}
+                <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center group/link"
+                    style={{ color: '#253439' }}
+                >
+                    <span className="group-hover/link:underline">GitHub</span>
+                    <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
             </div>
         </motion.div>
     );
 };
 
 export default function Projects() {
-    const [showAll, setShowAll] = useState(false)
-    const visibleProjects = showAll ? projects : projects.slice(0, 6)
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Scroll parallax pour le watermark
+    const { scrollY } = useScroll();
+    const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
+
+    // Détection mobile
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const featuredProject = projects.find(p => p.featured);
+    const otherProjects = projects.filter(p => !p.featured);
 
     return (
-        <section 
-            id="projects" 
-            className="min-h-screen bg-white py-24"
+        <section
+            id="projects"
+            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            style={{ backgroundColor: '#f5f0e8' }}
         >
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Header */}
+            {/* Numérotation éditoriale "04" en arrière-plan */}
+            <motion.div
+                className="hidden lg:block absolute top-32 right-12 pointer-events-none select-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+            >
+                <span
+                    className="font-mono font-bold text-[180px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: 0.05
+                    }}
+                >
+                    04
+                </span>
+            </motion.div>
+
+            {/* Watermark typographique "WORK" en arrière-plan */}
+            <motion.div
+                className="absolute pointer-events-none select-none"
+                style={{
+                    top: isMobile ? '8%' : '12%',
+                    left: isMobile ? '5%' : '8%',
+                    y: watermarkY
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+            >
+                <span
+                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: isMobile ? 0.02 : 0.03,
+                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
+                    }}
+                >
+                    WORK
+                </span>
+            </motion.div>
+
+            {/* Contenu principal */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto">
+
+                {/* HEADER ÉDITORIAL */}
                 <motion.div
+                    className="text-center mb-16 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    transition={{ duration: 0.8 }}
                 >
-                    <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-                        Projets
+                    {/* Surtitre */}
+                    <span
+                        className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
+                        style={{
+                            color: '#f97316',
+                            letterSpacing: '0.1em'
+                        }}
+                    >
+                        Projets · Ce que je crée
+                    </span>
+
+                    {/* Titre principal */}
+                    <h2
+                        className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
+                        style={{
+                            color: '#253439',
+                            lineHeight: '1.2'
+                        }}
+                    >
+                        Des sites qui racontent
                     </h2>
+
+                    {/* Chapô */}
+                    <p
+                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
+                        style={{
+                            color: '#333333',
+                            opacity: 0.9,
+                            lineHeight: '1.6'
+                        }}
+                    >
+                        Découvre une sélection de mes créations web, du blog personnel aux clones interactifs.
+                    </p>
                 </motion.div>
 
-                {/* Projects Grid - 2 columns layout */}
-                {visibleProjects.length > 0 ? (
-                    <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 max-w-7xl mx-auto justify-items-center lg:justify-items-stretch">
-                            {visibleProjects.map((project, index) => (
-                                <ProjectCard key={project.id} project={project} index={index} />
-                            ))}
-                        </div>
+                {/* FEATURED PROJECT */}
+                {featuredProject && <FeaturedProject project={featuredProject} />}
 
-                        {/* View More/Less Button */}
-                        <motion.div
-                            className="text-center mt-16"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            viewport={{ once: true }}
-                        >
-                            <button
-                                onClick={() => setShowAll(!showAll)}
-                                className="cta-button-glass font-public-sans"
-                            >
-                                <div className="glass-bg-button glass-backdrop" />
-                                <div className="glass-foreground-button">
-                                    <span className="cta-button-text-glass">{showAll ? 'View Less' : 'View More'}</span>
-                                    <span className="cta-button-icon-glass">{showAll ? '↑' : '↓'}</span>
-                                </div>
-                            </button>
-                        </motion.div>
-                    </>
-                ) : (
-                    /* Temporary message when no projects are available */
-                    <motion.div 
-                        className="text-center py-20"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: true }}
-                    >
-                        <div className="max-w-2xl mx-auto">
-                            <div className="glass-bg glass-backdrop absolute inset-0 z-0 rounded-2xl" />
-                            <div className="glass-foreground relative z-10 py-12 px-8 rounded-2xl">
-                                <div className="mb-6">
-                                    <span className="text-6xl">🚧</span>
-                                </div>
-                                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                                    Projets en cours
-                                </h3>
-                                <p className="text-lg text-gray-600 leading-relaxed">
-                                    Actuellement en train de coder...
-                                    <br />
-                                    Les projets arrivent bientôt !
-                                </p>
-                                <div className="mt-8 flex justify-center space-x-2">
-                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
+                {/* AUTRES PROJETS - Grid 3 colonnes */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                    {otherProjects.map((project, index) => (
+                        <ProjectCard key={project.id} project={project} index={index} />
+                    ))}
+                </div>
+
             </div>
         </section>
-    )
+    );
 }
