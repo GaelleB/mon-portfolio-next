@@ -1,212 +1,320 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Footer() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Scroll parallax pour le watermark
+    const { scrollY } = useScroll();
+    const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
+
+    // Détection mobile
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
-        <>
-            <style jsx>{`
-                .footer-text {
-                    font-size: 43px;
-                    line-height: 0.9em;
-                    position: relative;
-                    left: 50%;
-                    transform: translateY(52%) translateX(-50%);
-                }
+        <footer
+            id="contact"
+            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            style={{ backgroundColor: '#f5f0e8' }}
+        >
+            {/* Numérotation éditoriale "05" en arrière-plan */}
+            <motion.div
+                className="hidden lg:block absolute top-32 left-12 pointer-events-none select-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+            >
+                <span
+                    className="font-mono font-bold text-[180px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: 0.05
+                    }}
+                >
+                    05
+                </span>
+            </motion.div>
 
-                /* Mobile large */
-                @media (min-width: 480px) {
-                    .footer-text {
-                        font-size: 45px;
-                        line-height: 0.9em;
-                    }
-                }
+            {/* Watermark typographique "CONTACT" en arrière-plan */}
+            <motion.div
+                className="absolute pointer-events-none select-none"
+                style={{
+                    top: isMobile ? '8%' : '12%',
+                    right: isMobile ? '5%' : '8%',
+                    y: watermarkY
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+            >
+                <span
+                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: isMobile ? 0.02 : 0.03,
+                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
+                    }}
+                >
+                    CONTACT
+                </span>
+            </motion.div>
 
-                /* Tablette portrait iPad */
-                @media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
-                    .footer-text {
-                        font-size: 85px;
-                        line-height: 85px;
-                    }
-                }
+            {/* Contenu principal */}
+            <div className="relative z-10 w-full max-w-6xl mx-auto">
 
-                /* Tablette paysage */
-                @media (min-width: 768px) and (orientation: landscape) and (max-width: 1023px) {
-                    .footer-text {
-                        font-size: 100px;
-                        line-height: 100px;
-                    }
-                }
+                {/* HEADER ÉDITORIAL */}
+                <motion.div
+                    className="text-center mb-16 md:mb-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    {/* Surtitre */}
+                    <span
+                        className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
+                        style={{
+                            color: '#f97316',
+                            letterSpacing: '0.1em'
+                        }}
+                    >
+                        Contact · Parlons projet
+                    </span>
 
-                /* Desktop small (MacBook Air) */
-                @media (min-width: 1024px) {
-                    .footer-text {
-                        font-size: 105px;
-                        line-height: 0.9em;
-                    }
-                }
+                    {/* Titre principal */}
+                    <h2
+                        className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
+                        style={{
+                            color: '#253439',
+                            lineHeight: '1.2'
+                        }}
+                    >
+                        Créons ensemble ton prochain site
+                    </h2>
 
-                /* Desktop medium */
-                @media (min-width: 1280px) {
-                    .footer-text {
-                        font-size: 135px;
-                        line-height: 0.9em;
-                    }
-                }
+                    {/* Chapô */}
+                    <p
+                        className="font-sans text-base md:text-lg max-w-3xl mx-auto mb-10"
+                        style={{
+                            color: '#333333',
+                            opacity: 0.9,
+                            lineHeight: '1.6'
+                        }}
+                    >
+                        Prêt à donner vie à ton histoire ? Réservons un appel découverte pour en discuter.
+                    </p>
 
-                /* MacBook Air 13" et écrans similaires */
-                @media (min-width: 1440px) and (max-width: 1600px) {
-                    .footer-text {
-                        font-size: 162px;
-                        line-height: 162px;
-                    }
-                }
+                    {/* CTA Principal */}
+                    <motion.div
+                        className="flex flex-col sm:flex-row gap-4 items-center justify-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                        {/* Bouton Calendly */}
+                        <motion.a
+                            href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300 w-full sm:w-auto"
+                            style={{
+                                backgroundColor: '#f97316',
+                                color: '#faf7f2'
+                            }}
+                            whileHover={{
+                                scale: 1.03,
+                                backgroundColor: '#e86510',
+                                boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                            }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Réserver un appel découverte
+                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </motion.a>
 
-                /* Large desktop */
-                @media (min-width: 1600px) {
-                    .footer-text {
-                        font-size: 195px;
-                        line-height: 0.9em;
-                    }
-                }
-            `}</style>
-            <footer id="contact" className="bg-gray-50 relative overflow-hidden pt-20 md:pt-100 rounded-t-[40px]">
-            <div className="max-w-6xl mx-auto px-0 lg:px-6 pb-42 relative z-20">
-                {/* Section principale - 3 colonnes */}
-                <div className="grid md:grid-cols-3 gap-8 md:gap-16 lg:gap-20 mb-8">
-                    {/* Colonne 1 - Contact Me */}
-                    <div className="space-y-3">
-                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
-                            Contactez-moi
-                        </h2>
-                        <div className="space-y-1">
-                            <motion.a
-                                href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
-                                data-cursor-text="Appelez-moi"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                Réservez un appel
-                            </motion.a>
-                            <motion.a
+                        {/* Lien email */}
+                        <motion.a
+                            href="mailto:gaelleboucher.dev@gmail.com"
+                            className="inline-flex items-center justify-center font-sans text-base group"
+                            style={{ color: '#253439' }}
+                            whileHover={{ x: 5 }}
+                        >
+                            <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
+                                Ou écris-moi directement
+                            </span>
+                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </motion.a>
+                    </motion.div>
+                </motion.div>
+
+                {/* 3 COLONNES - Contact, Social, Navigation */}
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16 md:mb-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                    {/* Colonne 1 - Contact */}
+                    <div>
+                        <h3
+                            className="font-mono text-sm uppercase tracking-wider mb-4"
+                            style={{
+                                color: '#f97316',
+                                letterSpacing: '0.1em'
+                            }}
+                        >
+                            Contact
+                        </h3>
+                        <div className="space-y-3">
+                            <a
                                 href="mailto:gaelleboucher.dev@gmail.com"
-                                data-cursor-text="Écrivez-moi"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
                             >
                                 gaelleboucher.dev@gmail.com
-                            </motion.a>
+                            </a>
                         </div>
                     </div>
 
-                    {/* Colonne 2 - Useful Links */}
-                    <div className="space-y-3">
-                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
-                            Liens utiles
-                        </h2>
-                        <div className="space-y-1">
-                            <motion.a
-                                href="#home"
-                                data-cursor-text="Aller à l'accueil"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                Accueil
-                            </motion.a>
-                            <motion.a
-                                href="/licensing"
-                                data-cursor-text="Voir les licences"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                Licences
-                            </motion.a>
-                        </div>
-                    </div>
-
-                    {/* Colonne 3 - Social */}
-                    <div className="space-y-3">
-                        <h2 className="text-xl md:text-xl lg:text-2xl font-body font-bold text-black px-4">
+                    {/* Colonne 2 - Social */}
+                    <div>
+                        <h3
+                            className="font-mono text-sm uppercase tracking-wider mb-4"
+                            style={{
+                                color: '#f97316',
+                                letterSpacing: '0.1em'
+                            }}
+                        >
                             Social
-                        </h2>
-                        <div className="space-y-1">
-                            <motion.a
-                                href="https://www.malt.fr/profile/gaelleboucher"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                data-cursor-text="Mon profil Malt"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                Malt
-                            </motion.a>
-                            <motion.a
-                                href="https://github.com/GaelleB"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                data-cursor-text="Mon GitHub"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
-                            >
-                                GitHub
-                            </motion.a>
-                            <motion.a
+                        </h3>
+                        <div className="space-y-3">
+                            <a
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor-text="Mon profil LinkedIn"
-                                className="block text-xl md:text-xl lg:text-2xl text-gray-600 hover:text-gray-600 transition-colors duration-300 font-body py-2 px-4"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
                             >
                                 LinkedIn
-                            </motion.a>
+                            </a>
+                            <a
+                                href="https://github.com/GaelleB"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                GitHub
+                            </a>
+                            <a
+                                href="https://www.malt.fr/profile/gaelleboucher"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                Malt
+                            </a>
                         </div>
                     </div>
-                </div>
 
-                {/* Section du bas */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="pt-16 md:pt-70"
-                >
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
-                        {/* Copyright */}
-                        <div className="text-left px-4">
-                            <p className="text-lg text-gray-600 font-body">
-                                © Copyright 2025
-                            </p>
-                        </div>
-                        <div className="text-left md:text-right px-4">
-                            <p className="text-lg text-gray-600 font-body">
-                                Fait par{" "}
-                                <motion.a
-                                    href="https://www.linkedin.com/in/gaelle-boucher/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    data-cursor-text="Voir mon profil"
-                                    className="font-semibold transition-colors duration-300"
-                                    style={{ color: 'rgb(102, 112, 255)' }}
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    Gaëlle
-                                </motion.a>
-                            </p>
+                    {/* Colonne 3 - Navigation */}
+                    <div>
+                        <h3
+                            className="font-mono text-sm uppercase tracking-wider mb-4"
+                            style={{
+                                color: '#f97316',
+                                letterSpacing: '0.1em'
+                            }}
+                        >
+                            Navigation
+                        </h3>
+                        <div className="space-y-3">
+                            <a
+                                href="#home"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                Accueil
+                            </a>
+                            <a
+                                href="#about"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                À propos
+                            </a>
+                            <a
+                                href="#stack"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                Stack
+                            </a>
+                            <a
+                                href="#projects"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                Projets
+                            </a>
                         </div>
                     </div>
                 </motion.div>
-            </div>
-            
-            {/* Texte coupé en bas */}
-            <div className="absolute bottom-0 left-0 right-0 h-28 overflow-hidden z-0">
-                <div className="absolute bottom-0 left-0 right-0">
-                    <div className="font-public-sans text-black leading-none tracking-tighter select-none whitespace-nowrap footer-text" 
-                        style={{ 
-                            fontWeight: 900,
-                            width: '100vw',
-                            textAlign: 'center'
-                        }}>
-                        GAËLLE BOUCHER
+
+                {/* FOOTER MINIMAL */}
+                <motion.div
+                    className="pt-8 border-t"
+                    style={{ borderColor: 'rgba(249, 115, 22, 0.2)' }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                        <p
+                            className="font-sans text-sm"
+                            style={{ color: '#333333', opacity: 0.7 }}
+                        >
+                            © 2025 Gaëlle Boucher · Tous droits réservés
+                        </p>
+                        <p
+                            className="font-sans text-sm"
+                            style={{ color: '#333333', opacity: 0.7 }}
+                        >
+                            Fait avec ❤️ et{' '}
+                            <a
+                                href="https://claude.ai"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#f97316' }}
+                            >
+                                Claude
+                            </a>
+                        </p>
                     </div>
-                </div>
+                </motion.div>
+
             </div>
         </footer>
-        </>
     );
 }
