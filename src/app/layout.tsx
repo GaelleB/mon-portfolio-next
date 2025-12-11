@@ -22,19 +22,28 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Gaëlle Boucher - Développeuse Front-End | Portfolio',
-  description: 'Portfolio de Gaëlle Boucher, développeuse front-end spécialisée en React et Next.js. Créatrice de sites web sur mesure.',
-  keywords: 'développeuse front-end, React, Next.js, TypeScript, portfolio, sites web sur mesure',
+  metadataBase: new URL('https://mon-portfolio-next-mu.vercel.app'),
+  title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux | Portfolio',
+  description: 'Développeuse front-end spécialisée en projets éditoriaux et culturels. Je crée des sites web sur mesure pour webzines, médias culturels et maisons d\'édition avec React et Next.js.',
+  keywords: 'développeuse front-end, projets éditoriaux, webzine, médias culturels, maisons d\'édition, React, Next.js, TypeScript, sites web éditoriaux',
   robots: 'index, follow',
   alternates: {
     canonical: 'https://mon-portfolio-next-mu.vercel.app'
   },
   openGraph: {
-    title: 'Gaëlle Boucher - Développeuse Front-End',
-    description: 'Développeuse front-end spécialisée en React et Next.js. Créatrice de sites web sur mesure.',
+    title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux',
+    description: 'Je crée des sites web sur mesure pour webzines, médias culturels et maisons d\'édition. Développeuse spécialisée en projets éditoriaux.',
     type: 'website',
     url: 'https://mon-portfolio-next-mu.vercel.app',
-    locale: 'fr_FR'
+    locale: 'fr_FR',
+    images: [
+      {
+        url: '/assets/gaelle-new.jpg',
+        width: 500,
+        height: 500,
+        alt: 'Gaëlle Boucher - Développeuse Front-End spécialisée projets éditoriaux'
+      }
+    ]
   }
 }
 
