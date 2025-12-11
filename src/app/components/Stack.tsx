@@ -1,318 +1,234 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Icônes
-const ReactIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/react.svg" alt="React" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(95%) saturate(1094%) hue-rotate(162deg) brightness(98%) contrast(94%)' }} />
-  </div>
-);
-
-
-const FigmaIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/figma.svg" alt="Figma" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(92%) saturate(4593%) hue-rotate(344deg) brightness(98%) contrast(95%)' }} />
-  </div>
-);
-
-
-const TypeScriptIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/typescript.svg" alt="TypeScript" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(199deg) brightness(104%) contrast(97%)' }} />
-  </div>
-);
-
-const HTMLIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/html.svg" alt="HTML5" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
-  </div>
-);
-
-const CSSIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/css.svg" alt="CSS3" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(22%) sepia(77%) saturate(1497%) hue-rotate(240deg) brightness(97%) contrast(83%)' }} />
-  </div>
-);
-
-
-const TailwindIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/tailwindcss.svg" alt="Tailwind CSS" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(1552%) hue-rotate(158deg) brightness(91%) contrast(85%)' }} />
-  </div>
-);
-
-
-const ChatGPTIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/chatgpt.svg" alt="ChatGPT" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ transform: 'scale(1.5)' }} />
-  </div>
-);
-
-
-const ClaudeIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/claude.svg" alt="Claude" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(57%) sepia(51%) saturate(1097%) hue-rotate(324deg) brightness(97%) contrast(89%)' }} />
-  </div>
-);
-
-const GitHubIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/github.svg" alt="GitHub" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(8%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(94%) contrast(96%)' }} />
-  </div>
-);
-
-const GitIcon = () => (
-  <div className="w-20 h-20 flex items-center justify-center">
-    <Image src="/assets/icons/git.svg" alt="Git" width={80} height={80}
-      loading="lazy"
-      className="object-contain"
-      style={{ filter: 'brightness(0) saturate(100%) invert(36%) sepia(94%) saturate(6385%) hue-rotate(6deg) brightness(95%) contrast(88%)' }} />
-  </div>
-);
-
-// Données
-const technologies = [
-  { name: 'React', IconComponent: ReactIcon, description: 'React révolutionne le développement web avec ses composants réutilisables et sa gestion d\'état moderne.' },
-  { name: 'TypeScript', IconComponent: TypeScriptIcon, description: 'TypeScript améliore le développement JavaScript avec le typage statique et une meilleure maintenabilité.' },
-  { name: 'HTML', IconComponent: HTMLIcon, description: 'HTML forme l’épine dorsale de tous les projets web en structurant le contenu de manière sémantique.' },
-  { name: 'CSS', IconComponent: CSSIcon, description: 'CSS donne vie aux designs avec des styles élégants et des animations fluides.' },
-  { name: 'Tailwind', IconComponent: TailwindIcon, description: 'Tailwind accélère le processus de stylisation avec ses classes utilitaires et son approche mobile-first.' },
-  { name: 'Figma', IconComponent: FigmaIcon, description: 'Figma transforme le workflow de design grâce à ses outils collaboratifs et ses prototypes interactifs.' },
-  { name: 'Git', IconComponent: GitIcon, description: 'Git est le système de contrôle de version essentiel pour traquer les changements et collaborer efficacement.' },
-  { name: 'GitHub', IconComponent: GitHubIcon, description: 'GitHub sert de référentiel pour le code avec la collaboration et le contrôle de version intégrés.' },
-  { name: 'ChatGPT', IconComponent: ChatGPTIcon, description: 'ChatGPT accélère le processus de développement en assistant sur la logique et la résolution de problèmes.' },
-  { name: 'Claude', IconComponent: ClaudeIcon, description: 'Claude assiste le workflow de développement avec ses analyses précises et ses suggestions pertinentes.' }
+// Organisation des technologies par catégories
+const techCategories = [
+    {
+        title: "Développement",
+        icon: "laptop",
+        techs: [
+            { name: 'React', icon: '/assets/icons/react.svg', color: '#61DAFB' },
+            { name: 'TypeScript', icon: '/assets/icons/typescript.svg', color: '#3178C6' },
+            { name: 'HTML', icon: '/assets/icons/html.svg', color: '#E34F26' },
+            { name: 'CSS', icon: '/assets/icons/css.svg', color: '#1572B6' },
+            { name: 'Tailwind', icon: '/assets/icons/tailwindcss.svg', color: '#06B6D4' }
+        ]
+    },
+    {
+        title: "Design & Outils",
+        icon: "tools",
+        techs: [
+            { name: 'Figma', icon: '/assets/icons/figma.svg', color: '#F24E1E' },
+            { name: 'Git', icon: '/assets/icons/git.svg', color: '#F05032' },
+            { name: 'GitHub', icon: '/assets/icons/github.svg', color: '#181717' }
+        ]
+    },
+    {
+        title: "IA & Productivité",
+        icon: "ai",
+        techs: [
+            { name: 'ChatGPT', icon: '/assets/icons/chatgpt.svg', color: '#10A37F' },
+            { name: 'Claude', icon: '/assets/icons/claude.svg', color: '#D97757' }
+        ]
+    }
 ];
 
-// Card flip avec tooltip
-const TechCard = ({ tech }: { tech: typeof technologies[0], index: number }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [useFlip3D, setUseFlip3D] = useState(true);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Détection des navigateurs mobiles problématiques
-  useEffect(() => {
-    const checkFlip3DSupport = () => {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isIOS = /iphone|ipad|ipod/.test(userAgent);
-      const isSafariMobile = isIOS && /safari/.test(userAgent) && !/chrome/.test(userAgent);
-      const isOldAndroid = /android/.test(userAgent) && /android [1-4]/.test(userAgent);
-      
-      // Désactiver 3D pour Safari mobile et anciens Android
-      setUseFlip3D(!(isSafariMobile || isOldAndroid));
-    };
-    
-    checkFlip3DSupport();
-  }, []);
-  
-  // Scroll progress individuel pour chaque card
-  const { scrollYProgress: cardScrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start 0.8", "end 0.1"]
-  });
-  
-  // Animation de scale - grandissent en entrant seulement
-  const cardScale = useTransform(cardScrollYProgress, [0, 0.3], [0.85, 1]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      style={{ scale: cardScale }}
-      className={`text-center group cursor-pointer relative ${showTooltip ? 'z-50' : 'z-10'}`}
-      onClick={() => setIsFlipped(!isFlipped)}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
-      onMouseMove={handleMouseMove}
-    >
-      {/* Tooltip - Desktop/Tablette seulement */}
-      {showTooltip && (
+// Composant pour afficher une techno
+const TechItem = ({ tech, index }: { tech: typeof techCategories[0]['techs'][0], index: number }) => {
+    return (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          className="absolute z-50 pointer-events-none hidden md:block"
-          style={{
-            left: mousePosition.x,
-            top: mousePosition.y - 50,
-            transform: 'translateX(-50%)'
-          }}
+            className="flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
         >
-          <div className="bg-white rounded-full shadow-lg px-4 py-2 text-sm border border-gray-200 whitespace-nowrap">
-            <span className="text-gray-700 font-medium">
-              {isFlipped ? "Tape pour retourner" : "Tape pour retourner"}
+            {/* Icône */}
+            <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <Image
+                    src={tech.icon}
+                    alt={tech.name}
+                    width={48}
+                    height={48}
+                    className="object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+            </div>
+
+            {/* Nom */}
+            <span
+                className="font-sans text-base md:text-lg font-medium transition-colors duration-300"
+                style={{
+                    color: '#253439'
+                }}
+            >
+                {tech.name}
             </span>
-          </div>
+
+            {/* Point décoratif avec couleur de la techno */}
+            <div
+                className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ backgroundColor: tech.color }}
+            />
         </motion.div>
-      )}
-
-      <motion.div className="w-[430px] md:w-[360px] lg:w-[440px] h-[400px] md:h-[400px] lg:h-[480px] p-4 relative" style={{ perspective: "1000px" }}>
-        <motion.div
-          className="w-full h-full relative"
-          style={{ 
-            transformStyle: useFlip3D ? "preserve-3d" : "flat",
-            transform: "translateZ(0)",
-            willChange: isFlipped ? "transform" : "auto"
-          }}
-          animate={useFlip3D ? 
-            { rotateX: isFlipped ? 180 : 0 } : 
-            { scale: isFlipped ? 0.95 : 1 }
-          }
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-        >
-          {/* Face avant */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            style={useFlip3D ? { 
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              transform: "translateZ(0)"
-            } : {}}
-            animate={{ opacity: isFlipped ? 0 : 1 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
-            <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
-            <div className="glass-foreground-tech relative z-10 flex flex-col items-center justify-center text-center h-full">
-              <div className="mb-3">
-                <tech.IconComponent />
-              </div>
-              <p className="font-semibold text-2xl text-gray-900">{tech.name}</p>
-              
-              {/* Texte d'instruction - Mobile seulement, positionné en bas */}
-              <p className="text-gray-600 text-sm md:hidden absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                Tape pour retourner
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Face arrière */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            style={useFlip3D ? {
-              transform: "rotateX(180deg) translateZ(0)",
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden"
-            } : {}}
-            animate={{ opacity: isFlipped ? 1 : 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
-            <div className="glass-bg-tech glass-backdrop absolute inset-0 z-0" />
-            <div className="glass-foreground-tech relative z-10 flex items-center justify-center text-center p-6">
-              <p className="text-gray-custom text-lg leading-relaxed">{tech.description}</p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-    </motion.div>
-  );
+    );
 };
 
-// Section Stack
-export default function Stack() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <div id="stack" ref={sectionRef} className="relative bg-white overflow-hidden">
-      
-      {/* Container pour l'effet de scroll */}
-      <div className="relative min-h-[200vh] py-20">
-        
-        {/* Objet 3D qui suit le scroll derrière les cartes */}
-        <div className="absolute inset-0 pointer-events-none z-0 hidden md:block">
-          <div className="sticky top-1/2 transform -translate-y-1/2 flex items-center justify-center h-0">
-            <motion.div 
-              style={{ 
-                y: useTransform(useScroll({ target: sectionRef }).scrollYProgress, [0, 1], [-700, 850]) // Suivi des cards
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              animate={{
-                translateY: [0, -20, 0], // Rebond avec translateY au lieu de y
-              }}
-              transition={{
-                opacity: { duration: 0.6, ease: "easeOut" },
-                scale: { duration: 0.6, ease: "easeOut" },
-                translateY: {
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
+// Composant pour une catégorie
+const CategorySection = ({ category, index }: { category: typeof techCategories[0], index: number }) => {
+    return (
+        <motion.div
+            className="mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+        >
+            {/* Titre de catégorie */}
+            <h3
+                className="font-mono text-sm md:text-base uppercase tracking-wider mb-6"
+                style={{
+                    color: '#f97316',
+                    letterSpacing: '0.1em'
+                }}
             >
-              <Image 
-                src="/assets/3d/cube-green.webp" 
-                alt="Cube 3D"
-                width={1400} 
-                height={1400} 
-                loading="lazy"
-                className="opacity-60 drop-shadow-xl"
-              />
+                {category.title}
+            </h3>
+
+            {/* Liste des technos en grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                {category.techs.map((tech, techIndex) => (
+                    <TechItem key={tech.name} tech={tech} index={techIndex} />
+                ))}
+            </div>
+        </motion.div>
+    );
+};
+
+export default function Stack() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Scroll parallax pour le watermark
+    const { scrollY } = useScroll();
+    const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
+
+    // Détection mobile
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    return (
+        <section
+            id="stack"
+            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            style={{ backgroundColor: '#f5f0e8' }}
+        >
+            {/* Numérotation éditoriale "03" en arrière-plan */}
+            <motion.div
+                className="hidden lg:block absolute top-32 left-12 pointer-events-none select-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+            >
+                <span
+                    className="font-mono font-bold text-[180px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: 0.05
+                    }}
+                >
+                    03
+                </span>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Contenu qui défile par-dessus */}
-        <div className="relative z-10">
-          
-          <div className="max-w-[1400px] mx-auto px-6">
-            
-            {/* Titre */}
-            <div className="text-center mb-16">
-              <h2 className="section-title text-4xl font-medium text-gray-900 mb-6">
-                Mes compétences
-              </h2>
-            </div>
+            {/* Watermark typographique "STACK" en arrière-plan */}
+            <motion.div
+                className="absolute pointer-events-none select-none"
+                style={{
+                    top: isMobile ? '8%' : '12%',
+                    right: isMobile ? '5%' : '8%',
+                    y: watermarkY
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5 }}
+            >
+                <span
+                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
+                    style={{
+                        color: '#f97316',
+                        opacity: isMobile ? 0.02 : 0.03,
+                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
+                    }}
+                >
+                    STACK
+                </span>
+            </motion.div>
 
-            {/* Grille unique des technologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 lg:gap-2 max-w-7xl mx-auto justify-items-center">
-              {technologies.map((tech, index) => (
-                <TechCard key={tech.name} tech={tech} index={index} />
-              ))}
+            {/* Contenu principal */}
+            <div className="relative z-10 w-full max-w-6xl mx-auto">
+
+                {/* HEADER ÉDITORIAL */}
+                <motion.div
+                    className="text-center mb-16 md:mb-20"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    {/* Surtitre */}
+                    <span
+                        className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
+                        style={{
+                            color: '#f97316',
+                            letterSpacing: '0.1em'
+                        }}
+                    >
+                        Stack · Ma boîte à outils
+                    </span>
+
+                    {/* Titre principal */}
+                    <h2
+                        className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
+                        style={{
+                            color: '#253439',
+                            lineHeight: '1.2'
+                        }}
+                    >
+                        Les technologies qui donnent vie aux histoires
+                    </h2>
+
+                    {/* Chapô */}
+                    <p
+                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
+                        style={{
+                            color: '#333333',
+                            opacity: 0.9,
+                            lineHeight: '1.6'
+                        }}
+                    >
+                        React, TypeScript, Figma... Voici les outils que j&apos;utilise pour créer des expériences web sur mesure.
+                    </p>
+                </motion.div>
+
+                {/* LES 3 CATÉGORIES */}
+                <div className="max-w-5xl mx-auto">
+                    {techCategories.map((category, index) => (
+                        <CategorySection key={category.title} category={category} index={index} />
+                    ))}
+                </div>
+
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+        </section>
+    );
 }
