@@ -300,16 +300,7 @@ export default function Footer() {
                             className="font-sans text-sm"
                             style={{ color: '#333333', opacity: 0.7 }}
                         >
-                            Fait avec ❤️ et{' '}
-                            <a
-                                href="https://claude.ai"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="transition-colors duration-300 hover:text-[#f97316]"
-                                style={{ color: '#f97316' }}
-                            >
-                                Claude
-                            </a>
+                            Fait avec ❤️
                         </p>
                     </div>
                 </motion.div>
