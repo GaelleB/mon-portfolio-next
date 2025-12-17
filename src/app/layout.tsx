@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/react';
 
 // Fonts pour le style éditorial
 const inter = Inter({
@@ -64,6 +65,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} font-sans`}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
