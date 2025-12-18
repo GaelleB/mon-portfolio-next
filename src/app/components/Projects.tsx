@@ -213,21 +213,6 @@ const FeaturedProject = ({ project }: { project: Project }) => {
                                 </svg>
                             </motion.a>
                         )}
-                        <motion.a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center font-sans text-sm group"
-                            style={{ color: '#253439' }}
-                            whileHover={{ x: 5 }}
-                        >
-                            <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
-                                Voir sur GitHub
-                            </span>
-                            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </motion.a>
                     </motion.div>
                 </div>
 
@@ -247,29 +232,52 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
             transition={{ duration: 0.6, delay: index * 0.1 }}
         >
             {/* Image */}
-            <motion.a
-                href={project.demo || project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block relative rounded-xl overflow-hidden mb-4"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-            >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        width={600}
-                        height={450}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {/* Overlay orange au hover */}
-                    <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                        style={{ backgroundColor: '#f97316' }}
-                    />
-                </div>
-            </motion.a>
+            {project.demo ? (
+                <motion.a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative rounded-xl overflow-hidden mb-4 cursor-pointer"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            width={600}
+                            height={450}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        {/* Overlay orange au hover */}
+                        <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                            style={{ backgroundColor: '#f97316' }}
+                        />
+                    </div>
+                </motion.a>
+            ) : (
+                <motion.div
+                    className="block relative rounded-xl overflow-hidden mb-4"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            width={600}
+                            height={450}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        {/* Overlay orange au hover */}
+                        <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                            style={{ backgroundColor: '#f97316' }}
+                        />
+                    </div>
+                </motion.div>
+            )}
 
             {/* Badge catégorie */}
             <span
@@ -325,18 +333,6 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
                         </svg>
                     </a>
                 )}
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center group/link"
-                    style={{ color: '#253439' }}
-                >
-                    <span className="group-hover/link:underline">GitHub</span>
-                    <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
             </div>
         </motion.div>
     );
