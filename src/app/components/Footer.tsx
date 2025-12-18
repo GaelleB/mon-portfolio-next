@@ -216,22 +216,31 @@ export default function Footer() {
                                 LinkedIn
                             </a>
                             <a
-                                href="https://github.com/GaelleB"
+                                href="https://www.instagram.com/gaelle_boucher23/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
                             >
-                                GitHub
+                                Instagram
                             </a>
                             <a
-                                href="https://www.malt.fr/profile/gaelleboucher"
+                                href="https://medium.com/@gahell911"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
                             >
-                                Malt
+                                Medium
+                            </a>
+                            <a
+                                href="https://substack.com/@gahell911"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                style={{ color: '#253439' }}
+                            >
+                                Substack
                             </a>
                         </div>
                     </div>
