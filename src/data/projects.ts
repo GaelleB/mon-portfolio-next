@@ -8,7 +8,7 @@ export type Project = {
     image: string;
     tech: string[];
     github: string;
-    demo: string | null;
+    demo?: string;
     featured?: boolean;
 };
 

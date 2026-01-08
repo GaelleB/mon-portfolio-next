@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { navItems } from '@/data/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Footer() {
@@ -157,9 +156,9 @@ export default function Footer() {
                     </motion.div>
                 </motion.div>
 
-                {/* 3 COLONNES - Contact, Social, Navigation */}
+                {/* 2 COLONNES - Contact, Social */}
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16 md:mb-20"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 mb-16 md:mb-20 max-w-2xl mx-auto"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -239,31 +238,6 @@ export default function Footer() {
                             >
                                 Substack
                             </a>
-                        </div>
-                    </div>
-
-                    {/* Colonne 3 - Navigation */}
-                    <div>
-                        <h3
-                            className="font-mono text-sm uppercase tracking-wider mb-4"
-                            style={{
-                                color: '#f97316',
-                                letterSpacing: '0.1em'
-                            }}
-                        >
-                            Navigation
-                        </h3>
-                        <div className="space-y-3">
-                            {navItems.map((item) => (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
-                                    style={{ color: '#253439' }}
-                                >
-                                    {item.name}
-                                </a>
-                            ))}
                         </div>
                     </div>
                 </motion.div>
