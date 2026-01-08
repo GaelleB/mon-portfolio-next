@@ -6,8 +6,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { projects, type Project } from '@/data/projects';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
-// Composant pour le projet featured (Code in the City)
-const FeaturedProject = ({ project }: { project: Project }) => {
+// Composant pour le projet featured
+const FeaturedProject = ({ project, reverse = false }: { project: Project, reverse?: boolean }) => {
     return (
         <motion.div
             className="mb-20 md:mb-24"
@@ -19,11 +19,15 @@ const FeaturedProject = ({ project }: { project: Project }) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
                 {/* Image - 7 colonnes */}
-                <div className="lg:col-span-7">
-                    <motion.div
-                        className="relative rounded-2xl overflow-hidden group"
+                <div className={`lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
+                    <motion.a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block relative rounded-2xl overflow-hidden group cursor-pointer"
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.3 }}
+                        aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
                     >
                         <Image
                             src={project.image}
@@ -37,11 +41,11 @@ const FeaturedProject = ({ project }: { project: Project }) => {
                             className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
                             style={{ backgroundColor: '#f97316' }}
                         />
-                    </motion.div>
+                    </motion.a>
                 </div>
 
                 {/* Texte - 5 colonnes */}
-                <div className="lg:col-span-5">
+                <div className={`lg:col-span-5 ${reverse ? 'lg:order-1' : ''}`}>
                     {/* Badge catégorie */}
                     <motion.span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4 px-4 py-2 rounded-full"
@@ -278,7 +282,6 @@ export default function Projects() {
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
 
-    const featuredProject = projects.find(p => p.featured);
     const otherProjects = projects.filter(p => !p.featured);
 
     return (
@@ -377,8 +380,14 @@ export default function Projects() {
                     </p>
                 </motion.div>
 
-                {/* FEATURED PROJECT */}
-                {featuredProject && <FeaturedProject project={featuredProject} />}
+                {/* FEATURED PROJECTS - Alternés */}
+                {projects.filter(p => p.featured).map((project, index) => (
+                    <FeaturedProject
+                        key={project.id}
+                        project={project}
+                        reverse={index % 2 !== 0}
+                    />
+                ))}
 
                 {/* AUTRES PROJETS - Grid adaptative */}
                 {otherProjects.length > 0 && (
