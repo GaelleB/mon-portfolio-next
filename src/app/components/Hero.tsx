@@ -6,11 +6,10 @@ import Image from 'next/image';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Hero() {
-    const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const isMobile = useIsMobile();
 
-    // Textes rotatifs éditoriaux
-    const rotatingTexts = [
+    // Value propositions statiques
+    const valueProps = [
         "Pour webzines et maisons d'édition",
         "Développeuse React/Next spécialisée en contenu éditorial",
         "Quand le code rencontre la mise en page",
@@ -21,17 +20,6 @@ export default function Hero() {
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 500], [0, -150]);
     const lineArtY = useTransform(scrollY, [0, 500], [0, 100]);
-
-    // Animation automatique du texte toutes les 4 secondes
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTextIndex((prevIndex) =>
-                (prevIndex + 1) % rotatingTexts.length
-            );
-        }, 4000);
-
-        return () => clearInterval(interval);
-    }, [rotatingTexts.length]);
 
     return (
         <section
@@ -166,7 +154,7 @@ export default function Hero() {
 
                         {/* Titre principal */}
                         <motion.h1
-                            className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl mb-6"
+                            className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl mb-8"
                             style={{
                                 color: '#253439',
                                 lineHeight: '1.1'
@@ -178,28 +166,38 @@ export default function Hero() {
                             Je te crée un site qui raconte ton histoire
                         </motion.h1>
 
-                        {/* Textes rotatifs */}
-                        <motion.div
-                            className="mb-6 h-16 md:h-14 flex items-center justify-center lg:justify-start"
+                        {/* Value propositions statiques */}
+                        <motion.ul
+                            className="mb-8 space-y-3 text-center lg:text-left"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                            <motion.p
-                                key={currentTextIndex}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.5 }}
-                                className="font-sans text-lg md:text-xl"
-                                style={{
-                                    color: '#333333',
-                                    lineHeight: '1.4'
-                                }}
-                            >
-                                {rotatingTexts[currentTextIndex]}
-                            </motion.p>
-                        </motion.div>
+                            {valueProps.map((text, index) => (
+                                <motion.li
+                                    key={index}
+                                    className="flex items-start justify-center lg:justify-start gap-3"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                                >
+                                    <span
+                                        className="inline-block w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0"
+                                        style={{ backgroundColor: '#f97316' }}
+                                        aria-hidden="true"
+                                    />
+                                    <span
+                                        className="font-sans text-base md:text-lg"
+                                        style={{
+                                            color: '#333333',
+                                            lineHeight: '1.7'
+                                        }}
+                                    >
+                                        {text}
+                                    </span>
+                                </motion.li>
+                            ))}
+                        </motion.ul>
 
                         {/* Description courte */}
                         <motion.p
@@ -207,7 +205,7 @@ export default function Hero() {
                             style={{
                                 color: '#333333',
                                 opacity: 0.9,
-                                lineHeight: '1.6'
+                                lineHeight: '1.7'
                             }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
