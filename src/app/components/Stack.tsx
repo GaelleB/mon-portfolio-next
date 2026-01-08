@@ -217,7 +217,7 @@ export default function Stack() {
                             lineHeight: '1.6'
                         }}
                     >
-                        React, TypeScript, Figma... Voici les outils que j&apos;utilise pour créer des expériences web sur mesure.
+                        Du code à la mise en page, chaque outil a un rôle : structurer les contenus, soigner la typographie, créer des parcours de lecture fluides.
                     </p>
                 </motion.div>
 
