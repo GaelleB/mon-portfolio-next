@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Hero() {
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [isMobile, setIsMobile] = useState(false);
+    const isMobile = useIsMobile();
 
     // Textes rotatifs éditoriaux
     const rotatingTexts = [
@@ -20,19 +21,6 @@ export default function Hero() {
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 500], [0, -150]);
     const lineArtY = useTransform(scrollY, [0, 500], [0, 100]);
-
-    // Détection mobile
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     // Animation automatique du texte toutes les 4 secondes
     useEffect(() => {

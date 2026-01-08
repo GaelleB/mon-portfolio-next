@@ -1,28 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { navItems } from '@/data/navigation';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Footer() {
-    const [isMobile, setIsMobile] = useState(false);
+    const isMobile = useIsMobile();
 
     // Scroll parallax pour le watermark
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
-
-    // Détection mobile
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     return (
         <footer

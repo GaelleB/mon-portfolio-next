@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { techCategories, type Tech, type TechCategory } from '@/data/stack';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 // Composant pour afficher une techno
 const TechItem = ({ tech, index }: { tech: Tech, index: number }) => {
@@ -77,24 +78,11 @@ const CategorySection = ({ category, index }: { category: TechCategory, index: n
 };
 
 export default function Stack() {
-    const [isMobile, setIsMobile] = useState(false);
+    const isMobile = useIsMobile();
 
     // Scroll parallax pour le watermark
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
-
-    // Détection mobile
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     return (
         <section
