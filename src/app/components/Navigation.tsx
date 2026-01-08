@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { navItems } from '@/data/navigation';
 
 export default function Navigation() {
     const [activeSection, setActiveSection] = useState('Accueil');
@@ -14,13 +15,10 @@ export default function Navigation() {
         const handleScroll = () => {
             const scrollPosition = window.scrollY + 100;
 
-            const sections = [
-                { name: 'Accueil', element: document.getElementById('home') || document.querySelector('section:first-child') },
-                { name: 'À propos', element: document.getElementById('about') },
-                { name: 'Stack', element: document.getElementById('stack') },
-                { name: 'Projets', element: document.getElementById('projects') },
-                { name: 'Contact', element: document.getElementById('contact') }
-            ];
+            const sections = navItems.map(item => ({
+                name: item.name,
+                element: document.getElementById(item.href.slice(1)) || (item.href === '#home' ? document.querySelector('section:first-child') : null)
+            }));
 
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
@@ -41,14 +39,6 @@ export default function Navigation() {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const navItems = [
-        { name: 'Accueil', href: '#home' },
-        { name: 'À propos', href: '#about' },
-        { name: 'Stack', href: '#stack' },
-        { name: 'Projets', href: '#projects' },
-        { name: 'Contact', href: '#contact' }
-    ];
 
     const handleNavClick = (itemName: string) => {
         setActiveSection(itemName);

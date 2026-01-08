@@ -3,41 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-
-// Organisation des technologies par catégories
-const techCategories = [
-    {
-        title: "Développement",
-        icon: "laptop",
-        techs: [
-            { name: 'React', icon: '/assets/icons/react.svg', color: '#61DAFB' },
-            { name: 'TypeScript', icon: '/assets/icons/typescript.svg', color: '#3178C6' },
-            { name: 'HTML', icon: '/assets/icons/html.svg', color: '#E34F26' },
-            { name: 'CSS', icon: '/assets/icons/css.svg', color: '#1572B6' },
-            { name: 'Tailwind', icon: '/assets/icons/tailwindcss.svg', color: '#06B6D4' }
-        ]
-    },
-    {
-        title: "Design & Outils",
-        icon: "tools",
-        techs: [
-            { name: 'Figma', icon: '/assets/icons/figma.svg', color: '#F24E1E' },
-            { name: 'Git', icon: '/assets/icons/git.svg', color: '#F05032' },
-            { name: 'GitHub', icon: '/assets/icons/github.svg', color: '#181717' }
-        ]
-    },
-    {
-        title: "IA & Productivité",
-        icon: "ai",
-        techs: [
-            { name: 'ChatGPT', icon: '/assets/icons/chatgpt.svg', color: '#10A37F' },
-            { name: 'Claude', icon: '/assets/icons/claude.svg', color: '#D97757' }
-        ]
-    }
-];
+import { techCategories, type Tech, type TechCategory } from '@/data/stack';
 
 // Composant pour afficher une techno
-const TechItem = ({ tech, index }: { tech: typeof techCategories[0]['techs'][0], index: number }) => {
+const TechItem = ({ tech, index }: { tech: Tech, index: number }) => {
     return (
         <motion.div
             className="flex items-center gap-3 group"
@@ -77,7 +46,7 @@ const TechItem = ({ tech, index }: { tech: typeof techCategories[0]['techs'][0],
 };
 
 // Composant pour une catégorie
-const CategorySection = ({ category, index }: { category: typeof techCategories[0], index: number }) => {
+const CategorySection = ({ category, index }: { category: TechCategory, index: number }) => {
     return (
         <motion.div
             className="mb-12 md:mb-16"

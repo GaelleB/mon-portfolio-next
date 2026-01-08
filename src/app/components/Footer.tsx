@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { navItems } from '@/data/navigation';
 
 export default function Footer() {
     const [isMobile, setIsMobile] = useState(false);
@@ -257,34 +258,16 @@ export default function Footer() {
                             Navigation
                         </h3>
                         <div className="space-y-3">
-                            <a
-                                href="#home"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
-                                style={{ color: '#253439' }}
-                            >
-                                Accueil
-                            </a>
-                            <a
-                                href="#about"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
-                                style={{ color: '#253439' }}
-                            >
-                                À propos
-                            </a>
-                            <a
-                                href="#stack"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
-                                style={{ color: '#253439' }}
-                            >
-                                Stack
-                            </a>
-                            <a
-                                href="#projects"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
-                                style={{ color: '#253439' }}
-                            >
-                                Projets
-                            </a>
+                            {navItems.map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={item.href}
+                                    className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                    style={{ color: '#253439' }}
+                                >
+                                    {item.name}
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </motion.div>
