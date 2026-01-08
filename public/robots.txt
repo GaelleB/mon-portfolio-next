@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mon-portfolio-next-mu.vercel.app/sitemap.xml
+Sitemap: https://gaelle-boucher.dev/sitemap.xml
