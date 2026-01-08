@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://gaelle-boucher.dev'
   },
+  icons: {
+    icon: '/favicon.ico'
+  },
   openGraph: {
     title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux',
     description: 'Je développe des sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu. Développeuse spécialisée React/Next.js.',
