@@ -222,7 +222,7 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
-                            De la néonat&apos; au code, je conçois des expériences de lecture pour médias culturels, webzines et maisons d&apos;édition.
+                            De la néonat&apos; au code, je développe des sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu.
                         </motion.p>
 
                         {/* CTA */}
