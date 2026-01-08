@@ -46,6 +46,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-mono font-bold text-[180px] leading-none"
@@ -69,6 +70,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-serif font-bold text-[120px] md:text-[200px] lg:text-[280px] leading-none"
@@ -89,6 +91,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5, delay: 0.8 }}
+                aria-hidden="true"
             >
                 <motion.svg
                     width="120"
@@ -248,7 +251,7 @@ export default function Hero() {
                                 <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
                                     Voir mes projets
                                 </span>
-                                <span className="ml-2 group-hover:translate-y-1 inline-block transition-transform duration-300">↓</span>
+                                <span className="ml-2 group-hover:translate-y-1 inline-block transition-transform duration-300" aria-hidden="true">↓</span>
                             </motion.a>
                         </motion.div>
 
@@ -310,7 +313,7 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 1 }}
                         >
-                            <div className="flex -space-x-2">
+                            <div className="flex -space-x-2" aria-hidden="true">
                                 <div
                                     className="w-8 h-8 rounded-full border-2 shadow-md"
                                     style={{

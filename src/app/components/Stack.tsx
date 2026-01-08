@@ -20,7 +20,7 @@ const TechItem = ({ tech, index }: { tech: Tech, index: number }) => {
             <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
                 <Image
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`Logo ${tech.name}`}
                     width={48}
                     height={48}
                     className="object-contain transition-transform duration-300 group-hover:scale-110"
@@ -41,6 +41,7 @@ const TechItem = ({ tech, index }: { tech: Tech, index: number }) => {
             <div
                 className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ backgroundColor: tech.color }}
+                aria-hidden="true"
             />
         </motion.div>
     );
@@ -96,6 +97,7 @@ export default function Stack() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-mono font-bold text-[180px] leading-none"
@@ -119,6 +121,7 @@ export default function Stack() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"

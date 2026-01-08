@@ -137,9 +137,10 @@ const FeaturedProject = ({ project }: { project: Project }) => {
                                     boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
                                 }}
                                 whileTap={{ scale: 0.98 }}
+                                aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
                             >
                                 Voir le site
-                                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                 </svg>
                             </motion.a>
@@ -257,9 +258,10 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
                         rel="noopener noreferrer"
                         className="inline-flex items-center group/link"
                         style={{ color: '#f97316' }}
+                        aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
                     >
                         <span className="group-hover/link:underline">Voir le site</span>
-                        <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
@@ -291,6 +293,7 @@ export default function Projects() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-mono font-bold text-[180px] leading-none"
@@ -314,6 +317,7 @@ export default function Projects() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"

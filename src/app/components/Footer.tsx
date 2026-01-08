@@ -24,6 +24,7 @@ export default function Footer() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-mono font-bold text-[180px] leading-none"
@@ -47,6 +48,7 @@ export default function Footer() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
@@ -129,9 +131,10 @@ export default function Footer() {
                                 boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
                             }}
                             whileTap={{ scale: 0.98 }}
+                            aria-label="Réserver un appel découverte de 30 minutes sur Calendly (ouvre dans un nouvel onglet)"
                         >
                             Réserver un appel découverte
-                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </motion.a>
@@ -142,11 +145,12 @@ export default function Footer() {
                             className="inline-flex items-center justify-center font-sans text-base group"
                             style={{ color: '#253439' }}
                             whileHover={{ x: 5 }}
+                            aria-label="M'écrire par email à gaelleboucher.dev@gmail.com"
                         >
                             <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
                                 Ou écris-moi directement
                             </span>
-                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </motion.a>
@@ -201,6 +205,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
+                                aria-label="Mon profil LinkedIn (ouvre dans un nouvel onglet)"
                             >
                                 LinkedIn
                             </a>
@@ -210,6 +215,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
+                                aria-label="Mon profil Instagram (ouvre dans un nouvel onglet)"
                             >
                                 Instagram
                             </a>
@@ -219,6 +225,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
+                                aria-label="Mes articles sur Medium (ouvre dans un nouvel onglet)"
                             >
                                 Medium
                             </a>
@@ -228,6 +235,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
                                 style={{ color: '#253439' }}
+                                aria-label="Ma newsletter Substack (ouvre dans un nouvel onglet)"
                             >
                                 Substack
                             </a>

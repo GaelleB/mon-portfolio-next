@@ -118,6 +118,7 @@ export default function About() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.3 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-mono font-bold text-[180px] leading-none"
@@ -141,6 +142,7 @@ export default function About() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
+                aria-hidden="true"
             >
                 <span
                     className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
@@ -222,12 +224,13 @@ export default function About() {
                                         opacity: 0.15
                                     }}
                                     whileHover={{ opacity: 0.3 }}
+                                    aria-hidden="true"
                                 >
                                     {chapter.number}
                                 </motion.span>
 
                                 {/* Illustration line art */}
-                                <div className="mb-4 lg:mb-0">
+                                <div className="mb-4 lg:mb-0" aria-hidden="true">
                                     <ChapterIcon icon={chapter.icon} />
                                 </div>
                             </div>
@@ -329,6 +332,7 @@ export default function About() {
                             boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
                         }}
                         whileTap={{ scale: 0.98 }}
+                        aria-label="Voir mon profil LinkedIn (ouvre dans un nouvel onglet)"
                     >
                         <span>Voir mon LinkedIn</span>
                         <svg
@@ -337,6 +341,7 @@ export default function About() {
                             stroke="currentColor"
                             strokeWidth="2"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
@@ -349,6 +354,7 @@ export default function About() {
                         className="inline-flex items-center justify-center font-sans text-base group"
                         style={{ color: '#253439' }}
                         whileHover={{ x: 5 }}
+                        aria-label="Télécharger mon CV en PDF"
                     >
                         <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
                             Télécharger mon CV
@@ -359,6 +365,7 @@ export default function About() {
                             stroke="currentColor"
                             strokeWidth="2"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                         >
                             <path d="M12 4v12m0 0l-4-4m4 4l4-4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
                         </svg>

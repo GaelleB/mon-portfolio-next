@@ -86,7 +86,8 @@ export default function Navigation() {
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="p-2"
-                    aria-label="Menu"
+                    aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                    aria-expanded={isMobileMenuOpen}
                 >
                     <motion.div
                         animate={isMobileMenuOpen ? "open" : "closed"}
