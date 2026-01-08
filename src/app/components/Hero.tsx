@@ -352,7 +352,7 @@ export default function Hero() {
                                     opacity: 0.7
                                 }}
                             >
-                                5+ projets éditoriaux
+                                Projets éditoriaux en cours
                             </span>
                         </motion.div>
 

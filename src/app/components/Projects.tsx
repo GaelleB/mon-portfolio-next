@@ -42,36 +42,6 @@ const projects: Project[] = [
         tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
         github: 'https://github.com/GaelleB/flag-chronicles',
         demo: 'https://flag-chronicles.vercel.app/'
-    },
-    {
-        id: 1,
-        title: 'Netflix Clone',
-        year: 'Octobre 2025',
-        category: 'Clone site existant',
-        image: '/assets/netflix.webp',
-        tech: ['Next.js', 'JavaScript', 'CSS'],
-        github: 'https://github.com/GaelleB/netflix-clone',
-        demo: 'https://netflix-clone-tan-xi.vercel.app/'
-    },
-    {
-        id: 2,
-        title: 'Debug or Treat',
-        year: 'Octobre 2025',
-        category: 'Site interactif',
-        image: '/assets/happy-halloween.jpg',
-        tech: ['Astro'],
-        github: 'https://github.com/GaelleB/halloween-site',
-        demo: 'https://halloween-site.vercel.app/'
-    },
-    {
-        id: 3,
-        title: 'Groupomania',
-        year: 'Octobre 2025',
-        category: 'Portfolio',
-        image: '/assets/groupomania.png',
-        tech: ['Next.js', 'TypeScript'],
-        github: 'https://github.com/GaelleB/groupomania-next',
-        demo: 'https://groupomania-next.vercel.app/'
     }
 ];
 
@@ -451,19 +421,25 @@ export default function Projects() {
                             lineHeight: '1.6'
                         }}
                     >
-                        Découvre une sélection de mes créations web, du blog personnel aux clones interactifs.
+                        Des projets qui mêlent code et storytelling, de New York aux drapeaux américains.
                     </p>
                 </motion.div>
 
                 {/* FEATURED PROJECT */}
                 {featuredProject && <FeaturedProject project={featuredProject} />}
 
-                {/* AUTRES PROJETS - Grid 3 colonnes */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                    {otherProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
-                </div>
+                {/* AUTRES PROJETS - Grid adaptative */}
+                {otherProjects.length > 0 && (
+                    <div className={`grid gap-8 md:gap-10 ${
+                        otherProjects.length === 1
+                            ? 'grid-cols-1 max-w-2xl mx-auto'
+                            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                    }`}>
+                        {otherProjects.map((project, index) => (
+                            <ProjectCard key={project.id} project={project} index={index} />
+                        ))}
+                    </div>
+                )}
 
             </div>
         </section>
