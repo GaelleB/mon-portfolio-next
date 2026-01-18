@@ -15,6 +15,18 @@ export type Project = {
 // Liste des projets
 export const projects: Project[] = [
     {
+        id: 6,
+        title: '8 jours à New York',
+        year: 'Janvier 2026',
+        category: 'Carnet de voyage',
+        description: 'Récit de mon voyage à New York en août 2018. Une immersion de 8 jours dans la ville qui ne dort jamais, racontée jour après jour.',
+        image: '/assets/8days-nyc.jpg',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        github: 'https://github.com/GaelleB/days-in-nyc',
+        demo: 'https://days-in-nyc.vercel.app/',
+        featured: true
+    },
+    {
         id: 5,
         title: 'Flag Chronicles',
         year: 'Décembre 2025',
