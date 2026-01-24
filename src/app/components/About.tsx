@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { chapters } from '@/data/chapters';
 import { useIsMobile } from '@/hooks/useIsMobile';
