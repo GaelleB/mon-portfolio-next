@@ -20,14 +20,10 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
 
                 {/* Image - 7 colonnes */}
                 <div className={`lg:col-span-7 ${reverse ? 'lg:order-2' : ''}`}>
-                    <motion.a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block relative rounded-2xl overflow-hidden group cursor-pointer"
+                    <motion.div
+                        className="block relative rounded-2xl overflow-hidden group"
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.3 }}
-                        aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
                     >
                         <Image
                             src={project.image}
@@ -41,7 +37,7 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
                             className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
                             style={{ backgroundColor: '#f97316' }}
                         />
-                    </motion.a>
+                    </motion.div>
                 </div>
 
                 {/* Texte - 5 colonnes */}
@@ -50,8 +46,8 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
                     <motion.span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4 px-4 py-2 rounded-full"
                         style={{
-                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                            color: '#f97316',
+                            backgroundColor: 'rgba(154, 52, 18, 0.1)',
+                            color: '#9a3412',
                             letterSpacing: '0.1em'
                         }}
                         initial={{ opacity: 0, x: -20 }}
@@ -63,36 +59,27 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
                     </motion.span>
 
                     {/* Titre */}
-                    <motion.h3
+                    <h3
                         className="font-serif font-bold text-3xl md:text-4xl mb-4"
                         style={{
-                            color: '#253439',
+                            color: '#1a2528',
                             lineHeight: '1.2'
                         }}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
                     >
                         {project.title}
-                    </motion.h3>
+                    </h3>
 
                     {/* Description */}
                     {project.description && (
-                        <motion.p
+                        <p
                             className="font-sans text-base md:text-lg mb-6"
                             style={{
                                 color: '#333333',
-                                opacity: 0.9,
                                 lineHeight: '1.6'
                             }}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
                         >
                             {project.description}
-                        </motion.p>
+                        </p>
                     )}
 
                     {/* Tech tags */}
@@ -108,8 +95,8 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
                                 key={index}
                                 className="font-sans text-sm px-3 py-1 rounded-full"
                                 style={{
-                                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                                    color: '#f97316'
+                                    backgroundColor: 'rgba(154, 52, 18, 0.1)',
+                                    color: '#9a3412'
                                 }}
                             >
                                 {tech}
@@ -132,13 +119,12 @@ const FeaturedProject = ({ project, reverse = false }: { project: Project, rever
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center px-6 py-3 font-sans font-medium text-sm rounded-lg transition-all duration-300"
                                 style={{
-                                    backgroundColor: '#f97316',
-                                    color: '#faf7f2'
+                                    backgroundColor: '#c2410c',
+                                    color: '#ffffff'
                                 }}
                                 whileHover={{
                                     scale: 1.05,
-                                    backgroundColor: '#e86510',
-                                    boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                                    boxShadow: '0 8px 24px rgba(154, 52, 18, 0.25)'
                                 }}
                                 whileTap={{ scale: 0.98 }}
                                 aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
@@ -168,58 +154,32 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
             transition={{ duration: 0.6, delay: index * 0.1 }}
         >
             {/* Image */}
-            {project.demo ? (
-                <motion.a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative rounded-xl overflow-hidden mb-4 cursor-pointer"
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                            src={project.image}
-                            alt={project.title}
-                            width={600}
-                            height={450}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {/* Overlay orange au hover */}
-                        <div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                            style={{ backgroundColor: '#f97316' }}
-                        />
-                    </div>
-                </motion.a>
-            ) : (
-                <motion.div
-                    className="block relative rounded-xl overflow-hidden mb-4"
-                    whileHover={{ y: -5 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                            src={project.image}
-                            alt={project.title}
-                            width={600}
-                            height={450}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {/* Overlay orange au hover */}
-                        <div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                            style={{ backgroundColor: '#f97316' }}
-                        />
-                    </div>
-                </motion.div>
-            )}
+            <motion.div
+                className="block relative rounded-xl overflow-hidden mb-4"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+            >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                        src={project.image}
+                        alt={project.title}
+                        width={600}
+                        height={450}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Overlay orange au hover */}
+                    <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                        style={{ backgroundColor: '#f97316' }}
+                    />
+                </div>
+            </motion.div>
 
             {/* Badge catégorie */}
             <span
                 className="inline-block font-mono text-xs uppercase tracking-wider mb-2"
                 style={{
-                    color: '#f97316',
+                    color: '#9a3412',
                     letterSpacing: '0.1em'
                 }}
             >
@@ -230,7 +190,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
             <h3
                 className="font-serif font-bold text-xl md:text-2xl mb-3"
                 style={{
-                    color: '#253439',
+                    color: '#1a2528',
                     lineHeight: '1.3'
                 }}
             >
@@ -244,8 +204,8 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
                         key={index}
                         className="font-sans text-xs px-2 py-1 rounded-full"
                         style={{
-                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                            color: '#f97316'
+                            backgroundColor: 'rgba(154, 52, 18, 0.1)',
+                            color: '#9a3412'
                         }}
                     >
                         {tech}
@@ -261,7 +221,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center group/link"
-                        style={{ color: '#f97316' }}
+                        style={{ color: '#9a3412' }}
                         aria-label={`Voir le site ${project.title} (ouvre dans un nouvel onglet)`}
                     >
                         <span className="group-hover/link:underline">Voir le site</span>
@@ -298,15 +258,9 @@ export default function Projects() {
                 transition={{ duration: 1, delay: 0.3 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-mono font-bold text-[180px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: 0.05
-                    }}
-                >
-                    04
-                </span>
+                <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">04</text>
+                </svg>
             </motion.div>
 
             {/* Watermark typographique "WORK" en arrière-plan */}
@@ -322,16 +276,26 @@ export default function Projects() {
                 transition={{ duration: 1.2, delay: 0.5 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: isMobile ? 0.02 : 0.03,
-                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
-                    }}
+                <svg
+                    className="w-[250px] h-[100px] md:w-[400px] md:h-[160px] lg:w-[550px] lg:h-[220px]"
+                    viewBox="0 0 550 220"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    WORK
-                </span>
+                    <text
+                        x="0"
+                        y="180"
+                        fontFamily="serif"
+                        fontWeight="bold"
+                        fontSize="220"
+                        fill="#f97316"
+                        fillOpacity={isMobile ? 0.02 : 0.03}
+                        stroke="rgba(249, 115, 22, 0.08)"
+                        strokeWidth="1"
+                    >
+                        WORK
+                    </text>
+                </svg>
             </motion.div>
 
             {/* Contenu principal */}
@@ -349,7 +313,7 @@ export default function Projects() {
                     <span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
                         style={{
-                            color: '#f97316',
+                            color: '#c2410c',
                             letterSpacing: '0.1em'
                         }}
                     >

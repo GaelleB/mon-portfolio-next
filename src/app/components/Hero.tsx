@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -36,15 +35,9 @@ export default function Hero() {
                 transition={{ duration: 1, delay: 0.3 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-mono font-bold text-[180px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: 0.05
-                    }}
-                >
-                    01
-                </span>
+                <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">01</text>
+                </svg>
             </motion.div>
 
             {/* Typographie watermark "STORY" en arrière-plan */}
@@ -60,16 +53,26 @@ export default function Hero() {
                 transition={{ duration: 1.2, delay: 0.5 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-serif font-bold text-[120px] md:text-[200px] lg:text-[280px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: isMobile ? 0.02 : 0.03,
-                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
-                    }}
+                <svg
+                    className="w-[300px] h-[120px] md:w-[500px] md:h-[200px] lg:w-[700px] lg:h-[280px]"
+                    viewBox="0 0 700 280"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    STORY
-                </span>
+                    <text
+                        x="0"
+                        y="220"
+                        fontFamily="serif"
+                        fontWeight="bold"
+                        fontSize="280"
+                        fill="#f97316"
+                        fillOpacity={isMobile ? 0.02 : 0.03}
+                        stroke="rgba(249, 115, 22, 0.08)"
+                        strokeWidth="1"
+                    >
+                        STORY
+                    </text>
+                </svg>
             </motion.div>
 
             {/* Illustration line art "Livre ouvert" - Desktop only */}
@@ -144,7 +147,7 @@ export default function Hero() {
                             <span
                                 className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-6"
                                 style={{
-                                    color: '#f97316',
+                                    color: '#c2410c',
                                     letterSpacing: '0.1em'
                                 }}
                             >
@@ -203,8 +206,7 @@ export default function Hero() {
                         <motion.p
                             className="font-sans text-base md:text-lg mb-10 max-w-2xl mx-auto lg:mx-0"
                             style={{
-                                color: '#333333',
-                                opacity: 0.9,
+                                color: '#4a4a4a',
                                 lineHeight: '1.7'
                             }}
                             initial={{ opacity: 0, y: 20 }}
@@ -226,13 +228,12 @@ export default function Hero() {
                                 href="#contact"
                                 className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300 w-full sm:w-auto"
                                 style={{
-                                    backgroundColor: '#f97316',
-                                    color: '#faf7f2'
+                                    backgroundColor: '#c2410c',
+                                    color: '#ffffff'
                                 }}
                                 whileHover={{
                                     scale: 1.03,
-                                    backgroundColor: '#e86510',
-                                    boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                                    boxShadow: '0 8px 24px rgba(154, 52, 18, 0.25)'
                                 }}
                                 whileTap={{ scale: 0.98 }}
                             >

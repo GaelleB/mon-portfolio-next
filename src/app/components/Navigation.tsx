@@ -62,7 +62,7 @@ export default function Navigation() {
                             onClick={() => handleNavClick(item.name)}
                             className="relative font-mono text-xs uppercase tracking-wider transition-all duration-300"
                             style={{
-                                color: activeSection === item.name ? '#f97316' : '#253439',
+                                color: activeSection === item.name ? '#c2410c' : '#253439',
                                 letterSpacing: '0.1em'
                             }}
                         >
@@ -71,7 +71,7 @@ export default function Navigation() {
                                 <motion.div
                                     layoutId="activeUnderline"
                                     className="absolute -bottom-1 left-0 right-0 h-0.5"
-                                    style={{ backgroundColor: '#f97316' }}
+                                    style={{ backgroundColor: '#c2410c' }}
                                     initial={false}
                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                 />
@@ -99,7 +99,7 @@ export default function Navigation() {
                                 open: { rotate: 45, y: 6 }
                             }}
                             className="absolute h-0.5 w-full block top-1"
-                            style={{ backgroundColor: '#f97316' }}
+                            style={{ backgroundColor: '#c2410c' }}
                         />
                         <motion.span
                             variants={{
@@ -107,7 +107,7 @@ export default function Navigation() {
                                 open: { opacity: 0 }
                             }}
                             className="absolute h-0.5 w-full block top-3"
-                            style={{ backgroundColor: '#f97316' }}
+                            style={{ backgroundColor: '#c2410c' }}
                         />
                         <motion.span
                             variants={{
@@ -115,7 +115,7 @@ export default function Navigation() {
                                 open: { rotate: -45, y: -6 }
                             }}
                             className="absolute h-0.5 w-full block top-5"
-                            style={{ backgroundColor: '#f97316' }}
+                            style={{ backgroundColor: '#c2410c' }}
                         />
                     </motion.div>
                 </button>
@@ -138,9 +138,9 @@ export default function Navigation() {
                                 onClick={() => handleNavClick(item.name)}
                                 className="font-mono text-xs uppercase tracking-wider transition-colors duration-300 pb-2"
                                 style={{
-                                    color: activeSection === item.name ? '#f97316' : '#253439',
+                                    color: activeSection === item.name ? '#c2410c' : '#253439',
                                     letterSpacing: '0.1em',
-                                    borderBottom: activeSection === item.name ? '2px solid #f97316' : '2px solid transparent'
+                                    borderBottom: activeSection === item.name ? '2px solid #c2410c' : '2px solid transparent'
                                 }}
                             >
                                 {item.name}

@@ -25,15 +25,9 @@ export default function Footer() {
                 transition={{ duration: 1, delay: 0.3 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-mono font-bold text-[180px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: 0.05
-                    }}
-                >
-                    05
-                </span>
+                <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">05</text>
+                </svg>
             </motion.div>
 
             {/* Watermark typographique "CONTACT" en arrière-plan */}
@@ -49,16 +43,26 @@ export default function Footer() {
                 transition={{ duration: 1.2, delay: 0.5 }}
                 aria-hidden="true"
             >
-                <span
-                    className="font-serif font-bold text-[100px] md:text-[160px] lg:text-[220px] leading-none"
-                    style={{
-                        color: '#f97316',
-                        opacity: isMobile ? 0.02 : 0.03,
-                        WebkitTextStroke: '1px rgba(249, 115, 22, 0.08)'
-                    }}
+                <svg
+                    className="w-[280px] h-[100px] md:w-[450px] md:h-[160px] lg:w-[620px] lg:h-[220px]"
+                    viewBox="0 0 800 220"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
-                    CONTACT
-                </span>
+                    <text
+                        x="0"
+                        y="180"
+                        fontFamily="serif"
+                        fontWeight="bold"
+                        fontSize="220"
+                        fill="#f97316"
+                        fillOpacity={isMobile ? 0.02 : 0.03}
+                        stroke="rgba(249, 115, 22, 0.08)"
+                        strokeWidth="1"
+                    >
+                        CONTACT
+                    </text>
+                </svg>
             </motion.div>
 
             {/* Contenu principal */}
@@ -76,7 +80,7 @@ export default function Footer() {
                     <span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
                         style={{
-                            color: '#f97316',
+                            color: '#c2410c',
                             letterSpacing: '0.1em'
                         }}
                     >
@@ -98,8 +102,7 @@ export default function Footer() {
                     <p
                         className="font-sans text-base md:text-lg max-w-3xl mx-auto mb-10"
                         style={{
-                            color: '#333333',
-                            opacity: 0.9,
+                            color: '#4a4a4a',
                             lineHeight: '1.6'
                         }}
                     >
@@ -121,13 +124,12 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300 w-full sm:w-auto"
                             style={{
-                                backgroundColor: '#f97316',
-                                color: '#faf7f2'
+                                backgroundColor: '#c2410c',
+                                color: '#ffffff'
                             }}
                             whileHover={{
                                 scale: 1.03,
-                                backgroundColor: '#e86510',
-                                boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25)'
+                                boxShadow: '0 8px 24px rgba(154, 52, 18, 0.25)'
                             }}
                             whileTap={{ scale: 0.98 }}
                             aria-label="Réserver un appel découverte de 30 minutes sur Calendly (ouvre dans un nouvel onglet)"
@@ -169,20 +171,19 @@ export default function Footer() {
                         <h3
                             className="font-mono text-sm uppercase tracking-wider mb-4"
                             style={{
-                                color: '#f97316',
+                                color: '#c2410c',
                                 letterSpacing: '0.1em'
                             }}
                         >
                             Contact
                         </h3>
                         <div className="space-y-3">
-                            <a
-                                href="mailto:gaelleboucher.dev@gmail.com"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                            <span
+                                className="block font-sans text-base"
                                 style={{ color: '#253439' }}
                             >
                                 gaelleboucher.dev@gmail.com
-                            </a>
+                            </span>
                         </div>
                     </div>
 
@@ -191,7 +192,7 @@ export default function Footer() {
                         <h3
                             className="font-mono text-sm uppercase tracking-wider mb-4"
                             style={{
-                                color: '#f97316',
+                                color: '#c2410c',
                                 letterSpacing: '0.1em'
                             }}
                         >
@@ -202,7 +203,7 @@ export default function Footer() {
                                 href="https://www.linkedin.com/in/gaelle-boucher/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#c2410c]"
                                 style={{ color: '#253439' }}
                                 aria-label="Mon profil LinkedIn (ouvre dans un nouvel onglet)"
                             >
@@ -212,7 +213,7 @@ export default function Footer() {
                                 href="https://www.instagram.com/gaelle_boucher23/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#c2410c]"
                                 style={{ color: '#253439' }}
                                 aria-label="Mon profil Instagram (ouvre dans un nouvel onglet)"
                             >
@@ -222,7 +223,7 @@ export default function Footer() {
                                 href="https://medium.com/@gahell911"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#c2410c]"
                                 style={{ color: '#253439' }}
                                 aria-label="Mes articles sur Medium (ouvre dans un nouvel onglet)"
                             >
@@ -232,7 +233,7 @@ export default function Footer() {
                                 href="https://substack.com/@gahell911"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block font-sans text-base transition-colors duration-300 hover:text-[#f97316]"
+                                className="block font-sans text-base transition-colors duration-300 hover:text-[#c2410c]"
                                 style={{ color: '#253439' }}
                                 aria-label="Ma newsletter Substack (ouvre dans un nouvel onglet)"
                             >
