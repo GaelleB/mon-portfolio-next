@@ -256,13 +256,7 @@ export default function Footer() {
                             className="font-sans text-sm"
                             style={{ color: '#333333', opacity: 0.7 }}
                         >
-                            © 2025 Gaëlle Boucher · Tous droits réservés
-                        </p>
-                        <p
-                            className="font-sans text-sm"
-                            style={{ color: '#333333', opacity: 0.7 }}
-                        >
-                            Fait avec ❤️
+                            © 2026 Gaëlle Boucher · Tous droits réservés
                         </p>
                     </div>
                 </motion.div>

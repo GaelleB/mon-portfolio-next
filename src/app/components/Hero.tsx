@@ -305,47 +305,6 @@ export default function Hero() {
                             />
                         </motion.div>
 
-                        {/* Social proof */}
-                        <motion.div
-                            className="flex items-center justify-center space-x-3"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 1 }}
-                        >
-                            <div className="flex -space-x-2" aria-hidden="true">
-                                <div
-                                    className="w-8 h-8 rounded-full border-2 shadow-md"
-                                    style={{
-                                        backgroundColor: '#f97316',
-                                        borderColor: '#f5f0e8'
-                                    }}
-                                />
-                                <div
-                                    className="w-8 h-8 rounded-full border-2 shadow-md"
-                                    style={{
-                                        backgroundColor: '#253439',
-                                        borderColor: '#f5f0e8'
-                                    }}
-                                />
-                                <div
-                                    className="w-8 h-8 rounded-full border-2 shadow-md"
-                                    style={{
-                                        backgroundColor: '#333333',
-                                        borderColor: '#f5f0e8'
-                                    }}
-                                />
-                            </div>
-                            <span
-                                className="text-sm md:text-base font-medium ml-3"
-                                style={{
-                                    color: '#333333',
-                                    opacity: 0.7
-                                }}
-                            >
-                                Projets éditoriaux en cours
-                            </span>
-                        </motion.div>
-
                     </div>
 
                 </div>
