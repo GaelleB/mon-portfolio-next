@@ -6,6 +6,7 @@ import About from './components/About'
 import Stack from './components/Stack'
 import Projects from './components/Projects'
 import Services from './components/Services'
+import Process from './components/Process'
 import Footer from './components/Footer'
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Stack />
         <Projects />
         <Services />
+        <Process />
       </main>
       <Footer />
     </>

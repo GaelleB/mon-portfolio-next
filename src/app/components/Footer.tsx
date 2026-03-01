@@ -25,7 +25,7 @@ export default function Footer() {
                 aria-hidden="true"
             >
                 <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">06</text>
+                    <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">07</text>
                 </svg>
             </motion.div>
 

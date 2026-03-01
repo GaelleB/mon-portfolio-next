@@ -5,8 +5,8 @@ export default function StructuredData() {
         "name": "Gaëlle Boucher",
         "url": "https://gaelle-boucher.dev",
         "image": "https://gaelle-boucher.dev/assets/gaelle-new.jpg",
-        "jobTitle": "Développeuse Front-End",
-        "description": "Développeuse front-end spécialisée en sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu.",
+        "jobTitle": "Développeuse web éditoriale",
+        "description": "Développeuse web éditoriale spécialisée en sites narratifs : blogs culturels, webzines, projets de contenu.",
         "knowsAbout": [
             "React",
             "Next.js",
@@ -35,7 +35,7 @@ export default function StructuredData() {
         "@type": "WebSite",
         "name": "Gaëlle Boucher - Portfolio",
         "url": "https://gaelle-boucher.dev",
-        "description": "Portfolio de Gaëlle Boucher, développeuse front-end spécialisée en projets éditoriaux",
+        "description": "Portfolio de Gaëlle Boucher, développeuse web éditoriale spécialisée en sites narratifs",
         "author": {
             "@type": "Person",
             "name": "Gaëlle Boucher"
@@ -52,7 +52,7 @@ export default function StructuredData() {
             "@type": "Person",
             "name": "Gaëlle Boucher",
             "alternateName": "Gaëlle B.",
-            "description": "Développeuse front-end spécialisée en sites éditoriaux",
+            "description": "Développeuse web éditoriale spécialisée en sites narratifs",
             "image": "https://gaelle-boucher.dev/assets/gaelle-new.jpg"
         }
     };

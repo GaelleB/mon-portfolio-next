@@ -25,9 +25,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gaelle-boucher.dev'),
-  title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux | Portfolio',
-  description: 'Développeuse front-end spécialisée en sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu. Je crée des expériences web avec React et Next.js.',
-  keywords: 'développeuse front-end, sites éditoriaux, blogs culturels, webzines narratifs, projets de contenu, React, Next.js, TypeScript, développeuse web freelance',
+  title: 'Gaëlle Boucher - Développeuse web éditoriale | Portfolio',
+  description: 'Développeuse web éditoriale spécialisée en sites narratifs : blogs culturels, webzines, projets de contenu. Je conçois et développe des sites qui servent ton message.',
+  keywords: 'développeuse web éditoriale, sites éditoriaux, blogs culturels, webzines narratifs, projets de contenu, React, Next.js, TypeScript, développeuse web freelance',
   authors: [{ name: 'Gaëlle Boucher', url: 'https://gaelle-boucher.dev' }],
   creator: 'Gaëlle Boucher',
   publisher: 'Gaëlle Boucher',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     icon: '/favicon.ico'
   },
   openGraph: {
-    title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux',
-    description: 'Je développe des sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu. Développeuse spécialisée React/Next.js.',
+    title: 'Gaëlle Boucher - Développeuse web éditoriale',
+    description: 'Développeuse web éditoriale spécialisée en sites narratifs : blogs culturels, webzines, projets de contenu.',
     type: 'website',
     url: 'https://gaelle-boucher.dev',
     locale: 'fr_FR',
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
         url: 'https://gaelle-boucher.dev/assets/gaelle-new.jpg',
         width: 500,
         height: 500,
-        alt: 'Gaëlle Boucher - Développeuse Front-End spécialisée projets éditoriaux',
+        alt: 'Gaëlle Boucher - Développeuse web éditoriale',
         type: 'image/jpeg'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Gaëlle Boucher - Développeuse Front-End Projets Éditoriaux',
-    description: 'Je développe des sites éditoriaux : blogs culturels, webzines narratifs, projets de contenu avec React/Next.js.',
+    title: 'Gaëlle Boucher - Développeuse web éditoriale',
+    description: 'Développeuse web éditoriale spécialisée en sites narratifs : blogs culturels, webzines, projets de contenu.',
     images: ['https://gaelle-boucher.dev/assets/gaelle-new.jpg'],
     creator: '@gaelle_boucher23'
   }
