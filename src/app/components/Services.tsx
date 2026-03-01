@@ -14,7 +14,7 @@ export default function Services() {
     return (
         <section
             id="services"
-            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            className="relative min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-16 overflow-hidden"
             style={{ backgroundColor: '#f5f0e8' }}
         >
             {/* Numérotation éditoriale "05" en arrière-plan */}
@@ -169,37 +169,6 @@ export default function Services() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* CTA */}
-                <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                >
-                    <motion.a
-                        href="https://calendly.com/gaelleboucher-dev/30min?subject=Appel découverte"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-8 py-4 font-sans font-medium text-base rounded-lg transition-all duration-300"
-                        style={{
-                            backgroundColor: '#c2410c',
-                            color: '#ffffff'
-                        }}
-                        whileHover={{
-                            scale: 1.03,
-                            boxShadow: '0 8px 24px rgba(154, 52, 18, 0.25)'
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        aria-label="Réserver un appel découverte de 30 minutes sur Calendly (ouvre dans un nouvel onglet)"
-                    >
-                        Réserver un appel découverte
-                        <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </motion.a>
-                </motion.div>
 
             </div>
         </section>

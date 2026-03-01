@@ -108,7 +108,7 @@ export default function About() {
     return (
         <section
             id="about"
-            className="relative min-h-screen py-20 px-6 md:px-12 lg:px-16 overflow-hidden"
+            className="relative min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-16 overflow-hidden"
             style={{ backgroundColor: '#f5f0e8' }}
         >
             {/* Numérotation éditoriale "02" en arrière-plan */}
