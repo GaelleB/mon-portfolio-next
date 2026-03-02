@@ -151,7 +151,7 @@ export default function Hero() {
                                     letterSpacing: '0.1em'
                                 }}
                             >
-                                Développeuse Front-End · Projets Éditoriaux
+                                Développeuse Web Éditoriale
                             </span>
                         </motion.div>
 
