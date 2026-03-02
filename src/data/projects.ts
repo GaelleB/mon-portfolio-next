@@ -14,6 +14,17 @@ export type Project = {
 // Liste des projets
 export const projects: Project[] = [
     {
+        id: 8,
+        title: 'The Soul of the Game',
+        year: 'Février 2026',
+        category: 'Projet personnel',
+        description: 'Exploration éditoriale des plus grandes dynasties NBA. Des récits portés par les données qui racontent comment ces équipes ont défini le basketball moderne.',
+        image: '/assets/soul-of-the-game.png',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        demo: 'https://the-soul-of-the-game.vercel.app/',
+        featured: true
+    },
+    {
         id: 7,
         title: 'Anatomy of',
         year: 'Janvier 2026',
