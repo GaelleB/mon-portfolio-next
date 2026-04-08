@@ -57,6 +57,7 @@ export default function Hero() {
                     className="w-[300px] h-[120px] md:w-[500px] md:h-[200px] lg:w-[700px] lg:h-[280px]"
                     viewBox="0 0 700 280"
                     fill="none"
+                    overflow="visible"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <text

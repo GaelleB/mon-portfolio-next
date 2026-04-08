@@ -120,6 +120,7 @@ export default function Stack() {
                     className="w-[250px] h-[100px] md:w-[400px] md:h-[160px] lg:w-[550px] lg:h-[220px]"
                     viewBox="0 0 550 220"
                     fill="none"
+                    overflow="visible"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <text

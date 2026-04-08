@@ -141,6 +141,7 @@ export default function About() {
                     className="w-[280px] h-[100px] md:w-[450px] md:h-[160px] lg:w-[620px] lg:h-[220px]"
                     viewBox="0 0 900 220"
                     fill="none"
+                    overflow="visible"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <text

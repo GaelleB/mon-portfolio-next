@@ -34,7 +34,7 @@ export default function Footer() {
                 className="absolute pointer-events-none select-none"
                 style={{
                     top: isMobile ? '8%' : '12%',
-                    right: isMobile ? '5%' : '8%',
+                    right: isMobile ? '5%' : '14%',
                     y: watermarkY
                 }}
                 initial={{ opacity: 0 }}
@@ -46,6 +46,7 @@ export default function Footer() {
                     className="w-[280px] h-[100px] md:w-[450px] md:h-[160px] lg:w-[620px] lg:h-[220px]"
                     viewBox="0 0 800 220"
                     fill="none"
+                    overflow="visible"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <text
