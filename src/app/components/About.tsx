@@ -346,29 +346,6 @@ export default function About() {
                         </svg>
                     </motion.a>
 
-                    {/* CTA Secondaire - Télécharger CV */}
-                    <motion.a
-                        href="/cv-gaelle-boucher.pdf"
-                        download
-                        className="inline-flex items-center justify-center font-sans text-base group"
-                        style={{ color: '#253439' }}
-                        whileHover={{ x: 5 }}
-                        aria-label="Télécharger mon CV en PDF"
-                    >
-                        <span className="border-b-2 border-transparent group-hover:border-current transition-all duration-300">
-                            Télécharger mon CV
-                        </span>
-                        <svg
-                            className="ml-2 w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path d="M12 4v12m0 0l-4-4m4 4l4-4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
-                        </svg>
-                    </motion.a>
                 </motion.div>
 
             </div>
