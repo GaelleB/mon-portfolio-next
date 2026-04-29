@@ -275,7 +275,7 @@ export default function Hero() {
                                 }}
                             >
                                 <Image
-                                    src="/assets/gaelle-new.jpg"
+                                    src="/assets/gaelle-new.png"
                                     alt="Gaëlle Boucher - Développeuse web éditoriale"
                                     className="w-full h-full object-cover object-[47.9%_24.1%]"
                                     width={500}
