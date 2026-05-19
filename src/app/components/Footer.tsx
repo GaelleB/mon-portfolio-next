@@ -95,7 +95,7 @@ export default function Footer() {
                             lineHeight: '1.2'
                         }}
                     >
-                        Créons ensemble ton prochain site
+                        Un projet en tête ?
                     </h2>
 
                     {/* Chapô */}
@@ -106,7 +106,7 @@ export default function Footer() {
                             lineHeight: '1.6'
                         }}
                     >
-                        Prêt à donner vie à ton histoire ? Réservons un appel découverte pour en discuter.
+                        30 minutes pour voir si on se comprend. Sans engagement, sans jargon.
                     </p>
 
                     {/* CTA Principal */}
