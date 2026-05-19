@@ -1,86 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { techCategories, type Tech, type TechCategory } from '@/data/stack';
+import { toolGroups } from '@/data/stack';
 import { useIsMobile } from '@/hooks/useIsMobile';
-
-// Composant pour afficher une techno
-const TechItem = ({ tech, index }: { tech: Tech, index: number }) => {
-    return (
-        <motion.div
-            className="flex items-center gap-3 group"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-        >
-            {/* Icône */}
-            <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
-                <Image
-                    src={tech.icon}
-                    alt={`Logo ${tech.name}`}
-                    width={48}
-                    height={48}
-                    className="object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-            </div>
-
-            {/* Nom */}
-            <span
-                className="font-sans text-base md:text-lg font-medium transition-colors duration-300"
-                style={{
-                    color: '#253439'
-                }}
-            >
-                {tech.name}
-            </span>
-
-            {/* Point décoratif avec couleur de la techno */}
-            <div
-                className="w-2 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ backgroundColor: tech.color }}
-                aria-hidden="true"
-            />
-        </motion.div>
-    );
-};
-
-// Composant pour une catégorie
-const CategorySection = ({ category, index }: { category: TechCategory, index: number }) => {
-    return (
-        <motion.div
-            className="mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-        >
-            {/* Titre de catégorie */}
-            <h3
-                className="font-mono text-sm md:text-base uppercase tracking-wider mb-6"
-                style={{
-                    color: '#c2410c',
-                    letterSpacing: '0.1em'
-                }}
-            >
-                {category.title}
-            </h3>
-
-            {/* Liste des technos en grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {category.techs.map((tech, techIndex) => (
-                    <TechItem key={tech.name} tech={tech} index={techIndex} />
-                ))}
-            </div>
-        </motion.div>
-    );
-};
 
 export default function Stack() {
     const isMobile = useIsMobile();
 
-    // Scroll parallax pour le watermark
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 1000], [0, -100]);
 
@@ -90,7 +16,7 @@ export default function Stack() {
             className="relative min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-16 overflow-hidden"
             style={{ backgroundColor: '#f5f0e8' }}
         >
-            {/* Numérotation éditoriale "03" en arrière-plan */}
+            {/* Numérotation éditoriale */}
             <motion.div
                 className="hidden lg:block absolute top-32 left-12 pointer-events-none select-none"
                 initial={{ opacity: 0 }}
@@ -98,19 +24,15 @@ export default function Stack() {
                 transition={{ duration: 1, delay: 0.3 }}
                 aria-hidden="true"
             >
-                <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="200" height="180" viewBox="0 0 200 180" fill="none">
                     <text x="0" y="140" fontFamily="monospace" fontWeight="bold" fontSize="180" fill="#f97316" fillOpacity="0.05">03</text>
                 </svg>
             </motion.div>
 
-            {/* Watermark typographique "STACK" en arrière-plan */}
+            {/* Watermark STACK */}
             <motion.div
                 className="absolute pointer-events-none select-none"
-                style={{
-                    top: isMobile ? '8%' : '12%',
-                    right: isMobile ? '5%' : '8%',
-                    y: watermarkY
-                }}
+                style={{ top: isMobile ? '8%' : '12%', right: isMobile ? '5%' : '8%', y: watermarkY }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
@@ -118,77 +40,97 @@ export default function Stack() {
             >
                 <svg
                     className="w-[250px] h-[100px] md:w-[400px] md:h-[160px] lg:w-[550px] lg:h-[220px]"
-                    viewBox="0 0 550 220"
-                    fill="none"
-                    overflow="visible"
-                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 550 220" fill="none" overflow="visible"
                 >
                     <text
-                        x="0"
-                        y="180"
-                        fontFamily="serif"
-                        fontWeight="bold"
-                        fontSize="220"
+                        x="0" y="180" fontFamily="serif" fontWeight="bold" fontSize="220"
                         fill="#f97316"
                         fillOpacity={isMobile ? 0.02 : 0.03}
-                        stroke="rgba(249, 115, 22, 0.08)"
-                        strokeWidth="1"
+                        stroke="rgba(249, 115, 22, 0.08)" strokeWidth="1"
                     >
                         STACK
                     </text>
                 </svg>
             </motion.div>
 
-            {/* Contenu principal */}
             <div className="relative z-10 w-full max-w-6xl mx-auto">
 
-                {/* HEADER ÉDITORIAL */}
+                {/* HEADER */}
                 <motion.div
-                    className="text-center mb-16 md:mb-20"
+                    className="mb-16 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    {/* Surtitre */}
                     <span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
-                        style={{
-                            color: '#c2410c',
-                            letterSpacing: '0.1em'
-                        }}
+                        style={{ color: '#c2410c', letterSpacing: '0.1em' }}
                     >
                         Stack · Ma boîte à outils
                     </span>
-
-                    {/* Titre principal */}
                     <h2
                         className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
-                        style={{
-                            color: '#253439',
-                            lineHeight: '1.2'
-                        }}
+                        style={{ color: '#253439', lineHeight: '1.2' }}
                     >
-                        Les technologies qui donnent vie aux histoires
+                        Quelques outils, bien choisis
                     </h2>
-
-                    {/* Chapô */}
                     <p
-                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
-                        style={{
-                            color: '#4a4a4a',
-                            lineHeight: '1.6'
-                        }}
+                        className="font-sans text-base md:text-lg max-w-2xl"
+                        style={{ color: '#4a4a4a', lineHeight: '1.6' }}
                     >
-                        Du code à la mise en page, chaque outil a un rôle : structurer les contenus, soigner la typographie, créer des parcours de lecture fluides.
+                        Pas un catalogue exhaustif. Les outils que j&apos;utilise vraiment, pour ce qu&apos;ils permettent de faire.
                     </p>
                 </motion.div>
 
-                {/* LES 3 CATÉGORIES */}
-                <div className="max-w-5xl mx-auto">
-                    {techCategories.map((category, index) => (
-                        <CategorySection key={category.title} category={category} index={index} />
+                {/* LISTE DES GROUPES */}
+                <div>
+                    {toolGroups.map((group, index) => (
+                        <motion.div
+                            key={group.label}
+                            className="py-10 md:py-12"
+                            style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                        >
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
+
+                                {/* Label */}
+                                <div className="md:col-span-2">
+                                    <span
+                                        className="font-mono text-xs uppercase tracking-wider"
+                                        style={{ color: '#c2410c' }}
+                                    >
+                                        {group.label}
+                                    </span>
+                                </div>
+
+                                {/* Outils */}
+                                <div className="md:col-span-5">
+                                    <p
+                                        className="font-serif font-bold text-2xl md:text-3xl"
+                                        style={{ color: '#253439', lineHeight: '1.3' }}
+                                    >
+                                        {group.tools.join(', ')}
+                                    </p>
+                                </div>
+
+                                {/* Description */}
+                                <div className="md:col-span-5">
+                                    <p
+                                        className="font-sans text-base md:text-lg italic"
+                                        style={{ color: '#4a4a4a', lineHeight: '1.6' }}
+                                    >
+                                        {group.description}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </motion.div>
                     ))}
+                    <div style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }} />
                 </div>
 
             </div>
