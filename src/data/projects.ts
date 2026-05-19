@@ -14,6 +14,17 @@ export type Project = {
 // Liste des projets
 export const projects: Project[] = [
     {
+        id: 9,
+        title: 'Le Monde de DW',
+        year: 'Avril 2026',
+        category: 'Projet client',
+        description: 'Site one-page narratif pour Guillaume Michel, storyteller stratégique. Une page immersive qui capture l\'univers et la voix d\'un professionnel de la narration d\'entreprise.',
+        image: '/assets/le-monde-de-dw.png',
+        tech: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+        demo: 'https://www.le-monde-de-dw.fr/',
+        featured: true
+    },
+    {
         id: 8,
         title: 'The Soul of the Game',
         year: 'Février 2026',
