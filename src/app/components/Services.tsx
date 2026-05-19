@@ -71,7 +71,7 @@ export default function Services() {
 
                 {/* HEADER ÉDITORIAL */}
                 <motion.div
-                    className="text-center mb-16 md:mb-20"
+                    className="mb-16 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -85,7 +85,7 @@ export default function Services() {
                             letterSpacing: '0.1em'
                         }}
                     >
-                        Services · Ce que je propose
+                        Services · Comment je travaille
                     </span>
 
                     {/* Titre principal */}
@@ -96,79 +96,83 @@ export default function Services() {
                             lineHeight: '1.2'
                         }}
                     >
-                        Des offres claires, un objectif commun
+                        Selon là où tu en es
                     </h2>
 
                     {/* Chapô */}
                     <p
-                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
+                        className="font-sans text-base md:text-lg max-w-2xl"
                         style={{
                             color: '#333333',
                             opacity: 0.9,
                             lineHeight: '1.6'
                         }}
                     >
-                        De l'audit à la création complète, chaque prestation est pensée pour donner à ton contenu la place qu'il mérite.
+                        Pas de package standard. Un diagnostic, une refonte ciblée, ou un site complet : selon ce que ton projet demande vraiment.
                     </p>
                 </motion.div>
 
-                {/* GRILLE DE SERVICES */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-16 md:mb-20">
+                {/* LISTE ÉDITORIALE DE SERVICES */}
+                <div className="mb-16 md:mb-20">
                     {services.map((service, index) => (
                         <motion.div
                             key={service.id}
-                            className="flex flex-col p-8 rounded-2xl"
-                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
-                            initial={{ opacity: 0, y: 30 }}
+                            className="group py-10 md:py-12"
+                            style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.15 }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
                         >
-                            {/* Numéro décoratif */}
-                            <span
-                                className="block font-mono text-sm uppercase tracking-wider mb-6"
-                                style={{
-                                    color: '#c2410c',
-                                    letterSpacing: '0.1em'
-                                }}
-                            >
-                                {service.number}
-                            </span>
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
 
-                            {/* Titre */}
-                            <h3
-                                className="font-serif font-bold text-xl md:text-2xl mb-4"
-                                style={{
-                                    color: '#253439',
-                                    lineHeight: '1.3'
-                                }}
-                            >
-                                {service.title}
-                            </h3>
+                                {/* Numéro */}
+                                <div className="md:col-span-1">
+                                    <span
+                                        className="font-mono text-xs uppercase tracking-wider"
+                                        style={{ color: '#c2410c' }}
+                                    >
+                                        {service.number}
+                                    </span>
+                                </div>
 
-                            {/* Description */}
-                            <p
-                                className="font-sans text-base mb-6"
-                                style={{
-                                    color: '#4a4a4a',
-                                    lineHeight: '1.6'
-                                }}
-                            >
-                                {service.description}
-                            </p>
+                                {/* Titre + Description */}
+                                <div className="md:col-span-7">
+                                    <h3
+                                        className="font-serif font-bold text-2xl md:text-3xl mb-4 transition-colors duration-300"
+                                        style={{
+                                            color: '#253439',
+                                            lineHeight: '1.2'
+                                        }}
+                                    >
+                                        {service.title}
+                                    </h3>
+                                    <p
+                                        className="font-sans text-base md:text-lg"
+                                        style={{
+                                            color: '#4a4a4a',
+                                            lineHeight: '1.7'
+                                        }}
+                                    >
+                                        {service.description}
+                                    </p>
+                                </div>
 
-                            {/* Prix */}
-                            <span
-                                className="block font-mono text-sm uppercase tracking-wider mt-auto"
-                                style={{
-                                    color: '#c2410c',
-                                    letterSpacing: '0.05em'
-                                }}
-                            >
-                                {service.price}
-                            </span>
+                                {/* Prix */}
+                                <div className="md:col-span-4 md:text-right">
+                                    <span
+                                        className="font-serif font-bold text-xl md:text-2xl"
+                                        style={{ color: '#253439' }}
+                                    >
+                                        {service.price}
+                                    </span>
+                                </div>
+
+                            </div>
                         </motion.div>
                     ))}
+                    {/* Ligne de fermeture */}
+                    <div style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }} />
                 </div>
 
             </div>

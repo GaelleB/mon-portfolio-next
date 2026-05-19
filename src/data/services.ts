@@ -12,7 +12,7 @@ export const services: Service[] = [
         number: '01',
         title: 'Audit éditorial',
         description:
-            "J'analyse ton site existant : architecture, parcours de lecture, hiérarchie du contenu. Tu repars avec un diagnostic clair et des recommandations priorisées.",
+            "Ton site existe, mais quelque chose cloche. Les gens ne lisent pas, ne scrollent pas, ne restent pas. Je creuse : structure narrative, hiérarchie des contenus, cohérence éditoriale. En sortie : un diagnostic écrit, des priorités classées, une direction claire.",
         price: '490 €',
     },
     {
@@ -20,7 +20,7 @@ export const services: Service[] = [
         number: '02',
         title: 'Sprint narratif',
         description:
-            'Refonte ciblée : homepage, gabarit article, navigation. En 10 jours, ton site retrouve une cohérence éditoriale.',
+            "Tu sais ce qui ne va pas. On s'attaque aux pages qui comptent : homepage, gabarit article, navigation. On reconstruit la colonne vertébrale éditoriale du site. Dix jours. Un résultat visible.",
         price: 'À partir de 2 500 €',
     },
     {
@@ -28,7 +28,7 @@ export const services: Service[] = [
         number: '03',
         title: 'Site éditorial sur mesure',
         description:
-            "Conception et développement complet d'un site narratif. De la structure au code, pensé pour la lecture.",
+            "De zéro à en ligne. Architecture, design, code, pensé pour la lecture et pour durer. Pour ceux qui veulent un site qui a une voix, pas juste une présence.",
         price: 'À partir de 8 000 €',
     },
 ];
