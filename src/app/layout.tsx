@@ -80,7 +80,7 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <StructuredData />
       </head>
-      <body className={`${inter.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} font-sans`}>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable} font-sans`} suppressHydrationWarning>
         {children}
         <Analytics />
       </body>
