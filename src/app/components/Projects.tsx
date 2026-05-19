@@ -303,7 +303,7 @@ export default function Projects() {
 
                 {/* HEADER ÉDITORIAL */}
                 <motion.div
-                    className="text-center mb-16 md:mb-20"
+                    className="mb-16 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -333,7 +333,7 @@ export default function Projects() {
 
                     {/* Chapô */}
                     <p
-                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
+                        className="font-sans text-base md:text-lg max-w-3xl"
                         style={{
                             color: '#333333',
                             opacity: 0.9,
