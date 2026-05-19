@@ -69,95 +69,75 @@ export default function Process() {
             {/* Contenu principal */}
             <div className="relative z-10 w-full max-w-6xl mx-auto">
 
-                {/* HEADER ÉDITORIAL */}
+                {/* HEADER */}
                 <motion.div
-                    className="text-center mb-16 md:mb-20"
+                    className="mb-16 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    {/* Surtitre */}
                     <span
                         className="inline-block font-mono text-xs md:text-sm uppercase tracking-wider mb-4"
-                        style={{
-                            color: '#c2410c',
-                            letterSpacing: '0.1em'
-                        }}
+                        style={{ color: '#c2410c', letterSpacing: '0.1em' }}
                     >
                         Processus · Comment je travaille
                     </span>
-
-                    {/* Titre principal */}
                     <h2
                         className="font-serif font-bold text-3xl md:text-4xl lg:text-5xl mb-6"
-                        style={{
-                            color: '#253439',
-                            lineHeight: '1.2'
-                        }}
+                        style={{ color: '#253439', lineHeight: '1.2' }}
                     >
-                        Une méthode claire, du premier échange à la mise en ligne
+                        Du premier échange à la mise en ligne
                     </h2>
-
-                    {/* Chapô */}
                     <p
-                        className="font-sans text-base md:text-lg max-w-3xl mx-auto"
-                        style={{
-                            color: '#333333',
-                            opacity: 0.9,
-                            lineHeight: '1.6'
-                        }}
+                        className="font-sans text-base md:text-lg max-w-2xl"
+                        style={{ color: '#4a4a4a', lineHeight: '1.6' }}
                     >
-                        Chaque projet suit un cadre simple et transparent. Tu sais où on en est, à chaque étape.
+                        Pas de surprise. Tu sais où on en est à chaque moment.
                     </p>
                 </motion.div>
 
-                {/* GRILLE DES ÉTAPES */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+                {/* LISTE DES ÉTAPES */}
+                <div>
                     {processSteps.map((step, index) => (
                         <motion.div
                             key={step.id}
-                            className="flex flex-col p-8 rounded-2xl"
-                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
-                            initial={{ opacity: 0, y: 30 }}
+                            className="py-10 md:py-12"
+                            style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.15 }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
                         >
-                            {/* Numéro décoratif */}
-                            <span
-                                className="block font-mono text-sm uppercase tracking-wider mb-6"
-                                style={{
-                                    color: '#c2410c',
-                                    letterSpacing: '0.1em'
-                                }}
-                            >
-                                {step.number}
-                            </span>
-
-                            {/* Titre */}
-                            <h3
-                                className="font-serif font-bold text-xl md:text-2xl mb-4"
-                                style={{
-                                    color: '#253439',
-                                    lineHeight: '1.3'
-                                }}
-                            >
-                                {step.title}
-                            </h3>
-
-                            {/* Description */}
-                            <p
-                                className="font-sans text-base"
-                                style={{
-                                    color: '#4a4a4a',
-                                    lineHeight: '1.6'
-                                }}
-                            >
-                                {step.description}
-                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
+                                <div className="md:col-span-1">
+                                    <span
+                                        className="font-mono text-xs uppercase tracking-wider"
+                                        style={{ color: '#c2410c' }}
+                                    >
+                                        {step.number}
+                                    </span>
+                                </div>
+                                <div className="md:col-span-4">
+                                    <h3
+                                        className="font-serif font-bold text-2xl md:text-3xl"
+                                        style={{ color: '#253439', lineHeight: '1.2' }}
+                                    >
+                                        {step.title}
+                                    </h3>
+                                </div>
+                                <div className="md:col-span-7">
+                                    <p
+                                        className="font-sans text-base md:text-lg"
+                                        style={{ color: '#4a4a4a', lineHeight: '1.7' }}
+                                    >
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </div>
                         </motion.div>
                     ))}
+                    <div style={{ borderTop: '1px solid rgba(26, 37, 40, 0.15)' }} />
                 </div>
 
             </div>
