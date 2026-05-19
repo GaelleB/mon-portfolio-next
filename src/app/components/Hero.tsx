@@ -7,14 +7,6 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 export default function Hero() {
     const isMobile = useIsMobile();
 
-    // Value propositions statiques
-    const valueProps = [
-        "Pour webzines et maisons d'édition",
-        "Développeuse React/Next spécialisée en contenu éditorial",
-        "Quand le code rencontre la mise en page",
-        "Des interfaces narratives pour la culture"
-    ];
-
     // Scroll parallax pour les éléments décoratifs
     const { scrollY } = useScroll();
     const watermarkY = useTransform(scrollY, [0, 500], [0, -150]);
@@ -167,41 +159,8 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                         >
-                            Je te crée un site qui raconte ton histoire
+                            J&apos;te crée un site qui raconte ton histoire
                         </motion.h1>
-
-                        {/* Value propositions statiques */}
-                        <motion.ul
-                            className="mb-8 space-y-3 text-center lg:text-left"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                        >
-                            {valueProps.map((text, index) => (
-                                <motion.li
-                                    key={index}
-                                    className="flex items-start justify-center lg:justify-start gap-3"
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                                >
-                                    <span
-                                        className="inline-block w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0"
-                                        style={{ backgroundColor: '#f97316' }}
-                                        aria-hidden="true"
-                                    />
-                                    <span
-                                        className="font-sans text-base md:text-lg"
-                                        style={{
-                                            color: '#333333',
-                                            lineHeight: '1.7'
-                                        }}
-                                    >
-                                        {text}
-                                    </span>
-                                </motion.li>
-                            ))}
-                        </motion.ul>
 
                         {/* Description courte */}
                         <motion.p
